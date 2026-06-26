@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PvP Update Ranking Poll - Old School RuneScape</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:        #c89b3c;
+    --gold-light:  #e8c96a;
+    --gold-dark:   #8a6a1f;
+    --parchment:   #f2ead8;
+    --parchment-dark: #e0d4b8;
+    --brown-dark:  #1a0f00;
+    --brown-mid:   #3b2400;
+    --brown-ui:    #2c1a06;
+    --panel-bg:    #f7f0e0;
+    --border:      #c0a060;
+    --text-body:   #2a1a00;
+    --text-muted:  #6b4f2a;
+    --red-rs:      #8b1a1a;
+    --green-rs:    #2d6b2d;
+    --blue-rs:     #1a3a6b;
+    --skull-orange:#c85a00;
+  }
+
+  body {
+    background-color: #0d0800;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, #2a1500 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c89b3c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    font-family: 'Lato', sans-serif;
+    color: var(--text-body);
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    background: linear-gradient(180deg, #1a0900 0%, #0d0500 100%);
+    border-bottom: 2px solid var(--gold-dark);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .topbar-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .topbar-logo span { color: var(--gold-light); }
+  .topbar-nav { display: flex; gap: 28px; }
+  .topbar-nav a {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #b89060;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .topbar-nav a:hover { color: var(--gold-light); }
+  .topbar-nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(180deg, #1f0e00 0%, #0d0500 60%, #0d0800 100%);
+    border-bottom: 3px solid var(--gold-dark);
+    text-align: center;
+    padding: 36px 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(200,155,60,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-shadow: 0 2px 12px rgba(200,155,60,0.3);
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: #b89060;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .hero-divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    margin: 20px auto 0;
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+  }
+
+  /* ── PANEL ── */
+  .panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .panel-header {
+    background: linear-gradient(180deg, #ede0c0 0%, #e0d0a8 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .panel-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    letter-spacing: 0.04em;
+  }
+  .panel-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .panel-body { padding: 20px; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: #f0e8cc;
+    border: 1px solid #c8a850;
+    border-left: 4px solid var(--gold);
+    border-radius: 2px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+  .info-box strong { color: var(--brown-mid); }
+
+  /* ── CATEGORY TABS ── */
+  .category-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 8px;
+    background: #e8ddc0;
+    border: none;
+    border-right: 1px solid var(--border);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn:hover { background: #f0e4c0; color: var(--brown-dark); }
+  .tab-btn.active {
+    background: linear-gradient(180deg, #c89b3c 0%, #a07820 100%);
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  }
+
+  /* ── SIZE BADGE ── */
+  .size-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-small  { background: var(--green-rs);  color: #fff; }
+  .badge-medium { background: var(--blue-rs);   color: #fff; }
+  .badge-large  { background: #c85a00;    color: #fff; }
+  .badge-massive { background: var(--red-rs);           color: #fff; }
+
+  /* ── RANKING LIST ── */
+  .ranking-instructions {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ranking-instructions svg { flex-shrink: 0; }
+
+  .ranking-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .rank-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #faf4e4;
+    border: 1px solid #d4b870;
+    border-radius: 2px;
+    padding: 12px 14px;
+    cursor: grab;
+    transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    user-select: none;
+    position: relative;
+  }
+  .rank-item:hover {
+    background: #fff8e8;
+    border-color: var(--gold);
+    box-shadow: 0 2px 8px rgba(200,155,60,0.2);
+  }
+  .rank-item.dragging {
+    opacity: 0.5;
+    border-color: var(--gold);
+    background: #fff8e8;
+  }
+  .rank-item.drag-over {
+    border-color: var(--gold);
+    border-style: dashed;
+    background: #fef5d4;
+  }
+
+  .rank-number {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-dark);
+    min-width: 28px;
+    text-align: center;
+    line-height: 1;
+  }
+  .rank-number.top { color: var(--gold); text-shadow: 0 0 8px rgba(200,155,60,0.4); }
+
+  .drag-handle {
+    color: #c0a060;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    cursor: grab;
+    padding: 2px 4px;
+    flex-shrink: 0;
+  }
+  .drag-handle span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  .rank-content { flex: 1; min-width: 0; }
+  .rank-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brown-dark);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .rank-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .rank-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .arrow-btn {
+    background: #e0d0a8;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 10px;
+    transition: background 0.1s, color 0.1s;
+  }
+  .arrow-btn:hover:not(:disabled) {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold-dark);
+  }
+  .arrow-btn:disabled { opacity: 0.3; cursor: default; }
+
+  /* ── SUBMISSION ── */
+  .submit-section {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .submit-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .submit-note strong { color: var(--brown-mid); }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(180deg, #c89b3c 0%, #8a6a1f 100%);
+    border: 1px solid var(--gold-dark);
+    border-bottom: 2px solid #5a4010;
+    border-radius: 2px;
+    padding: 11px 28px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s;
+  }
+  .btn-submit:hover { filter: brightness(1.1); }
+  .btn-submit:active { transform: translateY(1px); border-bottom-width: 1px; }
+
+  .btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e0d0a8;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.15s;
+  }
+  .btn-reset:hover { background: #d0c098; color: var(--brown-dark); }
+
+  /* ── RESULTS PANEL ── */
+  .results-panel {
+    display: none;
+    background: #f0e8cc;
+    border: 1px solid var(--gold);
+    border-top: 3px solid var(--green-rs);
+    border-radius: 2px;
+    padding: 20px;
+    margin-top: 16px;
+  }
+  .results-panel.visible { display: block; }
+  .results-panel h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green-rs);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .result-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #d4b870;
+    font-size: 13px;
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-rank {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--gold-dark);
+    min-width: 24px;
+  }
+  .result-rank.r1 { color: var(--gold); font-size: 15px; }
+  .result-name { flex: 1; color: var(--brown-dark); font-weight: 600; }
+  .result-bar-wrap { width: 120px; height: 8px; background: #d4b870; border-radius: 1px; overflow: hidden; }
+  .result-bar { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold)); border-radius: 1px; transition: width 0.6s ease; }
+
+  /* ── SIDEBAR INFO ── */
+  .how-it-works {
+    background: linear-gradient(180deg, #1a0f00 0%, #0d0800 100%);
+    border: 1px solid var(--gold-dark);
+    border-top: 3px solid var(--gold-dark);
+    border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 24px;
+    color: #c8a860;
+  }
+  .how-it-works h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gold-dark);
+  }
+  .how-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .how-step-num {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    min-width: 20px;
+    margin-top: 1px;
+  }
+
+  /* ── PROGRESS ── */
+  .poll-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .poll-progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .poll-progress-count {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold-dark);
+    font-weight: 700;
+  }
+  .progress-bar-wrap {
+    height: 6px;
+    background: #d4b870;
+    border-radius: 1px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    border-radius: 1px;
+    width: 34%;
+    transition: width 0.3s;
+  }
+
+  /* ── DEADLINE ── */
+  .deadline-box {
+    background: #1a0f00;
+    border: 1px solid var(--gold-dark);
+    border-radius: 2px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .deadline-icon { font-size: 20px; }
+  .deadline-text { font-size: 12px; color: #b89060; line-height: 1.5; }
+  .deadline-text strong { color: var(--gold); display: block; font-size: 13px; margin-bottom: 2px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 2px solid var(--gold-dark);
+    background: #0d0500;
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #6b4f2a;
+    letter-spacing: 0.04em;
+  }
+  footer a { color: var(--gold-dark); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .topbar-nav { display: none; }
+    .category-tabs { flex-direction: column; }
+    .tab-btn { border-right: none; border-bottom: 1px solid var(--border); }
+    .tab-btn:last-child { border-bottom: none; }
+  }
+
+  .rank-number input {
+    width: 36px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold-dark);
+    color: inherit;
+    font-family: 'Cinzel', serif;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: center;
+    padding: 0;
+    cursor: text;
+    -moz-appearance: textfield;
+  }
+  .rank-number input::-webkit-outer-spin-button,
+  .rank-number input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .rank-number input:focus { outline: none; border-bottom-color: var(--gold); background: rgba(255,204,0,0.07); }
+
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topbar">
+  <a class="topbar-logo" href="#">Old School <span>RuneScape</span></a>
+  <div class="topbar-nav">
+    <a href="#">Game</a>
+    <a href="#">Community</a>
+    <a href="#" class="active">News & Polls</a>
+    <a href="#">Account</a>
+    <a href="#">Store</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Community Ranking Poll · 2026</div>
+  <h1>PvP Update Priority Ranking</h1>
+  <p class="hero-sub">Rank the PvP updates you most want to see developed. Your #1 choice is the update you want most. The community's top-ranked update will be prioritised for development.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <h3>⚔ How This Poll Works</h3>
+    <div class="how-step">
+      <div class="how-step-num">1.</div>
+      <div>Drag or use the arrows to rank the listed updates from most wanted (#1) to least wanted (#10).</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">2.</div>
+      <div>The update ranked #1 by the most players becomes the community's chosen priority.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">3.</div>
+      <div>Jagex commits to developing the top-ranked update, subject to a standard in-game poll before release.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">4.</div>
+      <div>All other updates remain in future ranking polls — nothing is ruled out permanently.</div>
+    </div>
+  </div>
+
+  <!-- DEADLINE -->
+  <div class="deadline-box">
+    <div class="deadline-icon">🗓</div>
+    <div class="deadline-text">
+      <strong>Ranking closes 28 July 2026</strong>
+      You must be a member to participate. One submission per account.
+    </div>
+  </div>
+
+  <!-- MAIN POLL PANEL -->
+  <div class="panel">
+    <div class="panel-header">
+      <svg class="panel-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="3" width="16" height="14" rx="1" stroke="#8a6a1f" stroke-width="1.5"/>
+        <path d="M6 7h8M6 10h8M6 13h5" stroke="#8a6a1f" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <h2>Rank PvP Updates by Priority</h2>
+    </div>
+    <div class="panel-body">
+
+      <div class="info-box">
+        <strong>Drag to reorder</strong> or use the ▲▼ arrows. Place the update you want developed most at position <strong>#1</strong>. Updates are split by development size — please rank each category separately.
+      </div>
+
+      <!-- CATEGORY TABS -->
+      <div class="info-box" style="margin-bottom:16px;">
+        <strong>Update Size Definitions:</strong><br><br>
+        <span style="color:var(--green-rs);">■ Small</span> — Quality of Life updates that realistically only take a week or two to develop.<br>
+        <span style="color:var(--blue-rs);">■ Medium</span> — Updates that might take 1–3 months to develop.<br>
+        <span style="color:#b84a00;">■ Large</span> — Updates that might take 4–6 months to develop.<br>
+        <span style="color:#cc2222;">■ Massive</span> — A raid-sized update that will take 6+ months and significant effort and resources. Similar to the effort put in for Raids and Sailing.
+      </div>
+      <div class="category-tabs">
+        <button class="tab-btn" onclick="showCategory('massive')">
+          Massive Updates <span class="size-badge badge-massive">Massive</span>
+        </button>
+        <button class="tab-btn active" onclick="showCategory('large')">
+          Large Updates <span class="size-badge badge-large">Large</span>
+        </button>
+        <button class="tab-btn" onclick="showCategory('medium')">
+          Medium Updates <span class="size-badge badge-medium">Medium</span>
+        </button>
+        <button class="tab-btn" onclick="showCategory('small')">
+          Small Updates <span class="size-badge badge-small">Small</span>
+        </button>
+      </div>
+
+      <!-- POLL PROGRESS -->
+      <div class="poll-progress">
+        <span class="poll-progress-label">Votes submitted</span>
+        <span class="poll-progress-count">34,218 / ~100,000 estimated</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill"></div>
+      </div>
+
+      <!-- RANKING INSTRUCTIONS -->
+      <div class="ranking-instructions">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#c0a060" stroke-width="1.2"/><path d="M8 7v4M8 5v1" stroke="#c0a060" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Drag items up or down to set your ranking. #1 = most wanted.
+      </div>
+
+      <!-- MASSIVE CATEGORY -->
+      <div id="cat-massive" class="category-section" style="display:none;">
+        <div class="ranking-list" id="list-massive">
+
+          <div class="rank-item" draggable="true" data-id="forinthry-castle">
+            <div class="rank-number"><input type="number" min="1" value="1" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Forinthry Castle <span class="size-badge badge-massive">Massive</span></div>
+              <div class="rank-desc">A clan-controlled stronghold in the deep Wilderness with constructible facilities, god alignments, and siege mechanics between rival clans.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)">▼</button>
+            </div>
+          </div>
+
+          <div class="rank-item" draggable="true" data-id="wildy-expansion">
+            <div class="rank-number"><input type="number" min="1" value="2" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Wilderness Expansion 2.0 <span class="size-badge badge-massive">Massive</span></div>
+              <div class="rank-desc">A full expansion of the deep Wilderness with new zones, content, bosses, and points of interest beyond the Bridge of Fate. Raid-tier in scope and development effort.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)">▼</button>
+            </div>
+          </div>
+
+          <div class="rank-item" draggable="true" data-id="tcz-full">
+            <div class="rank-number"><input type="number" min="1" value="3" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Full Team Combat Zones Rework <span class="size-badge badge-massive">Massive</span></div>
+              <div class="rank-desc">A full restructuring of multi-combat and singles zones across the Wilderness to support structured small-team PvP, going beyond the isolated Team Combat Zone Trial.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="none-good-massive">
+            <div class="rank-number"><input type="number" min="1" value="4" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">None of these ideas are good for PvP <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I do not believe any of the updates listed represent a good direction for PvP development.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)">▼</button>
+            </div>
+          </div>
+
+          <div class="rank-item" draggable="true" data-id="no-update-massive">
+            <div class="rank-number"><input type="number" min="1" value="5" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on non-PvP content instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I would prefer Jagex focus development time on other areas of the game rather than PvP.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)">▼</button>
+            </div>
+          </div>
+
+            
+
+          <div class="rank-item" draggable="true" data-id="prefer-smaller-massive">
+            <div class="rank-number"><input type="number" min="1" value="6" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on smaller PvP updates instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see multiple smaller PvP updates than one massive undertaking.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="skip-vote-massive">
+            <div class="rank-number"><input type="number" min="1" value="7" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Skip Vote <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I have no strong preference on PvP development priority and am happy to abstain from this ranking.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+            
+        </div>
+      </div>
+
+      <!-- LARGE CATEGORY -->
+      <div id="cat-large" class="category-section">
+        <div class="ranking-list" id="list-large">
+          <div class="rank-item" draggable="true" data-id="pvparena">
+            <div class="rank-number"><input type="number" min="1" value="1" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">PvP Arena Rework <span class="size-badge badge-large">Large</span></div>
+              <div class="rank-desc">Overhaul of the PvP Arena to use players' main-game stats and equipment, with improved matchmaking, ranked modes, and meaningful rewards.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="lms">
+            <div class="rank-number"><input type="number" min="1" value="2" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Last Man Standing Rework <span class="size-badge badge-large">Large</span></div>
+              <div class="rank-desc">Major overhaul of LMS including new maps, reward tracks, ranked seasons, and improvements to matchmaking speed and queue times.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="newboss">
+            <div class="rank-number"><input type="number" min="1" value="3" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">New Wilderness Group Boss <span class="size-badge badge-large">Large</span></div>
+              <div class="rank-desc">A new Wilderness boss designed specifically for small groups, encouraging cooperative PvM with PvP risk as a core design element.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="newminigame">
+            <div class="rank-number"><input type="number" min="1" value="4" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">New PvP Minigame <span class="size-badge badge-large">Large</span></div>
+              <div class="rank-desc">An entirely new structured PvP minigame designed from scratch with modern game design principles, balanced for both new and experienced PvP players.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="wildyrework">
+            <div class="rank-number"><input type="number" min="1" value="5" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Wilderness Zone Restructure <span class="size-badge badge-large">Large</span></div>
+              <div class="rank-desc">A full review and restructuring of multi-combat and singles zones to better support the full food chain of Wilderness activity.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="none-good-large">
+            <div class="rank-number"><input type="number" min="1" value="6" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">None of these ideas are good for PvP <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I do not believe any of the updates listed represent a good direction for PvP development.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="no-update-large">
+            <div class="rank-number"><input type="number" min="1" value="7" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on non-PvP content instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I would prefer Jagex focus development time on other areas of the game rather than PvP.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+            
+          <div class="rank-item" draggable="true" data-id="prefer-smaller-large">
+            <div class="rank-number"><input type="number" min="1" value="8" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on smaller PvP updates instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see multiple smaller PvP updates than one large update.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="prefer-larger-large">
+            <div class="rank-number"><input type="number" min="1" value="9" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on a massive PvP update instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see one ambitious raid-tier PvP update than a large one.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="skip-vote-large">
+            <div class="rank-number"><input type="number" min="1" value="10" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Skip Vote <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I have no strong preference on PvP development priority and am happy to abstain from this ranking.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEDIUM CATEGORY -->
+      <div id="cat-medium" class="category-section" style="display:none;">
+        <div class="ranking-list" id="list-medium">
+          <div class="rank-item" draggable="true" data-id="blessed">
+            <div class="rank-number"><input type="number" min="1" value="1" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Blessed Status System <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">An opt-in risk tier for the Wilderness allowing players to engage with PvM and PvP at reduced death penalty. Includes Tiered Blessed Status progression rewards.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="teams">
+            <div class="rank-number"><input type="number" min="1" value="2" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Wilderness Teams <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">A structured team-formation system with a recruitment board, shared objectives, and team-specific rewards to support small-group PvP and PvM activity.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="tcz">
+            <div class="rank-number"><input type="number" min="1" value="3" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Team Combat Zone Trial <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">A dedicated Wilderness area designed for structured small-team PvP encounters, trialled in one isolated location before wider rollout consideration.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="castlewars">
+            <div class="rank-number"><input type="number" min="1" value="4" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Castle Wars Revival <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">Updated rewards, matchmaking improvements, and ice barrage duration balance changes to make Castle Wars consistently active and rewarding.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="soulwars">
+            <div class="rank-number"><input type="number" min="1" value="5" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Soul Wars Improvements <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">Reward rebalancing and gameplay improvements to encourage genuine participation and reduce AFK behaviour.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="blighted">
+            <div class="rank-number"><input type="number" min="1" value="6" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Expanded Blighted Supplies <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">New blighted supply variants covering more combat styles to reduce the cost barrier for Wilderness PvM and PvP entry.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="inconsistencies">
+            <div class="rank-number"><input type="number" min="1" value="7" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">PvP/PvM Mechanic Consistency Pass <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">Systematic review of arbitrary mechanical differences between PvP and PvM environments, including autocast behaviour and item interactions.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="lootkeys">
+            <div class="rank-number"><input type="number" min="1" value="8" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Ironman Loot Key Bond Coffers <span class="size-badge badge-medium">Medium</span></div>
+              <div class="rank-desc">Allow Ironmen to convert Loot Keys into a Bond-only Coffer, letting them benefit from PvP kills without breaking Ironman restrictions.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="none-good-medium">
+            <div class="rank-number"><input type="number" min="1" value="9" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">None of these ideas are good for PvP <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I do not believe any of the updates listed represent a good direction for PvP development.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="no-update-medium">
+            <div class="rank-number"><input type="number" min="1" value="10" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on non-PvP content instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I would prefer Jagex focus development time on other areas of the game rather than PvP.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+            
+          <div class="rank-item" draggable="true" data-id="prefer-smaller-medium">
+            <div class="rank-number"><input type="number" min="1" value="11" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on smaller PvP updates instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see multiple small quality-of-life PvP updates than a medium-sized one.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="prefer-larger-medium">
+            <div class="rank-number"><input type="number" min="1" value="12" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on a larger PvP update instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see one big PvP update than several medium-sized ones.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="skip-vote-medium">
+            <div class="rank-number"><input type="number" min="1" value="13" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Skip Vote <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I have no strong preference on PvP development priority and am happy to abstain from this ranking.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMALL CATEGORY -->
+      <div id="cat-small" class="category-section" style="display:none;">
+        <div class="ranking-list" id="list-small">
+          <div class="rank-item" draggable="true" data-id="specorb">
+            <div class="rank-number"><input type="number" min="1" value="1" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Special Attack Orb Improvements <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Improvements to the special attack orb interface to reduce reliance on F-key muscle memory and lower the barrier for new PvP players.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="deathdot">
+            <div class="rank-number"><input type="number" min="1" value="2" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Deathdotting Removal <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Address the ability to stack on the same tile to hide from opponents, reducing a frustrating escape mechanic.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="multiindicator">
+            <div class="rank-number"><input type="number" min="1" value="3" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Clearer Multi/Singles Zone Indicators <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Improved in-game visual indicators for zone boundaries to reduce confusion for new Wilderness players.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="ragskull">
+            <div class="rank-number"><input type="number" min="1" value="4" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Rag Skull Mechanic <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Apply a skull to players who deal minimal damage to an opponent and disengage, discouraging low-effort harassment.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="diaryreview">
+            <div class="rank-number"><input type="number" min="1" value="5" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Wilderness Diary Death Cost Review <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Review and rebalance death cost reduction tiers from Wilderness Achievement Diaries.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="worldhop">
+            <div class="rank-number"><input type="number" min="1" value="6" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Wilderness World Hop Cooldown <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">A short cooldown on world hopping after recent combat in the Wilderness to reduce scouting and hit-and-run behaviour.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="autocast">
+            <div class="rank-number"><input type="number" min="1" value="7" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Autocast Consistency Fix <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Standardise autocast behaviour across all game modes and environments to remove arbitrary inconsistencies.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="tomefire">
+            <div class="rank-number"><input type="number" min="1" value="8" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Tome of Fire PvP Damage Review <span class="size-badge badge-small">Small</span></div>
+              <div class="rank-desc">Review and reduce the 50% PvP bonus from Tome of Fire relative to its 10% PvM bonus.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="none-good-small">
+            <div class="rank-number"><input type="number" min="1" value="9" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">None of these ideas are good for PvP <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I do not believe any of the updates listed represent a good direction for PvP development.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="no-update-small">
+            <div class="rank-number"><input type="number" min="1" value="10" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on non-PvP content instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I would prefer Jagex focus development time on other areas of the game rather than PvP.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+            
+          <div class="rank-item" draggable="true" data-id="prefer-larger-small">
+            <div class="rank-number"><input type="number" min="1" value="11" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">I'd prefer dev time be spent on a larger PvP update instead <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I'd rather see one significant PvP update than several small quality-of-life changes.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+          <div class="rank-item" draggable="true" data-id="skip-vote-small">
+            <div class="rank-number"><input type="number" min="1" value="12" onchange="jumpToRank(this)" onclick="this.select()"></div>
+            <div class="drag-handle"><span></span><span></span><span></span></div>
+            <div class="rank-content">
+              <div class="rank-title">Skip Vote <span class="size-badge" style="background:#4a4a4a;color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;">Opinion</span></div>
+              <div class="rank-desc">I have no strong preference on PvP development priority and am happy to abstain from this ranking.</div>
+            </div>
+            <div class="rank-arrows">
+              <button class="arrow-btn" onclick="moveItem(this,-1)" title="Move up">▲</button>
+              <button class="arrow-btn" onclick="moveItem(this,1)" title="Move down">▼</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-section">
+        <p class="submit-note">
+          Your ranking is saved automatically as you reorder. Click <strong>Submit Ranking</strong> when you are happy with your order. You may change your submission until the poll closes.
+        </p>
+        <button class="btn-submit" onclick="submitRanking()">
+          ⚔ Submit Ranking
+        </button>
+        <button class="btn-reset" onclick="resetCategory()">
+          ↺ Reset Order
+        </button>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="results-panel" id="results-panel">
+        <h3>✓ Ranking Submitted</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Thank you. Your ranking has been recorded. Current community standings for <span id="results-category-label">Large Updates</span>:</p>
+        <div id="results-list"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Jagex Ltd. · <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Cookie Settings</a></p>
+  <p style="margin-top:6px;">This is a fan-made concept demo. Not an official Jagex product.</p>
+</footer>
+
+<script>
+  // ── CATEGORY SWITCHING ──
+  const categories = ['massive', 'large', 'medium', 'small'];
+  let activeCategory = 'large';
+
+  function showCategory(cat) {
+    activeCategory = cat;
+    categories.forEach(c => {
+      document.getElementById('cat-' + c).style.display = c === cat ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', categories[i] === cat);
+    });
+    document.getElementById('results-panel').classList.remove('visible');
+    updateNumbers('list-' + cat);
+  }
+
+  // ── ARROW BUTTONS ──
+  function moveItem(btn, direction) {
+    const item = btn.closest('.rank-item');
+    const list = item.closest('.ranking-list');
+    const items = [...list.querySelectorAll('.rank-item')];
+    const idx = items.indexOf(item);
+    const target = idx + direction;
+    if (target < 0 || target >= items.length) return;
+    if (direction === -1) list.insertBefore(item, items[target]);
+    else list.insertBefore(items[target], item);
+    updateNumbers(list.id);
+  }
+
+  function updateNumbers(listId) {
+    const list = document.getElementById(listId);
+    if (!list) return;
+    list.querySelectorAll('.rank-item').forEach((item, i) => {
+      const num = item.querySelector('.rank-number');
+      const inp = num.querySelector('input');
+      if (inp) inp.value = i + 1;
+      else num.textContent = i + 1;
+      num.classList.toggle('top', i === 0);
+      // update arrow disabled states
+      const arrows = item.querySelectorAll('.arrow-btn');
+      const total = list.querySelectorAll('.rank-item').length;
+      arrows[0].disabled = i === 0;
+      arrows[1].disabled = i === total - 1;
+    });
+  }
+
+  // ── DRAG AND DROP ──
+  let dragSrc = null;
+
+  document.addEventListener('dragstart', e => {
+    const item = e.target.closest('.rank-item');
+    if (!item) return;
+    dragSrc = item;
+    setTimeout(() => item.classList.add('dragging'), 0);
+    e.dataTransfer.effectAllowed = 'move';
+  });
+
+  document.addEventListener('dragend', e => {
+    const item = e.target.closest('.rank-item');
+    if (item) item.classList.remove('dragging');
+    document.querySelectorAll('.rank-item').forEach(i => i.classList.remove('drag-over'));
+    dragSrc = null;
+  });
+
+  document.addEventListener('dragover', e => {
+    e.preventDefault();
+    const item = e.target.closest('.rank-item');
+    if (!item || item === dragSrc) return;
+    document.querySelectorAll('.rank-item').forEach(i => i.classList.remove('drag-over'));
+    item.classList.add('drag-over');
+  });
+
+  document.addEventListener('drop', e => {
+    e.preventDefault();
+    const item = e.target.closest('.rank-item');
+    if (!item || item === dragSrc || !dragSrc) return;
+    const list = item.closest('.ranking-list');
+    const srcList = dragSrc.closest('.ranking-list');
+    if (list !== srcList) return;
+    const items = [...list.querySelectorAll('.rank-item')];
+    const srcIdx = items.indexOf(dragSrc);
+    const tgtIdx = items.indexOf(item);
+    if (srcIdx < tgtIdx) list.insertBefore(dragSrc, item.nextSibling);
+    else list.insertBefore(dragSrc, item);
+    item.classList.remove('drag-over');
+    updateNumbers(list.id);
+  });
+
+  // ── SUBMIT ──
+  // Simulated community data for visual demo
+  const communityData = {
+    large:  ['Blessed Status System', 'Wilderness Teams', 'PvP Arena Rework', 'Team Combat Zone Trial', 'Forinthry Artefacts System'],
+    medium: ['PvP/PvM Mechanic Consistency Pass', 'Castle Wars Revival', 'Expanded Blighted Supplies', 'Ironman Loot Key Access', 'Soul Wars Improvements'],
+    small:  ['Clearer Multi/Singles Zone Indicators', 'Improved Special Attack Orb', 'Rag Skull Mechanic', 'Deathdotting Removal', 'Wilderness Diary Death Cost Review'],
+  };
+
+  const categoryLabels = { large: 'Large Updates', medium: 'Medium Updates', small: 'Small Updates' };
+
+  function submitRanking() {
+    const panel = document.getElementById('results-panel');
+    const list = document.getElementById('results-list');
+    const label = document.getElementById('results-category-label');
+
+    label.textContent = categoryLabels[activeCategory];
+
+    const data = communityData[activeCategory];
+    const maxBar = 100;
+    // fake vote percentages descending
+    const pcts = [42, 28, 14, 10, 6];
+
+    list.innerHTML = data.map((name, i) => `
+      <div class="result-row">
+        <div class="result-rank ${i === 0 ? 'r1' : ''}">${i === 0 ? '★' : i + 1}</div>
+        <div class="result-name">${name}</div>
+        <div class="result-bar-wrap">
+          <div class="result-bar" style="width:0%" data-pct="${pcts[i]}"></div>
+        </div>
+        <div style="font-size:12px;color:var(--text-muted);min-width:32px;text-align:right;">${pcts[i]}%</div>
+      </div>
+    `).join('');
+
+    panel.classList.add('visible');
+
+    // animate bars
+    requestAnimationFrame(() => {
+      panel.querySelectorAll('.result-bar').forEach(bar => {
+        bar.style.width = bar.dataset.pct + '%';
+      });
+    });
+
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetCategory() {
+    // reload page to reset — simple approach
+    location.reload();
+  }
+
+  // ── INIT ──
+  categories.forEach(cat => updateNumbers('list-' + cat));
+
+function jumpToRank(input) {
+  const item = input.closest('.rank-item');
+  const list = item.closest('.ranking-list');
+  const items = [...list.querySelectorAll('.rank-item')];
+  const currentIdx = items.indexOf(item);
+  let target = parseInt(input.value, 10) - 1;
+  if (isNaN(target)) { input.value = currentIdx + 1; return; }
+  target = Math.max(0, Math.min(items.length - 1, target));
+  if (target === currentIdx) { input.value = currentIdx + 1; return; }
+  // Remove from current position and insert at target
+  list.removeChild(item);
+  const refItems = [...list.querySelectorAll('.rank-item')];
+  if (target >= refItems.length) list.appendChild(item);
+  else list.insertBefore(item, refItems[target]);
+  updateNumbers(list.id);
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS PvP — Community Sentiment Analysis 2026</title>
+<style>
+
+@font-face {
+  font-family: 'RSUF';
+  src: url('data:font/woff;base64,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') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --stone-dark:   #1e1a12;
+  --stone-mid:    #2e2618;
+  --stone-panel:  #3d3020;
+  --stone-light:  #4e3e28;
+  --stone-border: #5a4a30;
+  --text-body:    #d8c89a;
+  --text-dim:     #a89870;
+  --green-rs:     #00c000;
+  --green-bright: #80ff00;
+  --yellow-rs:    #ffcc00;
+  --orange-rs:    #ff8c00;
+  --red-rs:       #cc2222;
+  --blue-rs:      #80c0ff;
+  --purple-rs:    #cc88ff;
+  --white-rs:     #f0e8d0;
+  --sara-blue:    #4488cc;
+  --guthix-green: #44aa44;
+  --zammy-red:    #cc3333;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: var(--stone-dark);
+  color: var(--text-body);
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.page-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><rect width="3" height="3" fill="%231e1a12"/><rect x="0" y="0" width="1" height="1" fill="%23261e10" opacity="0.5"/></svg>');
+  background-color: var(--stone-dark);
+}
+
+/* ── HERO ── */
+.hero {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.75) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="%23201808"/><rect x="0" y="0" width="2" height="2" fill="%23281a08" opacity="0.5"/></svg>');
+  background-color: #1a1208;
+  padding: 36px 24px 28px;
+  text-align: center;
+  border-bottom: 3px solid #5a4a2a;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,80,0,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-family: 'RSUF', serif;
+  font-size: 34px;
+  color: var(--yellow-rs);
+  text-shadow: 1px 0 0 #000,-1px 0 0 #000,0 1px 0 #000,0 -1px 0 #000,2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,3px 3px 0 #000;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.hero h2 {
+  font-family: 'RSUF', serif;
+  font-size: 15px;
+  color: var(--text-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #000;
+}
+.hero-sub {
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── BRICK STRIP ── */
+.brick-strip {
+  height: 18px;
+  background: #2a2010;
+  position: relative;
+  overflow: hidden;
+}
+.brick-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px, transparent 17px,
+    rgba(0,0,0,0.35) 17px, rgba(0,0,0,0.35) 19px,
+    transparent 19px, transparent 35px,
+    rgba(0,0,0,0.35) 35px, rgba(0,0,0,0.35) 37px
+  );
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 22px 28px;
+  border-bottom: 1px dashed #5a4a2a;
+}
+.section:last-child { border-bottom: none; }
+
+.section-inner {
+  background: rgba(0,0,0,0.22);
+  border: 1px solid #4a3a22;
+  border-radius: 1px;
+  padding: 16px 18px;
+}
+
+.sec-head {
+  font-family: 'RSUF', serif;
+  font-size: 24px;
+  color: var(--green-bright);
+  text-align: center;
+  text-shadow: 1px 0 0 #000,-1px 0 0 #000,0 1px 0 #000,0 -1px 0 #000,2px 2px 0 #000,-2px 2px 0 #000,3px 3px 0 #000;
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+}
+.sec-sub {
+  font-family: 'RSUF', serif;
+  font-size: 14px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 14px;
+  text-shadow: 1px 1px 0 #000;
+}
+.sec-divider {
+  border: none;
+  border-top: 1px dashed #6a5a3a;
+  margin: 8px 0 14px;
+}
+.subsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 16px;
+  color: var(--yellow-rs);
+  margin: 14px 0 6px;
+  letter-spacing: 0.04em;
+  text-shadow: 1px 0 0 #000,-1px 0 0 #000,0 1px 0 #000,0 -1px 0 #000,2px 2px 0 #000,3px 3px 0 #000;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin-bottom: 10px;
+}
+p:last-child { margin-bottom: 0; }
+
+em { color: var(--orange-rs); font-style: normal; }
+strong { color: var(--white-rs); }
+.hl-green { color: var(--green-rs); }
+.hl-blue  { color: var(--blue-rs); }
+.hl-red   { color: var(--red-rs); }
+.hl-yellow { color: var(--yellow-rs); }
+.hl-purple { color: var(--purple-rs); }
+
+/* ── APPROVAL METER ── */
+.approval-wrap {
+  text-align: center;
+  margin: 10px 0 18px;
+}
+.approval-label {
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.approval-bar-outer {
+  height: 26px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--stone-border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.approval-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--guthix-green) 0%, var(--green-bright) 100%);
+  transition: width 1.2s ease;
+}
+.approval-bar-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'RSUF', serif;
+  font-size: 15px;
+  color: var(--white-rs);
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+}
+
+/* ── PLAYER-TYPE BOXES ── */
+.player-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+.player-box {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid #4a3a22;
+  border-radius: 2px;
+  padding: 12px 14px;
+}
+.player-box.green  { border-left: 3px solid var(--green-rs); }
+.player-box.yellow { border-left: 3px solid var(--yellow-rs); }
+.player-box.red    { border-left: 3px solid var(--red-rs); }
+.player-box.blue   { border-left: 3px solid var(--blue-rs); }
+.player-box.purple { border-left: 3px solid var(--purple-rs); }
+.player-box.orange { border-left: 3px solid var(--orange-rs); }
+.player-type-name {
+  font-family: 'RSUF', serif;
+  font-size: 14px;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 0 #000;
+}
+.player-box.green  .player-type-name { color: var(--green-bright); }
+.player-box.yellow .player-type-name { color: var(--yellow-rs); }
+.player-box.red    .player-type-name { color: var(--red-rs); }
+.player-box.blue   .player-type-name { color: var(--blue-rs); }
+.player-box.purple .player-type-name { color: var(--purple-rs); }
+.player-box.orange .player-type-name { color: var(--orange-rs); }
+.player-box p { font-size: 13px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+/* ── NUMBERED PROBLEM LIST ── */
+.prob-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.prob-list li {
+  display: flex;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(90,74,42,0.3);
+  font-size: 14.5px;
+  color: var(--text-body);
+  line-height: 1.5;
+  align-items: baseline;
+}
+.prob-list li:last-child { border-bottom: none; }
+.prob-num {
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  color: var(--orange-rs);
+  min-width: 24px;
+  text-shadow: 1px 1px 0 #000;
+  flex-shrink: 0;
+}
+.prob-mentions {
+  font-family: 'RSUF', serif;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--stone-border);
+  padding: 1px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.prob-covered { color: var(--green-rs); font-size: 11px; }
+.prob-not-covered { color: var(--red-rs); font-size: 11px; }
+.prob-partial { color: var(--yellow-rs); font-size: 11px; }
+
+/* ── REBUTTAL LIST ── */
+.rs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.rs-list li {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-body);
+  padding: 5px 0 5px 22px;
+  position: relative;
+  border-bottom: 1px solid rgba(90,74,42,0.3);
+}
+.rs-list li:last-child { border-bottom: none; }
+.rs-list li::before {
+  content: '⚔';
+  position: absolute;
+  left: 2px;
+  color: var(--orange-rs);
+  font-size: 11px;
+  top: 7px;
+}
+.rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11px; }
+.rs-list.skull li::before   { content: '💀'; font-size: 10px; top: 6px; }
+.rs-list.cross li::before   { content: '✖'; color: var(--red-rs); font-size: 12px; top: 6px; }
+.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9px; top: 7px; }
+
+/* ── IDEA VERDICT BOXES ── */
+.verdict-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.verdict-box {
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 10px 10px;
+  text-align: center;
+}
+.verdict-box.yes   { border-color: var(--guthix-green); background: rgba(68,170,68,0.08); }
+.verdict-box.no    { border-color: var(--zammy-red);    background: rgba(204,51,51,0.08); }
+.verdict-box.split { border-color: var(--yellow-rs);    background: rgba(255,204,0,0.06); }
+.verdict-label {
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 0 #000;
+}
+.verdict-box.yes   .verdict-label { color: var(--green-bright); }
+.verdict-box.no    .verdict-label { color: var(--red-rs); }
+.verdict-box.split .verdict-label { color: var(--yellow-rs); }
+.verdict-box p { font-size: 12.5px; color: var(--text-dim); margin: 0; line-height: 1.45; }
+
+/* ── CALLOUT / NOTE BOX ── */
+.callout {
+  background: rgba(0,0,0,0.35);
+  border-left: 3px solid var(--orange-rs);
+  border: 1px solid rgba(90,74,42,0.5);
+  border-left: 3px solid var(--orange-rs);
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 14px;
+  color: var(--text-dim);
+  border-radius: 1px;
+}
+.callout.blue  { border-left-color: var(--blue-rs); }
+.callout.green { border-left-color: var(--green-rs); }
+.callout.red   { border-left-color: var(--red-rs); }
+.callout.yellow{ border-left-color: var(--yellow-rs); }
+
+/* ── MINI STAT GRID ── */
+.stat-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.stat-pill {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--stone-border);
+  border-radius: 2px;
+  padding: 5px 12px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.stat-pill span {
+  font-family: 'RSUF', serif;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
+}
+.stat-pill span.pos { color: var(--green-bright); }
+.stat-pill span.neg { color: var(--red-rs); }
+.stat-pill span.neu { color: var(--yellow-rs); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  border-top: 1px dashed var(--stone-border);
+  font-style: italic;
+}
+
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div style="font-size:42px;margin-bottom:8px;">⚔️💀⚔️</div>
+  <h1>OSRS PvP Community Analysis</h1>
+  <h2>Source Review — YouTube Comments, Reddit, Script — June 2026</h2>
+  <p class="hero-sub">Analysis of the Still Framed "Wilderness" comment section (~1,440 comments) cross-referenced against Chdata's video script and its core proposals: <em>Blessed Status</em>, <em>Wildy Teams</em>, <em>Team Combat Zones</em>, and <em>Priority Ranking Poll</em>.</p>
+</div>
+
+<div class="brick-strip"></div>
+
+<!-- ══════════════ SECTION 1: PLAYER TYPE MINDSETS ══════════════ -->
+<div class="section">
+  <div class="sec-head">Player Mindset Archetypes</div>
+  <div class="sec-sub">Six distinct mentalities visible across the comment section</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <p>The comment section is not a monolith. Roughly six distinct mindsets dominate the conversation, each with very different relationships to the Wilderness and what they want from it.</p>
+    <div class="player-grid" style="margin-top:14px;">
+      <div class="player-box red">
+        <div class="player-type-name">💀 The Anti-PvP Bloc</div>
+        <p>Broadly the <em>plurality</em> of commenters. They do not want to engage with PvP at all and will vote no on most PvP updates out of frustration or spite from past experiences. Includes casual mains, clue scroll hunters, and many ironmen. Core sentiment: <em>"Remove it, or at least keep it away from me."</em></p>
+      </div>
+      <div class="player-box orange">
+        <div class="player-type-name">🏃 The Reluctant Visitor</div>
+        <p>Goes into the Wilderness only when forced — clue steps, Mage Arena capes, or item unlocks like the Voidwaker. Actively resents being there. Brings minimum risk. Frequently gets griefed. Will support updates that reduce forced interaction but opposes anything that increases risk for non-PvPers. Large segment of ironmen fall here.</p>
+      </div>
+      <div class="player-box yellow">
+        <div class="player-type-name">🔰 The Willing But Helpless</div>
+        <p>Players who <em>want</em> to engage with the Wilderness or learn PvP but find the skill gap and entry cost completely overwhelming. "I would do PvP if I had a chance." Very sympathetic to tutorial ideas, gear brackets, and matchmaking. This group is the most likely to be converted into active participants by good design.</p>
+      </div>
+      <div class="player-box green">
+        <div class="player-type-name">⚔️ The PvM Enjoyer</div>
+        <p>Likes Wilderness PvM — slayer, chaos altar, revs, or agility — and has developed a live-and-let-live acceptance of getting PK'd occasionally. Generally supports making the Wilderness healthier but doesn't want it fundamentally changed. Often ironmen who've made peace with the risk.</p>
+      </div>
+      <div class="player-box blue">
+        <div class="player-type-name">🎯 The PvP Loyalist / PKer</div>
+        <p>Still actively PvPs or at least identifies with PvP culture. Ranges from reasonable ("PvPers should fight PvPers, not prey") to defensive ("stop coddling irons"). Smaller in number than they appear online. Often push back hard against anything that reduces Wilderness risk or moves items outside the Wilderness. Internally divided between solo PKers and multi/clan players.</p>
+      </div>
+      <div class="player-box purple">
+        <div class="player-type-name">🏰 The Ironman Bloc</div>
+        <p>Ironmen (~30% of players per their own estimates in comments) have unique complaints. They get nothing from kills, lose hard-earned items on death, can't buy replacements. Have zero incentive to fight back. The single most-cited demographic making Wilderness content politically toxic. Any update that doesn't account for them is practically guaranteed to be voted down.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 2: APPROVAL ESTIMATE ══════════════ -->
+<div class="section">
+  <div class="sec-head">Estimated Approval — Chdata's Proposals</div>
+  <div class="sec-sub">Rough guess based on comment tone and known community splits</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+
+    <div class="approval-wrap">
+      <div class="approval-label">Overall Package (Blessed Status + Wildy Teams + TCZ + Poll System)</div>
+      <div class="approval-bar-outer">
+        <div class="approval-bar-fill" style="width:42%;"></div>
+        <div class="approval-bar-label">~42%</div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-pill"><span class="pos">~65%</span>Wilderness-only Clue Scrolls</div>
+      <div class="stat-pill"><span class="pos">~58%</span>Ironman Bond Coffer</div>
+      <div class="stat-pill"><span class="neu">~47%</span>PvP Tutorial</div>
+      <div class="stat-pill"><span class="neu">~45%</span>Blessed Status</div>
+      <div class="stat-pill"><span class="neu">~40%</span>Wildy Teams (6-player)</div>
+      <div class="stat-pill"><span class="neg">~30%</span>Team Combat Zones</div>
+      <div class="stat-pill"><span class="neg">~28%</span>Limiting World Count</div>
+      <div class="stat-pill"><span class="neg">~22%</span>Wilderness Expansion</div>
+    </div>
+
+    <p style="margin-top:12px;">The full package sits below the 70% poll threshold by a wide margin — consistent with the historical polling reality Chdata identifies in his script. However, several individual ideas poll meaningfully above the average. The gap between "surface-level popular ideas" and "structural fixes" is a core problem. Breaking the package into smaller targeted polls (which the Priority Ranking Poll system addresses) is probably the most realistic path forward.</p>
+
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>Note on methodology:</strong> These are rough estimates derived from comment sentiment analysis, not a real poll. The actual poll would include the full playerbase including bots and inactive voters who skew anti-PvP. In that context, even these estimates may be optimistic.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 3: PROBLEMS LIST ══════════════ -->
+<div class="section">
+  <div class="sec-head">Unique PvP Problems Identified</div>
+  <div class="sec-sub">Ranked by mention frequency across script + comment section · ✔ = covered in script</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <p>Problem coverage key: <span class="prob-covered">✔ Covered in Chdata's script</span> &nbsp; <span class="prob-partial">◑ Partially covered</span> &nbsp; <span class="prob-not-covered">✖ Not covered / signal-boosted only</span></p>
+    <br>
+    <ol class="prob-list">
+      <li>
+        <span class="prob-num">#1</span>
+        <div>
+          <strong>The skill gap is too large — veterans utterly dominate beginners with no matchmaking or bracket system.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Explicitly listed as a core barrier to entry. Tutorial + Blighted Supplies + lower-cost PKing all address it.
+        </div>
+        <span class="prob-mentions">~60 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#2</span>
+        <div>
+          <strong>Wildy clue steps are anti-fun for everyone — the PKer gets nothing, the PvMer loses time and gear re-equipping, and nobody benefits.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Signal-boosted extensively with links to community posts. Wilderness-only clue scrolls proposed as fix.
+        </div>
+        <span class="prob-mentions">~55 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#3</span>
+        <div>
+          <strong>Ironmen have zero incentive to fight back — no loot on kill, lose hard-earned items on death, can't rebuy from GE.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Bond Coffer / Loot Key signal boost addresses the incentive side. Blessed Status addresses the death side.
+        </div>
+        <span class="prob-mentions">~52 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#4</span>
+        <div>
+          <strong>PvP updates consistently fail the 70% poll threshold because the non-PvP majority votes no out of apathy or spite.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          The Priority Ranking Poll System is specifically designed to break this cycle.
+        </div>
+        <span class="prob-mentions">~48 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#5</span>
+        <div>
+          <strong>World-hop scouting, alt scouts, and WildyCCTV make it trivially easy for PKers to find and ambush targets while targets can never see them coming.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Listed in the "even more problems" section of the script but no direct solution proposed.
+        </div>
+        <span class="prob-mentions">~40 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#6</span>
+        <div>
+          <strong>Bots and AHK cheaters dominate the PvP scene — prayer switching bots, AHK gear-swap scripts, RWT crews. Jagex enforcement is seen as nonexistent.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Listed as a known problem in the script. No dedicated solution proposed beyond general acknowledgment.
+        </div>
+        <span class="prob-mentions">~38 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#7</span>
+        <div>
+          <strong>The Wilderness is spread across too many worlds — the PvP community is too diluted to make any single world feel alive.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Discussed in script. World count limiting mentioned but pushed back on as a partial/flawed fix on its own.
+        </div>
+        <span class="prob-mentions">~35 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#8</span>
+        <div>
+          <strong>Risk is asymmetric — a PKer in max gear can rush someone in rag gear for zero loot, wasting both players' time. There is no meaningful minimum risk floor for PKers.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Blessed Status partially addresses this — PKers fighting Blessed players don't risk their own gear.
+        </div>
+        <span class="prob-mentions">~34 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#9</span>
+        <div>
+          <strong>Forced wilderness items (Voidwaker, MA2 capes, Rev weapons) lock useful non-PvP rewards behind a PvP zone, creating resentment in the non-PvP majority.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Discussed in detail. Script agrees this is misunderstood but proposes alternatives for some items.
+        </div>
+        <span class="prob-mentions">~32 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#10</span>
+        <div>
+          <strong>Freeze mechanics make escape nearly impossible — once frozen, most players are effectively dead, removing skill from the equation for non-PvPers.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Discussed in the problems list. No direct mechanical fix proposed for freeze mechanics specifically.
+        </div>
+        <span class="prob-mentions">~30 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#11</span>
+        <div>
+          <strong>The predator-prey model generates toxic behavior — PKers kill helpless players for no meaningful reward, griefing rather than PvPing.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Core theme of the script. Wildy Teams + TCZ directly target this by creating more equal engagements.
+        </div>
+        <span class="prob-mentions">~28 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#12</span>
+        <div>
+          <strong>Multi-combat clan dominance — solo and small-group players can be zerged by 10+ players with no defense. No cap on attackers in multi zones.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Team Combat Zones directly address this with a 6-player attack cap.
+        </div>
+        <span class="prob-mentions">~26 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#13</span>
+        <div>
+          <strong>Wilderness PvM gear and PvP survival gear conflict — filling inventory with boss supplies leaves no room for anti-PK gear.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Explicitly listed. Blighted Bone Sack and more Blighted Supplies directly address this.
+        </div>
+        <span class="prob-mentions">~25 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#14</span>
+        <div>
+          <strong>Arbitrary PvP-only mechanics — autocast disabled, spell icon resizing disabled, powered staves disabled. Creates inconsistency and confusion for new players.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Listed explicitly in the script as a known problem. No solution proposed but acknowledged.
+        </div>
+        <span class="prob-mentions">~22 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#15</span>
+        <div>
+          <strong>High cost of entry to PvP — Loot Keys cost 1M to unlock, Ferox respawn 5M, Trouver Parchments, consumable costs all add up before a single fight.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Explicitly listed. Blessed Status + more Blighted Supplies + Parchment removal all reduce these costs.
+        </div>
+        <span class="prob-mentions">~22 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#16</span>
+        <div>
+          <strong>No way to learn PvP without real financial risk — LMS doesn't teach Wilderness-relevant mechanics, PvP Arena is broken.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          PvP Tutorial (Framed / Pete Kayer) is explicitly praised and discussed. Script calls it a good start.
+        </div>
+        <span class="prob-mentions">~20 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#17</span>
+        <div>
+          <strong>Freeze-logging — the optimal play vs a PKer is to freeze and immediately log out, meaning no real PvP encounter occurs at all.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Listed in the "more problems" bullet list. No explicit fix in proposed solutions.
+        </div>
+        <span class="prob-mentions">~18 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#18</span>
+        <div>
+          <strong>Power creep has made PvP gear so strong that casual players get combo'd out before they can react, removing meaningful counterplay.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Implicitly addressed by Blessed Status reducing item loss risk, but max-hit power creep isn't directly tackled.
+        </div>
+        <span class="prob-mentions">~18 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#19</span>
+        <div>
+          <strong>Loot keys concentrate all PvM drops into a single slot — eliminating looters, floor loot culture, and the secondary food chain that gave the Wilderness texture.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Noted in community discussion. Not directly addressed in Chdata's proposals.
+        </div>
+        <span class="prob-mentions">~16 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#20</span>
+        <div>
+          <strong>No safe content exists below level 30 Wilderness, making the entire zone feel hostile for players just trying to pass through.</strong>
+          <div><span class="prob-not-covered">✖ Not covered</span></div>
+          Not mentioned in the script. Relevant to Reluctant Visitor mindset.
+        </div>
+        <span class="prob-mentions">~14 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#21</span>
+        <div>
+          <strong>Bot farms dominate every profitable Wilderness activity, meaning most "prey" encountered are actually bots with no actual players in the Wilderness.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Explicitly mentioned. Script notes the bot ban wave made the Wilderness even emptier.
+        </div>
+        <span class="prob-mentions">~14 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#22</span>
+        <div>
+          <strong>PJ Timer removal killed team PvP and small-group hunting — now it's only solo 1v1 or massive clan zerg, nothing in between.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Directly addressed by Wildy Teams and the Singles Teams history discussed in the script.
+        </div>
+        <span class="prob-mentions">~12 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#23</span>
+        <div>
+          <strong>"Us vs them" psychology — PvPers dismiss non-PvPers' concerns, non-PvPers spite vote. Neither side tries to understand the other.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Entire dedicated section in the script on psychological problems. This is one of Chdata's core points.
+        </div>
+        <span class="prob-mentions">~12 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#24</span>
+        <div>
+          <strong>Bounty Hunter and PvP worlds splitting the already-small PvP playerbase into too many separate venues.</strong>
+          <div><span class="prob-partial">◑ Mentioned</span></div>
+          Noted in script. No direct fix proposed beyond generally fixing the Wilderness itself.
+        </div>
+        <span class="prob-mentions">~10 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#25</span>
+        <div>
+          <strong>Ragging — attacking someone in minimum gear with no intention of getting a real kill, just to drain their supplies and waste their time.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Listed in problems. Blessed Status partially addresses this by making low-risk PKing less profitable.
+        </div>
+        <span class="prob-mentions">~10 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#26</span>
+        <div>
+          <strong>As OSRS adds more worlds to handle population, the Wilderness gets thinner — more worlds were never designed with the Wilderness in mind.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Explicitly listed in the script.
+        </div>
+        <span class="prob-mentions">~8 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#27</span>
+        <div>
+          <strong>PvP reputation is so toxic that word-of-mouth actively steers new players away before they ever try it.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Dedicated discussion in the script's psychological problems section.
+        </div>
+        <span class="prob-mentions">~8 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#28</span>
+        <div>
+          <strong>Wildertrees / Rev Caves / Wrathmaw — specific proposals that caused community backlash due to integrity concerns or bad design.</strong>
+          <div><span class="prob-covered">✔ Covered</span></div>
+          Discussed at length. Wrathmaw redesigned. Rev Caves referenced as a mixed success story.
+        </div>
+        <span class="prob-mentions">~8 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#29</span>
+        <div>
+          <strong>UIM (Ultimate Ironmen) lose everything on PvP death with no recourse at all — not even items on the floor to retrieve.</strong>
+          <div><span class="prob-not-covered">✖ Not covered</span></div>
+          Mentioned by commenters but not specifically addressed in Chdata's script.
+        </div>
+        <span class="prob-mentions">~6 mentions</span>
+      </li>
+      <li>
+        <span class="prob-num">#30</span>
+        <div>
+          <strong>Mobile players cannot realistically compete in PvP — the reaction speed required for prayer flicks and gear switches is beyond mobile input limits.</strong>
+          <div><span class="prob-not-covered">✖ Not covered</span></div>
+          Mentioned by commenters. Script doesn't address it, though it's a real barrier to new-player PvP growth.
+        </div>
+        <span class="prob-mentions">~5 mentions</span>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 4: REBUTTALS ══════════════ -->
+<div class="section">
+  <div class="sec-head">Community Rebuttals &amp; Pushback</div>
+  <div class="sec-sub">Arguments denying, dismissing, or countering the problems above</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <div class="subsec-head">Dismissals of Core Problems</div>
+    <ul class="rs-list cross">
+      <li><strong>"Just don't go in the Wilderness."</strong> The most common rebuttal. Ignores that clue steps, MA2 capes, Voidwaker, and diary rewards force interaction.</li>
+      <li><strong>"You chose to play Ironman. Stop asking for changes to the core game."</strong> Ignores that ironmen are ~30% of the playerbase and their voting bloc has outsized poll influence.</li>
+      <li><strong>"I did 200 hard clues last month and never got PK'd on wildy steps."</strong> Survivorship bias rebuttal — ignores that the fear of being PK'd is itself a barrier regardless of frequency.</li>
+      <li><strong>"Just learn to anti-PK. PvP has been in the game for 20 years."</strong> Dismisses the skill ceiling problem. Doesn't address why someone should invest hundreds of hours for a frustrating experience.</li>
+      <li><strong>"The wilderness should stay risky, that's the whole point."</strong> Mischaracterizes proposals like Blessed Status as "removing risk" when it actually just changes what is risked.</li>
+      <li><strong>"You want the Wilderness to be Weenie Hut Jr."</strong> Strawman of compromise proposals — no serious suggestion actually removes all risk.</li>
+      <li><strong>"PvP updates just attract gold farmers and RWT. Jagex is right to deprioritize it."</strong> Real concern about integrity, but used as a blanket reason to avoid any PvP investment.</li>
+      <li><strong>"If people wanted PvP, they'd go to PvP worlds / BH / LMS already."</strong> Ignores that those venues are also struggling. The argument proves the broader problem rather than refuting it.</li>
+    </ul>
+    <br>
+    <div class="subsec-head">Rebuttals to Specific Common Proposals</div>
+    <ul class="rs-list cross">
+      <li><strong>Against opt-in PvP toggle:</strong> "That just makes the Wilderness RS3 and kills the entire point of it." Largely correct that a full opt-out breaks the ecosystem design.</li>
+      <li><strong>Against limiting world count:</strong> "I can't get a 10-min trip at Vetion and you want to make it worse?" — PvMers fear reducing worlds concentrates PKers on them more, not on each other.</li>
+      <li><strong>Against Wilderness clue step removal:</strong> "Clue scrolls need the wilderness steps — that's part of the content." Minority view but genuinely held.</li>
+      <li><strong>Against alternative sources for Wilderness items:</strong> "If Voidwaker is outside the Wilderness, why would anyone go there for the bosses?" A real tension point between ecosystem health and item exclusivity.</li>
+      <li><strong>Against PvP tutorials:</strong> "A tutorial won't teach you tick-perfect prayer switching and 8-way gear swaps. You have to just live it." Partially correct — tutorials help but don't close the gap alone.</li>
+      <li><strong>Against more Blighted Supplies:</strong> Mostly uncontested as a concept. A few comments argue more Blighted items devalue risk further.</li>
+      <li><strong>Against any development time spent on PvP:</strong> "Dev time should go to Sailing, new raids, etc." Political argument that any PvP investment is a waste versus other content.</li>
+    </ul>
+    <br>
+    <div class="subsec-head">Minority Hardline Positions (Ignore / Very Hard to Convince)</div>
+    <ul class="rs-list skull">
+      <li><strong>"Remove PvP from the Wilderness entirely"</strong> — mentioned by at least a dozen commenters. Not a compromise. Waste of time engaging with.</li>
+      <li><strong>"PvP is for RWT gold farmers and losers. Let it die."</strong> — entrenched hatred with no path to conversion.</li>
+      <li><strong>"I'll vote no on every PvP poll forever out of spite."</strong> — explicit statement made multiple times. These are lost votes regardless of proposal quality.</li>
+      <li><strong>"Just make it like RS3 and remove the wilderness."</strong> — not understanding OSRS's identity or player values at all.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 5: IDEA VERDICTS ══════════════ -->
+<div class="section">
+  <div class="sec-head">How Do Chdata's Ideas Land?</div>
+  <div class="sec-sub">Per-proposal breakdown of likely reception by player type</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+
+    <div class="subsec-head">🛡️ Blessed Status</div>
+    <p>An opt-in overhead costing 100k where items are kept on death for a 5% fee paid to the PKer. Teams must be fully Blessed or not at all. PKers don't risk gear fighting Blessed players.</p>
+    <div class="verdict-grid">
+      <div class="verdict-box yes">
+        <div class="verdict-label">Likely Yes</div>
+        <p>Reluctant Visitors, Willing-but-Helpless, Ironman Bloc who want some death protection. PvM Enjoyers who want to risk more gear safely.</p>
+      </div>
+      <div class="verdict-box split">
+        <div class="verdict-label">Split / Skeptical</div>
+        <p>PvP Loyalists — some see it as a good way to get more bodies in the Wilderness, others see it as a "free pass" undermining risk culture. Very concept-dependent.</p>
+      </div>
+      <div class="verdict-box no">
+        <div class="verdict-label">Likely No</div>
+        <p>Anti-PvP Bloc who don't want to engage regardless. Hardcore PKers who feel it removes their earning potential from PvMer kills.</p>
+      </div>
+    </div>
+    <div class="callout green">
+      <strong>Appeal Strategy:</strong> Frame Blessed Status as "<em>deaths still hurt — you pay 5% to the PKer</em>" not as free protection. The PKer gets a guaranteed payment instead of gambling on what you're carrying. That's actually <em>more reliable income</em> for PKers, not less.
+    </div>
+
+    <div class="subsec-head">🏳️ Wildy Teams (6-player party system)</div>
+    <p>An official small-group party system with anti-friendly-fire and a recruitment board.</p>
+    <div class="verdict-grid">
+      <div class="verdict-box yes">
+        <div class="verdict-label">Likely Yes</div>
+        <p>Players who mention "I'd PvP if I could do it with friends" — a recurring sentiment. The recruitment board appeals to solo players wanting to get into group content.</p>
+      </div>
+      <div class="verdict-box split">
+        <div class="verdict-label">Split</div>
+        <p>Existing PvP players — some already organize through Discord and don't want the overhead. Anti-PvP players who don't care either way.</p>
+      </div>
+      <div class="verdict-box no">
+        <div class="verdict-label">Likely No</div>
+        <p>Very few explicit objections in comments. Most opposition is passive (just not caring about PvP). One of the safer proposals.</p>
+      </div>
+    </div>
+    <div class="callout green">
+      <strong>Appeal Strategy:</strong> This one mostly sells itself. Lean into the fact that multi-clan domination is a widely hated thing — Wildy Teams gives the "middle tier" players a real defense against being zerged.
+    </div>
+
+    <div class="subsec-head">🏟️ Team Combat Zones</div>
+    <p>A zone type where any one group can be attacked by at most 6 players. Turns multi into structured group PvP.</p>
+    <div class="verdict-grid">
+      <div class="verdict-box yes">
+        <div class="verdict-label">Likely Yes</div>
+        <p>Anyone who has been zerged by 20 players in multi while doing boss content. Small-group PvPers who want fair fights. PvMers who want to do Wildy bosses without clan interference.</p>
+      </div>
+      <div class="verdict-box split">
+        <div class="verdict-label">Split</div>
+        <p>Clan players — this directly restricts their ability to flood a zone. Some may accept 6v6 as still being clan content. Others will resent any limitation on zerg potential.</p>
+      </div>
+      <div class="verdict-box no">
+        <div class="verdict-label">Likely No</div>
+        <p>Large clan leadership who rely on overwhelming numbers as their primary tactic. This is probably the proposal that faces the most organized pushback from that community.</p>
+      </div>
+    </div>
+    <div class="callout yellow">
+      <strong>Appeal Strategy:</strong> Focus on framing TCZ as <em>making PvP actual PvP</em> instead of a zerg. If the PvP loyalist crowd wants to be taken seriously as a PvP game mode, capped engagements are more credible than pile-ons. Hard to sell to large clans directly — probably better to appeal around them.
+    </div>
+
+    <div class="subsec-head">📊 Priority Ranking Poll System</div>
+    <p>Community ranks potential updates by tiers. Jagex commits to developing the top-ranked one.</p>
+    <div class="verdict-grid">
+      <div class="verdict-box yes">
+        <div class="verdict-label">Likely Yes</div>
+        <p>Anyone frustrated with the broken polling system. A very broadly popular concept in principle. Gives all player types some agency without requiring everyone to agree on one update.</p>
+      </div>
+      <div class="verdict-box split">
+        <div class="verdict-label">Split</div>
+        <p>People who are skeptical of Jagex following through on commitments. "They said they'd look into the Resource Area 2 years ago" is a common sentiment.</p>
+      </div>
+      <div class="verdict-box no">
+        <div class="verdict-label">Likely No</div>
+        <p>Hardline anti-PvP bloc who don't want ANY PvP updates regardless of process. Very few explicit objectors to the poll mechanism itself though.</p>
+      </div>
+    </div>
+    <div class="callout blue">
+      <strong>Appeal Strategy:</strong> Pitch this to the non-PvP crowd as <em>giving them more control</em>, not less. If they rank PvP updates lower, they determine what comes first. The system doesn't force anything — it structures the conversation.
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 6: WHO CAN AND CAN'T BE CONVINCED ══════════════ -->
+<div class="section">
+  <div class="sec-head">Who Can Be Converted &amp; Who Can't</div>
+  <div class="sec-sub">Calibrating where to spend persuasion energy</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+
+    <div class="subsec-head" style="color:var(--green-bright);">✔ Good Targets to Persuade</div>
+    <ul class="rs-list check">
+      <li><strong>The Willing-but-Helpless</strong> — they already want to engage but feel locked out. Any reduction in skill gap or entry cost resonates immediately with them. Large enough group to meaningfully shift poll numbers.</li>
+      <li><strong>Ironmen who do Wilderness PvM</strong> — the "I love chaos altar and slayer but getting pk'd sucks" crowd. The Bond Coffer and Blessed Status speak directly to their pain. They're not fundamentally anti-PvP.</li>
+      <li><strong>PvMers who've been zerged in multi</strong> — Team Combat Zones are directly solving their real lived experience. Show them the specific scenario and they'll get it.</li>
+      <li><strong>Players who miss the "old Wilderness" energy</strong> — several commenters expressed nostalgia for a time when the Wilderness felt alive. Wildy Teams and a better ecosystem appeals to that nostalgia without requiring them to defend the current broken state.</li>
+      <li><strong>People who think PvP updates can never pass polls</strong> — the Priority Ranking Poll system directly addresses this despair. Showing them a credible path forward is itself persuasive.</li>
+    </ul>
+    <br>
+    <div class="subsec-head" style="color:var(--red-rs);">✖ Hard or Impossible to Convince</div>
+    <ul class="rs-list skull">
+      <li><strong>"Remove PvP entirely" contingent</strong> — this is identity-level opposition, not a design critique. No proposal fixes this.</li>
+      <li><strong>Players who will spite-vote no regardless</strong> — explicitly stated. Acknowledge them in the video, don't argue with them. Argue around them to the persuadable majority.</li>
+      <li><strong>Large clan PvP players who rely on zerg mechanics</strong> — Team Combat Zones specifically hurt their current playstyle. May need to accept losing this group's support for the TCZ proposal.</li>
+      <li><strong>"PvP is already dead and that's fine"</strong> — fatalistic but not necessarily hostile. May be swayed if the argument is that a healthier PvP ecosystem benefits everyone, not just PKers.</li>
+      <li><strong>Hardcore risk purists who see Blessed Status as "softening" the Wilderness</strong> — the counterargument (PKers get guaranteed income from Blessed players) is your best tool here, but some won't be moved.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 7: SCRIPT COVERAGE SUMMARY ══════════════ -->
+<div class="section">
+  <div class="sec-head">Coverage Summary</div>
+  <div class="sec-sub">How well does Chdata's script address the community's stated concerns?</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <div class="stat-row">
+      <div class="stat-pill"><span class="pos">19 / 30</span>Problems fully covered</div>
+      <div class="stat-pill"><span class="neu">7 / 30</span>Partially covered</div>
+      <div class="stat-pill"><span class="neg">4 / 30</span>Not addressed</div>
+    </div>
+    <br>
+    <p>Coverage is strong for the <em>structural and psychological</em> problems — the script directly addresses the polling doom spiral, the us-vs-them mentality, the skill barrier, the risk problem, the ironman problem, and the predator-prey design failure. These are the hardest problems and the ones most people talk past.</p>
+    <p>The gaps are mostly in <em>specific mechanical complaints</em> (freeze mechanics, UIM deaths, mobile players, no safe low-level content) and <em>enforcement issues</em> (bots, AHK, world-hop scouting). These are areas where either Jagex's engine or anti-cheat are the real lever, not player-facing design changes.</p>
+
+    <div class="callout yellow" style="margin-top:12px;">
+      <strong>Biggest uncovered gap in the comments:</strong> The <strong>mobile player PvP experience</strong> barely appears in the script but is a real demographic concern. As mobile grows, PvP's complexity becomes a harder and harder sell. Even acknowledging it briefly in the video would go a long way with that audience.
+    </div>
+    <div class="callout blue">
+      <strong>Script strength that may be underutilized:</strong> The <em>fishing trawler metaphor</em> — every problem is a hole in the side — is genuinely great for the video. The comment section demonstrates exactly what this looks like: everyone fixates on their one biggest complaint without connecting how they all reinforce each other. Drive that point home early.
+    </div>
+  </div>
+</div>
+
+<div class="brick-strip"></div>
+
+<div class="footer">
+  Source: Still Framed "Jagex, we need to talk about the Wilderness." YouTube comment section (~1,440 comments) · Chdata's OSRS PvP 2026 script · Analysis compiled June 2026
+</div>
+
+</div>
+</body>
+</html>

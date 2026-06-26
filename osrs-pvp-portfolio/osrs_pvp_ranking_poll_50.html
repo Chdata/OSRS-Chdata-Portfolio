@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PvP Update Priority Ranking — Old School RuneScape</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #c89b3c; --gold-light: #e8c96a; --gold-dark: #8a6a1f;
+    --panel-bg: #f7f0e0; --border: #c0a060;
+    --text-body: #2a1a00; --text-muted: #6b4f2a;
+    --brown-dark: #1a0f00; --brown-mid: #3b2400;
+    --red-rs: #8b1a1a; --green-rs: #2d6b2d; --blue-rs: #1a3a6b;
+  }
+  body {
+    background-color: #0d0800;
+    background-image: radial-gradient(ellipse at 50% 0%, #2a1500 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c89b3c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    font-family: 'Lato', sans-serif; color: var(--text-body); min-height: 100vh;
+  }
+  .topbar {
+    background: linear-gradient(180deg,#1a0900,#0d0500);
+    border-bottom: 2px solid var(--gold-dark);
+    padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px;
+  }
+  .topbar-logo { font-family:'Cinzel',serif; font-size:13px; font-weight:700; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; text-decoration:none; }
+  .topbar-logo span { color:var(--gold-light); }
+  .topbar-nav { display:flex; gap:28px; align-items:center; }
+  .topbar-nav a { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#b89060; text-decoration:none; }
+  .topbar-nav a:hover { color:var(--gold-light); }
+  .topbar-nav a.active { color:var(--gold); border-bottom:2px solid var(--gold); padding-bottom:2px; }
+  .dev-toggle-btn {
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    background:#1a0900; border:1px solid var(--gold-dark); border-radius:2px;
+    padding:5px 12px; color:#b89060; cursor:pointer; transition:all .15s;
+  }
+  .dev-toggle-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .dev-toggle-btn.active { background:var(--gold-dark); color:#fff; border-color:var(--gold); }
+  .dev-banner {
+    background: linear-gradient(90deg,#2a1500,#1a0f00,#2a1500);
+    border-bottom:1px solid var(--gold-dark); padding:6px 24px;
+    text-align:center; font-size:11.5px; font-weight:700; letter-spacing:.08em;
+    color:var(--gold); text-transform:uppercase; display:none;
+  }
+  .dev-banner.visible { display:block; }
+  .hero {
+    background:linear-gradient(180deg,#1f0e00,#0d0500 60%,#0d0800);
+    border-bottom:3px solid var(--gold-dark); text-align:center; padding:36px 24px 28px; position:relative; overflow:hidden;
+  }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 100% at 50% 100%,rgba(200,155,60,.08),transparent 70%); pointer-events:none; }
+  .hero-eyebrow { font-family:'Cinzel',serif; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:10px; }
+  .hero h1 { font-family:'Cinzel',serif; font-size:clamp(22px,4vw,36px); font-weight:700; color:var(--gold); letter-spacing:.04em; line-height:1.2; text-shadow:0 2px 12px rgba(200,155,60,.3); margin-bottom:12px; }
+  .hero-sub { font-size:14px; color:#b89060; max-width:580px; margin:0 auto; line-height:1.6; }
+  .hero-divider { width:120px; height:2px; background:linear-gradient(90deg,transparent,var(--gold-dark),transparent); margin:20px auto 0; }
+  .page-wrap { max-width:900px; margin:0 auto; padding:32px 16px 64px; }
+  .panel { background:var(--panel-bg); border:1px solid var(--border); border-top:3px solid var(--gold); border-radius:2px; margin-bottom:24px; box-shadow:0 4px 20px rgba(0,0,0,.4); }
+  .panel-header { background:linear-gradient(180deg,#ede0c0,#e0d0a8); border-bottom:1px solid var(--border); padding:14px 20px; display:flex; align-items:center; gap:10px; }
+  .panel-header h2 { font-family:'Cinzel',serif; font-size:15px; font-weight:700; color:var(--brown-dark); letter-spacing:.04em; }
+  .panel-body { padding:20px; }
+  .info-box { background:#f0e8cc; border:1px solid #c8a850; border-left:4px solid var(--gold); border-radius:2px; padding:14px 16px; margin-bottom:20px; font-size:13.5px; line-height:1.65; color:var(--text-body); }
+  .info-box strong { color:var(--brown-mid); }
+  .success-box { background:#e8f0e8; border:1px solid #5a9b5a; border-left:4px solid var(--green-rs); border-radius:2px; padding:14px 16px; margin-bottom:16px; font-size:13.5px; line-height:1.65; color:#1a3a1a; display:none; }
+  .success-box.visible { display:block; }
+  .how-it-works { background:linear-gradient(180deg,#1a0f00,#0d0800); border:1px solid var(--gold-dark); border-top:3px solid var(--gold-dark); border-radius:2px; padding:20px; margin-bottom:24px; color:#c8a860; }
+  .how-it-works h3 { font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:var(--gold); letter-spacing:.06em; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--gold-dark); }
+  .how-step { display:flex; gap:12px; margin-bottom:12px; font-size:12.5px; line-height:1.5; }
+  .how-step-num { font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:var(--gold); min-width:20px; margin-top:1px; }
+  .deadline-box { background:#1a0f00; border:1px solid var(--gold-dark); border-radius:2px; padding:12px 16px; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+  .deadline-text { font-size:12px; color:#b89060; line-height:1.5; }
+  .deadline-text strong { color:var(--gold); display:block; font-size:13px; margin-bottom:2px; }
+  /* FORM */
+  .submission-form { display:flex; flex-direction:column; gap:12px; }
+  .form-row { display:flex; gap:10px; flex-wrap:wrap; }
+  .form-field { display:flex; flex-direction:column; gap:5px; flex:1; min-width:200px; }
+  .form-label { font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); }
+  .form-input { background:#faf4e4; border:1px solid var(--border); border-radius:2px; padding:9px 12px; font-family:'Lato',sans-serif; font-size:13.5px; color:var(--text-body); outline:none; transition:border-color .15s,box-shadow .15s; }
+  .form-input:focus { border-color:var(--gold); box-shadow:0 0 0 2px rgba(200,155,60,.15); }
+  .form-input::placeholder { color:#b8a080; }
+  textarea.form-input { resize:vertical; min-height:70px; }
+  .char-count { font-size:11px; color:var(--text-muted); text-align:right; }
+  .char-count.warning { color:var(--red-rs); }
+  .btn-gold {
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(180deg,#c89b3c,#8a6a1f); border:1px solid var(--gold-dark); border-bottom:2px solid #5a4010;
+    border-radius:2px; padding:10px 22px; font-family:'Cinzel',serif; font-size:12px; font-weight:700;
+    letter-spacing:.08em; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.4); cursor:pointer;
+    transition:filter .15s,transform .1s; align-self:flex-start;
+  }
+  .btn-gold:hover { filter:brightness(1.1); }
+  .btn-gold:active { transform:translateY(1px); border-bottom-width:1px; }
+  .btn-ghost { background:#e0d0a8; border:1px solid var(--border); border-radius:2px; padding:10px 18px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--text-muted); cursor:pointer; margin-left:10px; transition:background .15s; display:inline-flex; align-items:center; gap:6px; }
+  .btn-ghost:hover { background:#d0c098; color:var(--brown-dark); }
+  .submissions-pending { background:#f0e8cc; border:1px solid #d4b870; border-radius:2px; padding:10px 14px; font-size:12.5px; color:var(--text-muted); margin-top:8px; display:none; }
+  .submissions-pending.visible { display:block; }
+  .pending-header { font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px; letter-spacing:.04em; text-transform:uppercase; }
+  .pending-item { display:flex; align-items:baseline; gap:8px; padding:4px 0; border-bottom:1px solid #d4b870; font-size:12.5px; }
+  .pending-item:last-child { border-bottom:none; }
+  .pending-status { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 7px; border-radius:2px; background:#d4a820; color:#fff; margin-left:auto; flex-shrink:0; }
+  /* TOOLBAR */
+  .ranking-toolbar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
+  .search-wrap { position:relative; flex:1; min-width:180px; }
+  .search-input { width:100%; background:#faf4e4; border:1px solid var(--border); border-radius:2px; padding:8px 12px 8px 32px; font-family:'Lato',sans-serif; font-size:13px; color:var(--text-body); outline:none; transition:border-color .15s; }
+  .search-input:focus { border-color:var(--gold); }
+  .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:13px; pointer-events:none; }
+  .filter-select { background:#faf4e4; border:1px solid var(--border); border-radius:2px; padding:8px 12px; font-family:'Lato',sans-serif; font-size:13px; color:var(--text-body); outline:none; cursor:pointer; }
+  .rank-count-badge { font-size:12px; color:var(--text-muted); padding:8px 0; white-space:nowrap; }
+  /* RANKING */
+  .ranking-instructions { font-size:13px; color:var(--text-muted); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .ranking-list { display:flex; flex-direction:column; gap:6px; }
+  .rank-item { display:flex; align-items:center; gap:10px; background:#faf4e4; border:1px solid #d4b870; border-radius:2px; padding:10px 12px; cursor:grab; transition:background .12s,box-shadow .12s,border-color .12s; user-select:none; position:relative; }
+  .rank-item:hover { background:#fff8e8; border-color:var(--gold); box-shadow:0 2px 8px rgba(200,155,60,.15); }
+  .rank-item.dragging { opacity:.45; border-color:var(--gold); }
+  .rank-item.drag-over { border-color:var(--gold); border-style:dashed; background:#fef5d4; }
+  .rank-item.hidden-search { display:none; }
+  .rank-item.top3 { border-left:3px solid var(--gold); }
+  .rank-item.user-submitted { border-left:3px solid var(--blue-rs); }
+  .rank-item.opinion-item    { border-left:3px solid #4a4a4a; }
+  .rank-number { font-family:'Cinzel',serif; font-size:15px; font-weight:700; color:var(--gold-dark); min-width:30px; text-align:center; line-height:1; flex-shrink:0; }
+  .rank-number.r1 { color:#c89b3c; font-size:17px; text-shadow:0 0 8px rgba(200,155,60,.5); }
+  .rank-number.r2 { color:#a0a0b0; font-size:16px; }
+  .rank-number.r3 { color:#a07040; }
+  .drag-handle { color:#c0a060; display:flex; flex-direction:column; gap:3px; cursor:grab; padding:2px 3px; flex-shrink:0; }
+  .drag-handle span { display:block; width:14px; height:2px; background:currentColor; border-radius:1px; }
+  .rank-content { flex:1; min-width:0; }
+  .rank-title { font-size:13px; font-weight:700; color:var(--brown-dark); margin-bottom:2px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .rank-desc { font-size:11.5px; color:var(--text-muted); line-height:1.4; }
+  .size-badge { display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:2px 6px; border-radius:2px; flex-shrink:0; }
+  .badge-large { background:#c85a00; color:#fff; }
+  .badge-medium { background:var(--blue-rs); color:#fff; }
+  .badge-small { background:var(--green-rs); color:#fff; }
+  .badge-community { background:#6b2d8b; color:#fff; }
+  .badge-massive { background:var(--red-rs); color:#fff; }
+  .badge-opinion   { background:#4a4a4a; color:#fff; }
+  .rank-arrows { display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
+  .arrow-btn { background:#e0d0a8; border:1px solid var(--border); border-radius:2px; width:22px; height:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:9px; transition:background .1s,color .1s; }
+  .arrow-btn:hover:not(:disabled) { background:var(--gold); color:#fff; border-color:var(--gold-dark); }
+  .arrow-btn:disabled { opacity:.25; cursor:default; }
+  /* DEV MODE CONTROLS */
+  .dev-controls { display:none; align-items:center; gap:6px; margin-left:6px; }
+  .dev-mode .dev-controls { display:flex; }
+  .btn-edit { background:#c8a820; border:1px solid #a08010; border-radius:2px; padding:3px 8px; font-size:10px; font-weight:700; color:#fff; cursor:pointer; letter-spacing:.04em; white-space:nowrap; }
+  .btn-edit:hover { background:#a08010; }
+  .btn-delete { background:#c85a00; border:1px solid #5a0a0a; border-radius:2px; padding:3px 8px; font-size:10px; font-weight:700; color:#fff; cursor:pointer; letter-spacing:.04em; }
+  .btn-delete:hover { background:#5a0a0a; }
+  /* EDIT MODAL */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.visible { display:flex; }
+  .modal { background:var(--panel-bg); border:1px solid var(--border); border-top:3px solid var(--gold); border-radius:2px; padding:24px; max-width:520px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,.6); }
+  .modal h3 { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:var(--brown-dark); margin-bottom:16px; }
+  .modal-field { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
+  .modal-field label { font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); }
+  .modal-btns { display:flex; gap:10px; margin-top:16px; }
+  /* PROGRESS */
+  .poll-progress { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .poll-progress-label { font-size:12px; color:var(--text-muted); font-weight:700; letter-spacing:.04em; }
+  .poll-progress-count { font-family:'Cinzel',serif; font-size:12px; color:var(--gold-dark); font-weight:700; }
+  .progress-bar-wrap { height:6px; background:#d4b870; border-radius:1px; margin-bottom:20px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--gold-dark),var(--gold)); border-radius:1px; width:34%; }
+  /* SUBMIT */
+  .submit-section { margin-top:8px; padding-top:20px; border-top:1px solid var(--border); }
+  .submit-note { font-size:12.5px; color:var(--text-muted); margin-bottom:16px; line-height:1.5; }
+  .submit-note strong { color:var(--brown-mid); }
+  /* RESULTS */
+  .results-panel { display:none; background:#f0e8cc; border:1px solid var(--gold); border-top:3px solid var(--green-rs); border-radius:2px; padding:20px; margin-top:16px; }
+  .results-panel.visible { display:block; }
+  .results-panel h3 { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:var(--green-rs); margin-bottom:14px; }
+  .result-row { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid #d4b870; font-size:13px; }
+  .result-row:last-child { border-bottom:none; }
+  .result-rank { font-family:'Cinzel',serif; font-weight:700; color:var(--gold-dark); min-width:24px; }
+  .result-rank.r1 { color:var(--gold); font-size:15px; }
+  .result-name { flex:1; color:var(--brown-dark); font-weight:600; }
+  .result-bar-wrap { width:100px; height:8px; background:#d4b870; border-radius:1px; overflow:hidden; }
+  .result-bar { height:100%; background:linear-gradient(90deg,var(--gold-dark),var(--gold)); border-radius:1px; transition:width .6s ease; }
+  .jump-top-btn { display:none; position:fixed; bottom:28px; right:24px; background:linear-gradient(180deg,#c89b3c,#8a6a1f); border:1px solid var(--gold-dark); border-radius:2px; padding:10px 16px; font-family:'Cinzel',serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:#fff; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.5); z-index:100; }
+  .jump-top-btn.visible { display:block; }
+  footer { border-top:2px solid var(--gold-dark); background:#0d0500; text-align:center; padding:24px; font-size:11px; color:#6b4f2a; letter-spacing:.04em; }
+  footer a { color:var(--gold-dark); text-decoration:none; }
+  @media(max-width:600px) { .topbar-nav { display:none; } .form-row { flex-direction:column; } }
+
+  .rank-number input {
+    width: 36px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold-dark);
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-align: center;
+    padding: 0;
+    cursor: text;
+    -moz-appearance: textfield;
+  }
+  .rank-number input::-webkit-outer-spin-button,
+  .rank-number input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .rank-number input:focus { outline: none; border-bottom-color: var(--gold); background: rgba(255,204,0,0.07); }
+
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="topbar-logo" href="#">Old School <span>RuneScape</span></a>
+  <div class="topbar-nav">
+    <a href="#">Game</a>
+    <a href="#">Community</a>
+    <a href="#" class="active">News & Polls</a>
+    <a href="#">Account</a>
+    <a href="#">Store</a>
+    <button class="dev-toggle-btn" id="dev-toggle" onclick="toggleDevMode()">⚙ Dev Mode</button>
+  </div>
+</nav>
+
+<div class="dev-banner" id="dev-banner">⚙ Developer Mode Active — You can edit and delete entries</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Community Ranking Poll · Phase 1 of 2 · 2026</div>
+  <h1>PvP Update Priority Ranking</h1>
+  <p class="hero-sub">Submit your own ideas, then rank all updates in order of priority. The community's #1 update will be developed next.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="how-it-works">
+    <h3>⚔ How This Poll Works</h3>
+    <div class="how-step"><div class="how-step-num">1.</div><div>Submit your own update idea below. Jagex will review submissions and the most feasible ideas will be added to future ranking rounds.</div></div>
+    <div class="how-step"><div class="how-step-num">2.</div><div>Drag or use the arrows to rank all updates from most wanted (#1) to least wanted.</div></div>
+    <div class="how-step"><div class="how-step-num">3.</div><div>The update ranked #1 by the most players becomes the community's priority and will be developed next, subject to a standard in-game poll before release.</div></div>
+    <div class="how-step"><div class="how-step-num">4.</div><div>All other updates remain eligible for future ranking polls — nothing is ruled out permanently.</div></div>
+  </div>
+
+  <div class="deadline-box">
+    <div style="font-size:20px;">🗓</div>
+    <div class="deadline-text"><strong>Ranking closes 28 July 2026</strong>Members only. One submission per account. Idea submissions close 14 July 2026.</div>
+  </div>
+
+  <!-- IDEA SUBMISSION -->
+  <div class="panel">
+    <div class="panel-header"><h2>💡 Submit a PvP Update Idea</h2></div>
+    <div class="panel-body">
+      <div class="info-box">Have an idea not on the list? Submit it here. <strong>Jagex will review all submissions</strong> — the most popular and feasible ideas will be included in future ranking polls. Your submission will also appear immediately in the ranking list below marked as a community submission.</div>
+      <div class="success-box" id="submit-success">✓ <strong>Your idea has been submitted</strong> and added to the ranking list below. Thank you.</div>
+      <div class="submission-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="idea-title">Update Title *</label>
+            <input class="form-input" id="idea-title" type="text" maxlength="80" placeholder="e.g. Blessed Status System" oninput="updateCharCount('idea-title','title-count',80)">
+            <div class="char-count" id="title-count">0 / 80</div>
+          </div>
+          <div class="form-field" style="max-width:180px;">
+            <label class="form-label" for="idea-size">Estimated Size</label>
+            <select class="form-input" id="idea-size">
+              <option value="Community">— Select —</option>
+              <option value="Massive">Massive</option>
+          <option value="Large">Large</option>
+              <option value="Medium">Medium</option>
+              <option value="Small">Small</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="idea-desc">Description *</label>
+          <textarea class="form-input" id="idea-desc" maxlength="400" placeholder="Briefly describe what the update does and why it would improve PvP..." oninput="updateCharCount('idea-desc','desc-count',400)"></textarea>
+          <div class="char-count" id="desc-count">0 / 400</div>
+        </div>
+        <button class="btn-gold" onclick="submitIdea()">✦ Submit Idea</button>
+      </div>
+      <div class="submissions-pending" id="pending-list">
+        <div class="pending-header">Your Submissions</div>
+        <div id="pending-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RANKING POLL -->
+  <div class="panel">
+    <div class="panel-header"><h2>Rank PvP Updates by Priority</h2></div>
+    <div class="panel-body">
+      <div class="info-box"><strong>Drag to reorder</strong> or use the ▲▼ buttons. Place the update you want most at <strong>#1</strong>. Use search to find specific updates — your full ranking is preserved while searching.</div>
+      <div class="poll-progress">
+        <span class="poll-progress-label">Votes submitted</span>
+        <span class="poll-progress-count">34,218 / ~100,000 estimated</span>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
+      <div class="info-box" style="margin-bottom:14px;">
+        <strong>Update Size Definitions:</strong><br><br>
+        <span style="color:var(--green-rs);">■ Small</span> — Quality of Life updates that realistically only take a week or two to develop.<br>
+        <span style="color:var(--blue-rs);">■ Medium</span> — Updates that might take 1–3 months to develop.<br>
+        <span style="color:#b84a00;">■ Large</span> — Updates that might take 4–6 months to develop.<br>
+        <span style="color:#cc2222;">■ Massive</span> — A raid-sized update that will take 6+ months and significant effort and resources to develop. Similar to the effort put in for Raids and Sailing.
+      </div>
+      <div class="ranking-toolbar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" id="search-input" type="text" placeholder="Search updates..." oninput="filterList()">
+        </div>
+        <select class="filter-select" id="size-filter" onchange="filterList()">
+          <option value="">All sizes</option>
+          <option value="Massive">Massive</option>
+          <option value="Large">Large</option>
+          <option value="Medium">Medium</option>
+          <option value="Small">Small</option>
+          <option value="Community">Community Submissions</option>
+          <option value="Opinion">Opinion / Abstain</option>
+        </select>
+        <div class="rank-count-badge" id="visible-count"></div>
+      </div>
+      <div class="ranking-instructions">ℹ Your top 3 picks are highlighted in gold. Scroll to rank all updates.</div>
+      <div class="ranking-list" id="main-list"></div>
+      <div class="submit-section">
+        <p class="submit-note">Your ranking is saved as you reorder. Click <strong>Submit Ranking</strong> when satisfied.</p>
+        <button class="btn-gold" style="padding:11px 28px;font-size:13px;" onclick="submitRanking()">⚔ Submit Ranking</button>
+        <button class="btn-ghost" onclick="if(confirm('Reset to default order?'))initList()">↺ Reset</button>
+      </div>
+      <div class="results-panel" id="results-panel">
+        <h3>✓ Ranking Submitted — Current Community Top 10</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Your vote has been recorded. Live community standings (top 10):</p>
+        <div id="results-list"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button class="jump-top-btn" id="jump-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲ Top</button>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <h3>✏ Edit Update Entry</h3>
+    <div class="modal-field">
+      <label class="form-label">Title</label>
+      <input class="form-input" id="edit-title" type="text" maxlength="80">
+    </div>
+    <div class="modal-field">
+      <label class="form-label">Size</label>
+      <select class="form-input" id="edit-size">
+        <option value="Massive">Massive</option>
+          <option value="Large">Large</option>
+        <option value="Medium">Medium</option>
+        <option value="Small">Small</option>
+        <option value="Community">Community</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="form-label">Description</label>
+      <textarea class="form-input" id="edit-desc" maxlength="400" style="min-height:80px;"></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-gold" onclick="saveEdit()">Save Changes</button>
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Jagex Ltd. · <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Cookie Settings</a></p>
+  <p style="margin-top:6px;">This is a fan-made concept demo. Not an official Jagex product.</p>
+</footer>
+
+<script>
+// ── ALL UPDATES FROM SCRIPT ──
+const BASE_UPDATES = [
+  // LARGE
+  {id:'blessed',title:'Blessed Status System',size:'Medium',desc:'An opt-in overhead status costing 100k to enable that lets you keep your items on death for a 5% death fee paid to the PKer. Includes Skull Prevention lock and a 25% fee on items gained in the Wilderness after entering.'},
+  {id:'tiered-blessed',title:'Tiered Blessed Status',size:'Medium',desc:'A 5-tier progression system built on top of Blessed Status. By completing Wilderness activities without leaving, players earn stars that increase loot multipliers from -25% up to +75% and eventually noted drops.'},
+  {id:'wildy-teams',title:'Wilderness Teams',size:'Medium',desc:'A structured small-group system with a recruitment board at Edgeville, anti-friendly-fire, and shared objectives. Teams must be fully Blessed or fully non-Blessed to reduce luring and griefing.'},
+  {id:'tcz',title:'Team Combat Zone Trial',size:'Medium',desc:'A dedicated Wilderness area designed for structured small-team PvP. Trialled in one isolated location as a proof of concept before any wider rollout is considered.'},
+  {id:'pvparena-rework',title:'PvP Arena Rework',size:'Large',desc:'Full rework using players\' main-game stats and equipment instead of an alternate save file. Includes improved matchmaking, ranked modes, reward improvements, and better discoverability.'},
+  {id:'forinthry-artefacts',title:'Forinthry Artefacts System',size:'Massive',desc:'A wealth consolidation system using tiered artefacts (Emblem to Idol) obtained by converting Ancient Artefacts or sacrificing PvM loot at Forinthry Gates. Reduces risk of losing accumulated Wilderness earnings without leaving.'},
+  {id:'forinthry-gates',title:'Forinthry Gates',size:'Large',desc:'Fast travel and safe logout points scattered across the Wilderness. Allow Tiered Blessed Status players to world hop or log out without losing their tier, encouraging organic longer trips over constant worldhopping.'},
+  {id:'lms-botfix',title:'Last Man Standing Anti-Bot Update',size:'Large',desc:'Targeted update to address the bot problem in Last Man Standing that is currently undermining the reward shop and discouraging legitimate participation.'},
+  {id:'safe-bounty-hunter',title:'Safe Version of Bounty Hunter',size:'Large',desc:'A no-risk variant of Bounty Hunter where players fight for points rather than loot, using minigame armour and weapons to level the playing field. Attracts a different crowd without pulling players away from risk Bounty Hunter.'},
+  // MEDIUM
+  {id:'castle-wars',title:'Castle Wars Revival',size:'Medium',desc:'Updated rewards, improved matchmaking, and balance changes including a review of ice barrage freeze duration in mass PvP minigames to make Castle Wars consistently active and genuinely rewarding.'},
+  {id:'soul-wars',title:'Soul Wars Improvements',size:'Medium',desc:'Reward rebalancing and gameplay changes following the recent nerf to Spoils of War crates, aimed at encouraging genuine participation and reducing AFK behaviour. Includes Blighted supplies in rewards.'},
+  {id:'rag-skull',title:'Rag Skull (Ragged Status)',size:'Medium',desc:'Automatic skull applied to players who initiate combat with under 100k risk (or 1-5% of gear value). Prevents low-effort ragging without Jagex needing to manually police it. Does not affect 3-itemers or Blessed players.'},
+  {id:'ironman-loot-keys',title:'Ironman Loot Key Bond Coffers',size:'Medium',desc:'Allow Ironmen to convert Loot Keys into a Bond-only Coffer, letting them benefit from PvP kills without breaking Ironman restrictions. Best paired with Blessed Status to make the risk worthwhile.'},
+  {id:'consistency-pass',title:'PvP/PvM Mechanic Consistency Pass',size:'Medium',desc:'Systematic review of arbitrary mechanical differences between PvP and PvM: autocast saving, Tome of Fire bonus (10% PvM vs 50% PvP), Anglerfish overheal, Blowpipe 2-tick, powered staves, spellbook resizing, consumable floor appearance.'},
+  {id:'blighted-supplies',title:'Expanded Blighted Supplies',size:'Medium',desc:'New variants covering more combat styles: Blighted Saradomin Brews, Forgotten Brews, Armadyl Brews, Super Combat Potions, Enchanted Bolts (all types), Blood/Smoke/Shadow Sacks, Corruption Sacks, God Spell Sacks.'},
+  {id:'bounty-hunter-improvements',title:'Bounty Hunter Improvements',size:'Medium',desc:'Rework of target assignment, rewards, and exploit prevention to make Bounty Hunter a viable and engaging singles PvP activity again.'},
+  {id:'ring-of-greed',title:'Ring of Greed',size:'Medium',desc:'A new Wilderness-exclusive ring that doubles drops within the Wilderness for Skulled players. The high-risk high-reward counterpart to Blessed Status\'s tiered loot bonuses. Signals boosted by PoisonedPotion\'s original concept.'},
+  {id:'wilderness-activity-listing',title:'Wilderness Activity Listing',size:'Medium',desc:'An in-game listing showing which Wilderness activities are currently occupied across worlds, helping PKers and PvMers find each other without needing to worldhop through hundreds of empty worlds.'},
+  {id:'recruitment-board',title:'Wilderness Recruitment Board',size:'Medium',desc:'An in-game noticeboard at Edgeville and Ferox Enclave for players to advertise or find groups for Wilderness Teams, boss trips, and other Wilderness activities.'},
+  {id:'pvp-ranking-poll',title:'PvP Update Priority Ranking Poll System',size:'Medium',desc:'A new polling process for PvP: community submits and ranks potential updates, with the top-ranked update committed to development. Small/medium/large categories keep scope manageable. Subsequent polls follow after each release.'},
+  {id:'wildy-clue-scrolls',title:'Wilderness-Only Clue Scrolls',size:'Medium',desc:'Dedicated Wilderness clue scrolls that keep players roaming and exploring the Wilderness organically, creating natural encounters between different player types. Best version outlined by Danil445.'},
+  {id:'minigame-teleport-improvements',title:'PvP Minigame Teleport Improvements',size:'Medium',desc:'Separate PvP and non-PvP minigames in the teleport list, label each as safe or dangerous, show the recommended world, add a quick-hop option, and add the PvP Arena which is currently missing from the teleports.'},
+  {id:'clan-wars-team-deathmatch',title:'Clan Wars Team Deathmatch Mode',size:'Medium',desc:'Repurpose the underused Clan Wars Purple Portal arenas for a Soul Wars-style team deathmatch with a reward shop. Could also be structured as a 6v6 PvP Arena using existing arena infrastructure.'},
+  {id:'resource-area-rework',title:'Resource Area Rework',size:'Medium',desc:'Rework of the Wilderness Resource Area to make it a more viable and engaging destination. Includes a noting NPC for Tier 5 Blessed Status players and improvements proposed by the community Wilderness Grove project.'},
+  // SMALL
+  {id:'autocast-consistency',title:'Autocast Consistency Fix',size:'Small',desc:'Standardise autocast behaviour across all game modes and environments. Currently differs arbitrarily between PvP, minigames, and PvM — the rules seem random and have no coherent design logic.'},
+  {id:'tome-of-fire-review',title:'Tome of Fire PvP Damage Review',size:'Small',desc:'Review and reduce the 50% PvP bonus from Tome of Fire relative to its 10% PvM bonus. One of the most egregious PvP/PvM inconsistencies and long overdue for a review.'},
+  {id:'anglerfish-review',title:'Anglerfish Overheal in PvP Review',size:'Small',desc:'Review of whether Anglerfish overhealing in PvP creates problematic combat pacing, following community discussion and a Jagex developer acknowledgement of the concern.'},
+  {id:'deathdotting',title:'Deathdotting Removal',size:'Small',desc:'Address the ability to stack on the same tile to hide from opponents during combat, making escape from PvP frustrating and unrewarding for the attacker.'},
+  {id:'worldhop-cooldown',title:'Wilderness World Hop Cooldown',size:'Small',desc:'A short cooldown on world hopping after recent combat in the Wilderness to reduce the scouting meta where clans or PKers can log in directly underneath targets.'},
+  {id:'multi-singles-indicators',title:'Clearer Multi/Singles Zone Indicators',size:'Small',desc:'Improved in-game visual indicators for zone boundaries to reduce confusion for newer players, which Jagex has already received strong positive survey feedback about.'},
+  {id:'skull-timer-notification',title:'Skull Timer Notification',size:'Small',desc:'An optional HUD indicator or notification warning players when their skull timer is about to expire, reducing accidental deaths caused by forgetting skull status.'},
+  {id:'spec-orb-improvements',title:'Special Attack Orb Improvements',size:'Small',desc:'Interface improvements to make the special attack orb more accessible without reliance on F-key muscle memory, lowering the barrier for new PvP players as discussed by Mod Goblin.'},
+  {id:'pvp-glossary',title:'PvP Changes Glossary Page',size:'Small',desc:'A dedicated wiki-style in-game or website page tracking all PvP mechanic changes over time, so returning players can quickly catch up on what has changed without reading every game update post.'},
+  {id:'pvp-knowledge-base',title:'PvP Skill Progression Guide',size:'Small',desc:'An in-game or community-supported guide covering PvP skill ladder concepts: prayer flicking, gear switching, vengeance, tick eating, safing, and progressing from basic to advanced PvP. Helps close the skill gap for new players.'},
+  {id:'minigame-billboards',title:'PvP Minigame World Billboards',size:'Small',desc:'Billboards near each PvP minigame showing the main active world, player counts, and a quick-hop button to join directly — similar to the billboards already in use at raids.'},
+  {id:'combat-level-req',title:'Combat Level Requirements for PvP Minigames',size:'Small',desc:'Lock Bounty Hunter, LMS, and potentially the PvP Arena behind 60+ combat level. Sets correct expectations that these are not beginner activities. Prevents very new players from being immediately overwhelmed.'},
+  {id:'pvp-world-improvements',title:'PvP World Improvements',size:'Small',desc:'Quality of life improvements to PvP Worlds including clearer signposting, better world selection, and addressing the discovery problem of new players not knowing PvP worlds exist.'},
+  {id:'blowpipe-review',title:'Blowpipe 2-Tick Attack Speed PvP Review',size:'Small',desc:'Review of Blowpipe 2-tick attack speed in PvP. One of the known PvP/PvM inconsistencies flagged by Mod Goblin as something worth untangling carefully.'},
+  {id:'powered-staves-review',title:'Powered Staves in PvP Review',size:'Small',desc:'Review usability of powered staves (particularly Tridents) in PvP environments for consistency with their PvM functionality.'},
+  {id:'spellbook-resize',title:'Spellbook Resizing in PvP',size:'Small',desc:'Allow players to resize their spellbook interface during PvP, matching the functionality already available in PvM environments.'},
+  {id:'consumables-floor',title:'Consumable Floor Appearance Speed',size:'Small',desc:'Make consumable items appear on the floor instantly upon dropping during PvP, matching the behaviour in non-PvP environments.'},
+  {id:'wildy-slayer',title:'Wilderness Slayer Improvements',size:'Small',desc:'Improvements to Wilderness Slayer tasks and rewards to make them a more viable and consistently rewarding reason to engage with the Wilderness beyond just specific bosses.'},
+  {id:'ferox-improvements',title:'Ferox Enclave Improvements',size:'Small',desc:'Quality of life improvements to Ferox Enclave as the main Wilderness hub, including better services, clearer signposting for new players, and improved amenities for extended Wilderness trips.'},
+  {id:'diary-death-cost',title:'Wilderness Diary Death Cost Review',size:'Small',desc:'Review and rebalance the death cost reduction tiers granted by Wilderness Achievement Diaries to better reflect current Wilderness activity levels and encourage diary completion.'},
+  {id:'pvp-data',title:'Published Wilderness Activity Data',size:'Small',desc:'Jagex commits to publishing regular data on Wilderness player counts, death rates, and activity metrics. Before/after data around updates would help the community evaluate what is and is not working objectively.'},
+  {id:'fountain-rune-fix',title:'Fountain of Rune Multi-Combat Fix',size:'Small',desc:'Review the Fountain of Rune being in a multi-combat area, which makes it effectively dead solo content. Single-combat or instanced access would make it a viable destination for more players.'},
+  {id:'wildy-altar-singles',title:'Wilderness Altar Singles Review',size:'Small',desc:'Review whether the Chaos Altar being in a multi-combat zone is appropriate given that it is primarily a solo activity, and whether a singles or phased approach would make it more viably engaging.'},
+  {id:'forinthry-castle',title:'Forinthry Castle',size:'Massive',desc:'A clan-controlled stronghold in the deep Wilderness with constructible facilities, god alignments, and siege mechanics between rival clans.'},
+  {id:'wildy-expansion',title:'Wilderness Expansion 2.0',size:'Massive',desc:'A full expansion of the deep Wilderness with new zones, content, bosses, and points of interest beyond the Bridge of Fate. Raid-tier in scope and development effort.'},
+  {id:'tcz-full',title:'Full Team Combat Zones Rework',size:'Massive',desc:'A full restructuring of multi-combat and singles zones across the Wilderness to support structured small-team PvP, going beyond the isolated Team Combat Zone Trial.'},
+  {id:'none-good',title:'None of these ideas are good for PvP',size:'Opinion',desc:'I do not believe any of the updates listed represent a good direction for PvP development.'},
+  {id:'no-update',title:"I'd prefer dev time be spent on non-PvP content instead",size:'Opinion',desc:'I would prefer Jagex focus development time on other areas of the game rather than PvP.'},
+  {id:'skip-vote',title:'Skip Vote',size:'Opinion',desc:'I have no strong preference on PvP development priority and am happy to abstain from this ranking.'},
+];
+
+let currentOrder = [];
+let pendingSubmissions = [];
+let devMode = false;
+let editingId = null;
+
+function initList() {
+  currentOrder = BASE_UPDATES.map(u => ({...u}));
+  renderList();
+}
+
+function renderList() {
+  const container = document.getElementById('main-list');
+  container.innerHTML = '';
+  currentOrder.forEach((item, i) => {
+    container.appendChild(makeItem(item, i));
+  });
+  bindDrag();
+  filterList();
+}
+
+function makeItem(item, i) {
+  const div = document.createElement('div');
+  div.className = 'rank-item' + (i < 3 ? ' top3' : '') + (item.size === 'Community' ? ' user-submitted' : '') + (item.size === 'Opinion' ? ' opinion-item' : '') + (devMode ? ' dev-mode' : '');
+  div.draggable = true;
+  div.dataset.id = item.id;
+  const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
+  const badgeClass = item.size === 'Community' ? 'badge-community' : item.size === 'Opinion' ? 'badge-opinion' : item.size === 'Massive' ? 'badge-massive' : item.size === 'Large' ? 'badge-large' : item.size === 'Medium' ? 'badge-medium' : 'badge-small';
+  const n = currentOrder.length;
+  div.innerHTML = `
+    <div class="rank-number ${rankClass}"><input type="number" min="1" value="${i + 1}" onchange="jumpToRank(this)" onclick="this.select()"></div>
+    <div class="drag-handle"><span></span><span></span><span></span></div>
+    <div class="rank-content">
+      <div class="rank-title">${escHtml(item.title)} <span class="size-badge ${badgeClass}">${item.size}</span></div>
+      <div class="rank-desc">${escHtml(item.desc)}</div>
+    </div>
+    <div class="dev-controls">
+      <button class="btn-edit" onclick="openEdit('${item.id}')">✏ Edit</button>
+      <button class="btn-delete" onclick="deleteItem('${item.id}')">✕ Delete</button>
+    </div>
+    <div class="rank-arrows">
+      <button class="arrow-btn" onclick="moveItem(this,-1)" ${i===0?'disabled':''}>▲</button>
+      <button class="arrow-btn" onclick="moveItem(this,1)" ${i===n-1?'disabled':''}>▼</button>
+    </div>
+  `;
+  return div;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function updateNumbers() {
+  const items = [...document.querySelectorAll('#main-list .rank-item')];
+  currentOrder = items.map(el => currentOrder.find(u => u.id === el.dataset.id) || currentOrder.find(u => u.id === el.dataset.id));
+  // rebuild currentOrder from DOM order
+  currentOrder = items.map(el => {
+    const id = el.dataset.id;
+    return currentOrder.find(u => u.id === id);
+  }).filter(Boolean);
+  const n = items.length;
+  items.forEach((el, i) => {
+    const num = el.querySelector('.rank-number');
+    const inp = num.querySelector('input');
+    if (inp) inp.value = i + 1;
+    else num.textContent = i === 0 ? '★' : i + 1;
+    num.className = 'rank-number' + (i===0?' r1':i===1?' r2':i===2?' r3':'');
+    el.classList.toggle('top3', i < 3);
+    const arrows = el.querySelectorAll('.arrow-btn');
+    arrows[0].disabled = i === 0;
+    arrows[1].disabled = i === n - 1;
+  });
+}
+
+function moveItem(btn, dir) {
+  const item = btn.closest('.rank-item');
+  const list = item.closest('.ranking-list');
+  const items = [...list.querySelectorAll('.rank-item')];
+  const idx = items.indexOf(item);
+  const target = idx + dir;
+  if (target < 0 || target >= items.length) return;
+  if (dir === -1) list.insertBefore(item, items[target]);
+  else list.insertBefore(items[target], item);
+  updateNumbers();
+}
+
+// DRAG
+function bindDrag() {
+  let dragSrc = null;
+  const list = document.getElementById('main-list');
+  list.addEventListener('dragstart', e => {
+    const item = e.target.closest('.rank-item');
+    if (!item) return;
+    dragSrc = item;
+    setTimeout(() => item.classList.add('dragging'), 0);
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  list.addEventListener('dragend', e => {
+    const item = e.target.closest('.rank-item');
+    if (item) item.classList.remove('dragging');
+    list.querySelectorAll('.rank-item').forEach(i => i.classList.remove('drag-over'));
+    dragSrc = null;
+  });
+  list.addEventListener('dragover', e => {
+    e.preventDefault();
+    const item = e.target.closest('.rank-item');
+    if (!item || item === dragSrc) return;
+    list.querySelectorAll('.rank-item').forEach(i => i.classList.remove('drag-over'));
+    item.classList.add('drag-over');
+  });
+  list.addEventListener('drop', e => {
+    e.preventDefault();
+    const item = e.target.closest('.rank-item');
+    if (!item || item === dragSrc || !dragSrc) return;
+    const items = [...list.querySelectorAll('.rank-item')];
+    const srcIdx = items.indexOf(dragSrc);
+    const tgtIdx = items.indexOf(item);
+    if (srcIdx < tgtIdx) list.insertBefore(dragSrc, item.nextSibling);
+    else list.insertBefore(dragSrc, item);
+    item.classList.remove('drag-over');
+    updateNumbers();
+  });
+}
+
+// FILTER
+function filterList() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const sz = document.getElementById('size-filter').value;
+  const items = document.querySelectorAll('#main-list .rank-item');
+  let visible = 0;
+  items.forEach(el => {
+    const id = el.dataset.id;
+    const upd = currentOrder.find(u => u.id === id);
+    if (!upd) return;
+    const matchQ = !q || upd.title.toLowerCase().includes(q) || upd.desc.toLowerCase().includes(q);
+    const matchSz = !sz || upd.size === sz;
+    el.classList.toggle('hidden-search', !matchQ || !matchSz);
+    if (matchQ && matchSz) visible++;
+  });
+  document.getElementById('visible-count').textContent = `Showing ${visible} of ${currentOrder.length}`;
+}
+
+// CHAR COUNT
+function updateCharCount(inputId, countId, max) {
+  const val = document.getElementById(inputId).value.length;
+  const el = document.getElementById(countId);
+  el.textContent = val + ' / ' + max;
+  el.classList.toggle('warning', val > max * 0.9);
+}
+
+// IDEA SUBMISSION → adds to ranking list
+function submitIdea() {
+  const title = document.getElementById('idea-title').value.trim();
+  const desc = document.getElementById('idea-desc').value.trim();
+  if (!title || !desc) { alert('Please fill in the title and description.'); return; }
+  const size = document.getElementById('idea-size').value || 'Community';
+  const id = 'community-' + Date.now();
+  const newItem = { id, title, desc, size: size === '— Select —' ? 'Community' : size };
+  currentOrder.push(newItem);
+  pendingSubmissions.push(newItem);
+  // add to DOM
+  const list = document.getElementById('main-list');
+  const el = makeItem(newItem, currentOrder.length - 1);
+  list.appendChild(el);
+  updateNumbers();
+  filterList();
+  // reset form
+  document.getElementById('idea-title').value = '';
+  document.getElementById('idea-desc').value = '';
+  ['title-count','desc-count'].forEach(id => {
+    document.getElementById(id).textContent = id === 'title-count' ? '0 / 80' : '0 / 400';
+  });
+  document.getElementById('submit-success').classList.add('visible');
+  renderPending();
+  setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
+}
+
+function renderPending() {
+  const container = document.getElementById('pending-items');
+  const wrap = document.getElementById('pending-list');
+  container.innerHTML = pendingSubmissions.map(s => `
+    <div class="pending-item">
+      <span>${escHtml(s.title)}</span>
+      <span class="pending-status">Under Review</span>
+    </div>
+  `).join('');
+  wrap.classList.toggle('visible', pendingSubmissions.length > 0);
+}
+
+// DEV MODE
+function toggleDevMode() {
+  devMode = !devMode;
+  document.getElementById('dev-toggle').classList.toggle('active', devMode);
+  document.getElementById('dev-banner').classList.toggle('visible', devMode);
+  document.querySelectorAll('.rank-item').forEach(el => el.classList.toggle('dev-mode', devMode));
+  document.querySelectorAll('.dev-controls').forEach(el => el.style.display = devMode ? 'flex' : 'none');
+}
+
+// DELETE
+function deleteItem(id) {
+  if (!confirm('Delete this entry from the ranking list?')) return;
+  currentOrder = currentOrder.filter(u => u.id !== id);
+  const el = document.querySelector(`.rank-item[data-id="${id}"]`);
+  if (el) el.remove();
+  updateNumbers();
+  filterList();
+}
+
+// EDIT
+function openEdit(id) {
+  editingId = id;
+  const item = currentOrder.find(u => u.id === id);
+  if (!item) return;
+  document.getElementById('edit-title').value = item.title;
+  document.getElementById('edit-size').value = item.size;
+  document.getElementById('edit-desc').value = item.desc;
+  document.getElementById('edit-modal').classList.add('visible');
+}
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('visible');
+  editingId = null;
+}
+function saveEdit() {
+  const item = currentOrder.find(u => u.id === editingId);
+  if (!item) return closeModal();
+  item.title = document.getElementById('edit-title').value.trim() || item.title;
+  item.size = document.getElementById('edit-size').value;
+  item.desc = document.getElementById('edit-desc').value.trim() || item.desc;
+  // update DOM element
+  const el = document.querySelector(`.rank-item[data-id="${editingId}"]`);
+  if (el) {
+    const badgeClass = item.size === 'Community' ? 'badge-community' : item.size === 'Opinion' ? 'badge-opinion' : item.size === 'Massive' ? 'badge-massive' : item.size === 'Large' ? 'badge-large' : item.size === 'Medium' ? 'badge-medium' : 'badge-small';
+    el.querySelector('.rank-title').innerHTML = `${escHtml(item.title)} <span class="size-badge ${badgeClass}">${item.size}</span>`;
+    el.querySelector('.rank-desc').textContent = item.desc;
+    el.classList.toggle('user-submitted', item.size === 'Community');
+  }
+  closeModal();
+  filterList();
+}
+document.getElementById('edit-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('edit-modal')) closeModal();
+});
+
+// SUBMIT RANKING
+function submitRanking() {
+  const top10 = currentOrder.slice(0,10);
+  const pcts = [34,22,12,9,6,5,4,3,3,2];
+  const panel = document.getElementById('results-panel');
+  const list = document.getElementById('results-list');
+  list.innerHTML = top10.map((u, i) => `
+    <div class="result-row">
+      <div class="result-rank ${i===0?'r1':''}">${i===0?'★':i+1}</div>
+      <div class="result-name">${escHtml(u.title)}</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:0%" data-pct="${pcts[i]}"></div></div>
+      <div style="font-size:12px;color:var(--text-muted);min-width:32px;text-align:right;">${pcts[i]}%</div>
+    </div>
+  `).join('');
+  panel.classList.add('visible');
+  requestAnimationFrame(() => panel.querySelectorAll('.result-bar').forEach(b => b.style.width = b.dataset.pct + '%'));
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// SCROLL
+window.addEventListener('scroll', () => document.getElementById('jump-top').classList.toggle('visible', scrollY > 400));
+
+initList();
+
+function jumpToRank(input) {
+  const item = input.closest('.rank-item');
+  const list = item.closest('.ranking-list');
+  const items = [...list.querySelectorAll('.rank-item')];
+  const currentIdx = items.indexOf(item);
+  let target = parseInt(input.value, 10) - 1;
+  if (isNaN(target)) { input.value = currentIdx + 1; return; }
+  target = Math.max(0, Math.min(items.length - 1, target));
+  if (target === currentIdx) { input.value = currentIdx + 1; return; }
+  list.removeChild(item);
+  const refItems = [...list.querySelectorAll('.rank-item')];
+  if (target >= refItems.length) list.appendChild(item);
+  else list.insertBefore(item, refItems[target]);
+  updateNumbers();
+  // rebuild currentOrder
+  currentOrder = [...document.querySelectorAll('#main-list .rank-item')]
+    .map(el => currentOrder.find(u => u.id === el.dataset.id))
+    .filter(Boolean);
+}
+
+</script>
+</body>
+</html>

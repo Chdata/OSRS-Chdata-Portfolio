@@ -1,0 +1,124 @@
+
+<style>
+.wh-outer{background:#1a1410;border:2px solid #8a7a50;border-radius:4px;font-family:'Times New Roman',serif;padding:6px;}
+.wh-hdr{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;background:#2a2010;border-bottom:1px solid #8a7a50;margin-bottom:5px;color:#d4b866;font-size:12px;font-weight:bold;}
+.hdr-left{display:flex;flex-direction:column;gap:1px;font-size:11px;}
+.hdr-stars{display:flex;gap:10px;font-size:10px;font-weight:normal;margin-top:1px;}
+.wh-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-flow:column;gap:2px;}
+.we{display:flex;align-items:center;gap:2px;padding:2px 4px;border-radius:2px;font-size:10.5px;border:1px solid #5a4a28;background:#231c0e;min-width:0;}
+.we.pvp{border-color:#8a2020;background:#2a1010;}
+.we.f2p{border-color:#7a7a7a;background:#252525;}
+.wn{font-weight:bold;font-size:10.5px;min-width:22px;color:#e8d890;}
+.wn.pvp{color:#e85050;}
+.wn.f2p{color:#cccccc;}
+.wp{font-size:9.5px;color:#a09050;flex:1;text-align:right;padding-right:1px;}
+.ws-m{font-size:8px;color:#d4b866;}
+.ws-f2p{font-size:8px;color:#b8b8b8;}
+.ws-pvp{font-size:8px;color:#e85050;}
+.flag{width:13px;height:9px;border-radius:1px;flex-shrink:0;}
+.flag-us{background:linear-gradient(#b22234 50%,#fff 50%);border:1px solid #888;}
+.flag-uk{background:#012169;border:1px solid #888;}
+.flag-de{background:linear-gradient(#000 33%,#c00 33%,#c00 66%,#ffce00 66%);border:1px solid #888;}
+.flag-au{background:#00008b;border:1px solid #888;}
+.fw{flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:2px;width:14px;height:14px;}
+.fw.none{background:transparent;border:1px solid #2e2510;}
+.fw.none span{font-size:6px;opacity:0.08;}
+.fw.low{background:#111e35;border:1px solid #3366cc;}
+.fw.low span{font-size:7px;}
+.fw.med{background:#2a1a00;border:1px solid #ff8800;}
+.fw.med span{font-size:8px;}
+.fw.high{background:#2a0e00;border:1px solid #ff4400;}
+.fw.high span{font-size:10px;}
+.fw.max{background:#2a0000;border:2px solid #ff1a00;}
+.fw.max span{font-size:10px;}
+.legend{display:flex;gap:8px;padding:5px 4px 2px;border-top:1px solid #5a4a28;margin-top:4px;font-size:10px;color:#a09050;align-items:center;flex-wrap:wrap;}
+.li{display:flex;align-items:center;gap:3px;}
+</style>
+
+<div style="padding:0.75rem 0;">
+<div class="wh-outer">
+  <div class="wh-hdr">
+    <div class="hdr-left">
+      <span>Select a world</span>
+      <div class="hdr-stars">
+        <span><span style="color:#d4b866;">★</span> Members only world</span>
+        <span><span style="color:#b8b8b8;">★</span> Free world</span>
+      </div>
+    </div>
+    <span style="display:flex;gap:10px;font-size:10px;font-weight:normal;align-items:center;">
+      <span style="color:#d4b866;font-weight:bold;">▲▼ Wilderness</span>
+      <span>▲▼ World</span><span>▲▼ Players</span><span>▲▼ Location</span><span>▲▼ Type</span>
+      <span style="color:#e85050;">Cancel</span>
+    </span>
+  </div>
+  <div class="wh-grid" id="wgrid"></div>
+  <div class="legend">
+    <span style="color:#d4b866;font-weight:bold;">Wilderness:</span>
+    <span class="li"><div class="fw none"><span>🔥</span></div> Empty</span>
+    <span class="li"><div class="fw low"><span>🔥</span></div> Low</span>
+    <span class="li"><div class="fw med"><span>🔥</span></div> Med</span>
+    <span class="li"><div class="fw high"><span>🔥</span></div> High</span>
+    <span class="li"><div class="fw max"><span>🔥</span></div> Packed</span>
+  </div>
+</div>
+</div>
+
+<script>
+const WORLDS = [
+  [301,'us',836,'f2p','high'],[302,'uk',1511,'m','max'],[303,'de',529,'m','high'],[304,'us',410,'m','none'],[305,'us',640,'m','low'],
+  [306,'us',436,'m','none'],[307,'us',699,'m','high'],[308,'uk',575,'f2p','low'],[309,'uk',553,'m','med'],[310,'uk',358,'m','none'],
+  [311,'de',464,'m','med'],[312,'de',366,'m','low'],[313,'us',336,'m','none'],[314,'us',467,'m','low'],[315,'us',321,'m','low'],
+  [316,'uk',209,'f2p','low'],[317,'us',393,'m','med'],[318,'uk',250,'m','none'],[320,'us',258,'m','med'],[321,'us',467,'m','low'],
+  [322,'us',408,'m','low'],[323,'us',251,'m','none'],[324,'us',232,'m','low'],[325,'uk',330,'m','med'],[326,'uk',184,'f2p','low'],
+  [327,'de',337,'m','none'],[328,'de',378,'m','low'],[329,'us',528,'m','med'],[330,'us',1567,'m','max'],[331,'us',299,'m','none'],
+  [332,'uk',405,'m','med'],[333,'uk',403,'m','med'],[334,'uk',305,'m','none'],[335,'de',197,'f2p','low'],[336,'de',343,'m','low'],
+  [337,'us',457,'m','none'],[338,'us',194,'m','low'],[339,'us',215,'m','low'],[340,'us',276,'m','med'],[341,'uk',289,'m','low'],
+  [342,'uk',405,'m','low'],[343,'de',402,'m','low'],[344,'de',597,'m','med'],[345,'us',70,'pvp','low'],[346,'us',477,'m','med'],
+  [347,'us',252,'m','low'],[348,'uk',155,'m','none'],[349,'uk',291,'m','low'],[350,'us',404,'m','med'],[351,'de',461,'m','med'],
+  [352,'de',457,'m','none'],[353,'us',376,'m','med'],[354,'us',587,'m','high'],[355,'us',443,'m','low'],[356,'us',257,'m','none'],
+  [357,'us',258,'m','low'],[358,'uk',398,'m','low'],[359,'de',357,'m','med'],[360,'de',431,'m','med'],[361,'us',473,'m','low'],
+  [362,'us',469,'m','none'],[363,'uk',251,'m','med'],[364,'uk',284,'m','low'],[365,'us',199,'m','low'],[366,'uk',258,'m','none'],
+  [367,'de',436,'m','med'],[368,'de',362,'m','low'],[369,'us',419,'m','low'],[370,'us',499,'m','med'],[371,'uk',257,'m','low'],
+  [372,'uk',54,'f2p','none'],[373,'uk',354,'m','low'],[374,'us',261,'m','low'],[375,'de',367,'m','none'],[376,'us',429,'m','med'],
+  [377,'us',512,'m','high'],[378,'us',224,'m','low'],[379,'uk',138,'f2p','low'],[380,'uk',195,'f2p','low'],[381,'uk',92,'f2p','none'],
+  [382,'uk',155,'f2p','low'],[383,'de',142,'f2p','none'],[384,'de',113,'f2p','low'],[385,'us',376,'m','low'],[386,'us',499,'m','low'],
+  [387,'au',247,'m','low'],[388,'au',242,'m','none'],[389,'au',230,'m','low'],[390,'au',400,'m','low'],[391,'au',145,'m','low'],
+  [392,'au',43,'pvp','low'],[393,'us',69,'m','low'],[394,'us',367,'m','med'],[395,'de',373,'m','none'],[396,'de',326,'m','low'],
+  [397,'de',101,'f2p','low'],[398,'de',126,'f2p','none'],[399,'us',130,'f2p','low'],[402,'us',447,'m','med'],[403,'us',411,'m','low'],
+  [404,'us',467,'m','low'],[405,'de',324,'m','med'],
+];
+
+// grid-auto-flow: column with 6 columns means we need to set grid-template-rows
+// Total items: compute rows needed
+const total = WORLDS.length;
+const cols = 6;
+const rows = Math.ceil(total / cols);
+document.getElementById('wgrid').style.gridTemplateRows = `repeat(${rows}, auto)`;
+
+const flagHTML = {
+  us:'<div class="flag flag-us"></div>',
+  uk:'<div class="flag flag-uk"></div>',
+  de:'<div class="flag flag-de"></div>',
+  au:'<div class="flag flag-au"></div>',
+};
+
+const grid = document.getElementById('wgrid');
+WORLDS.forEach(([num, flag, pop, type, flame]) => {
+  const we = document.createElement('div');
+  we.className = 'we' + (type==='pvp'?' pvp':type==='f2p'?' f2p':'');
+  const popStr = pop === 0 ? '0' : pop;
+  const badge = type==='pvp'
+    ? '<span class="ws-pvp">☠</span>'
+    : type==='f2p'
+    ? '<span class="ws-f2p">★</span>'
+    : '<span class="ws-m">★</span>';
+  const numCls = type==='pvp' ? ' pvp' : type==='f2p' ? ' f2p' : '';
+  we.innerHTML =
+    `<span class="wn${numCls}">${num}</span>`+
+    flagHTML[flag]+
+    `<span class="wp">${popStr}</span>`+
+    badge+
+    `<div class="fw ${flame}"><span>🔥</span></div>`;
+  grid.appendChild(we);
+});
+</script>
