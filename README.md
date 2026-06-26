@@ -1,18 +1,20 @@
 # OSRS PvP Design Portfolio
 
-A body of Old School RuneScape PvP design proposals.
+Hi, I'm Chdata.
 
-My goal is to provide solutions to improve PvP as a whole in Oldschool Runescape, starting mainly with a focus on the Wilderness, but not limited to just the Wilderness.
+welcome to my collection of "pretty posts" for OSRS suggestions I came up with.
 
-I'm a Runescape player from 2004, and I also spent more than a decade developing my own multiplayer PvP gamemode for Team Fortress 2, and 9 years leading and hosting creative and social communities in VRChat.
+My current goal is to provide solutions to improve PvP as a whole in Oldschool Runescape, starting mainly with a focus on the Wilderness, but not limited to just Wilderness PvP.
 
-I find a lot of things I experienced in working closely with my own communities of players shows similar patterns to what happens in the OSRS community, especially regarding PvP.
+I'm a Runescape player from 2004, and I also spent more than a decade developing my own multiplayer PvP gamemodes for Team Fortress 2.
 
-Nonetheless, you can judge whether my ideas would improve PvP or not, by checking out the pages in the link below:
+I also spent ~9 years leading and hosting creative and social communities in VRChat.
+
+I find a lot of things I've experienced in developing content closely with my own communities shows similar patterns to what happens in the OSRS community, especially regarding multiplayer PvP.
+
+You can judge whether my ideas would improve PvP or not, by checking out the pages in the link below:
 
 🔗 **[View the portfolio →](https://chdata.github.io/OSRS-Chdata-Portfolio/)**
-
-By Chdata.
 
 ---
 
