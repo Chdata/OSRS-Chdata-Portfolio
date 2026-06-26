@@ -8,7 +8,7 @@ My current goal is to provide solutions to improve PvP as a whole in Oldschool R
 
 I'm a Runescape player from 2004, and I also spent more than a decade developing my own multiplayer PvP gamemodes for Team Fortress 2.
 
-I also spent ~9 years leading and hosting creative and social communities in VRChat.
+I also spent around 9 years leading and hosting creative and social communities in VRChat.
 
 I find a lot of things I've experienced in developing content closely with my own communities shows similar patterns to what happens in the OSRS community, especially regarding multiplayer PvP.
 
