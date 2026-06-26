@@ -15,7 +15,6 @@
     --red-rs: #8b1a1a; --green-rs: #2d6b2d; --blue-rs: #1a3a6b;
   }
   body {
-    zoom: 1.5;
     background-color: #0d0800;
     background-image: radial-gradient(ellipse at 50% 0%, #2a1500 0%, transparent 70%),
       url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c89b3c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -230,7 +229,7 @@
 <div class="page-wrap">
 
   <div class="how-it-works">
-    <h3>⚔ How This Poll Works</h3>
+    <h3><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> How This Poll Works</h3>
     <div class="how-step"><div class="how-step-num">1.</div><div>Submit your own update idea below. Jagex will review submissions and the most feasible ideas will be added to future ranking rounds.</div></div>
     <div class="how-step"><div class="how-step-num">2.</div><div>Drag or use the arrows to rank all updates from most wanted (#1) to least wanted.</div></div>
     <div class="how-step"><div class="how-step-num">3.</div><div>The update ranked #1 by the most players becomes the community's priority and will be developed next, subject to a standard in-game poll before release.</div></div>
@@ -317,7 +316,7 @@
       <div class="ranking-list" id="main-list"></div>
       <div class="submit-section">
         <p class="submit-note">Your ranking is saved as you reorder. Click <strong>Submit Ranking</strong> when satisfied.</p>
-        <button class="btn-gold" style="padding:11px 28px;font-size:13px;" onclick="submitRanking()">⚔ Submit Ranking</button>
+        <button class="btn-gold" style="padding:11px 28px;font-size:13px;" onclick="submitRanking()"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Submit Ranking</button>
         <button class="btn-ghost" onclick="if(confirm('Reset to default order?'))initList()">↺ Reset</button>
       </div>
       <div class="results-panel" id="results-panel">

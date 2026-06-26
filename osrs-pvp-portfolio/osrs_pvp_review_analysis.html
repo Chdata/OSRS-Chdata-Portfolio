@@ -304,17 +304,19 @@ strong { color: var(--white-rs); }
 }
 .rs-list li:last-child { border-bottom: none; }
 .rs-list li::before {
-  content: '⚔';
+  content: '';
   position: absolute;
-  left: 2px;
-  color: var(--orange-rs);
-  font-size: 11px;
-  top: 7px;
+  left: 1px;
+  top: 6px;
+  width: 13px;
+  height: 13px;
+  background: url('../assets/multicombat.png') no-repeat center/contain;
+  image-rendering: pixelated;
 }
-.rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11px; }
-.rs-list.skull li::before   { content: '💀'; font-size: 10px; top: 6px; }
-.rs-list.cross li::before   { content: '✖'; color: var(--red-rs); font-size: 12px; top: 6px; }
-.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9px; top: 7px; }
+.rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11px; background: none; }
+.rs-list.skull li::before   { content: '💀'; font-size: 10px; top: 6px; background: none; }
+.rs-list.cross li::before   { content: '✖'; color: var(--red-rs); font-size: 12px; top: 6px; background: none; }
+.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9px; top: 7px; background: none; }
 
 /* ── IDEA VERDICT BOXES ── */
 .verdict-grid {
@@ -407,7 +409,7 @@ strong { color: var(--white-rs); }
 
 <!-- HERO -->
 <div class="hero">
-  <div style="font-size:42px;margin-bottom:8px;">⚔️💀⚔️</div>
+  <div style="font-size:42px;margin-bottom:8px;"><img src="../assets/multicombat.png" alt="" style="height:40px;width:auto;vertical-align:middle;image-rendering:pixelated;">💀<img src="../assets/multicombat.png" alt="" style="height:40px;width:auto;vertical-align:middle;image-rendering:pixelated;"></div>
   <h1>OSRS PvP Community Analysis</h1>
   <h2>Source Review — YouTube Comments, Reddit, Script — June 2026</h2>
   <p class="hero-sub">Analysis of the Still Framed "Wilderness" comment section (~1,440 comments) cross-referenced against Chdata's video script and its core proposals: <em>Blessed Status</em>, <em>Wildy Teams</em>, <em>Team Combat Zones</em>, and <em>Priority Ranking Poll</em>.</p>
@@ -436,7 +438,7 @@ strong { color: var(--white-rs); }
         <p>Players who <em>want</em> to engage with the Wilderness or learn PvP but find the skill gap and entry cost completely overwhelming. "I would do PvP if I had a chance." Very sympathetic to tutorial ideas, gear brackets, and matchmaking. This group is the most likely to be converted into active participants by good design.</p>
       </div>
       <div class="player-box green">
-        <div class="player-type-name">⚔️ The PvM Enjoyer</div>
+        <div class="player-type-name"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> The PvM Enjoyer</div>
         <p>Likes Wilderness PvM — slayer, chaos altar, revs, or agility — and has developed a live-and-let-live acceptance of getting PK'd occasionally. Generally supports making the Wilderness healthier but doesn't want it fundamentally changed. Often ironmen who've made peace with the risk.</p>
       </div>
       <div class="player-box blue">
@@ -955,5 +957,8 @@ strong { color: var(--white-rs); }
 </div>
 
 </div>
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
 </body>
 </html>

@@ -28,7 +28,6 @@
   }
 
   body {
-    zoom: 1.5;
     background-color: #0d0800;
     background-image:
       radial-gradient(ellipse at 50% 0%, #2a1500 0%, transparent 70%),
@@ -586,7 +585,7 @@
 
   <!-- HOW IT WORKS -->
   <div class="how-it-works">
-    <h3>⚔ How This Poll Works</h3>
+    <h3><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> How This Poll Works</h3>
     <div class="how-step">
       <div class="how-step-num">1.</div>
       <div>Drag or use the arrows to rank the listed updates from most wanted (#1) to least wanted (#10).</div>
@@ -1212,7 +1211,7 @@
           Your ranking is saved automatically as you reorder. Click <strong>Submit Ranking</strong> when you are happy with your order. You may change your submission until the poll closes.
         </p>
         <button class="btn-submit" onclick="submitRanking()">
-          ⚔ Submit Ranking
+          <img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Submit Ranking
         </button>
         <button class="btn-reset" onclick="resetCategory()">
           ↺ Reset Order
@@ -1398,5 +1397,8 @@ function jumpToRank(input) {
 
 </script>
 
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
 </body>
 </html>

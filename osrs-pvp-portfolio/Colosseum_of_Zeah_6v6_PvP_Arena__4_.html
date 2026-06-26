@@ -200,16 +200,18 @@ strong { color: var(--white-rs); }
 }
 .rs-list li:last-child { border-bottom: none; }
 .rs-list li::before {
-  content: '⚔';
+  content: '';
   position: absolute;
-  left: 2px;
-  color: var(--orange-rs);
-  font-size: 11.8px;
-  top: 5px;
+  left: 1px;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+  background: url('../assets/multicombat.png') no-repeat center/contain;
+  image-rendering: pixelated;
 }
-.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9.4px; top: 6px; }
-.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 11.8px; }
-.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 11.8px; }
+.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9.4px; top: 6px; background: none; }
+.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 11.8px; background: none; }
+.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 11.8px; background: none; }
 
 /* Three-column mode grid */
 .mode-grid {
@@ -423,7 +425,7 @@ strong { color: var(--white-rs); }
   <div class="brick-strip offset"></div>
 
   <div class="hero">
-    <span class="hero-icon">⚔️</span>
+    <span class="hero-icon"><img src="../assets/multicombat.png" alt="Colosseum of Zeah" style="height:44px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
     <h1>Colosseum of Zeah</h1>
     <h2>6v6 PvP Arena Minigame</h2>
     <span class="hero-tag">Player-Made Design Document &mdash; Not Official &mdash; @Chdata</span>
@@ -804,5 +806,8 @@ function toggleDev() {
 }
 </script>
 
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
 </body>
 </html>
