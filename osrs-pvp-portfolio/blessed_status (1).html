@@ -42,7 +42,6 @@
 
 body {
   background: var(--bg);
-  zoom: 1.5;
   font-family: 'RSUF', monospace;
   color: var(--white);
   width: 1140px;
@@ -72,7 +71,6 @@ body {
   image-rendering: pixelated;
   display: block;
   margin: 0 auto 12px;
-  filter: drop-shadow(0 0 8px rgba(68,136,204,0.6));
 }
 .hero h1 {
   font-size: 42.0px;
@@ -362,7 +360,7 @@ p:last-child { margin-bottom: 0; }
 /* ── TIERED BLESSED ── */
 .tiers {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 9.0px;
   margin: 18.0px 0;
 }
@@ -388,6 +386,12 @@ p:last-child { margin-bottom: 0; }
   display: block;
   letter-spacing: 2px;
 }
+.tier-box .tier-stars img {
+  height: 56px;
+  width: auto;
+  image-rendering: pixelated;
+  vertical-align: middle;
+}
 .tier-box .tier-val {
   font-size: 16.5px;
   color: var(--green);
@@ -400,6 +404,7 @@ p:last-child { margin-bottom: 0; }
   text-shadow: 1px 1px 0 #000;
   line-height: 1.3;
 }
+.tier-box.t0 { border-top: 3.0px solid #888; }
 .tier-box.t1 { border-top: 3.0px solid #888; }
 .tier-box.t2 { border-top: 3.0px solid #c89b3c; }
 .tier-box.t3 { border-top: 3.0px solid #c89b3c; }
@@ -550,40 +555,46 @@ p:last-child { margin-bottom: 0; }
   <p>By completing Wilderness activities <span class="hl-gold">without leaving or dying</span>, Blessed players accumulate Tiers that increase loot and add bonuses — rewarding sustained engagement over constant worldhopping.</p>
 
   <div class="tiers">
+    <div class="tier-box t0">
+      <div class="tier-num">Tier 0</div>
+      <span class="tier-stars"><img src="../assets/blessed-tier-0.png" alt="Tier 0"></span>
+      <div class="tier-val" style="color:var(--red);">-25% loot</div>
+      <div class="tier-desc">Default on entry</div>
+    </div>
     <div class="tier-box t1">
       <div class="tier-num">Tier 1</div>
-      <span class="tier-stars">☆</span>
-      <div class="tier-val">-25% loot</div>
-      <div class="tier-desc">Default on entry</div>
+      <span class="tier-stars"><img src="../assets/blessed-tier-1.png" alt="Tier 1"></span>
+      <div class="tier-val" style="color:var(--dim);">Normal loot</div>
+      <div class="tier-desc">Short trip completed</div>
     </div>
     <div class="tier-box t2">
       <div class="tier-num">Tier 2</div>
-      <span class="tier-stars" style="color:var(--gold);">★</span>
-      <div class="tier-val">-10% loot</div>
-      <div class="tier-desc">Short trip completed</div>
+      <span class="tier-stars"><img src="../assets/blessed-tier-2.png" alt="Tier 2"></span>
+      <div class="tier-val">+25% loot</div>
+      <div class="tier-desc">Sustained activity</div>
     </div>
     <div class="tier-box t3">
       <div class="tier-num">Tier 3</div>
-      <span class="tier-stars" style="color:var(--gold);">★★</span>
-      <div class="tier-val">Normal loot</div>
-      <div class="tier-desc">Sustained activity</div>
+      <span class="tier-stars"><img src="../assets/blessed-tier-3.png" alt="Tier 3"></span>
+      <div class="tier-val">+50% loot</div>
+      <div class="tier-desc">Extended trip</div>
     </div>
     <div class="tier-box t4">
       <div class="tier-num">Tier 4</div>
-      <span class="tier-stars" style="color:var(--sara);">★★★</span>
-      <div class="tier-val">+25% loot</div>
-      <div class="tier-desc">Extended trip</div>
+      <span class="tier-stars"><img src="../assets/blessed-tier-4.png" alt="Tier 4"></span>
+      <div class="tier-val">+75% loot</div>
+      <div class="tier-desc">Long committed run</div>
     </div>
     <div class="tier-box t5">
       <div class="tier-num">Tier 5</div>
-      <span class="tier-stars" style="color:var(--green);">★★★★</span>
+      <span class="tier-stars"><img src="../assets/blessed-tier-5.png" alt="Tier 5"></span>
       <div class="tier-val">+75% loot &amp; noted drops</div>
       <div class="tier-desc">Long committed run</div>
     </div>
   </div>
 
   <div class="note-box green">
-    Dying or leaving the Wilderness resets your Tier to 1. <span class="hl-green">Forinthry Gates</span> allow Tier 5 Blessed players to world-hop or log out without losing their Tier — rewarding players who stay in one world.
+    Dying or leaving the Wilderness resets your Tier to 0. <span class="hl-green">Forinthry Gates</span> allow Tier 5 Blessed players to world-hop or log out without losing their Tier — rewarding players who stay in one world.
   </div>
 </div>
 
