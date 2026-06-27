@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wilderness-Only Clue Scrolls — Chdata's OSRS PvP Proposal</title>
+<title>Wilderness Clue Steps Rework — Chdata's OSRS PvP Proposal</title>
 <style>
 @font-face {
   font-family: 'RSUF';
@@ -435,8 +435,8 @@ p:last-child { margin-bottom: 0; }
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Wilderness-Only Clue Scrolls</h1>
-  <p class="tagline">A dedicated clue scroll tier for players who want to engage with the Wilderness — without forcing non-PvP players into it against their will.</p>
+  <h1>Wilderness Clue Steps Rework</h1>
+  <p class="tagline">Make existing Wilderness clue steps optional paths with real upsides, and introduce Blighted Clue Scrolls — a new Wilderness-routed tier with its own dedicated reward table.</p>
   <div class="hero-divider"></div>
 </div>
 
@@ -446,67 +446,89 @@ p:last-child { margin-bottom: 0; }
 <!-- THE PROBLEM -->
 <div class="section">
   <div class="sec-head">The Problem</div>
-  <div class="sec-sub">Nobody enjoys mandatory Wilderness clue steps</div>
+  <div class="sec-sub">Mandatory Wilderness steps are bad for everyone — including the players who hate them</div>
   <hr class="sec-divider">
 
-  <p>Clue scrolls occasionally send players into the Wilderness to dig up a casket or speak to an NPC. This has been a source of frustration for years. Players who have no interest in PvP are forced into PvP-adjacent content just to complete a clue step. They bring minimal gear, rush in and out as fast as possible, and contribute nothing to the activity of the Wilderness. The PKer who kills them gets an empty inventory. Nobody wins.</p>
+  <p>Clue scrolls occasionally send players into the Wilderness to dig up a casket or speak to an NPC. For most players, this step is not a choice — it is an obstacle. They bring minimal gear, rush in and out as fast as possible, and resent the Wilderness for making them do it. The PKer who camps the spot gets an empty inventory. Nobody wins.</p>
 
-  <p>The gameplay loop is pointless in both directions: it is not fun for the clue hunter being hunted, and it is not rewarding for the PKer who spent time camping a spot for someone carrying nothing.</p>
+  <p><span class="hl-green">Nobody wants to feel forced into the Wilderness.</span> Being told mid-clue that you have to go to level 30 Wilderness or your scroll is stuck breeds resentment toward the Wilderness itself — not just the step. Players who might otherwise be curious about PvP content are pushed away by being shoved into it against their will.</p>
+
+  <p>The second problem is what this forced activity does to the Wilderness. A clue hunter rushing in with 3-item gear and immediately teleporting out contributes nothing. The Wilderness needs players who are engaged and carrying something — not players who are sprinting through it to finish a box tick.</p>
 
   <div class="note-box red">
-    <span class="hl-red">Forced interaction is not meaningful interaction.</span> A clue hunter running into the Wilderness with 3-item gear and immediately teleporting out is not the kind of player activity the Wilderness needs more of.
+    <span class="hl-red">Forced interaction is not meaningful interaction.</span> The current design produces low-stakes activity that is bad for clue hunters, bad for PKers, and bad for the activity of the Wilderness.
   </div>
 </div>
 
-<!-- THE FIX -->
+<!-- FIX 1 -->
 <div class="section">
-  <div class="sec-head">The Fix — A Wilderness-Only Clue Tier</div>
-  <div class="sec-sub">Opt-in, not forced</div>
+  <div class="sec-head">Fix 1 — Make Wilderness Steps Optional Paths</div>
+  <div class="sec-sub">Keep the step. Make it a decision, not an obligation.</div>
   <hr class="sec-divider">
 
-  <p>The solution that has been discussed in the community for years is a <span class="hl-gold">dedicated Wilderness-only clue scroll tier</span> — obtained from Wilderness content and completed entirely within the Wilderness. All existing Wilderness steps would be moved out of the standard clue tiers entirely.</p>
+  <p>Existing Wilderness clue steps do not need to be removed. They need to become <span class="hl-gold">optional paths</span> — a route a player can take for a real upside, or skip if they want nothing to do with PvP. Nobody is forced. Nobody is locked out. The choice belongs to the player.</p>
 
   <ul class="rules-list">
-    <li>A new <span class="hl-gold">Wilderness Clue Scroll</span> tier is obtainable from Wilderness monsters, Wilderness bosses, and PvP.</li>
-    <li>Every step of the clue scroll takes place <span class="hl-green">within the Wilderness</span> — no steps outside it.</li>
-    <li>All existing Wilderness steps are <span class="hl-green">removed from standard clue tiers</span> (Elite, Master, etc.) Players doing regular clues no longer get sent into the Wilderness involuntarily.</li>
-    <li>The <span class="hl-gold">rewards reflect the risk</span> — Wilderness clue rewards are tuned to be meaningfully better than standard clues, compensating for the additional danger of completing them in a PvP zone.</li>
-    <li>Players roaming the Wilderness to complete clue steps are <span class="hl-orange">organic activity</span> — they came willingly, they are engaged with the content, and they may be carrying something worth PKing for.</li>
+    <li><span class="hl-gold">Risky shortcut</span> — completing the Wilderness version of a step skips one or more subsequent steps, letting players finish the clue faster in exchange for the added risk.</li>
+    <li><span class="hl-green">Increased reward</span> — completing the Wilderness step boosts the final reward: a better loot roll, an extra casket, or a higher chance at rare items.</li>
+    <li><span class="hl-orange">Alternate path</span> — optionally, Wilderness steps could have a chance to find a Blighted Clue Scroll mid-scroll, or pull a reward from the Blighted drop table on completion. How tightly the two systems connect is a design decision for Jagex — they work independently, but they pair naturally.</li>
+    <li>Players who want to skip the Wilderness entirely can still do so — they just take the longer, safer route.</li>
   </ul>
 
   <div class="note-box green">
-    <span class="hl-green">Opt-in activity fills the Wilderness better than forced activity.</span> A player who chose to come to the Wilderness for clue scrolls is more likely to bring reasonable gear, stay longer, and contribute to the feeling of the Wilderness being alive.
+    <span class="hl-green">Optional paths create real decisions.</span> A player who chose to come to the Wilderness for a shortcut or a reward boost is engaged with the content — not trying to escape it. That is the kind of activity the Wilderness is built around.
+  </div>
+</div>
+
+<!-- FIX 2 -->
+<div class="section">
+  <div class="sec-head">Fix 2 — Introduce Blighted Clue Scrolls</div>
+  <div class="sec-sub">A fully Wilderness-routed clue tier, earned by going in.</div>
+  <hr class="sec-divider">
+
+  <p><span class="hl-orange">Blighted Clue Scrolls</span> are a new clue scroll tier where every step takes place inside the Wilderness, with their own dedicated drop table of Wilderness and PvP-themed rewards. They can be farmed directly as a primary Wilderness activity, or found mid-scroll by players who take the Wilderness step on a standard clue.</p>
+
+  <ul class="rules-list">
+    <li><span class="hl-gold">Standalone drop</span> — obtainable directly from Wilderness monsters, Wilderness bosses, and PvP. Players who want to run them can farm them as a primary activity.</li>
+    <li><span class="hl-orange">Mid-scroll find</span> — completing a Wilderness step on a standard clue scroll has a chance to convert it into a Blighted Clue Scroll, rewarding players who took the optional path with something better than they started with.</li>
+    <li><span class="hl-green">Dedicated reward table</span> — Wilderness and PvP-themed rewards distinct from standard clue loot, as detailed in Danil445's proposal.</li>
+    <li>All steps take place <span class="hl-gold">within the Wilderness</span> — players doing these scrolls are roaming the whole map, not sitting in one spot.</li>
+  </ul>
+
+  <p>The two fixes connect: the optional Wilderness step on a standard clue is the on-ramp. Players who take it might finish the clue faster, get a better reward, or walk away with a Blighted Clue Scroll that pulls them back in.</p>
+
+  <div class="note-box">
+    Blighted Clue Scrolls also stand on their own as a primary Wilderness activity — not just a side effect of doing a regular clue. That matters for the Wilderness feeling populated.
   </div>
 </div>
 
 <!-- WHY IT MATTERS -->
 <div class="section">
-  <div class="sec-head">Why This Matters</div>
-  <div class="sec-sub">Roaming players are the lifeblood of the Wilderness</div>
+  <div class="sec-head">Why This Works</div>
+  <div class="sec-sub">Roaming, willing players are the lifeblood of the Wilderness</div>
   <hr class="sec-divider">
 
-  <p>One of the biggest problems with the Wilderness right now is that it feels empty. PKers spend most of their time hopping worlds looking for someone — anyone — to fight. The problem is that content is too concentrated. Revenants, bosses, and agility all create fixed locations that get heavily scouted and avoided.</p>
+  <p>The Wilderness feels empty right now because content is too concentrated. Revenants, bosses, and agility all create fixed locations that get heavily scouted and avoided. PKers spend most of their time hopping worlds looking for anyone to fight.</p>
 
-  <p>Clue scroll hunters are different. They roam. Each step sends them to a different location. A player doing a Wilderness clue scroll might visit four or five different areas of the Wilderness over the course of completing it — <span class="hl-gold">spreading activity across the entire map</span> rather than concentrating it in one spot.</p>
+  <p>Clue scroll hunters are different. They roam. Each step sends them somewhere new. A player working through a Blighted Clue Scroll — or chasing the shortcut or reward boost on a standard one — might visit four or five different areas of the Wilderness in a single session, <span class="hl-gold">spreading activity across the entire map</span> rather than concentrating it in one spot.</p>
 
   <ul class="rules-list">
-    <li>Clue hunters roaming the Wilderness <span class="hl-green">create unpredictable player activity</span> across locations that normally see no one.</li>
-    <li>They are carrying a reward that has real value — giving PKers a reason to hunt them beyond just hoping for a lucky drop table hit.</li>
-    <li>Removing forced Wilderness steps from standard clues <span class="hl-green">improves the experience for the majority of players</span> who simply do not want PvP in their clue gameplay — without removing any PvP content.</li>
-    <li>This update pairs naturally with <span class="hl-sara">Blessed Status</span> — a clue hunter who might previously have avoided the Wilderness can now enter it on their own terms, with manageable risk.</li>
+    <li>Players who opt into Wilderness steps are there <span class="hl-green">because they chose to be</span> — engaged, potentially geared, and carrying something worth PKing for.</li>
+    <li>Blighted Clue Scroll runners are a genuinely interesting PKer target: a player roaming the whole Wilderness map with boosted rewards and a dedicated loot table.</li>
+    <li>This pairs naturally with <span class="hl-sara">Blessed Status</span> — a clue hunter who might previously have avoided the Wilderness entirely can now weigh the trade-off on their own terms, with manageable risk.</li>
   </ul>
 
-  <p style="margin-top:18px;">This idea has circulated in the community for years. The most thorough version is Danil445's "Blighted Clues" post:</p>
+  <p style="margin-top:18px;">This page is largely a summary of an idea that has been floating around the community for years. The best version of it is Danil445's post — worth reading in full:</p>
 
   <ul class="rules-list">
-    <li><a href="https://www.reddit.com/r/2007scape/comments/1fdiy6c/blighted_clues/" style="color:var(--gold);text-decoration:none;" target="_blank">Blighted Clues — Danil445</a> (1 year ago)</li>
-    <li><a href="https://www.reddit.com/r/2007scape/comments/wrpu1h/wildernessonly_clue_scrolls_revised_poll_in/" style="color:var(--gold);text-decoration:none;" target="_blank">Wilderness-Only Clue Scrolls — revised poll</a> — +378 upvotes (3 years ago)</li>
+    <li><a href="https://www.reddit.com/r/2007scape/comments/wrpu1h/wildernessonly_clue_scrolls_revised_poll_in/" style="color:var(--gold);text-decoration:none;" target="_blank">Wilderness-Only Clue Scrolls — Danil445</a> — +378 upvotes (3 years ago) <span class="hl-green">&#9654; recommended read</span></li>
+    <li><a href="https://www.reddit.com/r/2007scape/comments/1fdiy6c/blighted_clues/" style="color:var(--gold);text-decoration:none;" target="_blank">Blighted Clues</a> (1 year ago)</li>
     <li><a href="https://www.reddit.com/r/2007scape/comments/j3in5t/suggestion_blighted_clue_scrolls/" style="color:var(--gold);text-decoration:none;" target="_blank">Blighted Clue Scrolls suggestion</a> — +6,300 upvotes (5 years ago)</li>
     <li><a href="https://www.reddit.com/r/2007scape/comments/mh4f1o/new_clue_wilderness_remove_all_wilderness_steps/" style="color:var(--gold);text-decoration:none;" target="_blank">Remove all Wilderness steps from standard clues</a> — +60 upvotes (5 years ago)</li>
   </ul>
 
   <div class="note-box">
-    The +6,300 upvote post is one of the most upvoted Wilderness-related suggestions in the history of the subreddit. This is not a niche idea — it is a broadly supported quality of life improvement that has been waiting for implementation for half a decade.
+    The +6,300 upvote post is one of the most upvoted Wilderness-related suggestions in the history of the subreddit. This is not a niche idea — it is a broadly supported quality of life improvement that has been waiting for implementation for years.
   </div>
 </div>
 
