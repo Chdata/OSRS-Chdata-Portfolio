@@ -510,6 +510,249 @@ p:last-child { margin-bottom: 0; }
 
 <!-- TRANSITION / EXISTING PARCHMENTS -->
 <div class="section">
+  <div class="sec-head">Item Examples — Before &amp; After</div>
+  <div class="sec-sub">What actually changes for each item under the shard system</div>
+  <hr class="sec-divider">
+
+  <p>The player who died keeps the <span class="hl-orange">broken</span> or <span class="hl-red">mangled</span> version of the item. The killer receives the tradeable shards. The number of shards dropped equals the number required to repair the item — so if a friend killed you, they can simply trade the shards back.</p>
+
+  <div class="note-box" style="margin-bottom:18px;">
+    <span class="hl-orange">Broken</span> = item broke on death, repaired at a cost. <span class="hl-red">Mangled</span> = item broke above level 20 Wilderness (item must be locked first), repaired at a higher cost. Items that <span class="hl-green">do not get mangled</span> above 20 Wildy have no lock option — they go broken at the same cost regardless of where in the Wilderness you die.
+  </div>
+
+  <div class="note-box red" style="margin-bottom:18px;">
+    <span class="hl-red">Under the current system:</span> to protect an item above level 20 Wilderness, you must first apply a <span class="hl-gold">Trouver Parchment</span> (~<span class="hl-gold">650k</span>) once — it now persists on the item rather than being consumed on death. However, the first death still costs roughly <span class="hl-red">1.1m</span> (parchment + 500k Perdu repair), and every subsequent death costs <span class="hl-gold">500k</span> to repair at Perdu each time. The shard system replaces this entirely.
+  </div>
+
+  <div class="three-compare" style="grid-template-columns: 48px 1fr 1fr 1fr 1fr;">
+    <div class="tc-header tc-empty" style="border-bottom:1.5px solid var(--border);"></div>
+    <div class="tc-header tc-normal" style="color:var(--gold);">Item</div>
+    <div class="tc-header tc-normal">What killer gets (broken)</div>
+    <div class="tc-header tc-skulled">Above level 20 Wilderness</div>
+    <div class="tc-header tc-normal" style="color:var(--green);">Repair cost (broken / mangled)</div>
+
+    <div class="tc-empty" style="grid-column:1/6;padding:8px 12px;font-size:14px;color:var(--dim);text-shadow:1px 1px 0 #000;border-bottom:1.5px solid rgba(90,74,42,0.3);">Mangled repair costs are set at 2× the broken repair cost — Jagex would determine the actual values, but 2× is a reasonable baseline that reflects the added risk of deep Wilderness.</div>
+
+    <!-- Void Knight -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_melee_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void melee helm</div>
+    <div class="tc-cell good">1 Broken Void Helm Shard</div>
+    <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
+    <div class="tc-cell good">160k broken / 320k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_mage_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void mage helm</div>
+    <div class="tc-cell good">1 Broken Void Helm Shard</div>
+    <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
+    <div class="tc-cell good">160k broken / 320k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_ranger_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void ranger helm</div>
+    <div class="tc-cell good">1 Broken Void Helm Shard</div>
+    <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
+    <div class="tc-cell good">160k broken / 320k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_top_%28broken%29.png?bc0cd" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void knight top</div>
+    <div class="tc-cell good">4 Broken Void Armor Shards</div>
+    <div class="tc-cell mid">4 Mangled Void Armor Shards</div>
+    <div class="tc-cell good">180k broken / 360k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_robe_%28broken%29.png?4afbb" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void knight robe</div>
+    <div class="tc-cell good">3 Broken Void Armor Shards</div>
+    <div class="tc-cell mid">3 Mangled Void Armor Shards</div>
+    <div class="tc-cell good">135k broken / 270k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Elite_void_top_%28broken%29.png?7a7c0" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Elite void top</div>
+    <div class="tc-cell good">4 Broken Elite Void Shards</div>
+    <div class="tc-cell mid">4 Mangled Elite Void Shards</div>
+    <div class="tc-cell good">240k broken / 480k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Elite_void_robe_%28broken%29.png?1bc1e" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Elite void robe</div>
+    <div class="tc-cell good">3 Broken Elite Void Shards</div>
+    <div class="tc-cell mid">3 Mangled Elite Void Shards</div>
+    <div class="tc-cell good">180k broken / 360k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_gloves_%28broken%29.png?4afbb" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Void knight gloves</div>
+    <div class="tc-cell good">2 Broken Void Armor Shards</div>
+    <div class="tc-cell mid">2 Mangled Void Armor Shards</div>
+    <div class="tc-cell good">120k broken / 240k mangled</div>
+
+    <!-- Dragon defender -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dragon_defender_%28broken%29.png?8fa13" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Dragon defender</div>
+    <div class="tc-cell good">1 Broken Dragon Defender Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">240k broken</div>
+
+    <!-- Fire cape -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Fire_cape_%28broken%29.png?5abba" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Fire cape</div>
+    <div class="tc-cell good">1 Broken Fire Cape Cloth</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">150k broken</div>
+
+    <!-- Infernal cape -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Infernal_cape_%28broken%29.png?80b36" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Infernal cape</div>
+    <div class="tc-cell good">1 Broken Infernal Cape Cloth</div>
+    <div class="tc-cell mid">1 Mangled Infernal Cape Cloth</div>
+    <div class="tc-cell good">225k broken / 450k mangled</div>
+
+    <!-- Imbued capes -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_guthix_cape_%28broken%29.png?13f14" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Imbued Guthix cape</div>
+    <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">96k broken</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_saradomin_cape_%28broken%29.png?19317" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Imbued Saradomin cape</div>
+    <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">96k broken</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_zamorak_cape_%28broken%29.png?f36f9" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Imbued Zamorak cape</div>
+    <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">96k broken</div>
+
+    <!-- Fighter torso -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Fighter_torso_%28broken%29.png?7ce14" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Fighter torso</div>
+    <div class="tc-cell good">1 Broken Fighter Torso Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">150k broken</div>
+
+    <!-- Ava's assembler -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Ava%27s_assembler_%28broken%29.png?2baad" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Ava's assembler</div>
+    <div class="tc-cell good">1 Broken Assembler Shard</div>
+    <div class="tc-cell good">Does not get mangled</div>
+    <div class="tc-cell good">240k broken</div>
+
+    <!-- Dizana's quiver -->
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dizana%27s_quiver_%28l%29_%28mangled%29.png?7fca1" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Dizana's quiver</div>
+    <div class="tc-cell good">1 Broken Quiver Shard</div>
+    <div class="tc-cell mid">1 Mangled Quiver Shard</div>
+    <div class="tc-cell good">270k broken / 540k mangled</div>
+
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dizana%27s_quiver_%28l%29_%28mangled%29.png?7fca1" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-cell">Blessed Dizana's quiver</div>
+    <div class="tc-cell good">1 Broken Blessed Quiver Shard</div>
+    <div class="tc-cell mid">1 Mangled Blessed Quiver Shard</div>
+    <div class="tc-cell good">300k broken / 600k mangled</div>
+  </div>
+
+  <p style="margin-top:12px;font-size:16px;color:var(--dim);text-shadow:1px 1px 0 #000;">Items that say <span class="hl-green">does not get mangled</span> above 20 Wildy have no lock option — they always go broken at the same cost regardless of depth. Items that go mangled currently require locking with a Trouver Parchment before entering. Under the shard system, Trouver Parchments are removed entirely — items that currently go mangled would simply have a more expensive shard instead.</p>
+</div>
+
+<!-- NPC SHARD COSTS -->
+<div class="section">
+  <div class="sec-head">Buying Shards from NPCs</div>
+  <div class="sec-sub">Where to repair — and what it costs</div>
+  <hr class="sec-divider">
+
+  <p>The NPC who originally gives out or sells the item is the one who would also sell the replacement shards. If you don't want to make the trip, the GE is always an option — other players who received shards from PKing will be selling them there.</p>
+
+  <div class="three-compare" style="grid-template-columns: 1fr 1fr 1fr;">
+    <div class="tc-header tc-normal" style="color:var(--gold);">Shard type</div>
+    <div class="tc-header tc-normal">Repair NPC</div>
+    <div class="tc-header tc-normal" style="color:var(--green);">Price per shard (broken / mangled)</div>
+
+    <div class="tc-label">Void Helm Shard</div>
+    <div class="tc-cell">Void Knights (Pest Control)</div>
+    <div class="tc-cell good">160k per shard broken / 320k per shard mangled</div>
+
+    <div class="tc-label">Void Armor Shard</div>
+    <div class="tc-cell">Void Knights (Pest Control)</div>
+    <div class="tc-cell good">45k per shard broken (180k top / 135k robe / 120k gloves) / 90k per shard mangled</div>
+
+    <div class="tc-label">Elite Void Shard</div>
+    <div class="tc-cell">Void Knights (Pest Control)</div>
+    <div class="tc-cell good">60k per shard broken / 120k per shard mangled</div>
+
+    <div class="tc-label">Fire cape cloth</div>
+    <div class="tc-cell">TzHaar Fight Cave NPC</div>
+    <div class="tc-cell good">150k broken (does not get mangled)</div>
+
+    <div class="tc-label">Infernal cape cloth</div>
+    <div class="tc-cell">TzHaar Fight Cave NPC</div>
+    <div class="tc-cell good">225k broken / 450k mangled</div>
+
+    <div class="tc-label">Imbued cape shard</div>
+    <div class="tc-cell">Kolodion</div>
+    <div class="tc-cell good">96k broken (does not get mangled)</div>
+
+    <div class="tc-label">Fighter torso shard</div>
+    <div class="tc-cell">Barbarian Assault reward NPC</div>
+    <div class="tc-cell good">150k broken (does not get mangled)</div>
+
+    <div class="tc-label">Assembler shard</div>
+    <div class="tc-cell">Ava (Animal Magnetism quest)</div>
+    <div class="tc-cell good">240k broken (does not get mangled)</div>
+
+    <div class="tc-label">Dragon defender shard</div>
+    <div class="tc-cell">Warriors' Guild NPC</div>
+    <div class="tc-cell good">240k broken (does not get mangled)</div>
+
+    <div class="tc-label">Quiver Shard</div>
+    <div class="tc-cell">Fortis Colosseum reward NPC</div>
+    <div class="tc-cell good">270k broken / 540k mangled</div>
+
+    <div class="tc-label">Blessed Quiver Shard</div>
+    <div class="tc-cell">Fortis Colosseum reward NPC</div>
+    <div class="tc-cell good">300k broken / 600k mangled</div>
+  </div>
+
+  <div class="note-box" style="margin-top:18px;">
+    Because NPCs sell shards at a fixed price, the GE price naturally stays anchored to that value. Players who received shards from a PK will sell at or below the NPC price. Players who need to repair cheaply can buy off the GE. The economy self-regulates without Jagex having to do anything beyond setting the NPC price once.
+  </div>
+</div>
+
+<!-- MOD MANKED QUOTE -->
+<div class="section">
+  <div class="sec-head">Jagex's Response</div>
+  <div class="sec-sub">A developer directly addressed this concept</div>
+  <hr class="sec-divider">
+
+  <div class="summary-box">
+    <span class="label">Mod Manked — responding to the community suggestion</span>
+    "This is the approach I want to go for when we do have a chance to rework the system. My sole question is do you not think giving the PKer 5x the money will lead to abuse? E.g. Dragon defender is 240k normally, deep wildy it would be 1.2m... This would mean getting dragon defenders and dying to your friend could generate ~3m per hour? Other items will potentially have similar issues, but the dragon defender is the most obvious one to me."
+  </div>
+
+  <p>This is a fair concern — and it has a straightforward answer. The abuse case Mod Manked describes is a player intentionally dying to a friend to farm Mangled Dragon Defender Shards. But this is only a problem if the shards generate <span class="hl-red">new GP</span> — and under the shard system, they don't.</p>
+
+  <ul class="rules-list">
+    <li>Shards sold on the GE are bought by players who need to repair their own gear. No new GP is created — it is a player-to-player transfer, taxed by the GE.</li>
+    <li>The NPC buys shards at a fixed price anchored to the repair cost. If Mangled Dragon Defender Shards cost 500k from Perdu, the NPC would also buy them for 500k — setting the ceiling. There is no 5x multiplication unless Jagex specifically prices mangled shards at 5x the broken price.</li>
+    <li>The shard price is set by Jagex per item, not by the tier multiplier from the existing Trouver system. Mangled shards can simply cost the same as broken shards if Jagex decides the deep Wilderness premium is not worth the abuse risk.</li>
+  </ul>
+
+  <div class="note-box green">
+    <span class="hl-green">Mod Manked already said this is the direction they want to go.</span> The abuse concern is resolvable by design — it is a matter of how shards are priced, not whether the system can exist at all.
+  </div>
+
+  <hr class="sec-divider" style="margin-top:24px;">
+
+  <p>Another question that came up in the Trouver System Rework thread:</p>
+
+  <div class="summary-box" style="border-left-color:var(--dim);background:rgba(168,144,96,0.07);">
+    <span class="label" style="color:var(--dim);">Community — Trouver System Rework discussion</span>
+    "Is there a reason the team feels we MUST keep untradeables being deleted post 20 wild? I'd be curious to hear a PKer's or Jagex's explanation for why that even needs to be a thing. Like why can't items just break and need to be repaired the same way regardless of where you die in the Wilderness? Why if I walk 1 tile north does it need to become way more expensive?"
+  </div>
+
+  <p>This is a question I don't have a personal answer to. I don't know why the level 20 distinction needs to exist, or why the cost needs to jump so sharply at that line. If any veteran PKers or Jagex would like to explain the reasoning, I'd genuinely like to hear it.</p>
+</div>
+
+<!-- TRANSITION / EXISTING PARCHMENTS -->
+<div class="section">
   <div class="sec-head">Transitioning Away from Trouver Parchments</div>
   <div class="sec-sub">What happens to existing parchments</div>
   <hr class="sec-divider">
