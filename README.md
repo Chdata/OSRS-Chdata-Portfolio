@@ -10,7 +10,7 @@ I am starting mainly with a focus on the Wilderness, but not limited to just Wil
 
 You can judge whether my ideas would improve PvP or not, by checking out the pages in the link below:
 
-🔗 **[View the portfolio →](https://chdata.github.io/OSRS-Chdata-Portfolio/)**
+# 🔗 **[View the portfolio →](https://chdata.github.io/OSRS-Chdata-Portfolio/)**
 
 ---
 
