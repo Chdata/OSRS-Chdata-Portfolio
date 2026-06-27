@@ -96,7 +96,7 @@ body {
 
 .hero-sub {
   font-size: 16.5px;
-  color: var(--muted);
+  color: #c0a870;
   max-width: 600px;
   margin: 12px auto 0;
   line-height: 1.6;
@@ -147,7 +147,7 @@ body {
 /* CONTROLS BAR */
 .controls-bar {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 24px;
@@ -339,15 +339,15 @@ body {
 
 .threshold-badge {
   display: inline-block;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
-  padding: 1px 7px;
+  padding: 2px 8px;
   border-radius: 2px;
-  margin-left: 5px;
+  margin-left: 6px;
   text-shadow: none;
   vertical-align: middle;
   background: rgba(0,0,0,0.35);
-  color: var(--dim);
+  color: #b8a070;
   border: 1px solid var(--brick);
 }
 
@@ -374,6 +374,25 @@ body {
   transition: background 0.12s;
 }
 .unpolled-entry:hover { background: #1a1e28; }
+
+/* Scrapped proposals */
+.scrapped-entry {
+  border: 1px solid var(--brick);
+  border-left: 3px solid #8060a8;
+  background: var(--card-bg);
+  border-radius: 3px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  transition: background 0.12s;
+}
+.scrapped-entry:hover { background: #1c1820; }
+.scrapped-era {
+  font-size: 13px;
+  color: #9070b8;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+  text-shadow: 1px 1px 0 #000;
+}
 
 .unpolled-date {
   font-size: 15px;
@@ -479,6 +498,10 @@ footer {
       <button class="sort-btn" id="btn-date-desc" onclick="setSort('date-desc')">Date (newest first)</button>
       <button class="sort-btn" id="btn-pct-asc" onclick="setSort('pct-asc')">% Yes (lowest first)</button>
       <button class="sort-btn" id="btn-pct-desc" onclick="setSort('pct-desc')">% Yes (highest first)</button>
+      <button class="sort-btn" id="btn-votes-desc" onclick="setSort('votes-desc')">Total votes (most first)</button>
+      <button class="sort-btn" id="btn-votes-asc" onclick="setSort('votes-asc')">Total votes (fewest first)</button>
+      <button class="sort-btn" id="btn-skips-desc" onclick="setSort('skips-desc')">Skip votes (most first)</button>
+      <button class="sort-btn" id="btn-skips-asc" onclick="setSort('skips-asc')">Skip votes (fewest first)</button>
       <input class="filter-input" type="text" id="searchbox" placeholder="Search questions..." oninput="filterPolls()">
     </div>
 
@@ -503,7 +526,18 @@ footer {
 
 </main>
 
-<div class="brick-stripe"></div>
+<div style="margin-top:48px;">
+    <div class="section-label">Proposed Then Dropped</div>
+    <div class="section-title">Scrapped PvP &amp; Wilderness Proposals</div>
+
+    <div class="context-box">
+      These are PvP or Wilderness changes that Jagex publicly proposed, discussed, or designed - but then dropped before ever polling them (or, in one case, after failing a poll). Each entry links to the official source where the proposal was announced and/or cancelled.
+    </div>
+
+    <div id="scrapped-container"></div>
+  </div>
+
+  <div class="brick-stripe"></div>
 
 <footer>
   Chdata &mdash; OSRS PvP Design Portfolio &mdash; 2026 &nbsp;&bull;&nbsp; Data sourced from <a href="https://oldschool.runescape.com/polls/latest" style="color:var(--amber)">oldschool.runescape.com</a> and the <a href="https://oldschool.runescape.wiki/w/Polls" style="color:var(--amber)">OSRS Wiki</a>
@@ -1072,123 +1106,456 @@ const POLLS = [
         yesPct: 91.1, noPct: 8.9, yesVotes: 46375, noVotes: 4546, totalVotes: 52996
       }
     ]
+  },
+
+  // ─── ADDITIONAL POLLS WITH BURIED PvP/WILDERNESS QUESTIONS ───────────────
+
+  // 2020 - Poll 73
+  {
+    date: "2020-09-23",
+    dateDisplay: "23 Sep 2020",
+    title: "Old School Content Poll 73: The :Joy: of Polls",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Old_School_Content_Poll_73:_The_:Joy:_of_Polls",
+    pollNum: "73",
+    threshold: 75,
+    questions: [
+      {
+        text: "Should we increase the base number of charges on the Skull Sceptre from 5 base charges to 10? After completing the Wilderness Achievement Diary tiers this will increase to 14, 18, 22 and 26 respectively. Currently completing these diaries raises the total charges to 7, 9, 11 and 13.",
+        yesPct: 94.1, noPct: 5.9, yesVotes: 41602, noVotes: 2617, totalVotes: 48065
+      },
+      {
+        text: "Should we allow players to crush Skull Sceptre pieces into tradeable, stackable chunks? These chunks can then be used to charge the imbued Skull Sceptre.",
+        yesPct: 84.5, noPct: 15.5, yesVotes: 36809, noVotes: 6757, totalVotes: 48065
+      },
+      {
+        text: "Should the Skull Sceptre no longer be destroyed on death?",
+        yesPct: 85.3, noPct: 14.7, yesVotes: 36554, noVotes: 6315, totalVotes: 48065
+      }
+    ]
+  },
+
+  // 2020 - Soul Wars and Minigames
+  {
+    date: "2020-10-09",
+    dateDisplay: "9 Oct 2020",
+    title: "Soul Wars and Minigames",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Soul_Wars_and_Minigames",
+    pollNum: null,
+    threshold: 75,
+    questions: [
+      {
+        text: "Should the Last Man Standing Reward Shop be able to imbue equipment, like the Nightmare Zone reward shop does? The Nightmare Zone store won\'t be changed in any way.",
+        yesPct: 58.6, noPct: 41.4, yesVotes: 27329, noVotes: 19287, totalVotes: 51385
+      }
+    ]
+  },
+
+  // 2021 - Poll 74
+  {
+    date: "2021-01-20",
+    dateDisplay: "20 Jan 2021",
+    title: "Old School Content Poll 74: Collection Log & Game Improvements",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Old_School_Content_Poll_74:_Collection_Log_%26_Game_Improvements",
+    pollNum: "74",
+    threshold: 75,
+    questions: [
+      {
+        text: "Should it be possible to use Vesta\'s Longsword in combat against other players in PvP worlds? The Longsword would lose all bonuses when used against NPCs, effectively turning it into a cosmetic item.",
+        yesPct: 74.6, noPct: 25.4, yesVotes: 2363, noVotes: 805, totalVotes: 45387
+      },
+      {
+        text: "Should all of the Blighted items available in the Last Man Standing store also be added to the Soul Wars store? Each Blighted item would cost 10 Zeal to purchase. It would not be possible to sell these items back to the store for Zeal.",
+        yesPct: 76.2, noPct: 23.8, yesVotes: 23944, noVotes: 7462, totalVotes: 45387
+      },
+      {
+        text: "If the Blighted items are added to the Soul Wars Reward Shop, should it also be possible to use the spell sacks within the minigame? It would not be possible to use the Blighted food or potions.",
+        yesPct: 74.8, noPct: 25.2, yesVotes: 22842, noVotes: 7676, totalVotes: 45387
+      }
+    ]
+  },
+
+  // 2025 - Poll 84
+  {
+    date: "2025-04-14",
+    dateDisplay: "14 Apr 2025",
+    title: "Poll 84 - PvM Improvements, Agility Shortcuts & more!",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Poll_84_-_PvM_Improvements,_Agility_Shortcuts_%26_more!",
+    pollNum: "84",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should we allow players to chisel down Ancient Artefacts into Revenant Ether at a rate of 500gp to 1 ether?",
+        yesPct: 87.1, noPct: 12.9, yesVotes: 63842, noVotes: 9473, totalVotes: 90380
+      }
+    ]
+  },
+
+  // 2026 - Getting Around Poll
+  {
+    date: "2026-01-13",
+    dateDisplay: "13 Jan 2026",
+    title: "Getting Around Poll",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Getting_Around_Poll",
+    pollNum: "260",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should the Revenant Cave Teleport scroll allow players to select different cave entrances, as described in the blog?",
+        yesPct: 82.4, noPct: 17.6, yesVotes: 71708, noVotes: 15367, totalVotes: 102787
+      }
+    ]
+  },
+
+  // 2026 - Gathering Efficiencies
+  {
+    date: "2026-04-09",
+    dateDisplay: "9 Apr 2026",
+    title: "Gathering Efficiencies & More Lock-in Poll",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Gathering_Efficiencies_%26_More_Lock-in_Poll",
+    pollNum: "264",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should we allow the Expert Mining Gloves\' chance to prevent ore depletion apply to Runite Golems found in the Wilderness Resource Area? This effect already applies to Runite rocks.",
+        yesPct: 86.1, noPct: 13.9, yesVotes: 60699, noVotes: 9817, totalVotes: 77635
+      },
+      {
+        text: "Should we allow players to have a chance to receive additional Runite ore when successfully mining from a Runite Golem, scaling up with Wilderness Achievement Diary tier completion, as described in the blog?",
+        yesPct: 83.9, noPct: 16.1, yesVotes: 59848, noVotes: 11454, totalVotes: 77635
+      }
+    ]
+  },
+
+  // ─── 2016 ────────────────────────────────────────────────────────────────
+  {
+    date: "2016-05-26",
+    dateDisplay: "26 May 2016",
+    title: "Last Man Standing - PvP Minigame",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Last_Man_Standing_-_PvP_Minigame",
+    pollNum: null,
+    threshold: 75,
+    questions: [
+      {
+        text: "Should the Last Man Standing minigame be introduced into Old School RuneScape as described in the developer blog?",
+        yesPct: 87.6, noPct: 12.4, yesVotes: 35100, noVotes: 4962, totalVotes: 42000
+      }
+    ]
+  },
+
+  // ─── 2019 ────────────────────────────────────────────────────────────────
+  {
+    date: "2019-08-16",
+    dateDisplay: "16 Aug 2019",
+    title: "Last Man Standing Rewards Poll",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Last_Man_Standing_Rewards_Poll_Blog",
+    pollNum: null,
+    threshold: 75,
+    questions: [
+      {
+        text: "Should the LMS Reward shop offer a deadman cosmetic armour as described in the blog? This armour set will include the top, bottoms, and cape and will have no stats.",
+        yesPct: 81.1, noPct: 18.9, yesVotes: 20432, noVotes: 4773, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer trouver parchment as described in the blog?",
+        yesPct: 75.8, noPct: 24.2, yesVotes: 17650, noVotes: 5637, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Armadyl Halo as described in the blog?",
+        yesPct: 80.9, noPct: 19.1, yesVotes: 20126, noVotes: 4751, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Bandos Halo as described in the blog?",
+        yesPct: 80.8, noPct: 19.2, yesVotes: 20119, noVotes: 4778, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Seren Halo as described in the blog?",
+        yesPct: 79.4, noPct: 20.6, yesVotes: 19712, noVotes: 5129, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Ancient Halo as described in the blog?",
+        yesPct: 80.7, noPct: 19.3, yesVotes: 20071, noVotes: 4801, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Brassica Halo as described in the blog?",
+        yesPct: 77.6, noPct: 22.4, yesVotes: 19227, noVotes: 5564, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer a 3 Speed 1-Handed Weapon as described in the blog? This item will have no stats.",
+        yesPct: 75.2, noPct: 24.8, yesVotes: 18556, noVotes: 6122, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer a Guthixian Icon as described in the blog? This icon, when given to Juna, will allow the player to get it infused to the Staff of the Dead creating the Staff of Balance.",
+        yesPct: 78.2, noPct: 21.8, yesVotes: 19464, noVotes: 5426, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer combat XP Rewards as described in the blog? These will be similar to the Combat XP rewards from Pest Control but offer slightly less XP.",
+        yesPct: 74.5, noPct: 25.5, yesVotes: 18785, noVotes: 6418, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the ability to exchange points, similar to the Barbarian Assault point exchange system, as described in the blog?",
+        yesPct: 73.9, noPct: 26.1, yesVotes: 18510, noVotes: 6526, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the Rune Berserker shield as described in the blog? This shield will be tradeable and will degrade. It can be recharged with a token purchased from the LMS Reward Shop.",
+        yesPct: 70.4, noPct: 29.6, yesVotes: 17283, noVotes: 7281, totalVotes: 27505
+      },
+      {
+        text: "Should the LMS Reward shop offer the upgradeable cosmetic capes as described in the blog? These capes will represent a set amount of LMS games the player has won.",
+        yesPct: 82.2, noPct: 17.8, yesVotes: 20735, noVotes: 4499, totalVotes: 27505
+      }
+    ]
+  },
+  {
+    date: "2019-09-09",
+    dateDisplay: "9 Sep 2019",
+    title: "Last Man Standing: More Rewards",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Last_Man_Standing:_More_Rewards",
+    pollNum: null,
+    threshold: 75,
+    questions: [
+      {
+        text: "Should we add tradeable imbue scrolls to the LMS Reward Shop? This will be an alternative way of imbuing rings to what NMZ offers.",
+        yesPct: 61.8, noPct: 38.2, yesVotes: 16301, noVotes: 10077, totalVotes: 27850
+      },
+      {
+        text: "Should we add a tradeable teleport tablet that teleports you to level 33 Wilderness to the LMS Reward Shop?",
+        yesPct: 76.3, noPct: 23.7, yesVotes: 19914, noVotes: 6196, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase a token from the LMS Reward Shop as described in the blog? This tradeable token will allow players to reset the number of spell book switches on the magic and max capes.",
+        yesPct: 61.4, noPct: 38.6, yesVotes: 15581, noVotes: 9782, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase a dragon\'s tear from the LMS Reward shop as described in the blog? When used with a Staff of the Dead, the staff will have identical stats but with a special attack that fires a magical fireball, costing 65% special attack.",
+        yesPct: 69.3, noPct: 30.7, yesVotes: 17722, noVotes: 7845, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase an unskulling scroll from the LMS Reward shop as described in the blog? This scroll will be tradeable and can only be used once outside the Wilderness and in safe areas when not in combat on PvP worlds.",
+        yesPct: 64.0, noPct: 36.0, yesVotes: 16566, noVotes: 9332, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase an amulet of avarice upgrade from the LMS Reward shop as described in the blog? This upgraded amulet will allow players to use the Protect Item prayer without draining prayer points.",
+        yesPct: 64.5, noPct: 35.5, yesVotes: 16566, noVotes: 9114, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase an Elder maul attachment from the LMS Reward shop as described in the blog? When attached to the Elder maul, it will add +3 Strength bonus and +10 Crush Attack bonus.",
+        yesPct: 68.8, noPct: 31.2, yesVotes: 17761, noVotes: 8053, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase the Thammaron\'s Set from the LMS Reward shop as described in the blog? This set will include the top, bottoms, and hood and will require 60 Magic to equip.",
+        yesPct: 70.5, noPct: 29.5, yesVotes: 17850, noVotes: 7483, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase a Runic Orb of Binding from the LMS Reward shop? This orb is charged with Nature, Earth, and Water runes and runes stored are lost on PK death.",
+        yesPct: 62.8, noPct: 37.2, yesVotes: 15746, noVotes: 9315, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase a Runic Orb of Teleblock from the LMS Reward shop? This orb is charged with Law, Chaos, and Death runes and runes stored are lost on PK death.",
+        yesPct: 58.3, noPct: 41.7, yesVotes: 14649, noVotes: 10489, totalVotes: 27850
+      },
+      {
+        text: "Should we add an ability to purchase an ethereum scroll from the LMS Reward shop? When combined with a bracelet of ethereum, 1000 revenant ethers and Culinaromancer gloves, creates an Unworldly Bracelet with combined stats plus ethereum bracelet effect.",
+        yesPct: 68.3, noPct: 31.7, yesVotes: 17343, noVotes: 8064, totalVotes: 27850
+      }
+    ]
+  },
+
+  // ─── 2020 ─── (Soul Wars and Poll 73 entries already above in the POLLS array)
+
+  // ─── 2024 ────────────────────────────────────────────────────────────────
+  {
+    date: "2024-07-22",
+    dateDisplay: "22 Jul 2024",
+    title: "Poll 82 - Minigame Changes",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Poll_82_-_Minigame_Changes",
+    pollNum: "82",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should we adjust mapping in Soul Wars to prevent safespotting the Blue Team\'s avatar? This change aims to avoid one team gaining an advantage this way.",
+        yesPct: 93.6, noPct: 6.4, yesVotes: 45261, noVotes: 3117, totalVotes: 60207
+      },
+      {
+        text: "Should we allow Bounty Hunter\'s unique rewards to be used in other PvP minigames such as Soul Wars, Castle Wars or Clan Wars?",
+        yesPct: 74.5, noPct: 25.5, yesVotes: 33159, noVotes: 11343, totalVotes: 60207
+      },
+      {
+        text: "Should we allow players to use Blighted Supplies in all PvP minigames, including Clan Wars and Castle Wars?",
+        yesPct: 80.4, noPct: 19.6, yesVotes: 39313, noVotes: 9578, totalVotes: 60207
+      }
+    ]
+  },
+  {
+    date: "2024-12-09",
+    dateDisplay: "9 Dec 2024",
+    title: "Poll 83 - Castle Wars, New Player Changes & More",
+    pollUrl: "https://oldschool.runescape.wiki/w/Poll:Poll_83_-_Castle_Wars,_New_Player_Changes_%26_More",
+    pollNum: "83",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should we add Reward Crates to Castle Wars, as described in the blog? These would be separate from Castle Wars Tickets and offer things like Runes, Ammunition and Blighted supplies.",
+        yesPct: 88.1, noPct: 11.9, yesVotes: 47847, noVotes: 6471, totalVotes: 61030
+      },
+      {
+        text: "On themed Castle Wars Worlds, should players be made to use the Green Portal only, to ensure balanced teams?",
+        yesPct: 85.4, noPct: 14.6, yesVotes: 44271, noVotes: 7547, totalVotes: 61030
+      },
+      {
+        text: "Should games played on themed Castle Wars worlds provide an additional Castle Wars ticket, for both wins and losses?",
+        yesPct: 90.7, noPct: 9.3, yesVotes: 49225, noVotes: 5021, totalVotes: 61030
+      },
+      {
+        text: "On worlds that aren\'t Castle Wars themed, should we allow players to place Barricades in front of respawn barriers? This is to mirror old behaviour from 2008, at the request of the Castle Wars community.",
+        yesPct: 77.3, noPct: 22.7, yesVotes: 35166, noVotes: 10306, totalVotes: 61030
+      },
+      {
+        text: "On worlds that aren\'t Castle Wars themed, should we adjust the terrain as described in the blog? This is to mirror old behaviour from 2008, at the request of the Castle Wars community.",
+        yesPct: 86.0, noPct: 14.0, yesVotes: 38618, noVotes: 6276, totalVotes: 61030
+      },
+      {
+        text: "On worlds that aren\'t Castle Wars themed, should we restore the original functionality of the Dragon Spear and Zamorakian Hasta Special Attacks? This is to mirror old behaviour from before 2016, at the request of the Castle Wars community.",
+        yesPct: 82.7, noPct: 17.3, yesVotes: 37482, noVotes: 7834, totalVotes: 61030
+      },
+      {
+        text: "Should we allow players to wear their own helmets inside Castle Wars on all worlds?",
+        yesPct: 74.4, noPct: 25.6, yesVotes: 38398, noVotes: 13207, totalVotes: 61030
+      },
+      {
+        text: "Should we adjust the healing of Castle Wars Bandages to mirror Anglerfish? This change would impact all P2P worlds.",
+        yesPct: 87.2, noPct: 12.8, yesVotes: 43464, noVotes: 6408, totalVotes: 61030
+      },
+      {
+        text: "Should we adjust the Castlewars Brew to give it additional Super Restore and Stamina Potion effects on all worlds?",
+        yesPct: 90.2, noPct: 9.8, yesVotes: 46139, noVotes: 5036, totalVotes: 61030
+      },
+      {
+        text: "Should we provide players in Castle Wars with an infinite Rune Pouch that offers \'fake XP drops\' inside the minigame?",
+        yesPct: 78.4, noPct: 21.6, yesVotes: 39026, noVotes: 10731, totalVotes: 61030
+      },
+      {
+        text: "Should we replace the Bucket spawn with a pile of buckets inside Castle Wars on all worlds?",
+        yesPct: 90.7, noPct: 9.3, yesVotes: 44924, noVotes: 4617, totalVotes: 61030
+      },
+      {
+        text: "Should we allow players to store Castle Wars Bracelet charges at Lanthas, to be used whenever a game starts, as described in the blog? This change would impact all worlds.",
+        yesPct: 89.7, noPct: 10.3, yesVotes: 42112, noVotes: 4844, totalVotes: 61030
+      },
+      {
+        text: "On Themed Castle Wars worlds, should we adjust the Barricade placement cap in Castle Wars, as described in the blog?",
+        yesPct: 84.5, noPct: 15.5, yesVotes: 35830, noVotes: 6550, totalVotes: 61030
+      }
+    ]
+  },
+
+  // 2026 - Campfire Lock-in Poll (PvP Tutorial)
+  {
+    date: "2026-05-29",
+    dateDisplay: "29 May 2026",
+    title: "The Campfire Lock-in Poll",
+    pollUrl: "https://oldschool.runescape.com/polls/2026/1758",
+    pollNum: "265",
+    threshold: 70,
+    questions: [
+      {
+        text: "Should we create a PvP Tutorial as outlined in our recent Campfire? This would be a series of interactive challenges to work on key skills like Prayer switching, gear switching, combo-eating and escaping other players, with specific details and rewards to be locked in at a later date.",
+        yesPct: 83.1, noPct: 16.9, yesVotes: 57651, noVotes: 11685, totalVotes: 75636
+      }
+    ]
   }
+
 ];
 
 // =================== UNPOLLED DATA ===================
 
 const UNPOLLED = [
   {
-    date: "2014-07-31",
-    dateDisplay: "31 Jul 2014",
-    title: "Wilderness changes - Removal of Protect Item in Wilderness above level 20",
-    description: "Protect Item prayer was removed from the Wilderness above level 20 as an integrity change, without a poll.",
-    url: "https://oldschool.runescape.wiki/w/2014",
-    blogTitle: "Old School game updates"
+    date: "2018-11-02",
+    dateDisplay: "2 Nov 2018",
+    title: "Bounty Hunter & PvP unpolled changes (Nov 2018)",
+    description: "A batch of unpolled PvP balancing changes were applied to Bounty Hunter, explicitly stated as not going to poll. Changes included: free target skipping if target lacks a Mysterious Emblem or a PvP skull; a 6-second destroy timer on Mysterious Emblems to prevent mid-fight destruction; requiring an emblem in inventory to receive one as a drop; and preventing Clan Wars portal from removing skull status during combat. Jagex cited these as balancing matters, following a positively-received prior round of unpolled PvP changes in July 2018.",
+    url: "https://oldschool.runescape.wiki/w/Update:Poll_Blog:_Bounty_Hunter_and_PvP_Changes",
+    blogTitle: "Poll Blog: Bounty Hunter and PvP Changes"
   },
   {
-    date: "2017-09-14",
-    dateDisplay: "14 Sep 2017",
-    title: "Bounty Hunter Rework - Multi-target emblems, revamp of BH worlds",
-    description: "Major rework of the Bounty Hunter system on world 318, including changes to how emblems work, multi-target assignments, and changes to the skull timer.",
-    url: "https://oldschool.runescape.wiki/w/Update:Bounty_Hunter_Changes_%26_QoL",
-    blogTitle: "Bounty Hunter Changes & QoL"
+    date: "2020-01-23",
+    dateDisplay: "23 Jan 2020",
+    title: "Bounty Hunter closed - unpolled removal",
+    description: "Bounty Hunter worlds were shut down without a poll due to widespread boosting abuse where players cooperated for quick kills to farm rewards at an unacceptable rate. Jagex stated they intended to reopen it in a modified form. All rewards were transferred to Last Man Standing in the interim.",
+    url: "https://oldschool.runescape.wiki/w/Update:The_Future_of_Bounty_Hunter_and_PvP",
+    blogTitle: "The Future of Bounty Hunter and PvP"
   },
   {
-    date: "2018-11-01",
-    dateDisplay: "1 Nov 2018",
-    title: "Revenant Caves - Change from multi to singles combat",
-    description: "Following extensive community backlash over clan monopolisation and botting, Jagex changed the Revenant Caves from multi to singles combat. This was not polled.",
-    url: "https://oldschool.runescape.wiki/w/Update:Revenants_%26_LMS",
-    blogTitle: "Revenants & Last Man Standing"
+    date: "2020-10-01",
+    dateDisplay: "1 Oct 2020",
+    title: "Revenant Caves changed from multi to singles-plus (unpolled integrity change)",
+    description: "In an explicitly unpolled integrity change, Jagex overhauled the Revenant Caves: changed from multi-combat to singles-plus, redistributed revenants throughout the caves, rebalanced drop tables (reducing the impact of being skulled on loot), and added a 100,000 GP entry fee to discourage ragging. The caves had been a multi-combat dungeon since release in 2017. Jagex cited organised clan 'protection services' and widespread RWT as the integrity problems requiring action without a poll.",
+    url: "https://oldschool.runescape.wiki/w/Update:Revenant_Caves_Proposal",
+    blogTitle: "Revenant Caves Proposal"
   },
   {
-    date: "2019-02-07",
-    dateDisplay: "7 Feb 2019",
-    title: "Revenant Caves - Multi combat restored following community feedback",
-    description: "Multi combat was restored to the Revenant Caves after singles caused player numbers to drop dramatically. The change was not polled.",
-    url: "https://oldschool.runescape.wiki/w/2019",
-    blogTitle: "Game update: Revenant Caves adjustment"
-  },
-  {
-    date: "2019-08-22",
-    dateDisplay: "22 Aug 2019",
-    title: "PJ Timer added to the Wilderness",
-    description: "A PJ (player jumping) timer was added to single-way combat Wilderness zones, preventing players from attacking someone already in combat for a set period. Implemented unpolled as a game integrity change.",
-    url: "https://oldschool.runescape.wiki/w/Update:PvP_Improvements_%26_QoL",
-    blogTitle: "PvP Improvements & QoL"
-  },
-  {
-    date: "2021-01-06",
-    dateDisplay: "6 Jan 2021",
-    title: "Wilderness Changes: Singles Plus removed, PJ Timer adjusted",
-    description: "Changes to singles combat rules in the Wilderness, including removal of Singles Plus from certain areas and adjustments to the PJ Timer. Partially unpolled.",
-    url: "https://oldschool.runescape.wiki/w/Update:Wilderness_Changes",
-    blogTitle: "Wilderness Changes"
-  },
-  {
-    date: "2021-09-01",
-    dateDisplay: "1 Sep 2021",
-    title: "Loot Keys introduced to the Wilderness",
-    description: "Loot Keys were added to the Wilderness, allowing players to store items killed from other players in a key that can be opened later. Introduced as an integrity and QoL improvement, not polled.",
-    url: "https://oldschool.runescape.wiki/w/Update:Loot_Keys_%26_Wilderness_Improvements",
-    blogTitle: "Loot Keys & Wilderness Improvements"
-  },
-  {
-    date: "2022-01-19",
-    dateDisplay: "19 Jan 2022",
-    title: "Wilderness Changes (Unpolled): PJ Timer, Skull Timer, Anti-luring measures",
-    description: "As part of the controversial Wilderness Rework update, Jagex rolled out several unpolled changes including adjustments to PJ timers, skull timers, and protections against luring, simultaneously with the controversial removal of several Wilderness features that had been polled.",
-    url: "https://oldschool.runescape.wiki/w/Update:Wilderness_Changes_(2022)",
-    blogTitle: "Wilderness Changes (2022)"
-  },
-  {
-    date: "2022-01-19",
-    dateDisplay: "19 Jan 2022",
-    title: "Reverted Wilderness changes - Loot keys made free, GWD dungeon in Wilderness removed",
-    description: "After severe community backlash against the mobile-related Wilderness rework of January 2022, Jagex reverted several changes and re-polled parts of the update. The GWD dungeon added in 2014 was subsequently removed.",
-    url: "https://oldschool.runescape.wiki/w/Update:Wilderness_Changes_(2022)#Reversion",
-    blogTitle: "Wilderness Rework Reversion"
-  },
-  {
-    date: "2022-03-10",
-    dateDisplay: "10 Mar 2022",
-    title: "PvP Arena (Emir's Arena) released - unpolled game mode",
-    description: "The PvP Arena was introduced as a new PvP minigame. The mode itself was released without a poll, though rewards were subsequently polled separately. It replaced the old 1v1 Duel Arena.",
-    url: "https://oldschool.runescape.wiki/w/PvP_Arena",
-    blogTitle: "PvP Arena & Duel Arena Replacement"
-  },
-  {
-    date: "2023-08-09",
-    dateDisplay: "9 Aug 2023",
-    title: "Bounty Hunter re-released (unpolled relaunch)",
-    description: "Bounty Hunter was relaunched after its removal in 2021. The core minigame relaunch was not polled (only the rewards were, via the April 2023 poll). This was treated as a return of existing content.",
+    date: "2021-01-13",
+    dateDisplay: "13 Jan 2021",
+    title: "Bounty Hunter fully removed from the game",
+    description: "All emblems and reward shops from all iterations of Bounty Hunter (except Deadman worlds) were removed from the live game. This followed the January 2020 closure due to boosting. BH remained inactive for over two years before its redesign and relaunch in 2023.",
     url: "https://oldschool.runescape.wiki/w/Bounty_Hunter",
-    blogTitle: "Bounty Hunter Return"
+    blogTitle: "Bounty Hunter (OSRS Wiki - history section)"
   },
   {
-    date: "2023-11-22",
-    dateDisplay: "22 Nov 2023",
-    title: "PJ Timer - Adjustments to edge cases",
-    description: "Multiple small adjustments to PJ timer behavior in edge cases around freezes, teleports, and monster aggression in the Wilderness, implemented as game integrity/QoL changes without polling.",
-    url: "https://oldschool.runescape.wiki/w/2023",
-    blogTitle: "Game updates 2023"
+    date: "2021-06-24",
+    dateDisplay: "24 Jun 2021",
+    title: "Wilderness Changes blog - unpolled changes proposed and delivered",
+    description: "Jagex published a Wilderness Changes blog explicitly stating the included changes would not be polled, citing them as long-standing balancing matters. The changes included: Loot Keys (a purchasable permanent unlock replacing ground drops with a key item, initially priced at 5M GP then later reduced to 1M); an anti-skull-tricking change preventing players from losing their skull mid-combat; and a delay on Fountain of Rune logout abuse. The Loot Keys system went live on 23 February 2022 alongside the Nex release.",
+    url: "https://oldschool.runescape.wiki/w/Update:Wilderness_Changes",
+    blogTitle: "Wilderness Changes (June 2021 blog)"
   },
   {
-    date: "2024-04-17",
-    dateDisplay: "17 Apr 2024",
-    title: "Undead Pirates added to Chaos Temple - partial release",
-    description: "The Chaos Temple Undead Pirates update released following the Winter Summit 2024 poll. Some aspects of drop tables and spawn mechanics were adjusted post-release without further polling, under QoL/balance provisions.",
-    url: "https://oldschool.runescape.wiki/w/Update:Undead_Pirates",
-    blogTitle: "Undead Pirates at the Chaos Temple"
+    date: "2022-03-09",
+    dateDisplay: "9 Mar 2022",
+    title: "PJ Timer added to the Wilderness (unpolled)",
+    description: "The full player and NPC PJ Timer was added to all single-way and singles-plus areas of the Wilderness without a poll, framed as a game integrity and balancing change. The timer gives a 12-second grace period after PvP combat in which neither participant can be attacked by a third party. NPCs also now respect the PJ Timer. The timer is inactive on worlds 318 and 319 (Bounty Hunter target worlds). A beta for these changes ran in December 2021.",
+    url: "https://oldschool.runescape.wiki/w/Update:PJ_Timer_%26_New_Broadcast_Settings",
+    blogTitle: "PJ Timer & New Broadcast Settings"
   },
   {
-    date: "2024-10-02",
-    dateDisplay: "2 Oct 2024",
-    title: "Wilderness Slayer - Larran's key made tradeable (unpolled)",
-    description: "Larran's keys were made tradeable without a poll, as the primary intent was to combat the scamming that occurred when players 'sold' keys by allowing buyers to kill them for the stack.",
+    date: "2022-07-06",
+    dateDisplay: "6 Jul 2022",
+    title: "PvP Arena / Emir's Arena launched - game mode unpolled",
+    description: "The PvP Arena (Emir's Arena) was launched as a direct replacement for the Duel Arena, which was removed due to persistent Real World Trading and scamming. The game mode itself was not polled - only its rewards were polled separately (both the original PvP Arena Rewards poll and PvP Arena Rewards v2 ran before launch). The arena introduced ranked matchmaking, preset loadouts, and separated PvP combat from the Wilderness entirely for structured duels. Soft-launched 6 July 2022, fully launched 13 July 2022.",
+    url: "https://oldschool.runescape.wiki/w/Update:The_PvP_Arena",
+    blogTitle: "The PvP Arena (launch blog, Feb 2022)"
+  },
+  {
+    date: "2023-04-19",
+    dateDisplay: "19 Apr 2023",
+    title: "Larran's key made tradeable (unpolled anti-scam change)",
+    description: "Larran's keys were made tradeable without a poll. The Poll 79 blog stated: \"We\'re not polling this one since its primary intent is to combat scamming.\" Previously, players had been \'selling\' their keys by accepting GP and then allowing buyers to kill them for a stack of keys - an extra step that left players vulnerable to scammers. Making them directly tradeable closed that loophole.",
     url: "https://oldschool.runescape.wiki/w/Update:Poll_79:_Point-based_Combat_Achievements_%26_more!",
-    blogTitle: "Poll 79 update notes - unpolled change"
+    blogTitle: "Poll 79: Point-based Combat Achievements & more!"
+  },
+  {
+    date: "2023-05-24",
+    dateDisplay: "24 May 2023",
+    title: "Bounty Hunter relaunched (unpolled game mode relaunch)",
+    description: "Bounty Hunter returned as a redesigned minigame at Daimon's Crater in Ferox Enclave, over two years after its removal. The core minigame was not polled - only the rewards had been polled in April 2023 (the Bounty Hunter Rewards Poll). The new version features honour PvP with risk-based skull tiers, preset supply crates, and no Mysterious Emblems. Jagex positioned it as an entry point for new PvP players.",
+    url: "https://oldschool.runescape.wiki/w/Update:Bounty_Hunter_is_Back!",
+    blogTitle: "Bounty Hunter is Back!"
+  },
+  {
+    date: "2026-05-27",
+    dateDisplay: "27 May 2026",
+    title: "LMS reward shop locked behind 1 win requirement (unpolled)",
+    description: "Players must now win at least one game of Last Man Standing before they can purchase any tradeable items from Justine's Stuff for the Last Shopper Standing. Players who have not won a game can still purchase untradeable items from the shop. This change was implemented without a poll as an integrity measure targeting reward farming without genuine PvP engagement.",
+    url: "https://oldschool.runescape.wiki/w/Update:Changes_to_Sailing_%26_LMS_Rewards_Eligibility",
+    blogTitle: "Changes to Sailing & LMS Rewards Eligibility"
+  },
+  {
+    date: "2026-05-27",
+    dateDisplay: "27 May 2026",
+    title: "Wilderness PvP death window reduced to 30 seconds (unpolled)",
+    description: "If a player dies without having been in combat with another player within the last 30 seconds, their death is now treated as a PvM death rather than a PvP death - even if they were attacked by a player earlier. This means the PKer no longer receives their loot and the player's items go to a gravestone or Death instead. Intended to prevent cases where players were attacked, forgot they had been in combat, continued PvMing, then lost all items to a PvP death unexpectedly. Applies to all account types.",
+    url: "https://oldschool.runescape.wiki/w/Update:Changes_to_Sailing_%26_LMS_Rewards_Eligibility",
+    blogTitle: "Changes to Sailing & LMS Rewards Eligibility"
   }
 ];
 
@@ -1220,7 +1587,8 @@ function buildQuestionList() {
 function setSort(mode) {
   currentSort = mode;
   document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + mode).classList.add('active');
+  const btn = document.getElementById('btn-' + mode);
+  if (btn) btn.classList.add('active');
   renderPolls();
 }
 
@@ -1260,6 +1628,14 @@ function getSortedQuestions() {
       const pb = b.question.yesPct ?? 0;
       return pb - pa;
     });
+  } else if (currentSort === 'votes-desc') {
+    qs.sort((a, b) => (b.question.totalVotes ?? 0) - (a.question.totalVotes ?? 0));
+  } else if (currentSort === 'votes-asc') {
+    qs.sort((a, b) => (a.question.totalVotes ?? 0) - (b.question.totalVotes ?? 0));
+  } else if (currentSort === 'skips-desc') {
+    qs.sort((a, b) => (b.question.skipped ?? 0) - (a.question.skipped ?? 0));
+  } else if (currentSort === 'skips-asc') {
+    qs.sort((a, b) => (a.question.skipped ?? 0) - (b.question.skipped ?? 0));
   }
   return qs;
 }
@@ -1269,7 +1645,7 @@ function renderPolls() {
   const sorted = getSortedQuestions();
 
   // Group by poll for display (when date-sorted) or show flat list for pct sort
-  const isPctSort = currentSort === 'pct-asc' || currentSort === 'pct-desc';
+  const isPctSort = currentSort === 'pct-asc' || currentSort === 'pct-desc' || currentSort === 'votes-desc' || currentSort === 'votes-asc' || currentSort === 'skips-desc' || currentSort === 'skips-asc';
 
   let html = '';
   let totalQ = sorted.length;
@@ -1311,21 +1687,24 @@ function renderPolls() {
     // Flat list with poll name shown per question
     sorted.forEach(item => {
       const q = item.question;
-      const status = getPassStatus(q);
+      const status = getPassStatus(q, item.threshold);
       if (status === 'passed') passedQ++;
+      const flatThrLabel = (item.threshold || 70) === 75 ? '75% pass threshold (pre-Oct 2022)' : '70% pass threshold (post-Oct 2022)';
+      const flatThrClass = (item.threshold || 70) === 75 ? 'thr-75' : 'thr-70';
       html += '<div class="poll-group" style="margin-bottom:10px;">';
       html += '<div class="poll-group-header">';
       html += '<div>';
       html += '<div class="poll-group-title" style="font-size:15px;color:#c0a870">' + escHtml(item.pollTitle) + '</div>';
+      html += '<div class="poll-group-meta">Source: <a href="' + item.pollUrl + '" target="_blank">oldschool.runescape.com</a> &bull; <a href="' + item.pollWikiUrl + '" target="_blank">OSRS Wiki</a> &bull; <span class="era-badge ' + flatThrClass + '">' + flatThrLabel + '</span></div>';
       html += '</div>';
       html += '<div class="poll-date-badge">' + item.pollDateDisplay + '</div>';
       html += '</div>';
-      html += renderQuestion(q, status);
+      html += renderQuestion(q, status, item.threshold);
       html += '</div>';
     });
   }
 
-  container.innerHTML = html || '<div style="padding:24px;color:var(--muted);text-shadow:1px 1px 0 #000;">No questions match your search.</div>';
+  container.innerHTML = html || '<div style="padding:24px;color:#c0a870;font-size:16px;text-shadow:1px 1px 0 #000;">No questions match your search.</div>';
 
   // Update stats
   const yesNoQs = sorted.filter(i => !i.question.multi && i.question.yesPct != null);
@@ -1407,10 +1786,80 @@ function escHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+const SCRAPPED = [
+  {
+    era: "Jun 2021 - Mar 2022",
+    title: "Replacing all Wilderness single-way combat with singles-plus",
+    description: "The June 2021 Wilderness Changes blog proposed converting every single-way combat area in the Wilderness to singles-plus (where PvP always takes priority over NPC combat) alongside a PJ Timer. Following significant community feedback against the blanket change, Jagex opted for a different solution: the PJ Timer alone was added in March 2022, applied to all single-way and singles-plus areas, while the rest of the Wilderness kept its standard single-way rules. The proposal to convert all single-way areas was dropped without a poll.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Update:Wilderness_Changes",
+    proposalTitle: "Wilderness Changes (June 2021 blog)",
+    cancellationUrl: "https://oldschool.runescape.wiki/w/Update:PJ_Timer_%26_New_Broadcast_Settings",
+    cancellationTitle: "PJ Timer & New Broadcast Settings (March 2022) - states the original singles-plus plan was replaced"
+  },
+  {
+    era: "Feb 2022",
+    title: "PvP Arena: Thaw Potion (scrapped reward, never polled)",
+    description: "The original PvP Arena reward blog (February 2022) proposed a Thaw Potion, created by combining an unfinished dwarf weed potion with a white lily and a flame rose. Drinking it would grant 10 seconds of immunity to spells that bind players in place (Snare, Ice spells), usable once every two minutes. It was dropped from the proposal before any poll was held and does not appear in either the Rewards Beta or the PvP Arena Rewards v2 poll.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Emir%27s_Arena#Scrapped_rewards",
+    proposalTitle: "Emir's Arena wiki page - Scrapped rewards section"
+  },
+  {
+    era: "Feb 2022",
+    title: "PvP Arena: Amulet of Souls (scrapped reward, never polled)",
+    description: "Also proposed in the February 2022 PvP Arena blog: an Amulet of Souls combining an amulet of fury, an onyx, and an amulet of souls scroll. Usable only in the Wilderness, it would be charged with death and soul runes. When charged, it would resurrect the wearer with 5 HP if they took a killing blow, curing poison and venom - but only once every 15 minutes. Dropped from the proposal before polling.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Emir%27s_Arena#Scrapped_rewards",
+    proposalTitle: "Emir's Arena wiki page - Scrapped rewards section"
+  },
+  {
+    era: "Feb 2022",
+    title: "PvP Arena: Wristbands of the Arena / Humble Chivalry & Piety / Wilderness teleport item (scrapped, never polled)",
+    description: "Three further PvP Arena reward categories were proposed in the February 2022 launch blog but dropped before any poll. Wristbands of the Arena would have given Barrows Gloves equivalent stats at only 20 Defence (PvP-only). Humble Chivalry and Humble Piety were lesser prayer variants with a 40 Defence requirement. A new left-click teleport item was proposed as an alternative to the Royal Seed Pod, usable up to level 30 Wilderness. All three were cut before the Rewards Beta and never appeared on a poll. Concept art for the Wristbands exists and is referenced on the Emir's Arena wiki page.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Update:The_PvP_Arena",
+    proposalTitle: "The PvP Arena (launch blog, Feb 2022)"
+  },
+  {
+    era: "Oct 2020",
+    title: "Roaming Revenants (considered, dropped before polling)",
+    description: "During the 2020 Revenant Caves crisis, Jagex considered making Revenants roam throughout the wider Wilderness (similar to their original 2007 design) rather than being confined to the caves. The Revenant Caves Proposal blog explicitly stated: 'We've decided not to move forward with roaming revenants.' Reasons given were that roaming revenants would be annoying for PvM players and PKers alike, and that clans capable of dominating the caves could likely dominate rotating spawn points too. The idea was dropped in favour of the unpolled singles-plus conversion of the caves.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Update:Revenant_Caves_Proposal",
+    proposalTitle: "Revenant Caves Proposal (Oct 2020)"
+  },
+  {
+    era: "Sep 2024 - Nov 2024",
+    title: "Wrathmaw (Wilderness World Boss) and Sandmaw - failed poll, then shelved",
+    description: "Wrathmaw was announced at the Summer Summit 2024 as Old School's first-ever Wilderness World Boss - a tanky, roaming boss on a set timer intended to create scheduled PvP hotspots similar to Deadman's Breaches. It failed its Greenlight poll with only 49.1% support (below the 70% threshold). Jagex attempted a redesign in September 2024, also proposing a desert version called Sandmaw. On 5 November 2024, Jagex officially shelved both Wrathmaw and Sandmaw, stating they would instead focus on improving existing PvP activities.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Wrathmaw",
+    proposalTitle: "Wrathmaw (OSRS Wiki)",
+    cancellationUrl: "https://oldschool.runescape.wiki/w/Update:PvP_Survey,_Wrathmaw,_Bounty_Hunter_Changes_%26_More!",
+    cancellationTitle: "PvP Survey, Wrathmaw, Bounty Hunter Changes & More! (Nov 2024) - shelving announced"
+  }
+];
+
+function renderScrapped() {
+  const container = document.getElementById('scrapped-container');
+  if (!container) return;
+  let html = '';
+  SCRAPPED.forEach(s => {
+    html += '<div class="scrapped-entry">';
+    html += '<div class="scrapped-era">' + escHtml(s.era) + '</div>';
+    html += '<div class="unpolled-title">' + escHtml(s.title) + '</div>';
+    html += '<div class="unpolled-desc">' + escHtml(s.description) + '</div>';
+    html += '<div style="margin-top:8px;display:flex;gap:16px;flex-wrap:wrap;">';
+    html += '<a class="unpolled-link" href="' + s.proposalUrl + '" target="_blank">Proposal source: ' + escHtml(s.proposalTitle) + ' &#8594;</a>';
+    if (s.cancellationUrl) {
+      html += '<a class="unpolled-link" href="' + s.cancellationUrl + '" target="_blank">Cancellation source: ' + escHtml(s.cancellationTitle) + ' &#8594;</a>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
 // Init
 buildQuestionList();
 renderPolls();
 renderUnpolled();
+renderScrapped();
 
 // Back to top
 (function(){
