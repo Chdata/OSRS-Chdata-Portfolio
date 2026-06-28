@@ -56,7 +56,6 @@ body {
 
 .hero {
   background:
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(180,130,30,0.08) 0%, transparent 70%),
     linear-gradient(180deg, #181208 0%, #0e0c08 100%);
   padding: 52px 24px 44px;
   text-align: center;
@@ -178,6 +177,52 @@ body {
 }
 .sort-btn:hover { border-color: var(--gold); color: var(--gold); }
 .sort-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(200,144,58,0.1); }
+
+/* Section index / jump nav */
+.page-nav {
+  background: linear-gradient(180deg, #181208 0%, var(--stone) 100%);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 14px 18px;
+  margin-bottom: 30px;
+}
+.page-nav-label {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 0 #000;
+}
+.page-nav-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.page-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.page-nav-link:hover { border-color: var(--gold-hi); color: var(--gold-hi); background: rgba(200,144,58,0.08); }
+.page-nav-num {
+  font-size: 12px;
+  color: var(--amber);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 6px;
+  opacity: 0.85;
+}
+.section-label, #poll-section, #unpolled-section, #scrapped-section, #chdata-analysis, #analysis-section { scroll-margin-top: 18px; }
 
 .filter-input {
   background: var(--card-bg);
@@ -447,7 +492,6 @@ footer {
   letter-spacing: .06em;
   color: #1a1208;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,.5);
 }
 
 @media (max-width: 600px) {
@@ -458,6 +502,128 @@ footer {
 }
 
 .hidden { display: none !important; }
+
+.category-section-header {
+  border-radius: 3px;
+  padding: 10px 18px;
+  margin: 28px 0 16px;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #000;
+  border-left: 4px solid;
+}
+.cat-header-balance {
+  background: rgba(80,20,10,0.35);
+  border-color: #c05040;
+  color: #e07060;
+}
+.cat-header-content {
+  background: rgba(20,70,20,0.35);
+  border-color: #4a9040;
+  color: #70c060;
+}
+.cat-header-other {
+  background: rgba(30,40,80,0.35);
+  border-color: #4060b0;
+  color: #7090d0;
+}
+.cat-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: middle;
+  text-shadow: none;
+}
+.cat-badge-balance { background: rgba(80,20,10,0.7); color: #e07060; border: 1px solid #7a2010; }
+.cat-badge-content { background: rgba(20,70,20,0.7); color: #70c060; border: 1px solid #2a6010; }
+.cat-badge-other { background: rgba(30,40,80,0.7); color: #7090d0; border: 1px solid #204070; }
+
+/* OVERALL STATS BOX */
+.overall-stats-box {
+  background: var(--stone);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.overall-stats-title {
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.overall-stats-grid {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.overall-stat-cell {
+  flex: 1;
+  min-width: 220px;
+  padding: 0 20px;
+}
+
+.overall-stat-cell:first-child {
+  padding-left: 0;
+}
+
+.overall-stat-divider {
+  width: 1px;
+  background: var(--brick);
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.overall-stat-label {
+  font-size: 14px;
+  color: var(--muted);
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.overall-stat-value {
+  font-size: 19px;
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.overall-stat-pct {
+  font-size: 30px;
+  text-shadow: 2px 2px 0 #000;
+  font-weight: bold;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+
+.overall-stat-note {
+  font-size: 15px;
+  color: #c0a870;
+  text-shadow: 1px 1px 0 #000;
+  line-height: 1.5;
+}
+
+.pvp-color { color: #c05040; }
+.nonpvp-color { color: #70c060; }
+.all-color { color: var(--gold); }
+
+@media (max-width: 700px) {
+  .overall-stats-grid { flex-direction: column; gap: 16px; }
+  .overall-stat-divider { display: none; }
+  .overall-stat-cell { padding: 0; }
+}
 </style>
 </head>
 <body>
@@ -474,7 +640,19 @@ footer {
 
 <main class="main">
 
-  <div class="section-label">About This Page</div>
+  <nav class="page-nav" aria-label="Section index">
+    <div class="page-nav-label">Jump to Section</div>
+    <div class="page-nav-links">
+      <a class="page-nav-link" href="#" onclick="jumpTo('about-section');return false;"><span class="page-nav-num">1</span>About</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('poll-section');return false;"><span class="page-nav-num">2</span>Polled Questions</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('unpolled-section');return false;"><span class="page-nav-num">3</span>Unpolled Changes</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('scrapped-section');return false;"><span class="page-nav-num">4</span>Proposed Then Dropped</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('chdata-analysis');return false;"><span class="page-nav-num">5</span>Chdata's Analysis</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('analysis-section');return false;"><span class="page-nav-num">6</span>AI Data Analysis</a>
+    </div>
+  </nav>
+
+  <div class="section-label" id="about-section">About This Page</div>
   <div class="section-title">How to Use This Reference</div>
 
   <div class="context-box">
@@ -492,6 +670,79 @@ footer {
     <div class="section-label">Polled Questions</div>
     <div class="section-title">PvP &amp; Wilderness Poll History</div>
 
+    <div class="overall-stats-box">
+      <div class="overall-stats-title">OSRS Poll Universe &mdash; All Questions, 2013&ndash;2026</div>
+      <div class="overall-stats-grid">
+        <div class="overall-stat-cell">
+          <div class="overall-stat-label">PvP &amp; Wilderness questions</div>
+          <div class="overall-stat-value pvp-color">108 / 178 passed</div>
+          <div class="overall-stat-pct pvp-color">60.7%</div>
+          <div class="overall-stat-note">at applicable threshold (75% pre-Oct 2022, 70% after)</div>
+        </div>
+        <div class="overall-stat-divider"></div>
+        <div class="overall-stat-cell">
+          <div class="overall-stat-label">Non-PvP questions (all other polls)</div>
+          <div class="overall-stat-value nonpvp-color">1,355 / 1,504 passed</div>
+          <div class="overall-stat-pct nonpvp-color">90.1%</div>
+          <div class="overall-stat-note">across ~250+ polls covering skills, quests, bosses, and QoL</div>
+        </div>
+        <div class="overall-stat-divider"></div>
+        <div class="overall-stat-cell">
+          <div class="overall-stat-label">All poll questions combined</div>
+          <div class="overall-stat-value all-color">1,463 / 1,682 passed</div>
+          <div class="overall-stat-pct all-color">87.0%</div>
+          <div class="overall-stat-note">178 of 1,682 total questions are PvP (10.6%) &mdash; PvP pass rate is ~30 percentage points below the game-wide average</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="category-defs-box" style="background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:20px 24px;margin-bottom:20px;">
+      <div style="font-size:15px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;text-shadow:1px 1px 0 #000;">Question Type Breakdown</div>
+      <div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
+
+        <div style="flex:1;min-width:220px;padding:0 20px 0 0;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#e07060;text-shadow:1px 1px 0 #000;font-weight:bold;">Balance Changes</span>
+            <span class="cat-badge cat-badge-balance">Balance</span>
+          </div>
+          <div id="cat-stat-balance" style="font-size:18px;color:#e07060;text-shadow:1px 1px 0 #000;margin-bottom:6px;">-</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:10px;">Changes that favour one side or alter how PvP interactions work - skull mechanics, drop visibility, combat rules, Teleblock, PJ timing. These tend to fail polls and often require integrity updates to push through.</div>
+          <button class="sort-btn" onclick="bumpCategory('balance')">Bump to top</button>
+        </div>
+
+        <div style="width:1px;background:var(--brick);flex-shrink:0;align-self:stretch;margin:0 20px;"></div>
+
+        <div style="flex:1;min-width:220px;padding:0 20px;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#70c060;text-shadow:1px 1px 0 #000;font-weight:bold;">Content Changes</span>
+            <span class="cat-badge cat-badge-content">Content</span>
+          </div>
+          <div id="cat-stat-content" style="font-size:18px;color:#70c060;text-shadow:1px 1px 0 #000;margin-bottom:6px;">-</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:10px;">New content, minigames, enemies, items, and Wilderness additions that don't directly change the PvMer vs PKer interaction. Both sides benefit equally. These tend to pass polls as long as the design is solid.</div>
+          <button class="sort-btn" onclick="bumpCategory('content')">Bump to top</button>
+        </div>
+
+        <div style="width:1px;background:var(--brick);flex-shrink:0;align-self:stretch;margin:0 20px;"></div>
+
+        <div style="flex:1;min-width:220px;padding:0 0 0 20px;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#7090d0;text-shadow:1px 1px 0 #000;font-weight:bold;">Other Changes</span>
+            <span class="cat-badge cat-badge-other">Other</span>
+          </div>
+          <div id="cat-stat-other" style="font-size:18px;color:#7090d0;text-shadow:1px 1px 0 #000;margin-bottom:6px;">-</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:10px;">UI, overlays, QoL, world management, and changes that don't fit neatly into either category - K/D tracking, warning messages, Shard Share, combat XP rewards, obelisk behaviour.</div>
+          <button class="sort-btn" onclick="bumpCategory('other')">Bump to top</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+      <label style="color:var(--gold);font-size:15px;text-shadow:1px 1px 0 #000;">View mode:</label>
+      <button class="sort-btn active" id="btn-view-all" onclick="setViewMode('all')">All questions (merged)</button>
+      <button class="sort-btn" id="btn-view-split" onclick="setViewMode('split')">Split by type (Balance / Content / Other)</button>
+    </div>
+
     <div class="controls-bar">
       <label>Sort by:</label>
       <button class="sort-btn active" id="btn-date" onclick="setSort('date')">Date (oldest first)</button>
@@ -502,18 +753,20 @@ footer {
       <button class="sort-btn" id="btn-votes-asc" onclick="setSort('votes-asc')">Total votes (fewest first)</button>
       <button class="sort-btn" id="btn-skips-desc" onclick="setSort('skips-desc')">Skip votes (most first)</button>
       <button class="sort-btn" id="btn-skips-asc" onclick="setSort('skips-asc')">Skip votes (fewest first)</button>
+      <button class="sort-btn" id="btn-near-threshold" onclick="setSort('near-threshold')">Near miss (closest to threshold)</button>
+      <button class="sort-btn" id="btn-split" onclick="setSort('split')">Most split (closest to 50/50)</button>
       <input class="filter-input" type="text" id="searchbox" placeholder="Search questions..." oninput="filterPolls()">
     </div>
 
     <div class="stats-bar" id="stats-bar">
-      <span>Showing <strong id="visible-count">0</strong> questions from <strong id="visible-polls">0</strong> polls</span>
+      <span>Showing <strong id="visible-count">0</strong> from <strong id="visible-polls">0</strong> polls</span>
       <span>Pass rate: <strong id="pass-rate">-</strong></span>
     </div>
 
     <div id="polls-container"></div>
   </div>
 
-  <div style="margin-top:48px;">
+  <div style="margin-top:48px;" id="unpolled-section">
     <div class="section-label">Unpolled Changes</div>
     <div class="section-title">Unpolled PvP &amp; Wilderness Updates</div>
 
@@ -524,9 +777,7 @@ footer {
     <div id="unpolled-container"></div>
   </div>
 
-</main>
-
-<div style="margin-top:48px;">
+  <div style="margin-top:48px;" id="scrapped-section">
     <div class="section-label">Proposed Then Dropped</div>
     <div class="section-title">Scrapped PvP &amp; Wilderness Proposals</div>
 
@@ -537,7 +788,267 @@ footer {
     <div id="scrapped-container"></div>
   </div>
 
-  <div class="brick-stripe"></div>
+  <!-- ─────────────────────────  CHDATA'S ANALYSIS  ───────────────────────── -->
+  <div style="margin-top:56px;" id="chdata-analysis">
+    <div class="section-label">Chdata's Take</div>
+    <div class="section-title">Chdata's Analysis</div>
+
+    <div class="context-box">
+      This is my own read on what's happening to PvP polling - pulled from my video script, in my own words. The data analysis right after this is separate and was put together independently; there's a "Note from Claude" at the end of this section on whether my take actually holds up against the numbers.
+    </div>
+
+    <div style="font-size:18.5px;color:#e8d8a8;line-height:1.75;text-shadow:1px 1px 0 #000;">
+
+      <p style="margin-bottom:16px;">PvP updates almost never pass Old School's 70% threshold. The easy explanation is "the updates were just bad" or "everyone hates PvP now," but I don't think that's really it. I've got two points, and I'll start with the second one because it's the structural one.</p>
+
+      <p style="margin:22px 0 10px;color:var(--gold-hi);font-size:23px;font-weight:bold;">A 70% poll is antithetical to multiplayer PvP balance.</p>
+      <p style="margin-bottom:16px;">Think of the Wilderness as cats and mice. If you ask the cats "should we break the ankles of every mouse so you can catch them easier," most cats vote yes. The mice, obviously, vote no. Assuming roughly equal populations you land at 50/50 - never a 70% consensus. It's impossible by design. And it doesn't matter which way you slice the voting: let only cats vote and they build a Wilderness the mice flee from; let only mice vote and they hand the cats a chance to trip over their own feet mid-chase; let both vote and you get a permanent deadlock. All three roads lead to the same systematic failure.</p>
+
+      <p style="margin-bottom:16px;">Players vote in their own self-interest. So when you make them vote on the one part of the game that pits Player versus Player, they naturally vote against each other. Want to nerf the Voidwaker special? One side benefits, the other side gets hurt. Flip it and buff the Voidwaker - now the other side is hurt instead. Almost anything in PvP has someone on the offensive end and someone on the receiving end, so getting both of them to a 70% agreement... the math is just not mathing. Compare that to a PvM or skilling update, which basically gives everyone new toys and takes nothing away from anyone. Like, who's voting no on a PvM update? The monsters?</p>
+
+      <p style="margin-bottom:16px;">And here's the kicker - Old School is something like 90% non-PvPers. When that 90% can vote on PvP balance, they decide PvP's fate. The real-world result is that PvP has been shut down by the community itself. It's a polling doom spiral: Jagex waits for organic demand to climb to 70%, but that gets less likely every single year as PKers quit and new players and ironmen pour in. Speaking of which - if ironmen are something like 30% of the playerbase and they've got zero reason to vote yes on PvP, that's a 30% bloc of automatic no votes before you even start. At some point Jagex has to decide whether PvP is worth investing in on its own merits, or just let the current system run its slow death sentence.</p>
+
+      <p style="margin-bottom:16px;">Now, I'm not actually saying "scrap the polls." The community-driven nature of polling is the true spirit of Old School, and polls keep Jagex accountable for bad updates - Wrathmaw and the Calamity armour really did have flaws. I just think PvP is the one place where the 70% model breaks down, and that's worth being honest about.</p>
+
+      <p style="margin:22px 0 10px;color:var(--gold-hi);font-size:23px;font-weight:bold;">The failures are telling us we keep proposing the wrong kind of thing.</p>
+      <p style="margin-bottom:16px;">That's my first point, circled back to. For 10+ years Jagex has reached for the same category of solution - new loot-pinata content, new rewards, new bosses - without touching the actual core problems: risk not being worth the reward, the skill gap, and the lack of good activities built for different skill levels. So trying more of the same isn't what we need and isn't what players are asking for. I think the constant failure of PvP polls is the community telling us these aren't the solutions - not that PvP is hopeless.</p>
+
+      <p style="margin-bottom:16px;">I also think limiting polls to "only PKers" is backwards. That's textbook survivorship bias - the PKers are the survivors who already like the Wilderness, so asking only them why it's dead points Jagex at the wrong things. (For the record: by the PvP Arena poll's own rules I'm "not a PvPer" because I don't have an LMS win or 20 Wildy kills, and I wasn't allowed into the official PvP feedback Discord I applied to. I love PvP. I just like a different kind of it.) Wilderness gameplay concerns the whole community, so the solution has to be pollable to the whole community.</p>
+
+      <p style="margin-bottom:16px;">And to be clear - not every PvP poll fails, people forget that. Bounty Hunter changes passed. Wildy Agility passed. LMS, Castle Wars, and Soul Wars reward changes passed. It just feels like everything fails because the big, contested stuff fails, or gets rolled back later. It really does come down to finding the right designs.</p>
+
+      <p style="margin:22px 0 10px;color:var(--gold-hi);font-size:23px;font-weight:bold;">My fix: PvP Update Ranking Polls.</p>
+      <p style="margin-bottom:16px;">Instead of binary yes/no, Jagex shows ~10 PvP proposals and we rank them 1-10. Whatever's #1 gets built. The other nine aren't "ruled out" - they come back in the next ranking poll. This sidesteps the whole cat-and-mouse problem because nothing is being denied; it just turns the competitiveness toward deciding what matters most. Half the time I vote no on something not because I hate it, but because I'd rather the dev time went elsewhere, or because the idea needs another pass - and a yes/no/skip vote can't say any of that. (I'd also add a "Needs Improvement" option to lock-in polls.) It's more honest than the current setup where Jagex has to guess what we want and then watch it die at poll.</p>
+
+      <p style="margin-bottom:12px;">I've actually generated a couple of demo pages of what such a ranking poll could look like. Check them out here:</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+        <a href="osrs_pvp_ranking_poll.html" style="display:block;flex:1;min-width:260px;background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--gold-hi);border-radius:3px;padding:14px 18px;text-decoration:none;text-shadow:1px 1px 0 #000;transition:border-color 0.15s;">
+          <div style="font-size:15px;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase;margin-bottom:5px;">Demo &bull; Interactive</div>
+          <div style="font-size:19.5px;color:var(--gold-hi);margin-bottom:4px;">PvP Update Ranking Poll - Categorized &#9658;</div>
+          <div style="font-size:16.5px;color:#c0a870;line-height:1.5;">A mockup where players order PvP updates by priority, split into update size tiers. The community's top-ranked update gets developed first.</div>
+        </a>
+        <a href="osrs_pvp_ranking_poll_50.html" style="display:block;flex:1;min-width:260px;background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--gold-hi);border-radius:3px;padding:14px 18px;text-decoration:none;text-shadow:1px 1px 0 #000;transition:border-color 0.15s;">
+          <div style="font-size:15px;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase;margin-bottom:5px;">Demo &bull; Interactive</div>
+          <div style="font-size:19.5px;color:var(--gold-hi);margin-bottom:4px;">PvP Update Ranking Poll - Master List &#9658;</div>
+          <div style="font-size:16.5px;color:#c0a870;line-height:1.5;">An extended, searchable version with player-submitted ideas alongside Jagex proposals - showing how the system scales as a first-iteration mega ranking.</div>
+        </a>
+      </div>
+
+      <p style="margin-bottom:16px;">I'm not pulling this out of nowhere - I used to run Team Fortress 2 servers and make my own balance changes for my own game mode, and I saw the exact same pattern. Every change had a side that loved it and a side that hated it, and there was almost never a consensus. Direct feedback alone was useless because every complaint had a defender. What actually helped was data: usage rates, win rates, and - the big one - satisfaction surveys. Because "people use this a lot" is a completely different thing from "people like using this," which is a completely different thing again from "people like having to fight against this." Old School is the most community-driven game on the planet, and I think Jagex should track and publish a lot more of that kind of PvP data instead of leaving it a guessing game.</p>
+
+    </div>
+
+    <!-- NOTE FROM CLAUDE -->
+    <div style="margin-top:30px;background:linear-gradient(180deg,#141a24 0%,#10141c 100%);border:1px solid #2a3a52;border-left:4px solid #4878b8;border-radius:3px;padding:20px 24px;">
+      <div style="font-size:16.5px;letter-spacing:0.15em;color:#6da0e0;text-transform:uppercase;margin-bottom:12px;text-shadow:1px 1px 0 #000;">Note from Claude</div>
+      <div style="font-size:18px;color:#dce6f2;line-height:1.7;text-shadow:1px 1px 0 #000;">
+        <p style="margin-bottom:14px;">Does the take fit the data? Mostly yes, and the strongest part is the strongest claim. The "cat and mouse" argument - that zero-sum PvP balance can't reach 70% because it pits players against each other - shows up cleanly in the voting record. Every one of the 13 questions that landed in the 45-55% dead-heat band is a balance change; not a single one is content. The exact risk-shifting changes the argument predicts would split the room did split it: Protect Item on PvP worlds (42.8%), making dropped food/potions invisible (48.5%), instant drop visibility (51.8%), the multi-combat rev zone (50.6%). And all nine "should this PvP reward also work against NPCs / outside PvP" questions failed - the PvM majority vetoing PvP power leaking into PvE is the cat-and-mouse dynamic in miniature.</p>
+        <p style="margin-bottom:14px;">The "we keep proposing the wrong thing" point also holds up, maybe more than the script claims. The accessibility content aimed straight at the skill-gap problem actually passed comfortably - the LMS minigame at 87.6% and the PvP Tutorial at 83.1%. So the lever Chdata points to (positive-sum content that helps everyone rather than redistributing risk) is exactly what the data says clears the bar. The deprioritization worry has a real signature too: contested balance questions fell from 33% of the PvP slate before Oct 2022 to 13% after, with the hardest ones quietly routed to unpolled integrity updates instead.</p>
+        <p style="margin-bottom:0;">Where I'd add precision: "PvP almost never passes" is a touch overstated as written. Across the whole record it's 60.7%, and content-type questions pass 73% - it's <em>balance</em> changes that fail (33%), not PvP wholesale. Chdata's own "not all PvP polls fail" caveat is the more accurate framing, and it's worth leading with because it's harder to dismiss. The ironman-30%-bloc mechanism is plausible and consistent with the pattern, but this dataset can't directly measure who voted which way, so it should be presented as a reasonable inference rather than a proven number. Net: the core thesis - that a 70% consensus is structurally hostile to zero-sum PvP balance, and the way out is positive-sum design plus a ranking system - is well-supported. The one edit I'd make is to say "balance changes fail," not "PvP fails."</p>
+      </div>
+    </div>
+
+  </div>
+  <!-- ─────────────────────  END CHDATA'S ANALYSIS  ───────────────────── -->
+
+  <!-- ─────────────────────────  DATA ANALYSIS  ───────────────────────── -->
+  <div style="margin-top:56px;" id="analysis-section">
+    <div class="section-label">AI Data Analysis</div>
+    <div class="section-title">What the Numbers Actually Say</div>
+
+    <div class="context-box">
+      This section analyses the <strong>178 scored yes/no questions</strong> above (the single multiple-choice question is excluded from rates). Every figure is computed directly from the data on this page. A question "passed" if its Yes% met the threshold that applied on its date - <strong>75%</strong> before 27 Oct 2022, <strong>70%</strong> after. Where a claim is a genuine causal story it is labelled; where it is only a correlation - or a time artifact dressed up as one - that is said plainly, because a portfolio that overclaims is easy to shoot down.
+    </div>
+
+    <!-- HEADLINE -->
+    <div class="overall-stats-box" style="margin-top:24px;">
+      <div class="overall-stats-title">The Single Biggest Finding</div>
+      <div style="font-size:17px;color:#e8d8a8;line-height:1.75;text-shadow:1px 1px 0 #000;padding:4px 2px;">
+        PvP polls did <strong style="color:#f0d890;">not</strong> gradually get harder or easier to pass. The headline jump - from a <strong style="color:#e07060;">44%</strong> pass rate (51/116) under the old 75% threshold to <strong style="color:#70c060;">92%</strong> (57/62) after the charter dropped it to 70% on 27 Oct 2022 - has <strong style="color:#f0d890;">two</strong> drivers, and the second one matters more than it first appears.
+        <br><br>
+        The first is mechanical: the lower bar plus a rise in average Yes% (71.5% to 80.4%) lifts the rate directly. The second is <strong style="color:#f0d890;">selection</strong>. The threshold change came right after the PvP Arena poll, where 13 contested balance questions failed in a single sheet. <strong style="color:#f0d890;">Chdata's deduction: that failure marks the point where Jagex grew hesitant to put controversial PvP changes to a poll at all.</strong> The data fits this. Balance questions fell from <strong style="color:#e07060;">33%</strong> of the PvP slate before Oct 2022 to just <strong style="color:#70c060;">13%</strong> after, and 2023, 2025 and 2026 polled <strong>zero</strong> of them. The balance questions that did survive to a vote post-2022 were the safe ones - Soul Wars safespotting fixes and Castle Wars restorations at the community's own request - which all passed at 82%+. The genuinely divisive zero-sum changes were not being approved by a more agreeable electorate; they were no longer on the ballot. They moved instead to the unpolled / integrity channel (see the Unpolled section).
+        <br><br>
+        This is why the <strong style="color:#f0d890;">"self-defeating polls"</strong> dynamic is better described as persistent than as a one-year spike. Whenever a contested balance change was actually polled - 2013, 2014, 2016, 2017, 2021, 2022 - it tended to fail, across the entire timeline. The post-2022 pass rate is partly a <strong style="color:#f0d890;">survivorship statistic</strong>: it looks like the problem was solved, when in practice the questions that would have failed simply stopped being asked. The cleanest takeaway still holds, and gets sharper under this lens: <strong style="color:#f0d890;">the type of change predicts the outcome far better than the year does - and after 2022 the hardest types were quietly routed around the poll entirely.</strong>
+      </div>
+    </div>
+
+    <!-- TREND TABLE -->
+    <div style="font-size:16px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:32px 0 14px;text-shadow:1px 1px 0 #000;">Trends &amp; Whether the Correlation Is Real</div>
+    <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:16px;color:#e8d8a8;text-shadow:1px 1px 0 #000;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border-hi);text-align:left;color:var(--gold);">
+          <th style="padding:10px 12px;width:24%;">Question you asked</th>
+          <th style="padding:10px 12px;width:46%;">What the data shows</th>
+          <th style="padding:10px 12px;width:30%;">Real correlation?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">More/less likely to pass over time?</td>
+          <td style="padding:12px;vertical-align:top;">By year:<br>2013 - 33%<br>2014 - 53%<br>2016 - 44%<br>2017 - 69%<br>2019 - 46%<br>2022 - 29%<br>2023 - 94%<br>2024 - 90%<br>2026 - 100%<br><br>No smooth trend - a step change at the Oct 2022 threshold cut.</td>
+          <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Yes, but it's the rule change plus selection, not time.</strong> The "year" correlation is mostly a proxy for "which threshold applied" (pre/post split: 44% vs 92%) and for the fact that after 2022 the controversial questions stopped being polled - so the recent slate is pre-filtered toward things that pass.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">More likely to pass with more votes?</td>
+          <td style="padding:12px;vertical-align:top;">corr(total votes, Yes%) = +0.36. Turnout tertiles: low 41%, mid 56%, high 85% pass. <em>But</em> within the old-threshold era alone the correlation collapses to +0.09.</td>
+          <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Mostly a time artifact.</strong> High-turnout polls are recent (turnout grew ~6x since 2013), and recent polls pass more because of the threshold and a content-heavy slate. Turnout is a symptom of broad appeal, not a cause of passing. Do not claim "more votes = more likely to pass."</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Pass/fail by content of the question?</td>
+          <td style="padding:12px;vertical-align:top;">Balance changes pass <strong style="color:#e07060;">33%</strong> (15/46), Content <strong style="color:#70c060;">73%</strong> (83/113), Other 53% (10/19). Balance is worst in <em>both</em> eras (21% pre, 88% post). Mean Yes%: balance 66.2 vs content 77.9.</td>
+          <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Yes - the strongest content signal on the page.</strong> What a change <em>is</em> predicts its fate more reliably than when it ran.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Affecting PvPers and non-PvPers disproportionately?</td>
+          <td style="padding:12px;vertical-align:top;">"Balance" is exactly the zero-sum category - it picks a winner between PKer and PvMer. Of the 13 questions that landed in the 45-55% dead-heat band, <strong style="color:#e07060;">all 13 are balance; zero are content.</strong></td>
+          <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Yes, and it's the cleanest fact here.</strong> Anything that redistributes risk/reward between the two camps stalls at a coin flip. Positive-sum content that both sides can use sails through.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Anything in the skip votes?</td>
+          <td style="padding:12px;vertical-align:top;">corr(skip rate, Yes%) = -0.30. The highest-skip questions (~47% skipped) are niche PvP Arena reward items. Mean skip rate 13.9%.</td>
+          <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Weak but real.</strong> A high skip rate flags "this doesn't affect me / I don't get it," and those niche items also under-perform with the people who do vote. Skip rate is a usable <em>relevance</em> gauge.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--brick);">
+          <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Fewer PvP updates polled per year over time?</td>
+          <td style="padding:12px;vertical-align:top;">Total PvP/Wilderness questions per year shows <em>no</em> decline - 2024 is the peak (41). But <strong style="color:#e07060;">contested balance</strong> questions collapsed: 38 before Oct 2022 vs 8 after, with 0 in 2023, 2025 and 2026. The modern slate is dominated by minigame QoL and Wilderness resource tweaks, not core combat balance.</td>
+          <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Not in raw volume - but yes for the controversial kind.</strong> Caveat: this is a curated PvP set, not a full census, and much PvP change now ships unpolled, so read this as "controversial PvP <em>polling</em> dried up," not "fewer PvP updates shipped."</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- POLL TYPES -->
+    <div style="font-size:16px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:36px 0 14px;text-shadow:1px 1px 0 #000;">The Identifiable Poll "Types" (by content)</div>
+    <div style="font-size:16px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:18px;">Sorting the questions by what they actually propose - rather than the three coarse Balance/Content/Other buckets - six recurring types fall out. Ranked best to worst by how reliably they pass:</div>
+
+    <div style="display:grid;gap:12px;">
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #70c060;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#70c060;font-weight:bold;text-shadow:1px 1px 0 #000;">1. New content &amp; minigames</span><span class="cat-badge cat-badge-content">Best</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">LMS, Soul Wars, Castle Wars additions; Wilderness resources, bosses, teleports. The backbone of the "content" bucket. Reliable passers as long as the design is solid - this is where almost every modern PvP win lives.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #70c060;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#70c060;font-weight:bold;text-shadow:1px 1px 0 #000;">2. "Restore old behaviour" requests</span><span class="cat-badge cat-badge-content">Strong</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Castle Wars 2008 terrain/spears, PID back toward 2007 consistency. Framing a change as <em>restoring</em> a nostalgic, community-requested behaviour is a strong tailwind - these clear threshold comfortably.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #7090d0;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#7090d0;font-weight:bold;text-shadow:1px 1px 0 #000;">3. Clear anti-grief / QoL mechanics</span><span class="cat-badge cat-badge-other">Strong when obvious</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">BH target-swap delay (91%), visible Teleblock animation (92%), K/D tracking. When a QoL fix is unambiguously good for everyone it scores in the high 80s-90s. The catch: if the "QoL" change quietly shifts risk or reward, it drops into the contested zone instead.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #d4b866;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#d4b866;font-weight:bold;text-shadow:1px 1px 0 #000;">4. Reward-shop items</span><span class="cat-badge cat-badge-other">Coin-toss</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">LMS / Soul Wars / PvP Arena store unlocks. Splits cleanly by what the item <em>does</em>: cosmetics, capes and halos pass (75-82%); items that grant combat power - especially power that leaks outside the minigame - sink toward 60% and below.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #e07060;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#e07060;font-weight:bold;text-shadow:1px 1px 0 #000;">5. PvP power usable in PvM ("can it work against NPCs?")</span><span class="cat-badge cat-badge-balance">Reliably fails</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">The 2022 PvP Arena armour set produced eight near-identical "should this also be usable against NPCs / outside PvP" sub-questions that <em>all</em> landed at 53-54% and failed. The PvM-majority electorate vetoes letting PvP grind shortcut into PvE power. This is the single most predictable failure pattern on the page.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #e07060;border-radius:3px;padding:16px 20px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:17.5px;color:#e07060;font-weight:bold;text-shadow:1px 1px 0 #000;">6. Zero-sum combat / interaction rules</span><span class="cat-badge cat-badge-balance">Worst</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Drop visibility, singles vs multi, Protect Item on/off, attack-while-in-NPC-combat, KBD tele-lock. These directly move risk from one camp to the other and stall near 50/50. Tellingly, several were eventually shipped by Jagex as unpolled integrity changes <em>because</em> they could never clear a poll - see the Unpolled section above.</div>
+      </div>
+
+    </div>
+
+    <!-- NEAR MISS / SPLIT -->
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:34px;">
+      <div style="flex:1;min-width:280px;background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:18px 22px;">
+        <div style="font-size:16px;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;text-shadow:1px 1px 0 #000;">Near Misses</div>
+        <div style="font-size:30px;color:#e07060;text-shadow:2px 2px 0 #000;line-height:1;">9 <span style="font-size:16px;color:#c0a870;">failed within 2.5% of passing</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;margin-top:12px;text-shadow:1px 1px 0 #000;">Seven of the nine sat at 73.8-74.8% under the old 75% bar - they would all have <strong style="color:#70c060;">passed</strong> under today's 70% threshold. Use the new <em>"Near miss"</em> sort to bring the failed questions closest to passing to the top - they are the proposals most sensitive to wording and framing, where a small persuasion swing flips the result.</div>
+      </div>
+      <div style="flex:1;min-width:280px;background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:18px 22px;">
+        <div style="font-size:16px;letter-spacing:0.1em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;text-shadow:1px 1px 0 #000;">Very Split</div>
+        <div style="font-size:30px;color:#d4b866;text-shadow:2px 2px 0 #000;line-height:1;">5 / 13 / 21 <span style="font-size:16px;color:#c0a870;">within 2.5 / 5 / 10 pts of 50/50</span></div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;margin-top:12px;text-shadow:1px 1px 0 #000;">Of the 13 questions inside the 45-55% dead heat, <strong style="color:#e07060;">every single one is a Balance change</strong> and none is Content. A coin-flip result is the fingerprint of a zero-sum PvP-vs-PvM tradeoff. Use the new <em>"Most split"</em> sort to surface them - they map the exact fault lines where the community is genuinely divided.</div>
+      </div>
+    </div>
+
+    <!-- EXTRA TRENDS -->
+    <div style="font-size:16px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:36px 0 14px;text-shadow:1px 1px 0 #000;">Trends Worth Checking That You Didn't List</div>
+    <div style="display:grid;gap:12px;">
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--gold-hi);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">The dev slate mirrors the playerbase: ~90% non-PvP on both sides</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">PvP/Wilderness questions are just <strong>178 of 1,682</strong> total poll questions - <strong style="color:#e07060;">10.6%</strong>, so close to <strong>90% of everything polled is non-PvP</strong>. That lines up almost exactly with the commonly-cited estimate that roughly <strong>90% of the playerbase doesn't engage with PvP</strong>. The two 90%s reinforce each other: Jagex allocates development and polling roughly in proportion to demonstrated demand, so the share of PvP <em>updates</em> tracks the share of PvP <em>players</em>. Caveat worth stating out loud - the 89% is measured directly here, but the 90%-non-PvP-population figure is a widely-repeated estimate, not something this voting record can prove. The honest framing is that the update mix is consistent with the population estimate, which is exactly the "invest in proportion to current demand" loop the proposals are trying to break.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">The "74% graveyard"</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;"><strong>19 questions</strong> failed at 70-74.9% under the old bar - i.e. they had majority-plus support and died only because 75% was unreachable. This is the most concrete evidence the charter change mattered, and a ready-made argument: a big slice of "rejected" PvP content was never actually unpopular.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">Batching correlates results - it does not rescue them</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">When Jagex split one contested idea into many sub-questions (the eight ~53% PvP Arena armour items), they <strong style="color:#e07060;">all failed together</strong>. When they batched popular content (Poll 83's 13 Castle Wars questions), they <strong style="color:#70c060;">nearly all passed together</strong>. Questions inside one poll move as a bloc, so framing and blog reception lift or sink the whole sheet. Splitting a divisive concept into pieces just manufactures many correlated failures.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">Raw vote counts are not comparable across years</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Median turnout grew ~6x (12.7k in 2013 to 77.6k in 2026) with the playerbase. Any cross-year analysis must use Yes% or skip <em>rate</em>, never absolute votes or skips - otherwise you are mostly measuring how many people were online that year.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">There is a hard approval ceiling around 90%</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Almost nothing exceeds 94%, even universally loved QoL. The realistic target for a proposal is to clear threshold <em>with margin</em>, not to chase unanimity - so a design landing in the low-to-mid 80s is already a strong result, not a lukewarm one.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">The distribution is bimodal, and the danger zone is 70-79%</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Questions cluster at "clearly good" (80s) or "contested" (50s-60s), with a thin true middle. The 70-79% band is where both thresholds live and where outcomes are most fragile - a proposal here is exactly the kind worth re-framing toward positive-sum content before it ever reaches a poll.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
+        <div style="font-size:16px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">"Failed a poll" is not the end of the road</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Several zero-sum balance changes that could not pass were later shipped as unpolled integrity updates (instant drop visibility failed twice at 51-57%, then went in anyway; Rev Caves multi-to-singles). The polling record understates how much contested change actually happens - it just happens through a different door. A proposal framed as integrity rather than as a vote-bait balance question follows a completely different, and often more permissive, path.</div>
+      </div>
+
+    </div>
+
+    <!-- CORRELATION TO CORE PROBLEMS -->
+    <div style="font-size:16px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:36px 0 14px;text-shadow:1px 1px 0 #000;">How the Voting Record Maps to the Core Problems</div>
+    <div style="font-size:16px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:18px;">The landing page lists the core problems facing PvP. Three of them are claims about polling and outcomes, so the voting record can be checked directly against them. Here is what the data does and doesn't support.</div>
+
+    <div style="display:grid;gap:12px;">
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:3px;padding:16px 20px;">
+        <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Problem 1 - Risk is not worth the reward</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#70c060;">Supported, with an important twist.</strong> The poll record shows the community will not vote to <em>redistribute</em> risk between the two camps: every change that moved risk one way or the other stalled near 50/50 - Protect Item on PvP worlds (42.8%), instant drop visibility (51.8%), making dropped food/potions invisible (48.5%). That means the risk-vs-reward problem is essentially unsolvable through a balance poll; it has to be addressed with positive-sum content that adds reward without taking anything from anyone (which is exactly the design space Blessed Status aims at). The polls don't say players are happy with the risk - they say they won't approve a zero-sum fix for it.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:3px;padding:16px 20px;">
+        <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Problem 2 - The skill gap is too large</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#d4b866;">Polls are not the blocker here - design is.</strong> The accessibility content aimed squarely at the skill gap actually passed comfortably: the LMS minigame at 87.6% and the PvP Tutorial at 83.1%. So the community will vote yes on skill-gap solutions when they are framed as new, opt-in content for everyone. The reason the skill gap persists isn't poll rejection; it's that the things that passed (LMS, PvP Arena) didn't fully deliver the teaching ladder in practice. This is a build-quality problem, not a polling problem - which is good news for any well-designed accessibility proposal.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:3px;padding:16px 20px;">
+        <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Problem 3 - The self-defeating PvP polls</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#70c060;">This is the one the data backs most directly.</strong> The "90% non-PvPers vote on PvP balance and it can't reach 70%" claim is visible in the numbers: balance changes pass 33% vs content's 73%, and all 13 questions in the 45-55% dead-heat band are balance, zero are content. The "us vs them / it can only please ~50%" point is literally the shape of the data - a fair 50/50 split is the signature of a contested balance question. And the deprioritization loop shows up as the post-2022 collapse in contested balance polling (33% of the slate down to 13%), with the hardest changes rerouted to unpolled integrity updates. The ironman-bloc mechanism is consistent with all of this but can't be measured from vote totals alone, so treat it as a strong inference rather than a proven figure.</div>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:3px;padding:16px 20px;">
+        <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Predator-prey design &amp; the integrity escape hatch</div>
+        <div style="font-size:16px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#d4b866;">Backed, and it points at the proposed fix.</strong> The "force PvP through as integrity updates" path that the script weighs is already how several contested changes actually shipped: instant drop visibility failed at the polls twice (51-57%) and went in anyway; the Rev Caves multi-to-singles overhaul was an unpolled integrity change. So the binary poll genuinely is a dead end for zero-sum balance - which is the practical case for a ranking-style system that lets positive-sum PvP content compete on priority rather than survival. The "usable against NPCs" pattern (9 of 9 failed) is the clearest single demonstration that the PvM majority will veto anything that lets PvP power leak into PvE, exactly as the cat-and-mouse framing predicts.</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:26px;font-size:16px;color:var(--muted);line-height:1.6;text-shadow:1px 1px 0 #000;border-top:1px solid var(--brick);padding-top:14px;">
+      Method note: rates cover the 178 scored yes/no questions in the list above; the one multiple-choice question is excluded. Correlations are Pearson on Yes% / pass (1/0) against total votes or skip rate. "Near miss" = failed and within 2.5pp below its threshold; "very split" = within N points of 50%. Pass tested against each question's own threshold (75% pre-27-Oct-2022, 70% after). The Wrathmaw Greenlight failure (49.1%) and other Greenlight/beta polls in the Scrapped section are not part of this scored set.
+    </div>
+
+  </div>
+  <!-- ─────────────────────  END DATA ANALYSIS  ───────────────────── -->
+
+</main>
+
+<div class="brick-stripe"></div>
 
 <footer>
   Chdata &mdash; OSRS PvP Design Portfolio &mdash; 2026 &nbsp;&bull;&nbsp; Data sourced from <a href="https://oldschool.runescape.com/polls/latest" style="color:var(--amber)">oldschool.runescape.com</a> and the <a href="https://oldschool.runescape.wiki/w/Polls" style="color:var(--amber)">OSRS Wiki</a>
@@ -561,32 +1072,32 @@ const POLLS = [
       {
         text: "An extra button will be added to the options menu, allowing you to change the 'Attack' option in PvP to a left-click 'Fight' option.",
         yesVotes: 9455, noVotes: 3278, totalVotes: 12733,
-        yesPct: 74.3, noPct: 25.7
+        yesPct: 74.3, noPct: 25.7, category: "other"
       },
       {
         text: "Two of the existing old-school game worlds will become PvP worlds, with combat rules as described in the blog.",
         yesVotes: 10712, noVotes: 2021, totalVotes: 12733,
-        yesPct: 84.1, noPct: 15.9
+        yesPct: 84.1, noPct: 15.9, category: "content"
       },
       {
         text: "On PvP worlds, if they are launched, players will be prevented from attacking a target player in a single-way zone if the target has been attacking someone else in the last 10 seconds.",
         yesVotes: 9670, noVotes: 3063, totalVotes: 12733,
-        yesPct: 75.9, noPct: 24.1
+        yesPct: 75.9, noPct: 24.1, category: "balance"
       },
       {
         text: "On PvP worlds, if they are launched, players will be able to attack a target player who is in combat against an NPC in a single-way zone.",
         yesVotes: 9146, noVotes: 3587, totalVotes: 12733,
-        yesPct: 71.8, noPct: 28.2
+        yesPct: 71.8, noPct: 28.2, category: "balance"
       },
       {
         text: "On PvP worlds, if they are launched, players will get 10 secs of immunity from other players' attacks after teleporting. During this time, they will likewise be prevented from attacking other players.",
         yesVotes: 9281, noVotes: 3452, totalVotes: 12733,
-        yesPct: 72.9, noPct: 27.1
+        yesPct: 72.9, noPct: 27.1, category: "balance"
       },
       {
         text: "On PvP worlds, if they are launched, the 'Protect Item' prayer will be disabled.",
         yesVotes: 5451, noVotes: 7282, totalVotes: 12733,
-        yesPct: 42.8, noPct: 57.2
+        yesPct: 42.8, noPct: 57.2, category: "balance"
       }
     ]
   },
@@ -601,63 +1112,63 @@ const POLLS = [
     questions: [
       {
         text: "Would you like us to upgrade the Wilderness to the basic level as featured in the latest developer blog called 'Rejuvenating the Wilderness 2'?",
-        yesPct: 82.2, noPct: 17.8, yesVotes: 18601, noVotes: 4016, totalVotes: 22617
+        yesPct: 82.2, noPct: 17.8, yesVotes: 18601, noVotes: 4016, totalVotes: 22617, category: "content"
       },
       {
         text: "Should we stop players from teleporting out of the KBD lair?",
-        yesPct: 29.1, noPct: 70.9, yesVotes: 6575, noVotes: 16042, totalVotes: 22617
+        yesPct: 29.1, noPct: 70.9, yesVotes: 6575, noVotes: 16042, totalVotes: 22617, category: "balance"
       },
       {
         text: "Should we add three new rune rocks to the Ice Plateau?",
-        yesPct: 86.7, noPct: 13.3, yesVotes: 19604, noVotes: 3013, totalVotes: 22617
+        yesPct: 86.7, noPct: 13.3, yesVotes: 19604, noVotes: 3013, totalVotes: 22617, category: "content"
       },
       {
         text: "Should we add the Fountain of Rune to the maze area in the far East of level 50 Wilderness?",
-        yesPct: 76.9, noPct: 23.1, yesVotes: 17386, noVotes: 5231, totalVotes: 22617
+        yesPct: 76.9, noPct: 23.1, yesVotes: 17386, noVotes: 5231, totalVotes: 22617, category: "content"
       },
       {
         text: "Once we have solved the issue of luring players into the Wilderness using the trade windows, should we remove the Wilderness Ditch?",
-        yesPct: 68.3, noPct: 31.7, yesVotes: 15457, noVotes: 7160, totalVotes: 22617
+        yesPct: 68.3, noPct: 31.7, yesVotes: 15457, noVotes: 7160, totalVotes: 22617, category: "other"
       },
       {
         text: "Should we add a dungeon of God Wars creatures to the Wilderness?",
-        yesPct: 76.7, noPct: 23.3, yesVotes: 17358, noVotes: 5259, totalVotes: 22617
+        yesPct: 76.7, noPct: 23.3, yesVotes: 17358, noVotes: 5259, totalVotes: 22617, category: "content"
       },
       {
         text: "Should a player be able to see how many times they have been killed in the Wilderness, how many players they have killed in the Wilderness and the ratio between them?",
-        yesPct: 83.9, noPct: 16.1, yesVotes: 18984, noVotes: 3633, totalVotes: 22617
+        yesPct: 83.9, noPct: 16.1, yesVotes: 18984, noVotes: 3633, totalVotes: 22617, category: "other"
       },
       {
         text: "Should we replace red dragons with lava dragons in the Wilderness?",
-        yesPct: 80.4, noPct: 19.6, yesVotes: 18179, noVotes: 4438, totalVotes: 22617
+        yesPct: 80.4, noPct: 19.6, yesVotes: 18179, noVotes: 4438, totalVotes: 22617, category: "content"
       },
       {
         text: "If lava dragons enter the Wilderness, should you be able to get three times the amount of XP if you bury their bones in the Lava Dragon Isle?",
-        yesPct: 80.5, noPct: 19.5, yesVotes: 18202, noVotes: 4415, totalVotes: 22617
+        yesPct: 80.5, noPct: 19.5, yesVotes: 18202, noVotes: 4415, totalVotes: 22617, category: "content"
       },
       {
         text: "Should revenants be added to the Wilderness in the Graveyard of Shadows?",
-        yesPct: 67.9, noPct: 32.1, yesVotes: 15352, noVotes: 7265, totalVotes: 22617
+        yesPct: 67.9, noPct: 32.1, yesVotes: 15352, noVotes: 7265, totalVotes: 22617, category: "content"
       },
       {
         text: "If revenants are added should the Graveyard of Shadows become a multi combat zone?",
-        yesPct: 50.6, noPct: 49.4, yesVotes: 11454, noVotes: 11163, totalVotes: 22617
+        yesPct: 50.6, noPct: 49.4, yesVotes: 11454, noVotes: 11163, totalVotes: 22617, category: "balance"
       },
       {
         text: "Should we allow players to be able to attack other players in a single way combat area even if either are currently in combat with an NPC?",
-        yesPct: 51.5, noPct: 48.5, yesVotes: 11658, noVotes: 10959, totalVotes: 22617
+        yesPct: 51.5, noPct: 48.5, yesVotes: 11658, noVotes: 10959, totalVotes: 22617, category: "balance"
       },
       {
         text: "Should we remove 10 worlds from the world list to boost activity on the other worlds?",
-        yesPct: 60.1, noPct: 39.9, yesVotes: 13594, noVotes: 9023, totalVotes: 22617
+        yesPct: 60.1, noPct: 39.9, yesVotes: 13594, noVotes: 9023, totalVotes: 22617, category: "other"
       },
       {
         text: "Should tradeable items become visible immediately to all players if their owner chooses to drop them on the ground in the Wilderness?",
-        yesPct: 61.1, noPct: 38.9, yesVotes: 13824, noVotes: 8793, totalVotes: 22617
+        yesPct: 61.1, noPct: 38.9, yesVotes: 13824, noVotes: 8793, totalVotes: 22617, category: "balance"
       },
       {
         text: "Should we add loot broadcasts to the Kalphite Queen, the King Black Dragon, the Dagannoth Kings and the Chaos Elemental?",
-        yesPct: 78.8, noPct: 21.2, yesVotes: 17828, noVotes: 4789, totalVotes: 22617
+        yesPct: 78.8, noPct: 21.2, yesVotes: 17828, noVotes: 4789, totalVotes: 22617, category: "other"
       }
     ]
   },
@@ -672,51 +1183,74 @@ const POLLS = [
     questions: [
       {
         text: "Shard Share is a system which allows big drops from bosses to be instantly shared throughout a team by splitting them into shards. Shards can then be sold or combined to create the item which would've been dropped. Should Shard Share be added to Old School RuneScape?",
-        yesPct: 56.0, noPct: 44.0, yesVotes: 17494, noVotes: 13763, totalVotes: 34348, skipped: 3091
+        yesPct: 56.0, noPct: 44.0, yesVotes: 17494, noVotes: 13763, totalVotes: 34348, skipped: 3091, category: "other"
       },
       {
         text: "If Shard Share is introduced, should large stacks of items also be shared evenly throughout a team when it is toggled on?",
-        yesPct: 60.9, noPct: 39.1, yesVotes: 18257, noVotes: 11711, totalVotes: 34348, skipped: 4380
+        yesPct: 60.9, noPct: 39.1, yesVotes: 18257, noVotes: 11711, totalVotes: 34348, skipped: 4380, category: "other"
       },
       {
         text: "The order in which player's actions are registered (PID) in Old School is currently randomised every game tick. This means that combat in Old School is less consistent than it used to be back in 2007. Should we randomise PID less often in order to make combat more consistent? This change would make the combat system more similar to that found in 2007.",
-        yesPct: 81.2, noPct: 18.8, yesVotes: 24177, noVotes: 5592, totalVotes: 34348, skipped: 4579
+        yesPct: 81.2, noPct: 18.8, yesVotes: 24177, noVotes: 5592, totalVotes: 34348, skipped: 4579, category: "balance"
       },
       {
         text: "Should there be a 60 second delay between killing your Bounty Hunter target and being assigned a new one? This will give you time to pick up loot and leave the wilderness.",
-        yesPct: 91.1, noPct: 8.9, yesVotes: 26413, noVotes: 2582, totalVotes: 34348, skipped: 5353
+        yesPct: 91.1, noPct: 8.9, yesVotes: 26413, noVotes: 2582, totalVotes: 34348, skipped: 5353, category: "balance"
       },
       {
         text: "Should it only be possible to be assigned a Bounty Hunter target if they are below level 15 wilderness?",
-        yesPct: 65.1, noPct: 34.9, yesVotes: 17512, noVotes: 9378, totalVotes: 34348, skipped: 7458
+        yesPct: 65.1, noPct: 34.9, yesVotes: 17512, noVotes: 9378, totalVotes: 34348, skipped: 7458, category: "balance"
       },
       {
         text: "Should the ents and black unicorns found outside the entrance to the Corporeal Beast's cave be moved further away?",
-        yesPct: 66.6, noPct: 33.4, yesVotes: 18514, noVotes: 9280, totalVotes: 34348, skipped: 6554
+        yesPct: 66.6, noPct: 33.4, yesVotes: 18514, noVotes: 9280, totalVotes: 34348, skipped: 6554, category: "content"
       },
       {
         text: "Should Teleblock be usable in free-to-play?",
-        yesPct: 72.2, noPct: 27.8, yesVotes: 23259, noVotes: 8959, totalVotes: 34348, skipped: 2130
+        yesPct: 72.2, noPct: 27.8, yesVotes: 23259, noVotes: 8959, totalVotes: 34348, skipped: 2130, category: "balance"
       },
       {
         text: "Seeing when a Teleblock is successfully cast is currently quite difficult. Should an additional animation play to indicate when a Teleblock is successful?",
-        yesPct: 91.6, noPct: 8.4, yesVotes: 30464, noVotes: 2807, totalVotes: 34348, skipped: 1077
+        yesPct: 91.6, noPct: 8.4, yesVotes: 30464, noVotes: 2807, totalVotes: 34348, skipped: 1077, category: "other"
       },
       {
         text: "Should the skeletons and scorpions found in Edgeville be made non-aggressive on world 318?",
-        yesPct: 76.4, noPct: 23.6, yesVotes: 23312, noVotes: 7204, totalVotes: 34348, skipped: 3832
+        yesPct: 76.4, noPct: 23.6, yesVotes: 23312, noVotes: 7204, totalVotes: 34348, skipped: 3832, category: "balance"
       },
       {
         text: "Should untradeable items which have a tradeable version, two examples being the charged dragonfire shield or berserker ring (i), be converted to their tradeable versions when they are discarded from your inventory via the drop option whilst within the wilderness?",
-        yesPct: 70.0, noPct: 30.0, yesVotes: 20290, noVotes: 8708, totalVotes: 34348, skipped: 5350
+        yesPct: 70.0, noPct: 30.0, yesVotes: 20290, noVotes: 8708, totalVotes: 34348, skipped: 5350, category: "balance"
       },
       {
         text: "Should warning messages which can be toggled be added to teleport spells? These warnings will be disabled by default.",
-        yesPct: 67.2, noPct: 32.8, yesVotes: 19473, noVotes: 9502, totalVotes: 34348, skipped: 5373
+        yesPct: 67.2, noPct: 32.8, yesVotes: 19473, noVotes: 9502, totalVotes: 34348, skipped: 5373, category: "other"
       },
       {
         text: "One reward from the hard wilderness achievement diary allows you to choose the destination of the wilderness obelisks. Should we modify the behaviour so the left click will retain the random teleportation behaviour available before completing the diary, whilst right click options (unlocked on completing the hard diary) will offer an option to teleport to your previously chosen destination and the ability to open the list and select a destination.",
-        yesPct: 87.6, noPct: 12.4, yesVotes: 24116, noVotes: 3428, totalVotes: 34348, skipped: 6804
+        yesPct: 87.6, noPct: 12.4, yesVotes: 24116, noVotes: 3428, totalVotes: 34348, skipped: 6804, category: "other"
+      }
+    ]
+  },
+  {
+    id: "poll44",
+    title: "Old School Content Poll 44: PvP & Player-owned houses",
+    date: "2016-06-20",
+    dateDisplay: "20 Jun 2016",
+    url: "https://oldschool.runescape.com/polls/2016/1317",
+    wikiUrl: "https://oldschool.runescape.wiki/w/Poll:Old_School_Content_Poll_44:_PvP_%26_Player-owned_houses",
+    threshold: 75,
+    questions: [
+      {
+        text: "Should items dropped within the wilderness immediately appear to all players? This would prevent players dropping items to avoid losing them on death.",
+        yesPct: 57.3, noPct: 42.7, yesVotes: 27793, noVotes: 20732, totalVotes: 51888, skipped: 3363, category: "balance"
+      },
+      {
+        text: "Should food and potions dropped within the wilderness never appear to other players? This would prevent teams of players dropping each other supplies in single-way combat areas.",
+        yesPct: 57.3, noPct: 42.7, yesVotes: 26837, noVotes: 19995, totalVotes: 51888, skipped: 5056, category: "balance"
+      },
+      {
+        text: "Currently, dying with untradeable equipment in the wilderness results in the equipment being dropped to the ground. If you return to where you died, you can simply pick it back up. This means that there is no risk associated with using very powerful untradeable equipment in the wilderness. Should untradeable items dropped on death in the wilderness be broken and require a fee to be paid for repair? 75% of this fee would be awarded to the player who kills someone using untradeable equipment, with the remaining 25% being removed from the game.",
+        yesPct: 81.2, noPct: 18.8, yesVotes: 40058, noVotes: 9256, totalVotes: 51888, skipped: 2574, category: "balance"
       }
     ]
   },
@@ -731,55 +1265,110 @@ const POLLS = [
     questions: [
       {
         text: "Should tier 1 Bounty Hunter emblems be made tradeable on the Grand Exchange? It would also become possible to banknote emblems with this change.",
-        yesPct: 87.5, noPct: 12.5, yesVotes: 26427, noVotes: 3788, totalVotes: 33577, skipped: 3362
+        yesPct: 87.5, noPct: 12.5, yesVotes: 26427, noVotes: 3788, totalVotes: 33577, skipped: 3362, category: "content"
       },
       {
         text: "Should the drop rate of mysterious emblems from Wilderness bosses be increased to 1 in 5? It would still only be possible to receive emblems as a drop on world 318.",
-        yesPct: 87.3, noPct: 12.7, yesVotes: 26428, noVotes: 3832, totalVotes: 33577, skipped: 3317
+        yesPct: 87.3, noPct: 12.7, yesVotes: 26428, noVotes: 3832, totalVotes: 33577, skipped: 3317, category: "balance"
       },
       {
         text: "Should a Wine of Zamorak spawn be added to the temple in level 35 Wilderness? This wine would need to be telegrabbed, and players who have completed the hard Wilderness diary would receive them in noted form.",
-        yesPct: 86.1, noPct: 13.9, yesVotes: 27102, noVotes: 4368, totalVotes: 33577, skipped: 2107
+        yesPct: 86.1, noPct: 13.9, yesVotes: 27102, noVotes: 4368, totalVotes: 33577, skipped: 2107, category: "content"
       },
       {
         text: "Should the Bounty Hunter minigame only take place in levels 1 to 5 Wilderness on world 318, rather than the entire Wilderness?",
-        yesPct: 64.6, noPct: 35.4, yesVotes: 18186, noVotes: 9951, totalVotes: 33577, skipped: 5440
+        yesPct: 64.6, noPct: 35.4, yesVotes: 18186, noVotes: 9951, totalVotes: 33577, skipped: 5440, category: "balance"
       },
       {
         text: "Should tradeable items dropped within PvP areas appear instantly?",
-        yesPct: 51.8, noPct: 48.2, yesVotes: 15695, noVotes: 14617, totalVotes: 33577, skipped: 3265
+        yesPct: 51.8, noPct: 48.2, yesVotes: 15695, noVotes: 14617, totalVotes: 33577, skipped: 3265, category: "balance"
       },
       {
         text: "Should food and potions dropped within PvP areas never appear for other players? This would apply even if question 5 passes its poll.",
-        yesPct: 48.5, noPct: 51.5, yesVotes: 14308, noVotes: 15182, totalVotes: 33577, skipped: 4087
+        yesPct: 48.5, noPct: 51.5, yesVotes: 14308, noVotes: 15182, totalVotes: 33577, skipped: 4087, category: "balance"
       },
       {
         text: "Should the Bounty Hunter overlay display whether or not your target is skulled?",
-        yesPct: 86.9, noPct: 13.1, yesVotes: 24261, noVotes: 3667, totalVotes: 33577, skipped: 5649
+        yesPct: 86.9, noPct: 13.1, yesVotes: 24261, noVotes: 3667, totalVotes: 33577, skipped: 5649, category: "other"
       },
       {
         text: "Should the Bounty Hunter overlay display the tier of emblem your target is holding (if any)?",
-        yesPct: 81.0, noPct: 19.0, yesVotes: 22913, noVotes: 5385, totalVotes: 33577, skipped: 5279
+        yesPct: 81.0, noPct: 19.0, yesVotes: 22913, noVotes: 5385, totalVotes: 33577, skipped: 5279, category: "other"
       },
       {
         text: "Should the rune cost of the Teleport to Bounty Target spell be removed?",
-        yesPct: 59.0, noPct: 41.0, yesVotes: 16887, noVotes: 11716, totalVotes: 33577, skipped: 4974
+        yesPct: 59.0, noPct: 41.0, yesVotes: 16887, noVotes: 11716, totalVotes: 33577, skipped: 4974, category: "balance"
       },
       {
         text: "Should the kill/death ratio overlay track kills and deaths in the entire Wilderness, rather than just those beyond level 20 Wilderness?",
-        yesPct: 88.0, noPct: 12.0, yesVotes: 24139, noVotes: 3280, totalVotes: 33577, skipped: 6158
+        yesPct: 88.0, noPct: 12.0, yesVotes: 24139, noVotes: 3280, totalVotes: 33577, skipped: 6158, category: "other"
       },
       {
         text: "Should splashing a Teleblock spell provide less experience than casting one successfully?",
-        yesPct: 76.1, noPct: 23.9, yesVotes: 23182, noVotes: 7281, totalVotes: 33577, skipped: 3114
+        yesPct: 76.1, noPct: 23.9, yesVotes: 23182, noVotes: 7281, totalVotes: 33577, skipped: 3114, category: "balance"
       },
       {
         text: "Should we change the Teleblock spell so that it can tell you how many seconds remain before you can teleport? This will make the duration of teleblocks more consistent.",
-        yesPct: 92.6, noPct: 7.4, yesVotes: 29292, noVotes: 2354, totalVotes: 33577, skipped: 1931
+        yesPct: 92.6, noPct: 7.4, yesVotes: 29292, noVotes: 2354, totalVotes: 33577, skipped: 1931, category: "other"
       },
       {
         text: "Should Teleblocks be removed when you enter a safe zone on PvP worlds?",
-        yesPct: 82.3, noPct: 17.7, yesVotes: 25590, noVotes: 5522, totalVotes: 33577, skipped: 2465
+        yesPct: 82.3, noPct: 17.7, yesVotes: 25590, noVotes: 5522, totalVotes: 33577, skipped: 2465, category: "balance"
+      }
+    ]
+  },
+  {
+    id: "beneath-cursed-sands-pvp",
+    title: "Rewards for Beneath Cursed Sands & PvP Arena",
+    date: "2022-04-22",
+    dateDisplay: "22 Apr 2022",
+    url: "https://oldschool.runescape.com/polls/2022/1637",
+    wikiUrl: "https://oldschool.runescape.wiki/w/Poll:Rewards_for_Beneath_Cursed_Sands_%26_PvP_Arena",
+    threshold: 75,
+    questions: [
+      {
+        text: "Should Ornament Kits for Dragon Claws, Dragon Warhammer, Heavy Ballista, Armadyl (Helm, Chestplate and Chainskirt), Bandos (Chestplate, Tassets and Boots), Elder Chaos Robes, Dagon'hai Robes and the Elder Maul be added as rewards from the PvP Arena?",
+        yesPct: 73.8, noPct: 26.2, yesVotes: 29042, noVotes: 10304, totalVotes: 41471, skipped: 2125, category: "content"
+      },
+      {
+        text: "Should untradeable Blighted Wave and Blighted Surge sacks be added as rewards from the PvP Arena?",
+        yesPct: 71.2, noPct: 28.8, yesVotes: 12108, noVotes: 4899, totalVotes: 41471, skipped: 24464, category: "content"
+      },
+      {
+        text: "Should Imbue Scrolls be added as a reward from the PvP Arena? These would allow players to imbue the same items currently possible via Soul Wars.",
+        yesPct: 73.9, noPct: 26.1, yesVotes: 12950, noVotes: 4582, totalVotes: 41471, skipped: 23939, category: "content"
+      },
+      {
+        text: "Should Wristbands of the Arena be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 49.4, noPct: 50.6, yesVotes: 8179, noVotes: 8384, totalVotes: 41471, skipped: 24908, category: "balance"
+      },
+      {
+        text: "Should the Centurion Cuirass be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 53.0, noPct: 47.0, yesVotes: 8738, noVotes: 7753, totalVotes: 41471, skipped: 24980, category: "balance"
+      },
+      {
+        text: "Should the Calamity Chest and Calamity Breeches sets be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 53.9, noPct: 46.1, yesVotes: 8826, noVotes: 7546, totalVotes: 41471, skipped: 25099, category: "balance"
+      },
+      {
+        text: "Should the Maoma's headgear set be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 53.6, noPct: 46.4, yesVotes: 8763, noVotes: 7591, totalVotes: 41471, skipped: 25117, category: "balance"
+      },
+      {
+        text: "Should the Korrif's headgear set be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 53.5, noPct: 46.5, yesVotes: 8747, noVotes: 7598, totalVotes: 41471, skipped: 25126, category: "balance"
+      },
+      {
+        text: "Should the Saika's headgear set be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 53.4, noPct: 46.6, yesVotes: 8730, noVotes: 7612, totalVotes: 41471, skipped: 25129, category: "balance"
+      },
+      {
+        text: "Should a new untradeable left-click teleport that can be used up to level 30 Wilderness be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 66.8, noPct: 33.2, yesVotes: 11686, noVotes: 5814, totalVotes: 41471, skipped: 23971, category: "content"
+      },
+      {
+        text: "Should the Humble Chivalry and Humble Piety Prayers be added as a reward from the PvP Arena, as described in the blog?",
+        yesPct: 41.7, noPct: 58.3, yesVotes: 7154, noVotes: 9986, totalVotes: 41471, skipped: 24331, category: "balance"
       }
     ]
   },
@@ -794,71 +1383,71 @@ const POLLS = [
     questions: [
       {
         text: "Should Maoma's, Koriff's and Saika's Headgear be added as a reward from the PvP Arena, as described in the blog? The headgear would only be usable against other players in PvP throughout the Wilderness, PvP Worlds and PvP minigames.",
-        yesPct: 70.5, noPct: 29.5, yesVotes: 1785, noVotes: 747, totalVotes: 25744, skipped: 23212
+        yesPct: 70.5, noPct: 29.5, yesVotes: 1785, noVotes: 747, totalVotes: 25744, skipped: 23212, category: "balance"
       },
       {
         text: "If the headgear is added, should it be usable against NPCs within the Wilderness?",
-        yesPct: 54.6, noPct: 45.4, yesVotes: 12846, noVotes: 10667, totalVotes: 25744, skipped: 2231
+        yesPct: 54.6, noPct: 45.4, yesVotes: 12846, noVotes: 10667, totalVotes: 25744, skipped: 2231, category: "balance"
       },
       {
         text: "Should the Calamity armour and its Superior & Elite variants be added as a reward from the PvP Arena, as described in the blog? The armour would only be usable against other players in PvP throughout the Wilderness, PvP Worlds and PvP minigames.",
-        yesPct: 70.0, noPct: 30.0, yesVotes: 1776, noVotes: 762, totalVotes: 25744, skipped: 23206
+        yesPct: 70.0, noPct: 30.0, yesVotes: 1776, noVotes: 762, totalVotes: 25744, skipped: 23206, category: "balance"
       },
       {
         text: "If the Calamity armour is added, should it be usable against NPCs within the Wilderness?",
-        yesPct: 54.3, noPct: 45.7, yesVotes: 12769, noVotes: 10746, totalVotes: 25744, skipped: 2229
+        yesPct: 54.3, noPct: 45.7, yesVotes: 12769, noVotes: 10746, totalVotes: 25744, skipped: 2229, category: "balance"
       },
       {
         text: "Should the Fighter's Wristwraps be added as a reward from the PvP Arena, as described in the blog? These would be an attachment for all Culinaromancer's Gloves with the same stat requirements, and would only be usable against other players in PvP throughout the Wilderness, PvP Worlds and PvP minigames.",
-        yesPct: 70.5, noPct: 29.5, yesVotes: 1803, noVotes: 753, totalVotes: 25744, skipped: 23188
+        yesPct: 70.5, noPct: 29.5, yesVotes: 1803, noVotes: 753, totalVotes: 25744, skipped: 23188, category: "balance"
       },
       {
         text: "If the Fighter's Wristwraps are added, should the wrapped Culinaromancer's Gloves be usable against NPCs within the Wilderness?",
-        yesPct: 54.2, noPct: 45.8, yesVotes: 12764, noVotes: 10789, totalVotes: 25744, skipped: 2191
+        yesPct: 54.2, noPct: 45.8, yesVotes: 12764, noVotes: 10789, totalVotes: 25744, skipped: 2191, category: "balance"
       },
       {
         text: "Should we add Imbue Scrolls as a reward from the PvP Arena, as described in the blog?",
-        yesPct: 79.7, noPct: 20.3, yesVotes: 2057, noVotes: 523, totalVotes: 25744, skipped: 23164
+        yesPct: 79.7, noPct: 20.3, yesVotes: 2057, noVotes: 523, totalVotes: 25744, skipped: 23164, category: "content"
       },
       {
         text: "Should untradeable Blighted Wave sacks be added as a reward from the PvP Arena, as described in the blog?",
-        yesPct: 78.4, noPct: 21.6, yesVotes: 2028, noVotes: 559, totalVotes: 25744, skipped: 23157
+        yesPct: 78.4, noPct: 21.6, yesVotes: 2028, noVotes: 559, totalVotes: 25744, skipped: 23157, category: "content"
       },
       {
         text: "Should untradeable Blighted Surge sacks be added as a reward from the PvP Arena, as described in the blog?",
-        yesPct: 79.0, noPct: 21.0, yesVotes: 2051, noVotes: 544, totalVotes: 25744, skipped: 23149
+        yesPct: 79.0, noPct: 21.0, yesVotes: 2051, noVotes: 544, totalVotes: 25744, skipped: 23149, category: "content"
       },
       {
         text: "Should the Ornament Kit for Dragon Claws be added as a reward from the PvP Arena?",
-        yesPct: 69.7, noPct: 30.3, yesVotes: 17151, noVotes: 7454, totalVotes: 25744, skipped: 1139
+        yesPct: 69.7, noPct: 30.3, yesVotes: 17151, noVotes: 7454, totalVotes: 25744, skipped: 1139, category: "content"
       },
       {
         text: "Should the Ornament Kit for Elder Chaos Robes (Hood, Top and Robe) be added as a reward from the PvP Arena? One kit would be required for each piece.",
-        yesPct: 70.8, noPct: 29.2, yesVotes: 17300, noVotes: 7132, totalVotes: 25744, skipped: 1312
+        yesPct: 70.8, noPct: 29.2, yesVotes: 17300, noVotes: 7132, totalVotes: 25744, skipped: 1312, category: "content"
       },
       {
         text: "Should the Ornament Kit for the Heavy Ballista be added as a reward from the PvP Arena?",
-        yesPct: 68.5, noPct: 31.5, yesVotes: 16726, noVotes: 7690, totalVotes: 25744, skipped: 1328
+        yesPct: 68.5, noPct: 31.5, yesVotes: 16726, noVotes: 7690, totalVotes: 25744, skipped: 1328, category: "content"
       },
       {
         text: "Should the Ornament Kit for Armadyl (Helm, Chestplate and Chainskirt) be added as a reward from the PvP Arena? One kit would be required for each piece.",
-        yesPct: 64.5, noPct: 35.5, yesVotes: 15812, noVotes: 8692, totalVotes: 25744, skipped: 1240
+        yesPct: 64.5, noPct: 35.5, yesVotes: 15812, noVotes: 8692, totalVotes: 25744, skipped: 1240, category: "content"
       },
       {
         text: "Should the Ornament Kit for the Dragon Warhammer be added as a reward from the PvP Arena?",
-        yesPct: 67.0, noPct: 33.0, yesVotes: 16465, noVotes: 8105, totalVotes: 25744, skipped: 1174
+        yesPct: 67.0, noPct: 33.0, yesVotes: 16465, noVotes: 8105, totalVotes: 25744, skipped: 1174, category: "content"
       },
       {
         text: "Should the Ornament Kit for the Elder Maul be added as a reward from the PvP Arena?",
-        yesPct: 68.8, noPct: 31.2, yesVotes: 16855, noVotes: 7635, totalVotes: 25744, skipped: 1254
+        yesPct: 68.8, noPct: 31.2, yesVotes: 16855, noVotes: 7635, totalVotes: 25744, skipped: 1254, category: "content"
       },
       {
         text: "Should the Ornament Kit for Bandos (Chestplate, Tassets and Boots) be added as a reward from the PvP Arena? One kit would be required for each piece.",
-        yesPct: 65.0, noPct: 35.0, yesVotes: 15963, noVotes: 8591, totalVotes: 25744, skipped: 1190
+        yesPct: 65.0, noPct: 35.0, yesVotes: 15963, noVotes: 8591, totalVotes: 25744, skipped: 1190, category: "content"
       },
       {
         text: "Should the Ornament Kit for Dagon'hai Robes (Hat, Robe Top and Robe Bottom) be added as a reward from the PvP Arena? One kit would be required for each piece.",
-        yesPct: 70.0, noPct: 30.0, yesVotes: 17057, noVotes: 7293, totalVotes: 25744, skipped: 1394
+        yesPct: 70.0, noPct: 30.0, yesVotes: 17057, noVotes: 7293, totalVotes: 25744, skipped: 1394, category: "content"
       }
     ]
   },
@@ -873,23 +1462,23 @@ const POLLS = [
     questions: [
       {
         text: "Should the Thammaron's Sceptre be reworked as described in the blog?",
-        yesPct: 88.8, noPct: 11.2, yesVotes: 32032, noVotes: 4051, totalVotes: 44007, skipped: 7924
+        yesPct: 88.8, noPct: 11.2, yesVotes: 32032, noVotes: 4051, totalVotes: 44007, skipped: 7924, category: "content"
       },
       {
         text: "Should the Accursed Sceptre be added as described in the blog? This would be a tradeable upgrade from the Thammaron's Sceptre, made with a tradeable attachment dropped by Vet'ion.",
-        yesPct: 87.9, noPct: 12.1, yesVotes: 32961, noVotes: 4544, totalVotes: 44007, skipped: 6502
+        yesPct: 87.9, noPct: 12.1, yesVotes: 32961, noVotes: 4544, totalVotes: 44007, skipped: 6502, category: "content"
       },
       {
         text: "Should the Webweaver Bow be added as described in the blog? This would be a tradeable upgrade from the Craw's Bow, made with a tradeable attachment dropped by Venenatis.",
-        yesPct: 87.9, noPct: 12.1, yesVotes: 33549, noVotes: 4616, totalVotes: 44007, skipped: 5842
+        yesPct: 87.9, noPct: 12.1, yesVotes: 33549, noVotes: 4616, totalVotes: 44007, skipped: 5842, category: "content"
       },
       {
         text: "Should the Ursine Chainmace be added as described in the blog? This would be a tradeable upgrade from Viggora's Chainmace, made with a tradeable attachment dropped by Callisto.",
-        yesPct: 87.6, noPct: 12.4, yesVotes: 33383, noVotes: 4745, totalVotes: 44007, skipped: 5879
+        yesPct: 87.6, noPct: 12.4, yesVotes: 33383, noVotes: 4745, totalVotes: 44007, skipped: 5879, category: "content"
       },
       {
         text: "Should the Voidwaker, a tradeable weapon assembled by components dropped by each of Venenatis, Vet'ion and Callisto, be added to the game?",
-        yesPct: 85.1, noPct: 14.9, yesVotes: 32842, noVotes: 5736, totalVotes: 44007, skipped: 5429
+        yesPct: 85.1, noPct: 14.9, yesVotes: 32842, noVotes: 5736, totalVotes: 44007, skipped: 5429, category: "content"
       },
       {
         text: "If the Voidwaker is added to the game, should its Special Attack, Disrupt, cost 50% or 60% Special Attack energy? (50% won with 61%)",
@@ -898,15 +1487,15 @@ const POLLS = [
           { label: "50%", pct: 61.0, votes: 22296 },
           { label: "60%", pct: 39.0, votes: 14232 }
         ],
-        totalVotes: 44007, skipped: 7479
+        totalVotes: 44007, skipped: 7479, category: "content"
       },
       {
         text: "Should the Dragon Pickaxe be obtainable via the Mining skill, to be offered from a source determined by Poll Question 9?",
-        yesPct: 75.5, noPct: 24.5, yesVotes: 32283, noVotes: 10475, totalVotes: 44007, skipped: 1249
+        yesPct: 75.5, noPct: 24.5, yesVotes: 32283, noVotes: 10475, totalVotes: 44007, skipped: 1249, category: "content"
       },
       {
         text: "Should the Craw's Bow, Viggora's Chainmace and Thammaron's Sceptre from Revenants be made more obtainable? To be improved by means determined in a future poll.",
-        yesPct: 78.9, noPct: 21.1, yesVotes: 30685, noVotes: 8186, totalVotes: 44007, skipped: 5136
+        yesPct: 78.9, noPct: 21.1, yesVotes: 30685, noVotes: 8186, totalVotes: 44007, skipped: 5136, category: "content"
       }
     ]
   },
@@ -921,67 +1510,67 @@ const POLLS = [
     questions: [
       {
         text: "Should we add tier 78 Ancient Warrior armour (Statius', Vesta's, Morrigan's and Zuriel's) as an untradeable reward from Bounty Hunter, useable only within the Bounty Hunter crater, as described in the blog?",
-        yesPct: 74.5, noPct: 25.5, yesVotes: 25338, noVotes: 8678, totalVotes: 38534, skipped: 4518
+        yesPct: 74.5, noPct: 25.5, yesVotes: 25338, noVotes: 8678, totalVotes: 38534, skipped: 4518, category: "content"
       },
       {
         text: "Should we add tier 20 Corrupt Ancient Warrior armour (Statius', Vesta's, Morrigan's and Zuriel's) as an untradeable reward from Bounty Hunter, useable only within the Bounty Hunter crater, as described in the blog?",
-        yesPct: 72.4, noPct: 27.6, yesVotes: 24547, noVotes: 9352, totalVotes: 38534, skipped: 4635
+        yesPct: 72.4, noPct: 27.6, yesVotes: 24547, noVotes: 9352, totalVotes: 38534, skipped: 4635, category: "content"
       },
       {
         text: "Should we add tier 78 Ancient Warrior weapons as untradeable rewards from Bounty Hunter, useable only within the Bounty Hunter crater, as described in the blog?",
-        yesPct: 73.9, noPct: 26.1, yesVotes: 25100, noVotes: 8853, totalVotes: 38534, skipped: 4581
+        yesPct: 73.9, noPct: 26.1, yesVotes: 25100, noVotes: 8853, totalVotes: 38534, skipped: 4581, category: "content"
       },
       {
         text: "Should we add an imbue for the Dark Bow as an untradeable reward from Bounty Hunter, allowing players to create an imbued Dark Bow to be used within the Bounty Hunter crater?",
-        yesPct: 79.4, noPct: 20.6, yesVotes: 27733, noVotes: 7200, totalVotes: 38534, skipped: 3601
+        yesPct: 79.4, noPct: 20.6, yesVotes: 27733, noVotes: 7200, totalVotes: 38534, skipped: 3601, category: "content"
       },
       {
         text: "Should we add an imbue for the Barrelchest Anchor as an untradeable reward from Bounty Hunter, allowing players to create an imbued Barrelchest Anchor to be used within the Bounty Hunter crater?",
-        yesPct: 78.6, noPct: 21.4, yesVotes: 27321, noVotes: 7436, totalVotes: 38534, skipped: 3777
+        yesPct: 78.6, noPct: 21.4, yesVotes: 27321, noVotes: 7436, totalVotes: 38534, skipped: 3777, category: "content"
       },
       {
         text: "Should we add an imbue for the Dragon Mace as an untradeable reward from Bounty Hunter, allowing players to create an imbued Dragon Mace to be used within the Bounty Hunter crater?",
-        yesPct: 78.3, noPct: 21.7, yesVotes: 27274, noVotes: 7559, totalVotes: 38534, skipped: 3701
+        yesPct: 78.3, noPct: 21.7, yesVotes: 27274, noVotes: 7559, totalVotes: 38534, skipped: 3701, category: "content"
       },
       {
         text: "Should we add an imbue for the Dragon Longsword as an untradeable reward from Bounty Hunter, allowing players to create an imbued Dragon Longsword to be used within the Bounty Hunter crater?",
-        yesPct: 77.7, noPct: 22.3, yesVotes: 27044, noVotes: 7746, totalVotes: 38534, skipped: 3744
+        yesPct: 77.7, noPct: 22.3, yesVotes: 27044, noVotes: 7746, totalVotes: 38534, skipped: 3744, category: "content"
       },
       {
         text: "Should we add an imbue for the Abyssal Dagger as an untradeable reward from Bounty Hunter, allowing players to create an imbued Abyssal Dagger to be used within the Bounty Hunter crater?",
-        yesPct: 76.8, noPct: 23.2, yesVotes: 26756, noVotes: 8079, totalVotes: 38534, skipped: 3699
+        yesPct: 76.8, noPct: 23.2, yesVotes: 26756, noVotes: 8079, totalVotes: 38534, skipped: 3699, category: "content"
       },
       {
         text: "Should players be able to spend their Bounty Hunter points on Combat Experience rewards, as described in the blog?",
-        yesPct: 70.7, noPct: 29.3, yesVotes: 25295, noVotes: 10484, totalVotes: 38534, skipped: 2755
+        yesPct: 70.7, noPct: 29.3, yesVotes: 25295, noVotes: 10484, totalVotes: 38534, skipped: 2755, category: "other"
       },
       {
         text: "Should we add the ability to remove up to 500 Combat XP with Bounty Hunter points, as described in the blog?",
-        yesPct: 66.6, noPct: 33.4, yesVotes: 23851, noVotes: 11940, totalVotes: 38534, skipped: 2743
+        yesPct: 66.6, noPct: 33.4, yesVotes: 23851, noVotes: 11940, totalVotes: 38534, skipped: 2743, category: "other"
       },
       {
         text: "Should we add some darker, 'corrupt' ornament kits for a variety of Dragon armour and weaponry as untradeable cosmetic rewards from Bounty Hunter, as described in the blog?",
-        yesPct: 80.4, noPct: 19.6, yesVotes: 29136, noVotes: 7084, totalVotes: 38534, skipped: 2314
+        yesPct: 80.4, noPct: 19.6, yesVotes: 29136, noVotes: 7084, totalVotes: 38534, skipped: 2314, category: "content"
       },
       {
         text: "Should we add a darker, 'corrupt' ornament kit for the Fighter Torso as an untradeable cosmetic reward from Bounty Hunter?",
-        yesPct: 81.0, noPct: 19.0, yesVotes: 29415, noVotes: 6886, totalVotes: 38534, skipped: 2233
+        yesPct: 81.0, noPct: 19.0, yesVotes: 29415, noVotes: 6886, totalVotes: 38534, skipped: 2233, category: "content"
       },
       {
         text: "Should we add a darker, 'corrupt' ornament kit for the Neitiznot Helmet as an untradeable cosmetic reward from Bounty Hunter?",
-        yesPct: 80.2, noPct: 19.8, yesVotes: 29078, noVotes: 7188, totalVotes: 38534, skipped: 2268
+        yesPct: 80.2, noPct: 19.8, yesVotes: 29078, noVotes: 7188, totalVotes: 38534, skipped: 2268, category: "content"
       },
       {
         text: "Should we add an ornament kit for the Elder Maul as an untradeable cosmetic reward from Bounty Hunter? This same kit was initially polled as a reward from Emir's Arena.",
-        yesPct: 80.4, noPct: 19.6, yesVotes: 29037, noVotes: 7099, totalVotes: 38534, skipped: 2398
+        yesPct: 80.4, noPct: 19.6, yesVotes: 29037, noVotes: 7099, totalVotes: 38534, skipped: 2398, category: "content"
       },
       {
         text: "Should we add an ornament kit for the Heavy Ballista as an untradeable cosmetic reward from Bounty Hunter? This same kit was initially polled as a reward from Emir's Arena.",
-        yesPct: 80.0, noPct: 20.0, yesVotes: 28862, noVotes: 7213, totalVotes: 38534, skipped: 2459
+        yesPct: 80.0, noPct: 20.0, yesVotes: 28862, noVotes: 7213, totalVotes: 38534, skipped: 2459, category: "content"
       },
       {
         text: "Should we add an ornament kit for the Elder Chaos robes as an untradeable cosmetic reward from Bounty Hunter? This same kit was initially polled as a reward from Emir's Arena.",
-        yesPct: 81.0, noPct: 19.0, yesVotes: 29281, noVotes: 6882, totalVotes: 38534, skipped: 2371
+        yesPct: 81.0, noPct: 19.0, yesVotes: 29281, noVotes: 6882, totalVotes: 38534, skipped: 2371, category: "content"
       }
     ]
   },
@@ -996,11 +1585,11 @@ const POLLS = [
     questions: [
       {
         text: "Should we add Undead Pirates to the Wilderness Chaos Temple and adjust the Elder Chaos Druids, with rewards to be polled at a later date, as described in the blog? This would make the area a profitable low-level hotspot.",
-        yesPct: 79.4, noPct: 20.6, yesVotes: 57652, noVotes: 14964, totalVotes: 83780, skipped: 11164
+        yesPct: 79.4, noPct: 20.6, yesVotes: 57652, noVotes: 14964, totalVotes: 83780, skipped: 11164, category: "content"
       },
       {
         text: "Should we work on designs for improvements to the Wilderness Agility Course, Wilderness Slayer, Wilderness Resource Area and Fountain of Rune, to be fleshed out and locked in at a later date?",
-        yesPct: 87.8, noPct: 12.2, yesVotes: 68129, noVotes: 9497, totalVotes: 83780, skipped: 6154
+        yesPct: 87.8, noPct: 12.2, yesVotes: 68129, noVotes: 9497, totalVotes: 83780, skipped: 6154, category: "content"
       }
     ]
   },
@@ -1015,95 +1604,95 @@ const POLLS = [
     questions: [
       {
         text: "Should we move the Hard Clue step that currently points towards the Chaos Temple to a different Wilderness location?",
-        yesPct: 73.3, noPct: 26.7, yesVotes: 34488, noVotes: 12557, totalVotes: 52996, skipped: 5951
+        yesPct: 73.3, noPct: 26.7, yesVotes: 34488, noVotes: 12557, totalVotes: 52996, skipped: 5951, category: "other"
       },
       {
         text: "Should we add the Chivalry Prayer Scroll, a tradeable item that would unlock the Chivalry Prayer as described in the blog? We will not adjust the current means of unlocking Chivalry.",
-        yesPct: 62.7, noPct: 37.3, yesVotes: 29785, noVotes: 17717, totalVotes: 52996, skipped: 5494
+        yesPct: 62.7, noPct: 37.3, yesVotes: 29785, noVotes: 17717, totalVotes: 52996, skipped: 5494, category: "content"
       },
       {
         text: "Should we adjust Chivalry's bonuses, with the specific adjustment to be determined in Question 4?",
-        yesPct: 63.4, noPct: 36.6, yesVotes: 26742, noVotes: 15423, totalVotes: 52996, skipped: 10831
+        yesPct: 63.4, noPct: 36.6, yesVotes: 26742, noVotes: 15423, totalVotes: 52996, skipped: 10831, category: "balance"
       },
       {
         text: "Should we add Adamant Seeds, as described in the blog?",
-        yesPct: 72.9, noPct: 27.1, yesVotes: 32720, noVotes: 12191, totalVotes: 52996, skipped: 8085
+        yesPct: 72.9, noPct: 27.1, yesVotes: 32720, noVotes: 12191, totalVotes: 52996, skipped: 8085, category: "content"
       },
       {
         text: "Should we add the Blipblock Scroll (name TBD), a tradeable item that unlocks the ability to block teleportation attacks from Elder Chaos Druids, as described in the blog?",
-        yesPct: 81.8, noPct: 18.2, yesVotes: 39979, noVotes: 8912, totalVotes: 52996, skipped: 4105
+        yesPct: 81.8, noPct: 18.2, yesVotes: 39979, noVotes: 8912, totalVotes: 52996, skipped: 4105, category: "balance"
       },
       {
         text: "If we add the Blipblock Scroll (name TBD), should it also prevent teleportation attacks from Abyssal Demons?",
-        yesPct: 80.4, noPct: 19.6, yesVotes: 39510, noVotes: 9654, totalVotes: 52996, skipped: 3832
+        yesPct: 80.4, noPct: 19.6, yesVotes: 39510, noVotes: 9654, totalVotes: 52996, skipped: 3832, category: "balance"
       },
       {
         text: "Should we adjust the Fountain of Rune by allowing players to Alchemize multiple items at once, as outlined in the blog?",
-        yesPct: 67.1, noPct: 32.9, yesVotes: 33566, noVotes: 16461, totalVotes: 52996, skipped: 2969
+        yesPct: 67.1, noPct: 32.9, yesVotes: 33566, noVotes: 16461, totalVotes: 52996, skipped: 2969, category: "content"
       },
       {
         text: "Should we add an opt-in system that allows players to earn GP and Blighted supplies at the Wilderness Agility Course, as described in the blog?",
-        yesPct: 75.1, noPct: 24.9, yesVotes: 37911, noVotes: 12561, totalVotes: 52996, skipped: 2524
+        yesPct: 75.1, noPct: 24.9, yesVotes: 37911, noVotes: 12561, totalVotes: 52996, skipped: 2524, category: "content"
       },
       {
         text: "If the system from Question 9 is added, should Amylase crystals be obtainable as a reward? These would account for roughly 20% of the loot earned.",
-        yesPct: 68.9, noPct: 31.1, yesVotes: 33763, noVotes: 15249, totalVotes: 52996, skipped: 3984
+        yesPct: 68.9, noPct: 31.1, yesVotes: 33763, noVotes: 15249, totalVotes: 52996, skipped: 3984, category: "content"
       },
       {
         text: "Should we add a stackable token to the Wilderness Agility Course that players can hand in for extra XP, with increasing XP modifiers for bigger stacks, as described in the blog?",
-        yesPct: 79.7, noPct: 20.3, yesVotes: 40140, noVotes: 10213, totalVotes: 52996, skipped: 2643
+        yesPct: 79.7, noPct: 20.3, yesVotes: 40140, noVotes: 10213, totalVotes: 52996, skipped: 2643, category: "content"
       },
       {
         text: "Should we adjust the respawn timer of most Wilderness NPCs to 9 seconds to reduce downtime during Wilderness Slayer? This aims to bring NPCs across the Wilderness more in line with each other.",
-        yesPct: 89.7, noPct: 10.3, yesVotes: 44599, noVotes: 5117, totalVotes: 52996, skipped: 3280
+        yesPct: 89.7, noPct: 10.3, yesVotes: 44599, noVotes: 5117, totalVotes: 52996, skipped: 3280, category: "content"
       },
       {
         text: "Should we increase the quantity of Bandits at the Wilderness Bandit Camp to improve the respective Wilderness Slayer task?",
-        yesPct: 81.3, noPct: 18.7, yesVotes: 38191, noVotes: 8808, totalVotes: 52996, skipped: 5997
+        yesPct: 81.3, noPct: 18.7, yesVotes: 38191, noVotes: 8808, totalVotes: 52996, skipped: 5997, category: "content"
       },
       {
         text: "Should we increase the quantity of Rogues at Rogues' Castle to improve the respective Wilderness Slayer task?",
-        yesPct: 77.8, noPct: 22.2, yesVotes: 36518, noVotes: 10439, totalVotes: 52996, skipped: 6039
+        yesPct: 77.8, noPct: 22.2, yesVotes: 36518, noVotes: 10439, totalVotes: 52996, skipped: 6039, category: "content"
       },
       {
         text: "Should we increase the quantity of Dark Warriors at the Dark Warriors' Fortress to improve the respective Wilderness Slayer task?",
-        yesPct: 81.0, noPct: 19.0, yesVotes: 37842, noVotes: 8886, totalVotes: 52996, skipped: 6268
+        yesPct: 81.0, noPct: 19.0, yesVotes: 37842, noVotes: 8886, totalVotes: 52996, skipped: 6268, category: "content"
       },
       {
         text: "Should we increase the quantity of Ankou in the Wilderness Slayer Caves to improve the respective Wilderness Slayer task?",
-        yesPct: 84.4, noPct: 15.6, yesVotes: 39777, noVotes: 7329, totalVotes: 52996, skipped: 5890
+        yesPct: 84.4, noPct: 15.6, yesVotes: 39777, noVotes: 7329, totalVotes: 52996, skipped: 5890, category: "content"
       },
       {
         text: "Should we increase the quantity of Hellhounds in the Wilderness Slayer Caves to improve the respective Wilderness Slayer task?",
-        yesPct: 84.1, noPct: 15.9, yesVotes: 39623, noVotes: 7479, totalVotes: 52996, skipped: 5894
+        yesPct: 84.1, noPct: 15.9, yesVotes: 39623, noVotes: 7479, totalVotes: 52996, skipped: 5894, category: "content"
       },
       {
         text: "Should we increase the quantity of Jellies in the Wilderness Slayer Caves to improve the respective Wilderness Slayer task?",
-        yesPct: 84.2, noPct: 15.8, yesVotes: 39556, noVotes: 7427, totalVotes: 52996, skipped: 6013
+        yesPct: 84.2, noPct: 15.8, yesVotes: 39556, noVotes: 7427, totalVotes: 52996, skipped: 6013, category: "content"
       },
       {
         text: "Should we increase the quantity of Ice Giants in the Wilderness Slayer Caves to improve the respective Wilderness Slayer task?",
-        yesPct: 83.0, noPct: 17.0, yesVotes: 38904, noVotes: 7958, totalVotes: 52996, skipped: 6134
+        yesPct: 83.0, noPct: 17.0, yesVotes: 38904, noVotes: 7958, totalVotes: 52996, skipped: 6134, category: "content"
       },
       {
         text: "Should we adjust the furniture in the deep Wilderness Pirates' Hideout, allowing players to place a Dwarf Multicannon?",
-        yesPct: 80.0, noPct: 20.0, yesVotes: 38273, noVotes: 9589, totalVotes: 52996, skipped: 5134
+        yesPct: 80.0, noPct: 20.0, yesVotes: 38273, noVotes: 9589, totalVotes: 52996, skipped: 5134, category: "content"
       },
       {
         text: "Should we improve the drops of high-level Bandits, as described in the blog?",
-        yesPct: 84.4, noPct: 15.6, yesVotes: 40592, noVotes: 7485, totalVotes: 52996, skipped: 4919
+        yesPct: 84.4, noPct: 15.6, yesVotes: 40592, noVotes: 7485, totalVotes: 52996, skipped: 4919, category: "content"
       },
       {
         text: "Should we add frequent Coin drops to high-level Rogues, as described in the blog?",
-        yesPct: 81.1, noPct: 18.9, yesVotes: 38575, noVotes: 9017, totalVotes: 52996, skipped: 5404
+        yesPct: 81.1, noPct: 18.9, yesVotes: 38575, noVotes: 9017, totalVotes: 52996, skipped: 5404, category: "content"
       },
       {
         text: "Should we make Superior Slayer creatures 10% more likely to appear while on a Wilderness Slayer Task?",
-        yesPct: 80.5, noPct: 19.5, yesVotes: 40713, noVotes: 9878, totalVotes: 52996, skipped: 2405
+        yesPct: 80.5, noPct: 19.5, yesVotes: 40713, noVotes: 9878, totalVotes: 52996, skipped: 2405, category: "content"
       },
       {
         text: "Should we allow players to more easily purchase multiple imbued God Capes for a 250,000 GP cost, as described in the blog?",
-        yesPct: 91.1, noPct: 8.9, yesVotes: 46375, noVotes: 4546, totalVotes: 52996
+        yesPct: 91.1, noPct: 8.9, yesVotes: 46375, noVotes: 4546, totalVotes: 52996, category: "content"
       }
     ]
   },
@@ -1121,15 +1710,15 @@ const POLLS = [
     questions: [
       {
         text: "Should we increase the base number of charges on the Skull Sceptre from 5 base charges to 10? After completing the Wilderness Achievement Diary tiers this will increase to 14, 18, 22 and 26 respectively. Currently completing these diaries raises the total charges to 7, 9, 11 and 13.",
-        yesPct: 94.1, noPct: 5.9, yesVotes: 41602, noVotes: 2617, totalVotes: 48065
+        yesPct: 94.1, noPct: 5.9, yesVotes: 41602, noVotes: 2617, totalVotes: 48065, category: "content"
       },
       {
         text: "Should we allow players to crush Skull Sceptre pieces into tradeable, stackable chunks? These chunks can then be used to charge the imbued Skull Sceptre.",
-        yesPct: 84.5, noPct: 15.5, yesVotes: 36809, noVotes: 6757, totalVotes: 48065
+        yesPct: 84.5, noPct: 15.5, yesVotes: 36809, noVotes: 6757, totalVotes: 48065, category: "content"
       },
       {
         text: "Should the Skull Sceptre no longer be destroyed on death?",
-        yesPct: 85.3, noPct: 14.7, yesVotes: 36554, noVotes: 6315, totalVotes: 48065
+        yesPct: 85.3, noPct: 14.7, yesVotes: 36554, noVotes: 6315, totalVotes: 48065, category: "content"
       }
     ]
   },
@@ -1145,7 +1734,7 @@ const POLLS = [
     questions: [
       {
         text: "Should the Last Man Standing Reward Shop be able to imbue equipment, like the Nightmare Zone reward shop does? The Nightmare Zone store won\'t be changed in any way.",
-        yesPct: 58.6, noPct: 41.4, yesVotes: 27329, noVotes: 19287, totalVotes: 51385
+        yesPct: 58.6, noPct: 41.4, yesVotes: 27329, noVotes: 19287, totalVotes: 51385, category: "content"
       }
     ]
   },
@@ -1161,15 +1750,15 @@ const POLLS = [
     questions: [
       {
         text: "Should it be possible to use Vesta\'s Longsword in combat against other players in PvP worlds? The Longsword would lose all bonuses when used against NPCs, effectively turning it into a cosmetic item.",
-        yesPct: 74.6, noPct: 25.4, yesVotes: 2363, noVotes: 805, totalVotes: 45387
+        yesPct: 74.6, noPct: 25.4, yesVotes: 2363, noVotes: 805, totalVotes: 45387, category: "balance"
       },
       {
         text: "Should all of the Blighted items available in the Last Man Standing store also be added to the Soul Wars store? Each Blighted item would cost 10 Zeal to purchase. It would not be possible to sell these items back to the store for Zeal.",
-        yesPct: 76.2, noPct: 23.8, yesVotes: 23944, noVotes: 7462, totalVotes: 45387
+        yesPct: 76.2, noPct: 23.8, yesVotes: 23944, noVotes: 7462, totalVotes: 45387, category: "content"
       },
       {
         text: "If the Blighted items are added to the Soul Wars Reward Shop, should it also be possible to use the spell sacks within the minigame? It would not be possible to use the Blighted food or potions.",
-        yesPct: 74.8, noPct: 25.2, yesVotes: 22842, noVotes: 7676, totalVotes: 45387
+        yesPct: 74.8, noPct: 25.2, yesVotes: 22842, noVotes: 7676, totalVotes: 45387, category: "content"
       }
     ]
   },
@@ -1185,7 +1774,7 @@ const POLLS = [
     questions: [
       {
         text: "Should we allow players to chisel down Ancient Artefacts into Revenant Ether at a rate of 500gp to 1 ether?",
-        yesPct: 87.1, noPct: 12.9, yesVotes: 63842, noVotes: 9473, totalVotes: 90380
+        yesPct: 87.1, noPct: 12.9, yesVotes: 63842, noVotes: 9473, totalVotes: 90380, category: "content"
       }
     ]
   },
@@ -1201,7 +1790,7 @@ const POLLS = [
     questions: [
       {
         text: "Should the Revenant Cave Teleport scroll allow players to select different cave entrances, as described in the blog?",
-        yesPct: 82.4, noPct: 17.6, yesVotes: 71708, noVotes: 15367, totalVotes: 102787
+        yesPct: 82.4, noPct: 17.6, yesVotes: 71708, noVotes: 15367, totalVotes: 102787, category: "content"
       }
     ]
   },
@@ -1217,11 +1806,11 @@ const POLLS = [
     questions: [
       {
         text: "Should we allow the Expert Mining Gloves\' chance to prevent ore depletion apply to Runite Golems found in the Wilderness Resource Area? This effect already applies to Runite rocks.",
-        yesPct: 86.1, noPct: 13.9, yesVotes: 60699, noVotes: 9817, totalVotes: 77635
+        yesPct: 86.1, noPct: 13.9, yesVotes: 60699, noVotes: 9817, totalVotes: 77635, category: "content"
       },
       {
         text: "Should we allow players to have a chance to receive additional Runite ore when successfully mining from a Runite Golem, scaling up with Wilderness Achievement Diary tier completion, as described in the blog?",
-        yesPct: 83.9, noPct: 16.1, yesVotes: 59848, noVotes: 11454, totalVotes: 77635
+        yesPct: 83.9, noPct: 16.1, yesVotes: 59848, noVotes: 11454, totalVotes: 77635, category: "content"
       }
     ]
   },
@@ -1237,7 +1826,7 @@ const POLLS = [
     questions: [
       {
         text: "Should the Last Man Standing minigame be introduced into Old School RuneScape as described in the developer blog?",
-        yesPct: 87.6, noPct: 12.4, yesVotes: 35100, noVotes: 4962, totalVotes: 42000
+        yesPct: 87.6, noPct: 12.4, yesVotes: 35100, noVotes: 4962, totalVotes: 42000, category: "content"
       }
     ]
   },
@@ -1253,55 +1842,55 @@ const POLLS = [
     questions: [
       {
         text: "Should the LMS Reward shop offer a deadman cosmetic armour as described in the blog? This armour set will include the top, bottoms, and cape and will have no stats.",
-        yesPct: 81.1, noPct: 18.9, yesVotes: 20432, noVotes: 4773, totalVotes: 27505
+        yesPct: 81.1, noPct: 18.9, yesVotes: 20432, noVotes: 4773, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer trouver parchment as described in the blog?",
-        yesPct: 75.8, noPct: 24.2, yesVotes: 17650, noVotes: 5637, totalVotes: 27505
+        yesPct: 75.8, noPct: 24.2, yesVotes: 17650, noVotes: 5637, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the Armadyl Halo as described in the blog?",
-        yesPct: 80.9, noPct: 19.1, yesVotes: 20126, noVotes: 4751, totalVotes: 27505
+        yesPct: 80.9, noPct: 19.1, yesVotes: 20126, noVotes: 4751, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the Bandos Halo as described in the blog?",
-        yesPct: 80.8, noPct: 19.2, yesVotes: 20119, noVotes: 4778, totalVotes: 27505
+        yesPct: 80.8, noPct: 19.2, yesVotes: 20119, noVotes: 4778, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the Seren Halo as described in the blog?",
-        yesPct: 79.4, noPct: 20.6, yesVotes: 19712, noVotes: 5129, totalVotes: 27505
+        yesPct: 79.4, noPct: 20.6, yesVotes: 19712, noVotes: 5129, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the Ancient Halo as described in the blog?",
-        yesPct: 80.7, noPct: 19.3, yesVotes: 20071, noVotes: 4801, totalVotes: 27505
+        yesPct: 80.7, noPct: 19.3, yesVotes: 20071, noVotes: 4801, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the Brassica Halo as described in the blog?",
-        yesPct: 77.6, noPct: 22.4, yesVotes: 19227, noVotes: 5564, totalVotes: 27505
+        yesPct: 77.6, noPct: 22.4, yesVotes: 19227, noVotes: 5564, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer a 3 Speed 1-Handed Weapon as described in the blog? This item will have no stats.",
-        yesPct: 75.2, noPct: 24.8, yesVotes: 18556, noVotes: 6122, totalVotes: 27505
+        yesPct: 75.2, noPct: 24.8, yesVotes: 18556, noVotes: 6122, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer a Guthixian Icon as described in the blog? This icon, when given to Juna, will allow the player to get it infused to the Staff of the Dead creating the Staff of Balance.",
-        yesPct: 78.2, noPct: 21.8, yesVotes: 19464, noVotes: 5426, totalVotes: 27505
+        yesPct: 78.2, noPct: 21.8, yesVotes: 19464, noVotes: 5426, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer combat XP Rewards as described in the blog? These will be similar to the Combat XP rewards from Pest Control but offer slightly less XP.",
-        yesPct: 74.5, noPct: 25.5, yesVotes: 18785, noVotes: 6418, totalVotes: 27505
+        yesPct: 74.5, noPct: 25.5, yesVotes: 18785, noVotes: 6418, totalVotes: 27505, category: "other"
       },
       {
         text: "Should the LMS Reward shop offer the ability to exchange points, similar to the Barbarian Assault point exchange system, as described in the blog?",
-        yesPct: 73.9, noPct: 26.1, yesVotes: 18510, noVotes: 6526, totalVotes: 27505
+        yesPct: 73.9, noPct: 26.1, yesVotes: 18510, noVotes: 6526, totalVotes: 27505, category: "other"
       },
       {
         text: "Should the LMS Reward shop offer the Rune Berserker shield as described in the blog? This shield will be tradeable and will degrade. It can be recharged with a token purchased from the LMS Reward Shop.",
-        yesPct: 70.4, noPct: 29.6, yesVotes: 17283, noVotes: 7281, totalVotes: 27505
+        yesPct: 70.4, noPct: 29.6, yesVotes: 17283, noVotes: 7281, totalVotes: 27505, category: "content"
       },
       {
         text: "Should the LMS Reward shop offer the upgradeable cosmetic capes as described in the blog? These capes will represent a set amount of LMS games the player has won.",
-        yesPct: 82.2, noPct: 17.8, yesVotes: 20735, noVotes: 4499, totalVotes: 27505
+        yesPct: 82.2, noPct: 17.8, yesVotes: 20735, noVotes: 4499, totalVotes: 27505, category: "content"
       }
     ]
   },
@@ -1315,47 +1904,47 @@ const POLLS = [
     questions: [
       {
         text: "Should we add tradeable imbue scrolls to the LMS Reward Shop? This will be an alternative way of imbuing rings to what NMZ offers.",
-        yesPct: 61.8, noPct: 38.2, yesVotes: 16301, noVotes: 10077, totalVotes: 27850
+        yesPct: 61.8, noPct: 38.2, yesVotes: 16301, noVotes: 10077, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add a tradeable teleport tablet that teleports you to level 33 Wilderness to the LMS Reward Shop?",
-        yesPct: 76.3, noPct: 23.7, yesVotes: 19914, noVotes: 6196, totalVotes: 27850
+        yesPct: 76.3, noPct: 23.7, yesVotes: 19914, noVotes: 6196, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase a token from the LMS Reward Shop as described in the blog? This tradeable token will allow players to reset the number of spell book switches on the magic and max capes.",
-        yesPct: 61.4, noPct: 38.6, yesVotes: 15581, noVotes: 9782, totalVotes: 27850
+        yesPct: 61.4, noPct: 38.6, yesVotes: 15581, noVotes: 9782, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase a dragon\'s tear from the LMS Reward shop as described in the blog? When used with a Staff of the Dead, the staff will have identical stats but with a special attack that fires a magical fireball, costing 65% special attack.",
-        yesPct: 69.3, noPct: 30.7, yesVotes: 17722, noVotes: 7845, totalVotes: 27850
+        yesPct: 69.3, noPct: 30.7, yesVotes: 17722, noVotes: 7845, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase an unskulling scroll from the LMS Reward shop as described in the blog? This scroll will be tradeable and can only be used once outside the Wilderness and in safe areas when not in combat on PvP worlds.",
-        yesPct: 64.0, noPct: 36.0, yesVotes: 16566, noVotes: 9332, totalVotes: 27850
+        yesPct: 64.0, noPct: 36.0, yesVotes: 16566, noVotes: 9332, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase an amulet of avarice upgrade from the LMS Reward shop as described in the blog? This upgraded amulet will allow players to use the Protect Item prayer without draining prayer points.",
-        yesPct: 64.5, noPct: 35.5, yesVotes: 16566, noVotes: 9114, totalVotes: 27850
+        yesPct: 64.5, noPct: 35.5, yesVotes: 16566, noVotes: 9114, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase an Elder maul attachment from the LMS Reward shop as described in the blog? When attached to the Elder maul, it will add +3 Strength bonus and +10 Crush Attack bonus.",
-        yesPct: 68.8, noPct: 31.2, yesVotes: 17761, noVotes: 8053, totalVotes: 27850
+        yesPct: 68.8, noPct: 31.2, yesVotes: 17761, noVotes: 8053, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase the Thammaron\'s Set from the LMS Reward shop as described in the blog? This set will include the top, bottoms, and hood and will require 60 Magic to equip.",
-        yesPct: 70.5, noPct: 29.5, yesVotes: 17850, noVotes: 7483, totalVotes: 27850
+        yesPct: 70.5, noPct: 29.5, yesVotes: 17850, noVotes: 7483, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase a Runic Orb of Binding from the LMS Reward shop? This orb is charged with Nature, Earth, and Water runes and runes stored are lost on PK death.",
-        yesPct: 62.8, noPct: 37.2, yesVotes: 15746, noVotes: 9315, totalVotes: 27850
+        yesPct: 62.8, noPct: 37.2, yesVotes: 15746, noVotes: 9315, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase a Runic Orb of Teleblock from the LMS Reward shop? This orb is charged with Law, Chaos, and Death runes and runes stored are lost on PK death.",
-        yesPct: 58.3, noPct: 41.7, yesVotes: 14649, noVotes: 10489, totalVotes: 27850
+        yesPct: 58.3, noPct: 41.7, yesVotes: 14649, noVotes: 10489, totalVotes: 27850, category: "content"
       },
       {
         text: "Should we add an ability to purchase an ethereum scroll from the LMS Reward shop? When combined with a bracelet of ethereum, 1000 revenant ethers and Culinaromancer gloves, creates an Unworldly Bracelet with combined stats plus ethereum bracelet effect.",
-        yesPct: 68.3, noPct: 31.7, yesVotes: 17343, noVotes: 8064, totalVotes: 27850
+        yesPct: 68.3, noPct: 31.7, yesVotes: 17343, noVotes: 8064, totalVotes: 27850, category: "content"
       }
     ]
   },
@@ -1373,15 +1962,15 @@ const POLLS = [
     questions: [
       {
         text: "Should we adjust mapping in Soul Wars to prevent safespotting the Blue Team\'s avatar? This change aims to avoid one team gaining an advantage this way.",
-        yesPct: 93.6, noPct: 6.4, yesVotes: 45261, noVotes: 3117, totalVotes: 60207
+        yesPct: 93.6, noPct: 6.4, yesVotes: 45261, noVotes: 3117, totalVotes: 60207, category: "balance"
       },
       {
         text: "Should we allow Bounty Hunter\'s unique rewards to be used in other PvP minigames such as Soul Wars, Castle Wars or Clan Wars?",
-        yesPct: 74.5, noPct: 25.5, yesVotes: 33159, noVotes: 11343, totalVotes: 60207
+        yesPct: 74.5, noPct: 25.5, yesVotes: 33159, noVotes: 11343, totalVotes: 60207, category: "content"
       },
       {
         text: "Should we allow players to use Blighted Supplies in all PvP minigames, including Clan Wars and Castle Wars?",
-        yesPct: 80.4, noPct: 19.6, yesVotes: 39313, noVotes: 9578, totalVotes: 60207
+        yesPct: 80.4, noPct: 19.6, yesVotes: 39313, noVotes: 9578, totalVotes: 60207, category: "content"
       }
     ]
   },
@@ -1395,55 +1984,55 @@ const POLLS = [
     questions: [
       {
         text: "Should we add Reward Crates to Castle Wars, as described in the blog? These would be separate from Castle Wars Tickets and offer things like Runes, Ammunition and Blighted supplies.",
-        yesPct: 88.1, noPct: 11.9, yesVotes: 47847, noVotes: 6471, totalVotes: 61030
+        yesPct: 88.1, noPct: 11.9, yesVotes: 47847, noVotes: 6471, totalVotes: 61030, category: "content"
       },
       {
         text: "On themed Castle Wars Worlds, should players be made to use the Green Portal only, to ensure balanced teams?",
-        yesPct: 85.4, noPct: 14.6, yesVotes: 44271, noVotes: 7547, totalVotes: 61030
+        yesPct: 85.4, noPct: 14.6, yesVotes: 44271, noVotes: 7547, totalVotes: 61030, category: "balance"
       },
       {
         text: "Should games played on themed Castle Wars worlds provide an additional Castle Wars ticket, for both wins and losses?",
-        yesPct: 90.7, noPct: 9.3, yesVotes: 49225, noVotes: 5021, totalVotes: 61030
+        yesPct: 90.7, noPct: 9.3, yesVotes: 49225, noVotes: 5021, totalVotes: 61030, category: "content"
       },
       {
         text: "On worlds that aren\'t Castle Wars themed, should we allow players to place Barricades in front of respawn barriers? This is to mirror old behaviour from 2008, at the request of the Castle Wars community.",
-        yesPct: 77.3, noPct: 22.7, yesVotes: 35166, noVotes: 10306, totalVotes: 61030
+        yesPct: 77.3, noPct: 22.7, yesVotes: 35166, noVotes: 10306, totalVotes: 61030, category: "content"
       },
       {
         text: "On worlds that aren\'t Castle Wars themed, should we adjust the terrain as described in the blog? This is to mirror old behaviour from 2008, at the request of the Castle Wars community.",
-        yesPct: 86.0, noPct: 14.0, yesVotes: 38618, noVotes: 6276, totalVotes: 61030
+        yesPct: 86.0, noPct: 14.0, yesVotes: 38618, noVotes: 6276, totalVotes: 61030, category: "content"
       },
       {
         text: "On worlds that aren\'t Castle Wars themed, should we restore the original functionality of the Dragon Spear and Zamorakian Hasta Special Attacks? This is to mirror old behaviour from before 2016, at the request of the Castle Wars community.",
-        yesPct: 82.7, noPct: 17.3, yesVotes: 37482, noVotes: 7834, totalVotes: 61030
+        yesPct: 82.7, noPct: 17.3, yesVotes: 37482, noVotes: 7834, totalVotes: 61030, category: "balance"
       },
       {
         text: "Should we allow players to wear their own helmets inside Castle Wars on all worlds?",
-        yesPct: 74.4, noPct: 25.6, yesVotes: 38398, noVotes: 13207, totalVotes: 61030
+        yesPct: 74.4, noPct: 25.6, yesVotes: 38398, noVotes: 13207, totalVotes: 61030, category: "content"
       },
       {
         text: "Should we adjust the healing of Castle Wars Bandages to mirror Anglerfish? This change would impact all P2P worlds.",
-        yesPct: 87.2, noPct: 12.8, yesVotes: 43464, noVotes: 6408, totalVotes: 61030
+        yesPct: 87.2, noPct: 12.8, yesVotes: 43464, noVotes: 6408, totalVotes: 61030, category: "balance"
       },
       {
         text: "Should we adjust the Castlewars Brew to give it additional Super Restore and Stamina Potion effects on all worlds?",
-        yesPct: 90.2, noPct: 9.8, yesVotes: 46139, noVotes: 5036, totalVotes: 61030
+        yesPct: 90.2, noPct: 9.8, yesVotes: 46139, noVotes: 5036, totalVotes: 61030, category: "content"
       },
       {
         text: "Should we provide players in Castle Wars with an infinite Rune Pouch that offers \'fake XP drops\' inside the minigame?",
-        yesPct: 78.4, noPct: 21.6, yesVotes: 39026, noVotes: 10731, totalVotes: 61030
+        yesPct: 78.4, noPct: 21.6, yesVotes: 39026, noVotes: 10731, totalVotes: 61030, category: "content"
       },
       {
         text: "Should we replace the Bucket spawn with a pile of buckets inside Castle Wars on all worlds?",
-        yesPct: 90.7, noPct: 9.3, yesVotes: 44924, noVotes: 4617, totalVotes: 61030
+        yesPct: 90.7, noPct: 9.3, yesVotes: 44924, noVotes: 4617, totalVotes: 61030, category: "content"
       },
       {
         text: "Should we allow players to store Castle Wars Bracelet charges at Lanthas, to be used whenever a game starts, as described in the blog? This change would impact all worlds.",
-        yesPct: 89.7, noPct: 10.3, yesVotes: 42112, noVotes: 4844, totalVotes: 61030
+        yesPct: 89.7, noPct: 10.3, yesVotes: 42112, noVotes: 4844, totalVotes: 61030, category: "content"
       },
       {
         text: "On Themed Castle Wars worlds, should we adjust the Barricade placement cap in Castle Wars, as described in the blog?",
-        yesPct: 84.5, noPct: 15.5, yesVotes: 35830, noVotes: 6550, totalVotes: 61030
+        yesPct: 84.5, noPct: 15.5, yesVotes: 35830, noVotes: 6550, totalVotes: 61030, category: "balance"
       }
     ]
   },
@@ -1459,7 +2048,7 @@ const POLLS = [
     questions: [
       {
         text: "Should we create a PvP Tutorial as outlined in our recent Campfire? This would be a series of interactive challenges to work on key skills like Prayer switching, gear switching, combo-eating and escaping other players, with specific details and rewards to be locked in at a later date.",
-        yesPct: 83.1, noPct: 16.9, yesVotes: 57651, noVotes: 11685, totalVotes: 75636
+        yesPct: 83.1, noPct: 16.9, yesVotes: 57651, noVotes: 11685, totalVotes: 75636, category: "content"
       }
     ]
   }
@@ -1469,6 +2058,14 @@ const POLLS = [
 // =================== UNPOLLED DATA ===================
 
 const UNPOLLED = [
+  {
+    date: "2017-01-01",
+    dateDisplay: "c. 2017 (exact date unconfirmed)",
+    title: "Wilderness instant item drop visibility (unpolled integrity change)",
+    description: "Items manually dropped in the Wilderness were made instantly visible to all other players, without a poll. Food and potions dropped in the Wilderness were made to never appear to other players at all (and now despawn after 15 seconds). This directly addressed pre-death item stashing and team supply-dropping tactics. The mechanic had been polled twice and failed both times: Poll 44 (Jun 2016) at 57.3% yes, and the PvP QoL poll (Feb 2017) at 51.8% yes. Jagex implemented it anyway as a game integrity change. The OSRS Wiki Game Integrity updates page lists it explicitly as an unpolled change.",
+    url: "https://oldschool.runescape.wiki/w/Game_Integrity_updates",
+    blogTitle: "Game Integrity updates (OSRS Wiki)"
+  },
   {
     date: "2018-11-02",
     dateDisplay: "2 Nov 2018",
@@ -1562,6 +2159,7 @@ const UNPOLLED = [
 // =================== RENDER ===================
 
 let currentSort = 'date';
+let currentViewMode = 'all';
 let allQuestions = [];
 
 // Flatten questions with parent poll info
@@ -1590,6 +2188,44 @@ function setSort(mode) {
   const btn = document.getElementById('btn-' + mode);
   if (btn) btn.classList.add('active');
   renderPolls();
+}
+
+function setViewMode(mode) {
+  currentViewMode = mode;
+  document.getElementById('btn-view-all').classList.toggle('active', mode === 'all');
+  document.getElementById('btn-view-split').classList.toggle('active', mode === 'split');
+  renderPolls();
+}
+
+function bumpCategory(cat) {
+  // Switch to split view and scroll to that category section
+  if (currentViewMode !== 'split') {
+    setViewMode('split');
+    document.getElementById('btn-view-all').classList.remove('active');
+    document.getElementById('btn-view-split').classList.add('active');
+  }
+  // Find the category header and scroll to it
+  setTimeout(() => {
+    const headers = document.querySelectorAll('.category-section-header');
+    for (const h of headers) {
+      if (h.dataset.cat === cat) {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+    }
+  }, 50);
+}
+
+function populateCategoryStats() {
+  const cats = ['balance', 'content', 'other'];
+  const total = allQuestions.filter(i => !i.question.multi && i.question.yesPct != null).length;
+  cats.forEach(cat => {
+    const qs = allQuestions.filter(i => (i.question.category || 'other') === cat && !i.question.multi && i.question.yesPct != null);
+    const passed = qs.filter(i => i.question.yesPct >= (i.threshold || 70)).length;
+    const pct = qs.length > 0 ? Math.round(passed / qs.length * 100) : 0;
+    const el = document.getElementById('cat-stat-' + cat);
+    if (el) el.textContent = qs.length + ' questions \u2014 ' + passed + ' / ' + qs.length + ' passed (' + pct + '%)';
+  });
 }
 
 function filterPolls() {
@@ -1636,6 +2272,25 @@ function getSortedQuestions() {
     qs.sort((a, b) => (b.question.skipped ?? 0) - (a.question.skipped ?? 0));
   } else if (currentSort === 'skips-asc') {
     qs.sort((a, b) => (a.question.skipped ?? 0) - (b.question.skipped ?? 0));
+  } else if (currentSort === 'near-threshold') {
+    // Near miss = FAILED questions only, closest to (but under) their threshold first.
+    // Passed, multi, and unscored questions sink to the bottom.
+    qs.sort((a, b) => {
+      const gap = (item) => {
+        const q = item.question;
+        if (q.yesPct == null || q.multi) return Infinity;
+        const thr = item.threshold || 70;
+        return q.yesPct < thr ? (thr - q.yesPct) : Infinity; // only failures count
+      };
+      return gap(a) - gap(b);
+    });
+  } else if (currentSort === 'split') {
+    // Closest to a 50/50 yes-no split first.
+    qs.sort((a, b) => {
+      const da = (a.question.yesPct == null || a.question.multi) ? Infinity : Math.abs(a.question.yesPct - 50);
+      const db = (b.question.yesPct == null || b.question.multi) ? Infinity : Math.abs(b.question.yesPct - 50);
+      return da - db;
+    });
   }
   return qs;
 }
@@ -1644,64 +2299,75 @@ function renderPolls() {
   const container = document.getElementById('polls-container');
   const sorted = getSortedQuestions();
 
-  // Group by poll for display (when date-sorted) or show flat list for pct sort
-  const isPctSort = currentSort === 'pct-asc' || currentSort === 'pct-desc' || currentSort === 'votes-desc' || currentSort === 'votes-asc' || currentSort === 'skips-desc' || currentSort === 'skips-asc';
+  const isPctSort = currentSort === 'pct-asc' || currentSort === 'pct-desc' || currentSort === 'votes-desc' || currentSort === 'votes-asc' || currentSort === 'skips-desc' || currentSort === 'skips-asc' || currentSort === 'near-threshold' || currentSort === 'split';
 
-  let html = '';
-  let totalQ = sorted.length;
   let passedQ = 0;
 
-  if (!isPctSort) {
-    // Group by poll
-    const groups = {};
-    const groupOrder = [];
-    sorted.forEach(item => {
-      if (!groups[item.pollId]) {
-        groups[item.pollId] = { ...item, questions: [] };
-        groupOrder.push(item.pollId);
-      }
-      groups[item.pollId].questions.push(item.question);
-    });
-
-    groupOrder.forEach(pollId => {
-      const g = groups[pollId];
-      html += '<div class="poll-group" data-poll-id="' + pollId + '">';
-      html += '<div class="poll-group-header">';
-      html += '<div>';
-      html += '<div class="poll-group-title">' + escHtml(g.pollTitle) + '</div>';
-      const thrLabel = (g.threshold || 70) === 75 ? '75% pass threshold (pre-Oct 2022)' : '70% pass threshold (post-Oct 2022)';
-      const thrClass = (g.threshold || 70) === 75 ? 'thr-75' : 'thr-70';
-      html += '<div class="poll-group-meta">Source: <a href="' + g.pollUrl + '" target="_blank">oldschool.runescape.com</a> &bull; <a href="' + g.pollWikiUrl + '" target="_blank">OSRS Wiki</a> &bull; <span class="era-badge ' + thrClass + '">' + thrLabel + '</span></div>';
-      html += '</div>';
-      html += '<div class="poll-date-badge">' + g.pollDateDisplay + '</div>';
-      html += '</div>';
-
-      g.questions.forEach(q => {
-        const status = getPassStatus(q, g.threshold);
-        if (status === 'passed') passedQ++;
-        html += renderQuestion(q, status, g.threshold);
+  function renderQuestionList(qs) {
+    let html = '';
+    if (!isPctSort) {
+      const groups = {};
+      const groupOrder = [];
+      qs.forEach(item => {
+        if (!groups[item.pollId]) {
+          groups[item.pollId] = { ...item, questions: [] };
+          groupOrder.push(item.pollId);
+        }
+        groups[item.pollId].questions.push(item.question);
       });
+      groupOrder.forEach(pollId => {
+        const g = groups[pollId];
+        html += '<div class="poll-group" data-poll-id="' + pollId + '">';
+        html += '<div class="poll-group-header"><div>';
+        html += '<div class="poll-group-title">' + escHtml(g.pollTitle) + '</div>';
+        const thrLabel = (g.threshold || 70) === 75 ? '75% pass threshold (pre-Oct 2022)' : '70% pass threshold (post-Oct 2022)';
+        const thrClass = (g.threshold || 70) === 75 ? 'thr-75' : 'thr-70';
+        html += '<div class="poll-group-meta">Source: <a href="' + g.pollUrl + '" target="_blank">oldschool.runescape.com</a> &bull; <a href="' + g.pollWikiUrl + '" target="_blank">OSRS Wiki</a> &bull; <span class="era-badge ' + thrClass + '">' + thrLabel + '</span></div>';
+        html += '</div><div class="poll-date-badge">' + g.pollDateDisplay + '</div></div>';
+        g.questions.forEach(q => {
+          const status = getPassStatus(q, g.threshold);
+          if (status === 'passed') passedQ++;
+          html += renderQuestion(q, status, g.threshold);
+        });
+        html += '</div>';
+      });
+    } else {
+      qs.forEach(item => {
+        const q = item.question;
+        const status = getPassStatus(q, item.threshold);
+        if (status === 'passed') passedQ++;
+        const flatThrClass = (item.threshold || 70) === 75 ? 'thr-75' : 'thr-70';
+        const flatThrLabel = (item.threshold || 70) === 75 ? '75% pass threshold (pre-Oct 2022)' : '70% pass threshold (post-Oct 2022)';
+        html += '<div class="poll-group" style="margin-bottom:10px;">';
+        html += '<div class="poll-group-header"><div>';
+        html += '<div class="poll-group-title" style="font-size:15px;color:#c0a870">' + escHtml(item.pollTitle) + '</div>';
+        html += '<div class="poll-group-meta">Source: <a href="' + item.pollUrl + '" target="_blank">oldschool.runescape.com</a> &bull; <a href="' + item.pollWikiUrl + '" target="_blank">OSRS Wiki</a> &bull; <span class="era-badge ' + flatThrClass + '">' + flatThrLabel + '</span></div>';
+        html += '</div><div class="poll-date-badge">' + item.pollDateDisplay + '</div></div>';
+        html += renderQuestion(q, status, item.threshold);
+        html += '</div>';
+      });
+    }
+    return html;
+  }
+
+  let html = '';
+
+  if (currentViewMode === 'split') {
+    const cats = [
+      { key: 'balance', label: 'Balance Changes', desc: 'Changes that favour one side or alter PvP interactions between players', headerClass: 'cat-header-balance' },
+      { key: 'content', label: 'Content Changes', desc: 'New content, items, minigames, or Wilderness additions that benefit all players equally', headerClass: 'cat-header-content' },
+      { key: 'other', label: 'Other Changes', desc: 'QoL, UI, overlays, world management, and changes that don\'t fit neatly into either category', headerClass: 'cat-header-other' },
+    ];
+    cats.forEach(cat => {
+      const catQs = sorted.filter(i => (i.question.category || 'other') === cat.key);
+      if (catQs.length === 0) return;
+      html += '<div class="category-section-header ' + cat.headerClass + '" data-cat="' + cat.key + '">';
+      html += cat.label + ' &mdash; <span style="font-size:13px;letter-spacing:0.05em;text-transform:none;opacity:0.8;">' + cat.desc + '</span>';
       html += '</div>';
+      html += renderQuestionList(catQs);
     });
   } else {
-    // Flat list with poll name shown per question
-    sorted.forEach(item => {
-      const q = item.question;
-      const status = getPassStatus(q, item.threshold);
-      if (status === 'passed') passedQ++;
-      const flatThrLabel = (item.threshold || 70) === 75 ? '75% pass threshold (pre-Oct 2022)' : '70% pass threshold (post-Oct 2022)';
-      const flatThrClass = (item.threshold || 70) === 75 ? 'thr-75' : 'thr-70';
-      html += '<div class="poll-group" style="margin-bottom:10px;">';
-      html += '<div class="poll-group-header">';
-      html += '<div>';
-      html += '<div class="poll-group-title" style="font-size:15px;color:#c0a870">' + escHtml(item.pollTitle) + '</div>';
-      html += '<div class="poll-group-meta">Source: <a href="' + item.pollUrl + '" target="_blank">oldschool.runescape.com</a> &bull; <a href="' + item.pollWikiUrl + '" target="_blank">OSRS Wiki</a> &bull; <span class="era-badge ' + flatThrClass + '">' + flatThrLabel + '</span></div>';
-      html += '</div>';
-      html += '<div class="poll-date-badge">' + item.pollDateDisplay + '</div>';
-      html += '</div>';
-      html += renderQuestion(q, status, item.threshold);
-      html += '</div>';
-    });
+    html = renderQuestionList(sorted);
   }
 
   container.innerHTML = html || '<div style="padding:24px;color:#c0a870;font-size:16px;text-shadow:1px 1px 0 #000;">No questions match your search.</div>';
@@ -1709,7 +2375,10 @@ function renderPolls() {
   // Update stats
   const yesNoQs = sorted.filter(i => !i.question.multi && i.question.yesPct != null);
   const passedYesNo = yesNoQs.filter(i => i.question.yesPct >= (i.threshold || 70)).length;
-  document.getElementById('visible-count').textContent = totalQ;
+  const multiQs = sorted.filter(i => i.question.multi);
+  document.getElementById('visible-count').textContent = multiQs.length > 0
+    ? yesNoQs.length + ' yes/no + ' + multiQs.length + ' multi-choice questions'
+    : yesNoQs.length + ' questions';
   const pollIds = [...new Set(sorted.map(i => i.pollId))];
   document.getElementById('visible-polls').textContent = pollIds.length;
   document.getElementById('pass-rate').textContent = yesNoQs.length > 0
@@ -1727,6 +2396,10 @@ function renderQuestion(q, status, threshold) {
   } else {
     html += '<span class="pass-badge multi">MULTIPLE CHOICE</span>';
   }
+  if (q.category) {
+    const catLabels = { balance: 'Balance', content: 'Content', other: 'Other' };
+    html += '<span class="cat-badge cat-badge-' + q.category + '">' + (catLabels[q.category] || q.category) + '</span>';
+  }
   html += '</div>';
   html += '<div class="vote-bars">';
 
@@ -1740,7 +2413,7 @@ function renderQuestion(q, status, threshold) {
       html += '</div>';
     });
   } else if (q.yesPct != null) {
-    const yClass = q.yesPct >= 70 ? 'passed' : 'failed';
+    const yClass = q.yesPct >= (threshold || 70) ? 'passed' : 'failed';
     html += '<div class="vote-row">';
     html += '<div class="vote-label">Yes</div>';
     html += '<div class="vote-bar-wrap"><div class="vote-bar-fill bar-yes" style="width:' + q.yesPct + '%"></div></div>';
@@ -1825,6 +2498,24 @@ const SCRAPPED = [
     proposalTitle: "Revenant Caves Proposal (Oct 2020)"
   },
   {
+    era: "Dec 2022 - Jun 2023",
+    title: "Ruinous Powers (new prayer book - shelved before main game release)",
+    description: "Originally proposed as a reward for Desert Treasure II, the Ruinous Powers prayer book passed its Greenlight poll with 86.3% support in December 2022. After two betas and months of community consultation, Jagex ended the second beta early on 19 June 2023 and shelved the project. They stated the prayers had become power creep for its own sake rather than solving new problems, and that the original vision had fallen to the wayside. Notably, Jagex explicitly cited PvP as an area where players wanted prayers that 'mix things up significantly' - signalling prayer design space for PvP remains open. The Ruinous Powers have since appeared only in temporary game modes (Trailblazer Reloaded League, Deadman: Annihilation).",
+    proposalUrl: "https://oldschool.runescape.wiki/w/Ruinous_Powers",
+    proposalTitle: "Ruinous Powers (OSRS Wiki)",
+    cancellationUrl: "https://secure.runescape.com/m=news/a=97/the-future-of-the-ruinous-powers?oldschool=1",
+    cancellationTitle: "The Future of the Ruinous Powers (June 2023 shelving blog)"
+  },
+  {
+    era: "Mar 2024 - Oct 2024",
+    title: "God Alignment Prayers (Rites of Balance / Zaros Alignment - shelved after initial feedback)",
+    description: "Announced in March 2024 as a reward for While Guthix Sleeps (Guthix Alignment / Rites of Balance) and a follow-on Zaros Alignment tied to Desert Treasure II, the God Alignments were a community-inspired proposal for deity-themed prayer sets alongside the existing prayer book. Following rapid negative feedback about complexity and power creep, the Seren Alignments were removed within days. By October 2024's Gielinor Gazette, the whole God Alignments project was listed as shelved with no projected release date. The Zaros Alignment overlaps directly with the Ruinous Powers design space, making these two shelved prayer projects closely related.",
+    proposalUrl: "https://oldschool.runescape.wiki/w/God_Alignments",
+    proposalTitle: "God Alignments (OSRS Wiki)",
+    cancellationUrl: "https://secure.runescape.com/m=news/god-alignment-prayers---consultation--direction?oldschool=1",
+    cancellationTitle: "God Alignment Prayers - Consultation & Direction (March 2024 blog)"
+  },
+  {
     era: "Sep 2024 - Nov 2024",
     title: "Wrathmaw (Wilderness World Boss) and Sandmaw - failed poll, then shelved",
     description: "Wrathmaw was announced at the Summer Summit 2024 as Old School's first-ever Wilderness World Boss - a tanky, roaming boss on a set timer intended to create scheduled PvP hotspots similar to Deadman's Breaches. It failed its Greenlight poll with only 49.1% support (below the 70% threshold). Jagex attempted a redesign in September 2024, also proposing a desert version called Sandmaw. On 5 November 2024, Jagex officially shelved both Wrathmaw and Sandmaw, stating they would instead focus on improving existing PvP activities.",
@@ -1857,9 +2548,16 @@ function renderScrapped() {
 
 // Init
 buildQuestionList();
+populateCategoryStats();
 renderPolls();
 renderUnpolled();
 renderScrapped();
+
+// Section index smooth-scroll (avoids hash navigation inside sandboxed iframes)
+function jumpTo(id){
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 // Back to top
 (function(){

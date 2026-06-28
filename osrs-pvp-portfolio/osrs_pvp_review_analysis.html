@@ -29,6 +29,7 @@
   --blue-rs:      #80c0ff;
   --purple-rs:    #cc88ff;
   --white-rs:     #f0e8d0;
+  --gold:         #d4af5a;
   --sara-blue:    #4488cc;
   --guthix-green: #44aa44;
   --zammy-red:    #cc3333;
@@ -37,7 +38,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  zoom: 1.5;
   background: var(--stone-dark);
   color: var(--text-body);
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -237,6 +237,22 @@ strong { color: var(--white-rs); }
   font-size: 14px;
   margin-bottom: 4px;
   text-shadow: 1px 1px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.arch-pct {
+  font-family: 'RSUF', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--gold);
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(212,175,90,0.4);
+  border-radius: 4px;
+  padding: 1px 7px;
+  text-shadow: 1px 1px 0 #000;
+  flex-shrink: 0;
 }
 .player-box.green  .player-type-name { color: var(--green-bright); }
 .player-box.yellow .player-type-name { color: var(--yellow-rs); }
@@ -253,23 +269,28 @@ strong { color: var(--white-rs); }
   margin: 0;
 }
 .prob-list li {
-  display: flex;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  row-gap: 0;
   padding: 7px 0;
   border-bottom: 1px solid rgba(90,74,42,0.3);
   font-size: 14.5px;
   color: var(--text-body);
   line-height: 1.5;
-  align-items: baseline;
+  align-items: start;
 }
 .prob-list li:last-child { border-bottom: none; }
 .prob-num {
   font-family: 'RSUF', serif;
   font-size: 13px;
   color: var(--orange-rs);
-  min-width: 24px;
   text-shadow: 1px 1px 0 #000;
-  flex-shrink: 0;
+  grid-column: 1;
+  padding-top: 2px;
+}
+.prob-list li > div {
+  grid-column: 2;
 }
 .prob-mentions {
   font-family: 'RSUF', serif;
@@ -279,10 +300,9 @@ strong { color: var(--white-rs); }
   border: 1px solid var(--stone-border);
   padding: 1px 6px;
   border-radius: 2px;
-  white-space: nowrap;
-  align-self: flex-start;
-  margin-top: 1px;
-  flex-shrink: 0;
+  margin-top: 4px;
+  grid-column: 1 / -1;
+  box-sizing: border-box;
 }
 .prob-covered { color: var(--green-rs); font-size: 11px; }
 .prob-not-covered { color: var(--red-rs); font-size: 11px; }
@@ -304,19 +324,17 @@ strong { color: var(--white-rs); }
 }
 .rs-list li:last-child { border-bottom: none; }
 .rs-list li::before {
-  content: '';
+  content: '⚔';
   position: absolute;
-  left: 1px;
-  top: 6px;
-  width: 13px;
-  height: 13px;
-  background: url('../assets/multicombat.png') no-repeat center/contain;
-  image-rendering: pixelated;
+  left: 2px;
+  color: var(--orange-rs);
+  font-size: 11px;
+  top: 7px;
 }
-.rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11px; background: none; }
-.rs-list.skull li::before   { content: '💀'; font-size: 10px; top: 6px; background: none; }
-.rs-list.cross li::before   { content: '✖'; color: var(--red-rs); font-size: 12px; top: 6px; background: none; }
-.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9px; top: 7px; background: none; }
+.rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11px; }
+.rs-list.skull li::before   { content: '💀'; font-size: 10px; top: 6px; }
+.rs-list.cross li::before   { content: '✖'; color: var(--red-rs); font-size: 12px; top: 6px; }
+.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9px; top: 7px; }
 
 /* ── IDEA VERDICT BOXES ── */
 .verdict-grid {
@@ -388,6 +406,211 @@ strong { color: var(--white-rs); }
 .stat-pill span.neg { color: var(--red-rs); }
 .stat-pill span.neu { color: var(--yellow-rs); }
 
+/* ── SORT BAR ── */
+.sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 10px;
+  flex-wrap: wrap;
+}
+.sort-label {
+  font-family: 'RSUF', serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+.sort-btn {
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--stone-border);
+  color: var(--text-dim);
+  padding: 4px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: border-color 0.15s, color 0.15s;
+}
+.sort-btn:hover {
+  border-color: var(--yellow-rs);
+  color: var(--yellow-rs);
+}
+.sort-btn.active {
+  border-color: var(--green-bright);
+  color: var(--green-bright);
+  background: rgba(128,255,0,0.06);
+}
+
+/* ── SOURCES LIST ── */
+.source-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.source-list li {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  row-gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(90,74,42,0.3);
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.5;
+  align-items: start;
+}
+.source-list li .source-platform {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: start;
+  margin-top: 2px;
+}
+.source-list li > span:not(.source-platform):not(.source-count) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.source-list li .source-count {
+  grid-column: 2;
+  grid-row: 2;
+}
+.source-list li:last-child { border-bottom: none; }
+
+/* Collapsible Reddit source group */
+.source-group {
+  border-bottom: 1px solid rgba(90,74,42,0.3);
+}
+.source-group:last-child { border-bottom: none; }
+.source-group > summary {
+  display: grid;
+  grid-template-columns: 72px 1fr 18px;
+  column-gap: 10px;
+  row-gap: 2px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.5;
+  align-items: start;
+  cursor: pointer;
+  list-style: none;
+}
+.source-group > summary::-webkit-details-marker { display: none; }
+.source-group > summary .source-platform { grid-column: 1; align-self: start; margin-top: 2px; }
+.source-group > summary .sg-main { grid-column: 2; grid-row: 1; }
+.source-group > summary .source-count { grid-column: 2; grid-row: 2; }
+.source-group > summary .sg-chevron {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  margin-top: 3px;
+  color: var(--gold);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+.source-group[open] > summary .sg-chevron { transform: rotate(90deg); }
+.source-group > summary:hover .sg-main { color: var(--white-rs); }
+.source-group .sg-toggle-hint {
+  color: var(--gold);
+  font-size: 12.5px;
+  font-style: italic;
+}
+.source-sublist {
+  list-style: none;
+  margin: 0 0 6px 0;
+  padding: 4px 0 4px 14px;
+  border-left: 2px solid rgba(255,69,0,0.35);
+  margin-left: 8px;
+}
+.source-sublist li {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(90,74,42,0.2);
+  font-size: 13.5px;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.source-sublist li:last-child { border-bottom: none; }
+.source-sublist li > span:not(.source-platform):not(.source-count) {
+  grid-column: 1;
+  grid-row: auto;
+}
+.source-sublist li > span.source-count {
+  grid-column: 1;
+  grid-row: auto;
+}
+.source-sublist .sub-num {
+  color: var(--gold);
+  font-family: 'RSUF', serif;
+  font-size: 11px;
+  margin-right: 5px;
+}
+.source-sublist .source-count {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.source-platform {
+  font-family: 'RSUF', serif;
+  font-size: 12px;
+  color: var(--white-rs);
+  background: rgba(0,0,0,0.45);
+  border: 1px solid var(--stone-border);
+  padding: 1px 0;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-shadow: 1px 1px 0 #000;
+  width: 72px;
+  text-align: center;
+  display: inline-block;
+}
+.source-platform.yt    { border-color: #cc2222; color: #ff6666; }
+.source-platform.rd    { border-color: #ff4500; color: #ff6633; }
+.source-platform.dc    { border-color: #5566cc; color: #99aaff; }
+.source-platform.doc   { border-color: var(--guthix-green); color: var(--green-bright); }
+.source-platform.tw    { border-color: #1d9bf0; color: #1d9bf0; }
+.source-count {
+  font-family: 'RSUF', serif;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+
+/* ── PLATFORM BREAKDOWN BAR ── */
+.platform-bar-wrap {
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  grid-column: 1 / -1;
+  box-sizing: border-box;
+}
+.platform-bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  flex: 1;
+  min-width: 60px;
+  overflow: hidden;
+  display: flex;
+}
+.platform-bar-yt  { background: #cc2222; height: 100%; }
+.platform-bar-tw  { background: #1d9bf0; height: 100%; }
+.platform-bar-rd  { background: #ff4500; height: 100%; }
+.platform-label {
+  font-family: 'RSUF', serif;
+  font-size: 10px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.platform-label .yt-col { color: #ff6666; }
+.platform-label .tw-col { color: #1d9bf0; }
+.platform-label .rd-col { color: #ff6633; }
+
 /* ── FOOTER ── */
 .footer {
   text-align: center;
@@ -398,65 +621,279 @@ strong { color: var(--white-rs); }
   font-style: italic;
 }
 
+/* ══ PAGE NAVIGATION (back-to-index, section index, top button) ══ */
+.back-to-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 16px 0;
+  padding: 7px 14px;
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  color: var(--gold);
+  background: var(--stone-mid);
+  border: 1px solid var(--stone-border);
+  border-radius: 5px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.back-to-index:hover {
+  background: var(--stone-panel);
+  color: var(--white-rs);
+  border-color: var(--gold);
+}
+.back-to-index .bti-arrow { font-size: 15px; line-height: 1; }
+
+.page-nav {
+  margin: 0 0 22px 0;
+  padding: 14px 16px;
+  background: var(--stone-mid);
+  border: 1px solid var(--stone-border);
+  border-radius: 7px;
+}
+.page-nav-title {
+  font-family: 'RSUF', serif;
+  font-size: 13px;
+  color: var(--gold);
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.page-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.page-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 6px;
+  font-family: 'RSUF', serif;
+  font-size: 12.5px;
+  color: var(--text-body);
+  background: var(--stone-dark);
+  border: 1px solid var(--stone-border);
+  border-radius: 5px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.page-nav-link:hover {
+  background: var(--stone-panel);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.page-nav-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  color: #1a1208;
+  background: var(--gold);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+#top-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 15px;
+  font-family: 'RSUF', serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #1a1208;
+  background: linear-gradient(180deg, #c89b3c, #8a6a1f);
+  border: 1px solid #5a4a2a;
+  border-radius: 3px;
+  cursor: pointer;
+  text-shadow: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: filter 0.15s;
+}
+#top-btn:hover { filter: brightness(1.12); }
+
+/* Section landing offset so jump targets aren't flush to the top */
+#sources-section, #archetypes-section, #approval-section, #problems-section,
+#solutions-section, #rebuttals-section, #verdicts-section, #convert-section,
+#coverage-section { scroll-margin-top: 18px; }
+
 </style>
 </head>
 <body>
-<!-- BACK TO PORTFOLIO -->
-<div style="background:#0a0804;border-bottom:2px solid #5a4a2a;padding:6px 12px;">
-  <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,#3a2e1a,#241c0e);border:1px solid #7a6a4a;border-radius:3px;padding:5px 12px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:13px;color:#f0d890;text-decoration:none;text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;letter-spacing:.03em;">&#8249; Back to Portfolio</a>
-</div>
 <div class="page-wrap">
 
 <!-- HERO -->
 <div class="hero">
-  <div style="font-size:42px;margin-bottom:8px;"><img src="../assets/multicombat.png" alt="" style="height:40px;width:auto;vertical-align:middle;image-rendering:pixelated;"><img src="../assets/wilderness-skull.png" alt="Skull" style="height:40px;width:auto;vertical-align:middle;image-rendering:pixelated;"><img src="../assets/multicombat.png" alt="" style="height:40px;width:auto;vertical-align:middle;image-rendering:pixelated;"></div>
+  <div style="font-size:42px;margin-bottom:8px;">⚔️💀⚔️</div>
   <h1>OSRS PvP Community Analysis</h1>
   <h2>Source Review — YouTube Comments, Reddit, Script — June 2026</h2>
-  <p class="hero-sub">Analysis of the Still Framed "Wilderness" comment section (~1,440 comments) cross-referenced against Chdata's video script and its core proposals: <em>Blessed Status</em>, <em>Wildy Teams</em>, <em>Team Combat Zones</em>, and <em>Priority Ranking Poll</em>.</p>
+  <p class="hero-sub">Analysis of ~7,000 comments, replies, and posts across 13 sources (YouTube, Reddit, and Twitter/X) cross-referenced against Chdata's video script and its core proposals: <em>Blessed Status</em>, <em>Wildy Teams</em>, <em>Team Combat Zones</em>, and <em>Priority Ranking Poll</em>.</p>
 </div>
 
 <div class="brick-strip"></div>
 
-<!-- ══════════════ SECTION 1: PLAYER TYPE MINDSETS ══════════════ -->
-<div class="section">
-  <div class="sec-head">Player Mindset Archetypes</div>
-  <div class="sec-sub">Six distinct mentalities visible across the comment section</div>
+<a class="back-to-index" href="../index.html"><span class="bti-arrow">⌂</span> Back to Portfolio Index</a>
+
+<nav class="page-nav">
+  <div class="page-nav-title">Jump to a section</div>
+  <div class="page-nav-links">
+    <a class="page-nav-link" href="#" onclick="jumpTo('sources-section');return false;"><span class="page-nav-num">1</span>Comment Sources</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('archetypes-section');return false;"><span class="page-nav-num">2</span>Player Mindset Archetypes</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('approval-section');return false;"><span class="page-nav-num">3</span>Estimated Approval</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('problems-section');return false;"><span class="page-nav-num">4</span>Problems Identified</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('solutions-section');return false;"><span class="page-nav-num">5</span>Proposed Solutions</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('rebuttals-section');return false;"><span class="page-nav-num">6</span>Rebuttals &amp; Pushback</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('verdicts-section');return false;"><span class="page-nav-num">7</span>How Ideas Land</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('convert-section');return false;"><span class="page-nav-num">8</span>Who Can Be Converted</a>
+    <a class="page-nav-link" href="#" onclick="jumpTo('coverage-section');return false;"><span class="page-nav-num">9</span>Coverage Summary</a>
+  </div>
+</nav>
+
+<!-- ══════════════ SOURCES ══════════════ -->
+<div class="section" id="sources-section">
+  <div class="sec-head">Comment Sources</div>
+  <div class="sec-sub">All data analyzed to build this document · 5 video/social sources + 8 Reddit searches (grouped below) · 13 total</div>
   <hr class="sec-divider">
   <div class="section-inner">
-    <p>The comment section is not a monolith. Roughly six distinct mindsets dominate the conversation, each with very different relationships to the Wilderness and what they want from it.</p>
+    <ul class="source-list">
+      <li>
+        <span class="source-platform yt">YouTube</span>
+        <span><strong>Framed</strong> — <a href="https://youtu.be/mpAikQy8ZSA" target="_blank" style="color:var(--blue-rs);text-decoration:none;">"Dear Jagex, PvP Has a serious problem."</a> (comment section) · Feb 22, 2026 · 190,690 views</span>
+        <span class="source-count">~2,980 comments · backfilled</span>
+      </li>
+      <li>
+        <span class="source-platform yt">YouTube</span>
+        <span><strong>Odablock Clips</strong> — <a href="https://youtu.be/N1iI5DpFay8" target="_blank" style="color:var(--blue-rs);text-decoration:none;">"PvP in Runescape will die if Jagex doesn't listen.."</a> (comment section) · Feb 23, 2026 · 118,516 views</span>
+        <span class="source-count">~1,104 comments · backfilled</span>
+      </li>
+      <li>
+        <span class="source-platform tw">Twitter/X</span>
+        <span><strong>Framed (@KFramed)</strong> — <a href="https://x.com/KFramed/status/2038301766702284843" target="_blank" style="color:var(--blue-rs);text-decoration:none;">"What are some current pain points of the wilderness and what would your suggestion be to improve them?"</a> (replies) · Mar 29, 2026 · 47.3K views</span>
+        <span class="source-count">~130 replies · no individual likes data</span>
+      </li>
+      <li>
+        <span class="source-platform yt">YouTube</span>
+        <span><strong>Still Framed</strong> — <a href="https://youtu.be/88kwn4dhk9U" target="_blank" style="color:var(--blue-rs);text-decoration:none;">"Jagex, we need to talk about the Wilderness."</a> (comment section) · Mar 30, 2026 · 72,166 views</span>
+        <span class="source-count">~1,440 comments · backfilled</span>
+      </li>
+      <li>
+        <span class="source-platform yt">YouTube</span>
+        <span><strong>TheoryWiser ft. Framed</strong> — <a href="https://youtu.be/gCjrEimWs0U" target="_blank" style="color:var(--blue-rs);text-decoration:none;">"Framed: The PvP Situation in Old School Runescape (is bad)"</a> (comment section) · Apr 3, 2026 · 16,766 views</span>
+        <span class="source-count">~357 comments · backfilled</span>
+      </li>
+      <details class="source-group">
+        <summary>
+          <span class="source-platform rd">Reddit</span>
+          <span class="sg-main"><strong>The OSRS Community</strong> — <strong>r/2007scape searches</strong> · 8 distinct queries across "pvp" and "wildy" (relevance, top, comments, and new sorts) · <span class="sg-toggle-hint">click to expand all 8 ▸</span></span>
+          <span class="source-count">~430 posts/threads analyzed across 8 distinct searches · upvotes & comment counts tracked separately · duplicates excluded across searches</span>
+          <span class="sg-chevron">▸</span>
+        </summary>
+        <ul class="source-sublist">
+        <li>
+          <span><span class="sub-num">#1</span><a href="https://www.reddit.com/r/2007scape/search?q=pvp&restrict_sr=on&sort=relevance&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "pvp" (relevance-sorted, all time)</a> · various dates · ~553K aggregate upvotes</span>
+          <span class="source-count">~200 posts analyzed · upvotes tracked separately</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#2</span><a href="https://www.reddit.com/r/2007scape/search/?q=pvp&sort=top&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "pvp" (top-sorted, all time)</a> · various dates · ~89K additional upvotes (duplicates excluded)</span>
+          <span class="source-count">~28 unique posts · duplicates from relevance search excluded</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#3</span><a href="https://www.reddit.com/r/2007scape/search/?q=pvp&sort=comments&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "pvp" (comments-sorted, all time)</a> · various dates · ~27 unique posts (duplicates excluded)</span>
+          <span class="source-count">~27 unique posts · duplicates from previous Reddit searches excluded · comments per post tracked as separate stat</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#4</span><a href="https://www.reddit.com/r/2007scape/search/?q=pvp&sort=new&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "pvp" (new-sorted, all time)</a> · various dates including June 2026 · ~38 unique posts (duplicates excluded)</span>
+          <span class="source-count">~38 unique posts · most recent data; includes DMM All Stars 2026 reaction posts, Summer Campfire 2026 confirms Bot Ladder being polled, Raids 4 PvP concern posts</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#5</span><a href="https://www.reddit.com/r/2007scape/search/?q=wildy&sort=relevance&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "wildy" (relevance-sorted, all time)</a> · various dates · ~64M aggregate upvotes across highest-ranked posts</span>
+          <span class="source-count">~35 unique posts analyzed for PvP signal · ignoring duplicates from previous searches · search term broadened to capture wilderness-framed PvP discourse not surfaced by "pvp" query</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#6</span><a href="https://www.reddit.com/r/2007scape/search/?q=wildy&sort=top&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "wildy" (top-sorted, all time)</a> · various dates · highest all-time upvoted wilderness posts</span>
+          <span class="source-count">~29 unique posts analyzed for PvP signal · ignoring duplicates from previous searches · surfaces the highest-engagement wilderness sentiment posts including bot-crisis and predator-prey design critiques</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#7</span><a href="https://www.reddit.com/r/2007scape/search/?q=wildy&sort=comments&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "wildy" (comments-sorted, all time)</a> · various dates · most-debated wilderness posts by comment volume</span>
+          <span class="source-count">~43 unique posts analyzed for PvP signal · ignoring duplicates from previous searches · sorting by comment count surfaces the most CONTESTED threads, making this the richest source for the PvMer-vs-PKer perception gap and the community's unresolved fight over what the Wilderness is for</span>
+        </li>
+        <li>
+          <span><span class="sub-num">#8</span><a href="https://www.reddit.com/r/2007scape/search/?q=wildy&sort=new&restrict_sr=on&t=all" target="_blank" style="color:var(--blue-rs);text-decoration:none;">r/2007scape search: "wildy" (new-sorted, all time)</a> · most recent posts including June 2026 · surfaces live, in-the-moment wilderness sentiment</span>
+          <span class="source-count">~27 PvP-relevant posts analyzed (ignoring duplicates from previous searches) · captures the freshest discourse: Raids 4 gear-creep concerns, trouver/parch mechanic-trust fallout (650+ upvote threads), a community-built matchmaking plugin, PvP-quest-chain and risk-capped-learning proposals, and recurring "does anyone enjoy wildy content" debate</span>
+        </li>
+        </ul>
+      </details>
+      </ul>
+    <p style="margin-top:10px;font-size:13px;color:var(--text-dim);">Additional sources will appear here as comment pages are analyzed. Each entry shows the platform, author/channel, content title, view count, and whether like counts are included.</p>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 1: PLAYER TYPE MINDSETS ══════════════ -->
+<div class="section" id="archetypes-section">
+  <div class="sec-head">Player Mindset Archetypes</div>
+  <div class="sec-sub">Eight stance-bearing mindsets plus a no-position slice, visible across ~7,000 data points · updated across 13 sources · engagement-weighted, normalized to 100%</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <p>The comment sections are not a monolith. Eight distinct stance-bearing mindsets dominate the conversation — plus a ninth slice for people who engaged but took no readable position — each with very different relationships to PvP and what they want from it. Sources 2 and 3 (Framed's tutorial video and the Oda react) skewed toward existing PvP-adjacent players. Source 5 (TheoryWiser podcast) drew a more analytical audience — longer, more reasoned comments — and surfaced the sharpest articulations of structural problems like the skill-ceiling death spiral, the parasitic predator-prey dynamic, and why polling will never fix this without first changing who is in the Wilderness and why.</p>
+    <div class="callout" style="margin-top:14px;background:rgba(212,175,90,0.06);border:1px solid rgba(212,175,90,0.3);border-radius:6px;padding:12px 14px;">
+      <strong style="color:var(--gold);">How the percentages are calculated</strong>
+      <p style="margin-top:6px;font-size:12.5px;color:var(--text-dim);line-height:1.6;">These shares are an <strong>estimate</strong>, not a precise count, and they're built one specific way: the denominator is <strong>all ~7,000 data points across the 13 sources</strong>, and the figures are <strong>engagement-weighted</strong> — a comment, post, or grievance is counted in proportion to the upvotes and likes it drew, so popular sentiment carries more weight than a single low-traction comment. A commenter who fits two mindsets (e.g. a PvMer who is <em>also</em> a Reluctant Visitor) has their weight <strong>split across both</strong> rather than double-counted, and the nine slices are then <strong>normalized to sum to exactly 100%</strong>, so this reads as a clean pie rather than overlapping tags. The off-topic / meme / no-stance mass isn't discarded — it becomes its own slice ("Commented But Took No Position"), since those people did engage with PvP topics even though no position can be read from them. One important caveat: because this is <em>engagement-weighted</em>, it deliberately differs from a raw headcount. The Reluctant Visitor tops the chart not because it's the largest group of distinct people, but because the highest-engagement threads in the data ("I got ganked doing my clue," "the wildy just wastes my time," "forced into content I don't want") are written by and resonate with people who <em>do</em> go to the Wilderness and resent it. A simple show-of-hands count would likely rank the Anti-PvP Bloc higher. Treat these as the shape of the <em>conversation's energy</em>, not a census of the playerbase.</p>
+    </div>
+
     <div class="player-grid" style="margin-top:14px;">
       <div class="player-box red">
-        <div class="player-type-name">💀 The Anti-PvP Bloc</div>
-        <p>Broadly the <em>plurality</em> of commenters. They do not want to engage with PvP at all and will vote no on most PvP updates out of frustration or spite from past experiences. Includes casual mains, clue scroll hunters, and many ironmen. Core sentiment: <em>"Remove it, or at least keep it away from me."</em></p>
+        <div class="player-type-name"><span>💀 The Anti-PvP Bloc</span><span class="arch-pct">~16%</span></div>
+        <p>The largest hard-<em>no</em> voting bloc, and by raw headcount likely the single biggest stance group — though once weighted by engagement it sits behind the Reluctant Visitor (see the calculation note). They don't want to engage with PvP at all and will vote no on most PvP updates. Source 5 gave this group their most articulate voice yet — several comments were not spite-driven but argued from first principles that the predator-prey model is <em>structurally unfixable</em> within the current polling system, that "juiced drop tables" just create better loot piñatas, and that the 90% of players with no interest in PvP are not the problem — they are correctly reflecting their rational self-interest. Hard to dismiss these as ignorant votes. Core sentiment: <em>"I will always take the side of the person toiling against the person who takes the path of least resistance."</em></p>
       </div>
       <div class="player-box orange">
-        <div class="player-type-name">🏃 The Reluctant Visitor</div>
-        <p>Goes into the Wilderness only when forced — clue steps, Mage Arena capes, or item unlocks like the Voidwaker. Actively resents being there. Brings minimum risk. Frequently gets griefed. Will support updates that reduce forced interaction but opposes anything that increases risk for non-PvPers. Large segment of ironmen fall here.</p>
+        <div class="player-type-name"><span>🏃 The Reluctant Visitor</span><span class="arch-pct">~24%</span></div>
+        <p>Goes into the Wilderness only when forced — clue steps, MA2 capes, Voidwaker. Actively resents being there. Brings minimum risk. Frequently griefed. This archetype was most prominent in source 3 (Still Framed's wilderness video) and almost entirely absent from sources 1-2, which drew more PvP-curious audiences. Will vote yes for anything that reduces forced interaction.</p>
       </div>
       <div class="player-box yellow">
-        <div class="player-type-name">🔰 The Willing But Helpless</div>
-        <p>Players who <em>want</em> to engage with the Wilderness or learn PvP but find the skill gap and entry cost completely overwhelming. "I would do PvP if I had a chance." Very sympathetic to tutorial ideas, gear brackets, and matchmaking. This group is the most likely to be converted into active participants by good design.</p>
+        <div class="player-type-name"><span>🔰 The Willing But Helpless</span><span class="arch-pct">~11%</span></div>
+        <p>Players who <em>want</em> to PvP but find the skill gap, cost, and cheater environment completely overwhelming. The single most vocal archetype in sources 1 and 2. <em>"I would do it if I had a chance."</em> Source 5 (TheoryWiser) produced the sharpest articulation of this group's problem: <em>"Imagine if you wanted to complete the Inferno but there was nothing to properly train you for it beyond Fight Caves. That's how PvP is right now."</em> Largest potential conversion target. Also the group most likely to cite AHK/client cheating as the specific reason they gave up trying.</p>
       </div>
       <div class="player-box green">
-        <div class="player-type-name"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> The PvM Enjoyer</div>
-        <p>Likes Wilderness PvM — slayer, chaos altar, revs, or agility — and has developed a live-and-let-live acceptance of getting PK'd occasionally. Generally supports making the Wilderness healthier but doesn't want it fundamentally changed. Often ironmen who've made peace with the risk.</p>
+        <div class="player-type-name"><span>⚔️ The PvM Enjoyer</span><span class="arch-pct">~15%</span></div>
+        <p>Does Wilderness PvM — agility, chaos altar, revs, bosses — and has made peace with occasional PKing as part of the deal. Generally supports making the Wilderness healthier but doesn't want radical changes. Ironmen who've grinded the Voidwaker fall here. They care more about the predator-prey ratio and cheating environment than about PvP design per se.</p>
       </div>
       <div class="player-box blue">
-        <div class="player-type-name">🎯 The PvP Loyalist / PKer</div>
-        <p>Still actively PvPs or at least identifies with PvP culture. Ranges from reasonable ("PvPers should fight PvPers, not prey") to defensive ("stop coddling irons"). Smaller in number than they appear online. Often push back hard against anything that reduces Wilderness risk or moves items outside the Wilderness. Internally divided between solo PKers and multi/clan players.</p>
+        <div class="player-type-name"><span>🎯 The PvP Loyalist / PKer</span><span class="arch-pct">~10%</span></div>
+        <p>Still actively PKs or closely identifies with PvP culture. Heavily represented in source 3 (Oda's audience). Internally split between <em>legitimate PKers</em> who want real fights with other PKers, and <em>loot pinata hunters</em> who primarily target PvMers and have no interest in fair fights. Sources 2-3 surfaced this split explicitly — several commenters called the latter group the primary reason PvP is dying.</p>
       </div>
       <div class="player-box purple">
-        <div class="player-type-name">🏰 The Ironman Bloc</div>
-        <p>Ironmen (~30% of players per their own estimates in comments) have unique complaints. They get nothing from kills, lose hard-earned items on death, can't buy replacements. Have zero incentive to fight back. The single most-cited demographic making Wilderness content politically toxic. Any update that doesn't account for them is practically guaranteed to be voted down.</p>
+        <div class="player-type-name"><span>🏰 The Ironman Bloc</span><span class="arch-pct">~2%</span></div>
+        <p>Estimated ~30% of the playerbase. Gets nothing from kills, loses hard-earned items on death, can't rebuy from GE. Zero incentive to fight back. The most politically powerful anti-PvP vote in polls. Consistently referenced across the sources as the demographic any PvP update must account for. Bond Coffer + Blessed Status together are the only proposals that speak directly to their situation.</p>
+      </div>
+      <div class="player-box" style="border-left:3px solid var(--text-dim);">
+        <div class="player-type-name" style="color:var(--text-dim);"><span>🕰️ The Nostalgic Ex-PKer</span><span class="arch-pct">~1%</span></div>
+        <p>Emerged clearly in sources 2 and 3 — players who loved PvP in 2006-2012, quit when it became too sweaty or when EOC dropped, and now watch PvP content without playing it. <em>"We just need to be 13 and garbage at the game again."</em> Potentially persuadable back into at least casual engagement, but only if the skill ceiling is lowered — not by tutorials, but by mechanically simpler combat options. A distinct group from the Willing-but-Helpless because they know what PvP used to be and are grieving its loss rather than trying to enter a foreign system.</p>
+      </div>
+      <div class="player-box" style="border-left:3px solid #f0a030;">
+        <div class="player-type-name" style="color:#f0a030;"><span>📺 The DMM Convert</span><span class="arch-pct">~1%</span></div>
+        <p>Identified for the first time in source 9 (new-sorted Reddit, June 2026) following DMM All Stars 3. A wave of players who were previously indifferent or hostile to PvP, converted by <em>watching</em> rather than playing. Dozens of posts with the same structure: "I've never touched LMS/Bounty Hunter/the Wilderness for PvP, but after watching DMM All Stars I want to try." Distinct from the Willing-but-Helpless (who already wanted to and were blocked) and the Nostalgic Ex-PKer (who used to play). These players had no pre-existing PvP interest and were pulled in purely by spectator experience — their existence is the strongest evidence in the dataset that PvP content that is <em>watchable</em> is a more effective onboarding funnel than any tutorial. The 2013 demographics data (source 9) shows PvP was once the #2 most popular activity at ~30% of players; the DMM Convert represents the population that could potentially restore some of that share. Mechanically, they want low-stakes structured entry — not the open Wilderness, but something with a defined format and stakes they control. Many explicitly mentioned trying LMS immediately after watching DMM, and finding it hostile.</p>
+      </div>
+      <div class="player-box" style="border-left:3px solid #6b6b6b;">
+        <div class="player-type-name" style="color:#9a9a9a;"><span>🤐 Commented But Took No Position</span><span class="arch-pct">~20%</span></div>
+        <p>A genuine category, not a discard pile. These are people who engaged with PvP topics — jokes, memes, one-line reactions, tangents, "RIP," tagging a friend — but whose comments carry no extractable stance on the design questions. They took the time to show up under a PvP video or wilderness thread, which is itself a weak signal of interest, but you can't infer what they actually want. They're surfaced heavily in the meme-and-reaction layer of every source (especially the image/clip posts). Worth tracking because they represent latent, uncommitted attention: a chunk of the audience that is <em>present</em> for the conversation but hasn't been given a reason to land anywhere. From a persuasion standpoint they're the wildcard — neither won nor lost — and a clear, watchable case (see the DMM Convert) is the most plausible way to move some of them into a stance.</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ══════════════ SECTION 2: APPROVAL ESTIMATE ══════════════ -->
-<div class="section">
+<div class="section" id="approval-section">
   <div class="sec-head">Estimated Approval — Chdata's Proposals</div>
-  <div class="sec-sub">Rough guess based on comment tone and known community splits</div>
+  <div class="sec-sub">Revised estimates across 13 sources · ~7,000 comments/replies/posts</div>
   <hr class="sec-divider">
   <div class="section-inner">
 
@@ -469,467 +906,939 @@ strong { color: var(--white-rs); }
     </div>
 
     <div class="stat-row">
-      <div class="stat-pill"><span class="pos">~65%</span>Wilderness-only Clue Scrolls</div>
-      <div class="stat-pill"><span class="pos">~58%</span>Ironman Bond Coffer</div>
-      <div class="stat-pill"><span class="neu">~47%</span>PvP Tutorial</div>
-      <div class="stat-pill"><span class="neu">~45%</span>Blessed Status</div>
-      <div class="stat-pill"><span class="neu">~40%</span>Wildy Teams (6-player)</div>
-      <div class="stat-pill"><span class="neg">~30%</span>Team Combat Zones</div>
-      <div class="stat-pill"><span class="neg">~28%</span>Limiting World Count</div>
-      <div class="stat-pill"><span class="neg">~22%</span>Wilderness Expansion</div>
+      <div class="stat-pill"><span class="pos">✅ Passed</span>PvP Tutorial / Proving Grounds</div>
+      <div class="stat-pill"><span class="pos">~66%</span>ELO / Matchmaking System</div>
+      <div class="stat-pill"><span class="pos">~59%</span>Wilderness-only Clue Scrolls</div>
+      <div class="stat-pill"><span class="pos">~59%</span>Ironman Bond Coffer</div>
+      <div class="stat-pill"><span class="neu">~46%</span>Blessed Status</div>
+      <div class="stat-pill"><span class="neu">~43%</span>Wildy Teams (6-player)</div>
+      <div class="stat-pill"><span class="neg">~37%</span>Team Combat Zones</div>
+      <div class="stat-pill"><span class="neg">~30%</span>Limiting World Count</div>
+      <div class="stat-pill"><span class="neg">~25%</span>Wilderness Expansion</div>
     </div>
 
-    <p style="margin-top:12px;">The full package sits below the 70% poll threshold by a wide margin — consistent with the historical polling reality Chdata identifies in his script. However, several individual ideas poll meaningfully above the average. The gap between "surface-level popular ideas" and "structural fixes" is a core problem. Breaking the package into smaller targeted polls (which the Priority Ranking Poll system addresses) is probably the most realistic path forward.</p>
+    <p style="margin-top:12px;">All thirteen sources now paint a consistent picture. The full package is below the 70% threshold by a significant margin. The <em>PvP Tutorial / Proving Grounds</em> concept remains the single highest-enthusiasm idea — and it has now passed its lock-in poll, making it the one item here that's moved from "estimated approval" to confirmed content. Source 5 (TheoryWiser podcast) produced the clearest articulation of why it's needed: <em>"Imagine if you wanted to complete the Inferno but there was nothing to properly train you beyond Fight Caves."</em> That framing resonates across every archetype except the hardline anti-PvP bloc.</p>
+
+    <p>The <strong>ELO/matchmaking system</strong> — which Chdata <em>does</em> address (the existing PvP Arena is meant to have ranked matchmaking but underdelivers, and his proposed 6v6 PvP Arena builds in a matchmaking/ranking system) — continues to accumulate cross-source support. Source 5's chess grandmaster analogy (<em>"Imagine learning chess by playing against grandmasters"</em>) drew 41 likes and 13 replies, one of the highest-engagement single comments in the dataset. Every successful competitive game uses skill-based matching; OSRS's absence of it is increasingly framed as a design oversight rather than an intentional choice. The newest data drives this home: source 13 (wildy new-sorted) surfaced a player who built and shipped a skill-based PvP matchmaking and leaderboard plugin for RuneLite — roughly 77,000 players rated across 250,000 matches — explicitly because the game won't do it itself. When the community is building the matchmaking system as a third-party plugin, the demand signal is hard to argue with. Worth explicit signal-boosting in the video.</p>
 
     <div class="callout blue" style="margin-top:10px;">
-      <strong>Note on methodology:</strong> These are rough estimates derived from comment sentiment analysis, not a real poll. The actual poll would include the full playerbase including bots and inactive voters who skew anti-PvP. In that context, even these estimates may be optimistic.
+      <strong>Note on methodology:</strong> These are engagement-informed estimates, not real polls — nobody has voted on most of these. Each figure is built from the archetype voting model in Section 1: take the engagement-weighted share of each mindset (with the no-position slice removed, since non-voters don't decide polls), estimate how likely each would be to vote <em>yes</em> on that specific proposal, then sum across the voter base. A proposal that pleases the large Reluctant-Visitor and Willing-but-Helpless blocs scores higher than one that mainly serves PKers, who are a smaller share of the conversation. Reddit upvotes are tracked separately from YouTube likes and carry different signal weight — a high-upvote Reddit post reflects broad passive agreement, while a high-like YouTube comment reflects active engagement from a viewing audience. Sources skew toward engaged, PvP-aware players who chose to comment on PvP content; the actual polling electorate includes far more inactive accounts and bot votes that skew anti-PvP. The numbers were re-derived across all 13 sources and will shift as new data arrives. Treat them as upper-bound, directional estimates relative to the 70% poll threshold, not predictions of an exact poll result — real polls also swing on question wording, JMod framing, and turnout, none of which this captures.
     </div>
   </div>
 </div>
 
 <!-- ══════════════ SECTION 3: PROBLEMS LIST ══════════════ -->
-<div class="section">
+<div class="section" id="problems-section">
   <div class="sec-head">Unique PvP Problems Identified</div>
-  <div class="sec-sub">Ranked by mention frequency across script + comment section · ✔ = covered in script</div>
+  <div class="sec-sub">Ranked by mention frequency · 13 sources · ~7,000 data points · ✔ = covered in script</div>
   <hr class="sec-divider">
   <div class="section-inner">
     <p>Problem coverage key: <span class="prob-covered">✔ Covered in Chdata's script</span> &nbsp; <span class="prob-partial">◑ Partially covered</span> &nbsp; <span class="prob-not-covered">✖ Not covered / signal-boosted only</span></p>
-    <br>
-    <ol class="prob-list">
-      <li>
+
+    <div class="sort-bar">
+      <span class="sort-label">Sort by:</span>
+      <button class="sort-btn active" id="sort-rank" onclick="sortProblems('rank')"># Original Rank</button>
+      <button class="sort-btn" id="sort-mentions" onclick="sortProblems('mentions')">💬 Mentions</button>
+      <button class="sort-btn" id="sort-likes" onclick="sortProblems('likes')">👍 YT Likes</button>
+      <button class="sort-btn" id="sort-replies" onclick="sortProblems('replies')">↩️ YT Replies</button>
+      <button class="sort-btn" id="sort-upvotes" onclick="sortProblems('upvotes')">⬆️ Reddit Upvotes</button>
+      <button class="sort-btn" id="sort-rdcomments" onclick="sortProblems('rdcomments')">💬 Reddit Comments</button>
+    </div>
+
+    <ol class="prob-list" id="prob-list">
+      <li data-rank="1" data-replies="347" data-mentions="312" data-likes="4467" data-upvotes="30,674" data-rdcomments="7,327">
         <span class="prob-num">#1</span>
         <div>
           <strong>The skill gap is too large — veterans utterly dominate beginners with no matchmaking or bracket system.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Explicitly listed as a core barrier to entry. Tutorial + Blighted Supplies + lower-cost PKing all address it.
         </div>
-        <span class="prob-mentions">~60 mentions</span>
+        <span class="prob-mentions">~312 mentions · 4467 YT likes · 347 YT replies · 30,674 RD upvotes · 7,327 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:81.4%"></div><div class="platform-bar-tw" style="width:4.5%"></div><div class="platform-bar-rd" style="width:14.1%"></div></div><span class="platform-label"><span class="yt-col">YT 81%</span> · <span class="tw-col">TW 5%</span> · <span class="rd-col">RD 14%</span></span></div>
       </li>
-      <li>
+      <li data-rank="2" data-replies="57" data-mentions="69" data-likes="630" data-upvotes="6,317" data-rdcomments="0">
         <span class="prob-num">#2</span>
         <div>
           <strong>Wildy clue steps are anti-fun for everyone — the PKer gets nothing, the PvMer loses time and gear re-equipping, and nobody benefits.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Signal-boosted extensively with links to community posts. Wilderness-only clue scrolls proposed as fix.
         </div>
-        <span class="prob-mentions">~55 mentions</span>
+        <span class="prob-mentions">~69 mentions · 630 YT likes · 57 YT replies · 6,317 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:86.1%"></div><div class="platform-bar-tw" style="width:12.7%"></div><div class="platform-bar-rd" style="width:1.3%"></div></div><span class="platform-label"><span class="yt-col">YT 86%</span> · <span class="tw-col">TW 13%</span> · <span class="rd-col">RD 1%</span></span></div>
       </li>
-      <li>
+      <li data-rank="3" data-replies="123" data-mentions="97" data-likes="891" data-upvotes="3,823" data-rdcomments="414">
         <span class="prob-num">#3</span>
         <div>
           <strong>Ironmen have zero incentive to fight back — no loot on kill, lose hard-earned items on death, can't rebuy from GE.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Bond Coffer / Loot Key signal boost addresses the incentive side. Blessed Status addresses the death side.
         </div>
-        <span class="prob-mentions">~52 mentions</span>
+        <span class="prob-mentions">~97 mentions · 891 YT likes · 123 YT replies · 3,823 RD upvotes · 414 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:81.4%"></div><div class="platform-bar-tw" style="width:13.4%"></div><div class="platform-bar-rd" style="width:5.2%"></div></div><span class="platform-label"><span class="yt-col">YT 81%</span> · <span class="tw-col">TW 13%</span> · <span class="rd-col">RD 5%</span></span></div>
       </li>
-      <li>
+      <li data-rank="4" data-replies="89" data-mentions="271" data-likes="591" data-upvotes="210,302" data-rdcomments="32,417">
         <span class="prob-num">#4</span>
         <div>
           <strong>PvP updates consistently fail the 70% poll threshold because the non-PvP majority votes no out of apathy or spite.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           The Priority Ranking Poll System is specifically designed to break this cycle.
         </div>
-        <span class="prob-mentions">~48 mentions</span>
+        <span class="prob-mentions">~271 mentions · 591 YT likes · 89 YT replies · 210,302 RD upvotes · 32,417 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:36.4%"></div><div class="platform-bar-tw" style="width:4.2%"></div><div class="platform-bar-rd" style="width:59.4%"></div></div><span class="platform-label"><span class="yt-col">YT 36%</span> · <span class="tw-col">TW 4%</span> · <span class="rd-col">RD 59%</span></span></div>
       </li>
-      <li>
+      <li data-rank="5" data-replies="2" data-mentions="48" data-likes="38" data-upvotes="2,876" data-rdcomments="3,505">
         <span class="prob-num">#5</span>
         <div>
           <strong>World-hop scouting, alt scouts, and WildyCCTV make it trivially easy for PKers to find and ambush targets while targets can never see them coming.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Listed in the "even more problems" section of the script but no direct solution proposed.
         </div>
-        <span class="prob-mentions">~40 mentions</span>
+        <span class="prob-mentions">~48 mentions · 38 YT likes · 2 YT replies · 2,876 RD upvotes · 3,505 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:85.4%"></div><div class="platform-bar-tw" style="width:8.3%"></div><div class="platform-bar-rd" style="width:6.2%"></div></div><span class="platform-label"><span class="yt-col">YT 85%</span> · <span class="tw-col">TW 8%</span> · <span class="rd-col">RD 6%</span></span></div>
       </li>
-      <li>
+      <li data-rank="6" data-replies="39" data-mentions="189" data-likes="375" data-upvotes="111,518" data-rdcomments="9,235">
         <span class="prob-num">#6</span>
         <div>
           <strong>Bots and AHK cheaters dominate the PvP scene — prayer switching bots, AHK gear-swap scripts, RWT crews. Jagex enforcement is seen as nonexistent.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Listed as a known problem in the script. No dedicated solution proposed beyond general acknowledgment.
         </div>
-        <span class="prob-mentions">~38 mentions</span>
+        <span class="prob-mentions">~189 mentions · 375 YT likes · 39 YT replies · 111,518 RD upvotes · 9,235 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:55.2%"></div><div class="platform-bar-tw" style="width:5.5%"></div><div class="platform-bar-rd" style="width:39.2%"></div></div><span class="platform-label"><span class="yt-col">YT 55%</span> · <span class="tw-col">TW 6%</span> · <span class="rd-col">RD 39%</span></span></div>
       </li>
-      <li>
+      <li data-rank="7" data-replies="8" data-mentions="66" data-likes="111" data-upvotes="13,008" data-rdcomments="0">
         <span class="prob-num">#7</span>
         <div>
           <strong>The Wilderness is spread across too many worlds — the PvP community is too diluted to make any single world feel alive.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Discussed in script. World count limiting mentioned but pushed back on as a partial/flawed fix on its own.
         </div>
-        <span class="prob-mentions">~35 mentions</span>
+        <span class="prob-mentions">~66 mentions · 111 YT likes · 8 YT replies · 13,008 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:56.7%"></div><div class="platform-bar-tw" style="width:29.9%"></div><div class="platform-bar-rd" style="width:13.4%"></div></div><span class="platform-label"><span class="yt-col">YT 57%</span> · <span class="tw-col">TW 30%</span> · <span class="rd-col">RD 13%</span></span></div>
       </li>
-      <li>
+      <li data-rank="8" data-replies="110" data-mentions="69" data-likes="884" data-upvotes="22,103" data-rdcomments="2,442">
         <span class="prob-num">#8</span>
         <div>
           <strong>Risk is asymmetric — a PKer in max gear can rush someone in rag gear for zero loot, wasting both players' time. There is no meaningful minimum risk floor for PKers.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Blessed Status partially addresses this — PKers fighting Blessed players don't risk their own gear.
         </div>
-        <span class="prob-mentions">~34 mentions</span>
+        <span class="prob-mentions">~69 mentions · 884 YT likes · 110 YT replies · 22,103 RD upvotes · 2,442 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:62.3%"></div><div class="platform-bar-tw" style="width:14.5%"></div><div class="platform-bar-rd" style="width:23.2%"></div></div><span class="platform-label"><span class="yt-col">YT 62%</span> · <span class="tw-col">TW 14%</span> · <span class="rd-col">RD 23%</span></span></div>
       </li>
-      <li>
+      <li data-rank="9" data-replies="135" data-mentions="136" data-likes="1019" data-upvotes="101,882" data-rdcomments="3,161">
         <span class="prob-num">#9</span>
         <div>
           <strong>Forced wilderness items (Voidwaker, MA2 capes, Rev weapons) lock useful non-PvP rewards behind a PvP zone, creating resentment in the non-PvP majority.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Discussed in detail. Script agrees this is misunderstood but proposes alternatives for some items.
         </div>
-        <span class="prob-mentions">~32 mentions</span>
+        <span class="prob-mentions">~136 mentions · 1019 YT likes · 135 YT replies · 101,882 RD upvotes · 3,161 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:43.0%"></div><div class="platform-bar-tw" style="width:15.6%"></div><div class="platform-bar-rd" style="width:41.5%"></div></div><span class="platform-label"><span class="yt-col">YT 43%</span> · <span class="tw-col">TW 16%</span> · <span class="rd-col">RD 41%</span></span></div>
       </li>
-      <li>
+      <li data-rank="10" data-replies="121" data-mentions="62" data-likes="792" data-upvotes="21,808" data-rdcomments="5,695">
         <span class="prob-num">#10</span>
         <div>
           <strong>Freeze mechanics make escape nearly impossible — once frozen, most players are effectively dead, removing skill from the equation for non-PvPers.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Discussed in the problems list. No direct mechanical fix proposed for freeze mechanics specifically.
         </div>
-        <span class="prob-mentions">~30 mentions</span>
+        <span class="prob-mentions">~62 mentions · 792 YT likes · 121 YT replies · 21,808 RD upvotes · 5,695 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:60.0%"></div><div class="platform-bar-tw" style="width:7.3%"></div><div class="platform-bar-rd" style="width:32.7%"></div></div><span class="platform-label"><span class="yt-col">YT 60%</span> · <span class="tw-col">TW 7%</span> · <span class="rd-col">RD 33%</span></span></div>
       </li>
-      <li>
+      <li data-rank="11" data-replies="252" data-mentions="218" data-likes="1075" data-upvotes="148,411" data-rdcomments="21,202">
         <span class="prob-num">#11</span>
         <div>
           <strong>The predator-prey model generates toxic behavior — PKers kill helpless players for no meaningful reward, griefing rather than PvPing.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Core theme of the script. Wildy Teams + TCZ directly target this by creating more equal engagements.
         </div>
-        <span class="prob-mentions">~28 mentions</span>
+        <span class="prob-mentions">~218 mentions · 1075 YT likes · 252 YT replies · 148,411 RD upvotes · 21,202 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:35.3%"></div><div class="platform-bar-tw" style="width:12.1%"></div><div class="platform-bar-rd" style="width:52.7%"></div></div><span class="platform-label"><span class="yt-col">YT 35%</span> · <span class="tw-col">TW 12%</span> · <span class="rd-col">RD 53%</span></span></div>
       </li>
-      <li>
+      <li data-rank="12" data-replies="0" data-mentions="26" data-likes="4" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#12</span>
         <div>
           <strong>Multi-combat clan dominance — solo and small-group players can be zerged by 10+ players with no defense. No cap on attackers in multi zones.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Team Combat Zones directly address this with a 6-player attack cap.
         </div>
-        <span class="prob-mentions">~26 mentions</span>
+        <span class="prob-mentions">~26 mentions · 4 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="13" data-replies="7" data-mentions="50" data-likes="30" data-upvotes="33,994" data-rdcomments="6,075">
         <span class="prob-num">#13</span>
         <div>
           <strong>Wilderness PvM gear and PvP survival gear conflict — filling inventory with boss supplies leaves no room for anti-PK gear.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Explicitly listed. Blighted Bone Sack and more Blighted Supplies directly address this.
         </div>
-        <span class="prob-mentions">~25 mentions</span>
+        <span class="prob-mentions">~50 mentions · 30 YT likes · 7 YT replies · 33,994 RD upvotes · 6,075 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:58.1%"></div><div class="platform-bar-tw" style="width:9.3%"></div><div class="platform-bar-rd" style="width:32.6%"></div></div><span class="platform-label"><span class="yt-col">YT 58%</span> · <span class="tw-col">TW 9%</span> · <span class="rd-col">RD 33%</span></span></div>
       </li>
-      <li>
+      <li data-rank="14" data-replies="126" data-mentions="93" data-likes="981" data-upvotes="50,040" data-rdcomments="7,476">
         <span class="prob-num">#14</span>
         <div>
           <strong>Arbitrary PvP-only mechanics — autocast disabled, spell icon resizing disabled, powered staves disabled. Creates inconsistency and confusion for new players.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Listed explicitly in the script as a known problem. No solution proposed but acknowledged.
         </div>
-        <span class="prob-mentions">~22 mentions</span>
+        <span class="prob-mentions">~93 mentions · 981 YT likes · 126 YT replies · 50,040 RD upvotes · 7,476 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:33.7%"></div><div class="platform-bar-tw" style="width:11.6%"></div><div class="platform-bar-rd" style="width:54.7%"></div></div><span class="platform-label"><span class="yt-col">YT 34%</span> · <span class="tw-col">TW 12%</span> · <span class="rd-col">RD 55%</span></span></div>
       </li>
-      <li>
+      <li data-rank="15" data-replies="86" data-mentions="58" data-likes="1153" data-upvotes="5,230" data-rdcomments="0">
         <span class="prob-num">#15</span>
         <div>
           <strong>High cost of entry to PvP — Loot Keys cost 1M to unlock, Ferox respawn 5M, Trouver Parchments, consumable costs all add up before a single fight.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Explicitly listed. Blessed Status + more Blighted Supplies + Parchment removal all reduce these costs.
         </div>
-        <span class="prob-mentions">~22 mentions</span>
+        <span class="prob-mentions">~58 mentions · 1153 YT likes · 86 YT replies · 5,230 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:75.9%"></div><div class="platform-bar-tw" style="width:10.3%"></div><div class="platform-bar-rd" style="width:13.8%"></div></div><span class="platform-label"><span class="yt-col">YT 76%</span> · <span class="tw-col">TW 10%</span> · <span class="rd-col">RD 14%</span></span></div>
       </li>
-      <li>
+      <li data-rank="16" data-replies="212" data-mentions="261" data-likes="4367" data-upvotes="45,406" data-rdcomments="9,154">
         <span class="prob-num">#16</span>
         <div>
           <strong>No way to learn PvP without real financial risk — LMS doesn't teach Wilderness-relevant mechanics, PvP Arena is broken.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           PvP Tutorial (Framed / Pete Kayer) is explicitly praised and discussed. Script calls it a good start.
         </div>
-        <span class="prob-mentions">~20 mentions</span>
+        <span class="prob-mentions">~261 mentions · 4367 YT likes · 212 YT replies · 45,406 RD upvotes · 9,154 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:70.2%"></div><div class="platform-bar-tw" style="width:4.3%"></div><div class="platform-bar-rd" style="width:25.5%"></div></div><span class="platform-label"><span class="yt-col">YT 70%</span> · <span class="tw-col">TW 4%</span> · <span class="rd-col">RD 25%</span></span></div>
       </li>
-      <li>
+      <li data-rank="17" data-replies="121" data-mentions="35" data-likes="802" data-upvotes="15,922" data-rdcomments="3,372">
         <span class="prob-num">#17</span>
         <div>
           <strong>Freeze-logging — the optimal play vs a PKer is to freeze and immediately log out, meaning no real PvP encounter occurs at all.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Listed in the "more problems" bullet list. No explicit fix in proposed solutions.
         </div>
-        <span class="prob-mentions">~18 mentions</span>
+        <span class="prob-mentions">~35 mentions · 802 YT likes · 121 YT replies · 15,922 RD upvotes · 3,372 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:61.8%"></div><div class="platform-bar-tw" style="width:8.8%"></div><div class="platform-bar-rd" style="width:29.4%"></div></div><span class="platform-label"><span class="yt-col">YT 62%</span> · <span class="tw-col">TW 9%</span> · <span class="rd-col">RD 29%</span></span></div>
       </li>
-      <li>
+      <li data-rank="18" data-replies="49" data-mentions="31" data-likes="364" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#18</span>
         <div>
           <strong>Power creep has made PvP gear so strong that casual players get combo'd out before they can react, removing meaningful counterplay.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Implicitly addressed by Blessed Status reducing item loss risk, but max-hit power creep isn't directly tackled.
         </div>
-        <span class="prob-mentions">~18 mentions</span>
+        <span class="prob-mentions">~31 mentions · 364 YT likes · 49 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="19" data-replies="37" data-mentions="16" data-likes="292" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#19</span>
         <div>
           <strong>Loot keys concentrate all PvM drops into a single slot — eliminating looters, floor loot culture, and the secondary food chain that gave the Wilderness texture.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Noted in community discussion. Not directly addressed in Chdata's proposals.
         </div>
-        <span class="prob-mentions">~16 mentions</span>
+        <span class="prob-mentions">~16 mentions · 292 YT likes · 37 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="20" data-replies="2" data-mentions="32" data-likes="30" data-upvotes="3,093" data-rdcomments="0">
         <span class="prob-num">#20</span>
         <div>
           <strong>No safe content exists below level 30 Wilderness, making the entire zone feel hostile for players just trying to pass through.</strong>
           <div><span class="prob-not-covered">✖ Not covered</span></div>
           Not mentioned in the script. Relevant to Reluctant Visitor mindset.
         </div>
-        <span class="prob-mentions">~14 mentions</span>
+        <span class="prob-mentions">~32 mentions · 30 YT likes · 2 YT replies · 3,093 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:43.8%"></div><div class="platform-bar-tw" style="width:53.1%"></div><div class="platform-bar-rd" style="width:3.1%"></div></div><span class="platform-label"><span class="yt-col">YT 44%</span> · <span class="tw-col">TW 53%</span> · <span class="rd-col">RD 3%</span></span></div>
       </li>
-      <li>
+      <li data-rank="21" data-replies="0" data-mentions="14" data-likes="10" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#21</span>
         <div>
           <strong>Bot farms dominate every profitable Wilderness activity, meaning most "prey" encountered are actually bots with no actual players in the Wilderness.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Explicitly mentioned. Script notes the bot ban wave made the Wilderness even emptier.
         </div>
-        <span class="prob-mentions">~14 mentions</span>
+        <span class="prob-mentions">~14 mentions · 10 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="22" data-replies="93" data-mentions="91" data-likes="947" data-upvotes="37,449" data-rdcomments="6,249">
         <span class="prob-num">#22</span>
         <div>
           <strong>PJ Timer removal killed team PvP and small-group hunting — now it's only solo 1v1 or massive clan zerg, nothing in between.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Directly addressed by Wildy Teams and the Singles Teams history discussed in the script.
         </div>
-        <span class="prob-mentions">~12 mentions</span>
+        <span class="prob-mentions">~91 mentions · 947 YT likes · 93 YT replies · 37,449 RD upvotes · 6,249 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:64.4%"></div><div class="platform-bar-tw" style="width:10.3%"></div><div class="platform-bar-rd" style="width:25.3%"></div></div><span class="platform-label"><span class="yt-col">YT 64%</span> · <span class="tw-col">TW 10%</span> · <span class="rd-col">RD 25%</span></span></div>
       </li>
-      <li>
+      <li data-rank="23" data-replies="224" data-mentions="127" data-likes="1590" data-upvotes="121,037" data-rdcomments="14,486">
         <span class="prob-num">#23</span>
         <div>
           <strong>"Us vs them" psychology — PvPers dismiss non-PvPers' concerns, non-PvPers spite vote. Neither side tries to understand the other.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Entire dedicated section in the script on psychological problems. This is one of Chdata's core points.
         </div>
-        <span class="prob-mentions">~12 mentions</span>
+        <span class="prob-mentions">~127 mentions · 1590 YT likes · 224 YT replies · 121,037 RD upvotes · 14,486 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:33.1%"></div><div class="platform-bar-tw" style="width:11.3%"></div><div class="platform-bar-rd" style="width:55.6%"></div></div><span class="platform-label"><span class="yt-col">YT 33%</span> · <span class="tw-col">TW 11%</span> · <span class="rd-col">RD 56%</span></span></div>
       </li>
-      <li>
+      <li data-rank="24" data-replies="0" data-mentions="10" data-likes="17" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#24</span>
         <div>
           <strong>Bounty Hunter and PvP worlds splitting the already-small PvP playerbase into too many separate venues.</strong>
           <div><span class="prob-partial">◑ Mentioned</span></div>
           Noted in script. No direct fix proposed beyond generally fixing the Wilderness itself.
         </div>
-        <span class="prob-mentions">~10 mentions</span>
+        <span class="prob-mentions">~10 mentions · 17 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="25" data-replies="21" data-mentions="28" data-likes="126" data-upvotes="18,967" data-rdcomments="0">
         <span class="prob-num">#25</span>
         <div>
           <strong>Ragging — attacking someone in minimum gear with no intention of getting a real kill, just to drain their supplies and waste their time.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Listed in problems. Blessed Status partially addresses this by making low-risk PKing less profitable.
         </div>
-        <span class="prob-mentions">~10 mentions</span>
+        <span class="prob-mentions">~28 mentions · 126 YT likes · 21 YT replies · 18,967 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:50.0%"></div><div class="platform-bar-tw" style="width:3.6%"></div><div class="platform-bar-rd" style="width:46.4%"></div></div><span class="platform-label"><span class="yt-col">YT 50%</span> · <span class="tw-col">TW 4%</span> · <span class="rd-col">RD 46%</span></span></div>
       </li>
-      <li>
+      <li data-rank="26" data-replies="0" data-mentions="9" data-likes="13" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#26</span>
         <div>
           <strong>As OSRS adds more worlds to handle population, the Wilderness gets thinner — more worlds were never designed with the Wilderness in mind.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Explicitly listed in the script.
         </div>
-        <span class="prob-mentions">~8 mentions</span>
+        <span class="prob-mentions">~9 mentions · 13 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="27" data-replies="0" data-mentions="8" data-likes="0" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#27</span>
         <div>
           <strong>PvP reputation is so toxic that word-of-mouth actively steers new players away before they ever try it.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Dedicated discussion in the script's psychological problems section.
         </div>
-        <span class="prob-mentions">~8 mentions</span>
+        <span class="prob-mentions">~8 mentions · 0 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
       </li>
-      <li>
+      <li data-rank="28" data-replies="0" data-mentions="11" data-likes="0" data-upvotes="2,635" data-rdcomments="0">
         <span class="prob-num">#28</span>
         <div>
           <strong>Wildertrees / Rev Caves / Wrathmaw — specific proposals that caused community backlash due to integrity concerns or bad design.</strong>
           <div><span class="prob-covered">✔ Covered</span></div>
           Discussed at length. Wrathmaw redesigned. Rev Caves referenced as a mixed success story.
         </div>
-        <span class="prob-mentions">~8 mentions</span>
+        <span class="prob-mentions">~11 mentions · 0 YT likes · 0 YT replies · 2,635 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:80.0%"></div><div class="platform-bar-tw" style="width:20.0%"></div></div><span class="platform-label"><span class="yt-col">YT 80%</span> · <span class="tw-col">TW 20%</span></span></div>
       </li>
-      <li>
+      <li data-rank="29" data-replies="0" data-mentions="9" data-likes="3" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#29</span>
         <div>
           <strong>UIM (Ultimate Ironmen) lose everything on PvP death with no recourse at all — not even items on the floor to retrieve.</strong>
           <div><span class="prob-not-covered">✖ Not covered</span></div>
           Mentioned by commenters but not specifically addressed in Chdata's script.
         </div>
-        <span class="prob-mentions">~6 mentions</span>
+        <span class="prob-mentions">~9 mentions · 3 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:66.7%"></div><div class="platform-bar-tw" style="width:33.3%"></div></div><span class="platform-label"><span class="yt-col">YT 67%</span> · <span class="tw-col">TW 33%</span></span></div>
       </li>
-      <li>
+      <li data-rank="30" data-replies="0" data-mentions="6" data-likes="3" data-upvotes="0" data-rdcomments="0">
         <span class="prob-num">#30</span>
         <div>
           <strong>Mobile players cannot realistically compete in PvP — the reaction speed required for prayer flicks and gear switches is beyond mobile input limits.</strong>
           <div><span class="prob-not-covered">✖ Not covered</span></div>
           Mentioned by commenters. Script doesn't address it, though it's a real barrier to new-player PvP growth.
         </div>
-        <span class="prob-mentions">~5 mentions</span>
+        <span class="prob-mentions">~6 mentions · 3 YT likes · 0 YT replies</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:83.3%"></div><div class="platform-bar-tw" style="width:16.7%"></div></div><span class="platform-label"><span class="yt-col">YT 83%</span> · <span class="tw-col">TW 17%</span></span></div>
+      </li>
+      <li data-rank="31" data-replies="0" data-mentions="17" data-likes="0" data-upvotes="20,146" data-rdcomments="3,462">
+        <span class="prob-num">#31</span>
+        <div>
+          <strong>Trip interruption / wasted time — the real wilderness frustration isn't losing items, it's that a single PKer can force you to abandon your entire trip even if you survive or escape.</strong>
+          <div><span class="prob-covered">✔ Covered in script (addressed as "time risk" in the risk deep-dive)</span></div>
+          Cleanly isolated in Reddit source 8: "The reason people don't like the wilderness isn't that you can lose your items, it's that you're pretty much guaranteed to waste your time." Even players who bring near-zero risk gear (and lose almost nothing on death) stop going to the wilderness because every encounter forces a full trip reset — bank, resupply, travel back. This is distinct from the loot piñata framing (#8) because it's about time cost, not GP cost. The asymmetry: the PKer's trip is unaffected by a failed PK attempt, but the PvMer's trip is completely ruined by a successful one. Chdata's script names exactly this as <em>time risk</em> in the risk deep-dive, treating it as a first-class form of risk alongside item/GP loss. Blessed Status is the proposal that most directly targets it: by making it easier and less risky to stand and fight back — and by making a death far less punishing even when it happens — it lowers the all-or-nothing cost of an encounter, so a single PKer landing on you no longer means the trip is automatically over.
+        </div>
+        <span class="prob-mentions">~17 mentions · 0 YT likes · 0 YT replies · 20,146 RD upvotes · 3,462 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="32" data-replies="0" data-mentions="10" data-likes="0" data-upvotes="4,828" data-rdcomments="2,217">
+        <span class="prob-num">#32</span>
+        <div>
+          <strong>No combat level brackets in the open wilderness — mid-level players doing mid-level content get attacked by max mains, making the encounter structurally unwinnable regardless of skill.</strong>
+          <div><span class="prob-not-covered">✖ Not addressed in script</span></div>
+          Most clearly articulated in "wilderness pvp is broken at a structural level" (Reddit source 8): deep wilderness content peaks in usefulness around 90-100 combat, but there's nothing preventing a 126 from attacking a 90. BH uses ±5 combat brackets. PvP worlds use ±15. The open wilderness uses nothing. The result: mid-level players doing content designed for them face opponents with 50+ combat levels of advantage. This isn't a skill gap (#1) — a level 90 player can't outskill a max main no matter how much they practice. It's a systems gap. Reinforced by posts noting that the "just learn to PK" advice is useless when your opponent has stats you can't match.
+        </div>
+        <span class="prob-mentions">~10 mentions · 0 YT likes · 0 YT replies · 4,828 RD upvotes · 2,217 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="33" data-replies="0" data-mentions="16" data-likes="0" data-upvotes="12,791" data-rdcomments="4,285">
+        <span class="prob-num">#33</span>
+        <div>
+          <strong>Teleblock duration makes surviving a PvP encounter irrelevant — even tanking a full PK attempt still leaves you unable to escape for up to 5 minutes, so the only viable exit is logging out of the game itself.</strong>
+          <div><span class="prob-not-covered">✖ Not addressed in script (freeze timer #10 is adjacent but distinct)</span></div>
+          The central argument of "I think my biggest issue with wilderness content is that escape should also be thrilling" (979 upvotes, 915 comments — highest-comment new post across all Reddit sources). Teleblock lasts 5 minutes (2.5 min with Protect from Magic). No PvP encounter lasts 5 minutes. This means surviving multiple freeze-eat cycles still leaves you stuck in the wilderness with no teleport and no in-game escape options. The community-established meta is spam-clicking the logout button, which isn't a game mechanic — it's literally leaving the game. The post argues escape should have its own skill expression: terrain shortcuts (Agility/Thieving checks), NPC disruption, cached supply areas, lock-pickable rooms. Currently there's none of that. Distinct from #10 (freeze too long) and #17 (escape broken) because it specifically targets Teleblock's 5-minute duration as the root cause of the logout-or-die binary. Related posts: "why throwing more minigames at the problem won't fix it," "The reason people don't like the wilderness," multiple DMM feedback posts on freeze + teleblock interaction.
+        </div>
+        <span class="prob-mentions">~16 mentions · 0 YT likes · 0 YT replies · 12,791 RD upvotes · 4,285 RD comments</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="34" data-replies="0" data-mentions="14" data-likes="0" data-upvotes="508" data-rdcomments="0">
+        <span class="prob-num">#34</span>
+        <div>
+          <strong>Incoming gear (Raids 4 hybrid armor, Rondache shield) is expected to further break the PvP meta — reducing gear switching skill expression and adding instant-hit burst potential with no meaningful counterplay.</strong>
+          <div><span class="prob-not-covered">✖ Not in script (predates Raids 4 announcement)</span></div>
+          Multiple posts in source 9 flagging Raids 4 reward proposals as deeply problematic for PvP. The hybrid armor is identified as trivially BIS for PvP — less switches, same KO potential, effectively 3 extra brew spaces, tanky enough to eliminate the glass-cannon penalty of wearing mage robes. The Rondache shield's instant-hit stored-damage special is compared to a Granite Maul that never misses and can combo freely. One detailed analysis notes "Dual crossbows at 2 ticks with 28 higher range strength than a dragon knife will decimate PvP worlds" and the Ket Breaker as "the first 3-tick melee weapon with stats on it." The underlying problem: every new content release threatens to reset the PvP meta in ways that require years of community re-learning, and the gear gap between experienced and new players keeps widening. Not previously in the dataset because Raids 4 is new news.
+        </div>
+        <span class="prob-mentions">~14 mentions · 0 YT likes · 0 YT replies · 508 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="35" data-replies="0" data-mentions="9" data-likes="0" data-upvotes="91" data-rdcomments="26">
+        <span class="prob-num">#35</span>
+        <div>
+          <strong>LMS win-requirement gatekeeping — before the bot ladder was announced, requiring a game win to access tradeable LMS rewards (MSB imbue, rune arrows) was identified as actively destroying beginner onboarding.</strong>
+          <div><span class="prob-partial">◑ Partially addressed — the PvP Tutorial has now passed a lock-in poll and is confirmed for the game, which directly responds to this</span></div>
+          Multiple high-engagement posts in source 9 specifically about this. Players who tried LMS for the first time after DMM All Stars reported: entering the game enthusiastic, spending 100+ games learning, accruing points — then discovering tradeable rewards require a win, and finding the skill gap to achieve a win unbridgeable against established players and bots. <em>"I was having fun. But realistically I never could get past top 4."</em> Several posts note the bitter irony that Jagex simultaneously wants more people to engage with PvP and then walls its most accessible on-ramp behind a requirement most beginners can never meet. <strong>This problem is now being directly addressed</strong>: the PvP Tutorial / bot-ladder concept (announced by Framed and surfaced at Summer Campfire 2026, referenced in source 9) has since passed its lock-in poll, so a structured PvP on-ramp is confirmed to be coming. The resolution has moved from "in progress" to "locked in"; the problem is documented here for the record.
+        </div>
+        <span class="prob-mentions">~9 mentions · 0 YT likes · 0 YT replies · 91 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="36" data-replies="0" data-mentions="6" data-likes="0" data-upvotes="9,000" data-rdcomments="0">
+        <span class="prob-num">#36</span>
+        <div>
+          <strong>WildyCCTV and external scouting tools — third-party bot networks that tell PKers exactly when and where real players are doing wilderness content, removing any possibility of stealth or safe windows.</strong>
+          <div><span class="prob-partial">◑ Named in script's problem list, but no solution proposed (and the tool itself is now defunct)</span></div>
+          Source 10 (wildy-relevance search) surfaces this as a structurally distinct problem from general AHK/scripting (#6). WildyCCTV was a website fed by bot scouts that published live player activity in the Wilderness. The moment a real player entered a wildy boss area, the bot network logged it and PKers were notified. Multiple high-upvote posts document this: "WildyCCTV is back" (~1,120 upvotes), "I recorded what WildyCCTV looks like" (~2,517 upvotes, 729 comments), "so this is how they find people easily in wildy... surely this isn't allowed" (~1,735 upvotes, 400 comments). A suggestion post proposed limiting world hopping for low-total-level accounts as a counter (~968 upvotes). The practical effect: no amount of careful world selection, off-peak timing, or gear minimization protected you once a scout bot was in the area, which invalidated the "just minimize your risk" advice given to PvMers. <strong>Script status:</strong> Chdata's script does list this as one of the wilderness problems, but deliberately offers no proposal for it — and notably, WildyCCTV no longer exists, so the specific tool is no longer a live issue. The broader scouting-bot dynamic it represents folds back into the cheating/bot-infrastructure problem (#6), which the script also flags without a dedicated solution. The Sir Puggers bot-exposure post (~1,991 upvotes) documents PKer clans running dedicated bot-protection operations at wildy bosses, shielding bots while hunting legitimate players.
+        </div>
+        <span class="prob-mentions">~6 mentions · 0 YT likes · 0 YT replies · 9,000 RD upvotes (estimated across related posts)</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="37" data-replies="0" data-mentions="12" data-likes="0" data-upvotes="30,479" data-rdcomments="30">
+        <span class="prob-num">#37</span>
+        <div>
+          <strong>Skull tricking and lure exploits — mechanics that let PKers force bank loss on players who never consented to a PvP interaction, by manipulating skull state, trade windows, or item-value displays.</strong>
+          <div><span class="prob-not-covered">✖ Not in script (mechanical exploit class — and largely superseded by the in-game Skull Prevention option)</span></div>
+          <div style="margin:6px 0;padding:6px 10px;background:rgba(255,180,80,0.08);border-left:2px solid var(--gold);font-size:0.92em;"><strong>Dating caveat:</strong> Most of this data predates the <em>Skull Prevention</em> option Jagex later added to the game, which neutralized the classic skull-trick (logging in beneath a player to trick them into attacking and skulling). The lure-via-trade-value variant still exists in principle, but the headline "skull tricking" grievance these posts describe is mostly a historical problem now. Treat the upvote weight here as evidence of how strongly the community felt at the time, not as a measure of the live problem today.</div>
+          Source 11 (wildy-top search) surfaces this as a high-engagement grievance. "PvPers are complaining about PvP being broken while simultaneously trying to abuse any possible trick to get peoples bank" (1,102 upvotes, 583 comments) cites a series of Framed skull-tricking videos by name. "Remove Skull tricking by adding a new Player Attack Option" (722 upvotes, 301 comments) proposes a UI fix. The "28B+ lured in 5 days" Revenant Weapons lure post documents an organized operation exploiting GE-value display lag. The throughline: a meaningful slice of "PvP" in the Wilderness isn't combat at all — it's social engineering and mechanical exploits to take banks from people who never agreed to fight. This is relevant to Chdata's framing because it sharpens the PvMer's core objection: the problem isn't losing a fair fight, it's being tricked or trapped into a loss with no counterplay. It also complicates the PKer-vs-PvMer perception gap — the "honest PKer" the script appeals to is a different population from the lurers and skull-trickers, and the video may want to distinguish them explicitly.
+        </div>
+        <span class="prob-mentions">~12 mentions · 0 YT likes · 0 YT replies · 30,479 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="38" data-replies="0" data-mentions="3" data-likes="0" data-upvotes="4,429" data-rdcomments="0">
+        <span class="prob-num">#38</span>
+        <div>
+          <strong>FOMO spawn mechanics and BIS-in-Wilderness gear pressure — content design that uses timed/limited spawns and best-in-slot rewards to coerce engagement, rather than attracting players who want to be there.</strong>
+          <div><span class="prob-covered">✔ Adjacent to script's core thesis (the Labeling Problem and forced-content critique)</span></div>
+          Source 11's "Wrathmaw MUST Fail" (2,636 upvotes, 406 comments) is the clearest articulation: it argues a proposed wilderness boss with limited time-gated spawns is "a nefarious tactic used in online games that tries to force players to logon more frequently by playing on fear of missing out," and that "nothing in the wildy should drop BIS items." Crucially, this post uses the <em>exact fishing trawler metaphor</em> Chdata's script uses — "it may as well be another fishing trawler, something most of us hate to do, but a grind everyone must do." This is independent community convergence on Chdata's central framing device. The problem is distinct from forced-items (#9) because it's about the <em>design philosophy</em> of using FOMO and BIS gates as engagement coercion, which is exactly what the Labeling Problem and the "design content for the Wilderness, not content that forces everyone into it" principle push against. Worth referencing directly: the community has already rejected this design approach at the ballot box.
+        </div>
+        <span class="prob-mentions">~3 mentions · 0 YT likes · 0 YT replies · 4,429 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="39" data-replies="0" data-mentions="6" data-likes="0" data-upvotes="2,496" data-rdcomments="0">
+        <span class="prob-num">#39</span>
+        <div>
+          <strong>The Wilderness bosses themselves are poorly tuned — bad locations, mismatched loot, forced multi-combat, and hardcoded-disabled attack styles make the content unrewarding to engage with even before any PKer shows up.</strong>
+          <div><span class="prob-partial">◑ Lightly addressed in script (Chdata has one wildy-boss improvement idea; otherwise mostly out of scope)</span></div>
+          Surfaced strongly in source 12 (comments-sorted), where boss-quality complaints generate heavy debate independent of PK pressure. "This is the reason PVMers don't go in the wildy" (Scorpia, 202 comments) and "What's the deal with Scorpia?" (240 comments) both argue the deepest-wildy boss has the worst location-to-reward ratio in the game. "Chaos Elemental: What the Fuck" (150 comments) catalogs a 1-minute respawn, ragdoll teleports, and chaos-dwarf-tier loot. "Everything I hate about the Wilderness" from a PKer's own perspective (329 comments) makes the same point: the Resource Arena, Rogues' Chest, and Scorpia are all unrewarding relative to their risk and depth. <strong>Script status:</strong> Chdata doesn't dwell on boss tuning, but the script does include one idea aimed at improving the wilderness bosses. It's also worth noting the broader landscape here — Mod Manked was working on a new version of the Revenant Caves, so part of this problem space was already getting official attention at the time of writing. The takeaway for the video remains: some "Wilderness is dead" sentiment isn't about PKers at all, it's that specific PvM content there is genuinely worse-tuned than equivalent safe content, and the script's PvP-relationship proposals won't fix a badly-designed boss on their own.
+        </div>
+        <span class="prob-mentions">~6 mentions · 0 YT likes · 0 YT replies · 2,496 RD upvotes</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="40" data-replies="0" data-mentions="11" data-likes="0" data-upvotes="3,118" data-rdcomments="0">
+        <span class="prob-num">#40</span>
+        <div>
+          <strong>Power creep from PvM rewards keeps reshaping PvP — every new raid's best-in-slot gear leaks into the Wilderness and rewrites the meta, so the people who actually fight each other are perpetually chasing the newest items rather than playing a stable game.</strong>
+          <div><span class="prob-not-covered">✖ Not addressed in script (Chdata's framing actually runs the other way — he argues PvP <em>rewards</em> avoid power-creeping the game)</span></div>
+          Surfaced in source 13 (wildy new-sorted) around the Raids 4 reward blogs. "Youtubers are going to have a field day in the wildy with raids 4 gear" (23 comments) catalogs how the proposed hybrid armor, dual crossbows, and the new megarare would each individually warp PvP — flat armour reducing KO potential, 2-tick crossbows, instant-hit combo weapons. "Raids 4 rewards + tweaks to existing items" (21 comments) and several "hybrid armor is a mistake" threads argue the new tier devalues existing sets and erases gear-switching skill expression in PvP. The throughline: Wilderness PvP never gets to stabilize because PvM content keeps injecting new top-end items that change what a fight looks like, and balancing those for PvP is an afterthought in the reward blogs. <strong>Script relationship:</strong> this is a genuine tension with Chdata's framing rather than a gap. The script explicitly argues that PvP <em>rewards</em> are good precisely because they don't power-creep the game ("we're not going to get raid rewards from a PvP minigame"). The community concern here is the reverse direction — PvM rewards creeping into PvP — which the script doesn't take up. Worth noting as the one major recurring grievance the proposals don't touch, since none of the four core ideas address gear/power balance.
+        </div>
+        <span class="prob-mentions">~11 mentions · 0 YT likes · 0 YT replies · 3,118 RD upvotes (estimated across Raids 4 reward threads)</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
       </li>
     </ol>
   </div>
 </div>
 
-<!-- ══════════════ SECTION 4: REBUTTALS ══════════════ -->
-<div class="section">
+<!-- ══════════════ SECTION 3B: COMMUNITY PROPOSED SOLUTIONS ══════════════ -->
+<div class="section" id="solutions-section">
+  <div class="sec-head">Community Proposed Solutions</div>
+  <div class="sec-sub">Ranked by mention frequency across 13 sources · ✔ = in Chdata's script · ◑ = adjacent / partial · ✖ = not in script</div>
+  <hr class="sec-divider">
+  <div class="section-inner">
+    <p>Coverage key: <span class="prob-covered">✔ In Chdata's script</span> &nbsp; <span class="prob-partial">◑ Partially covered or adjacent</span> &nbsp; <span class="prob-not-covered">✖ Not in script</span></p>
+
+    <div class="sort-bar">
+      <span class="sort-label">Sort by:</span>
+      <button class="sort-btn active" id="sol-sort-rank" onclick="sortSolutions('rank')"># Original Rank</button>
+      <button class="sort-btn" id="sol-sort-mentions" onclick="sortSolutions('mentions')">💬 Mentions</button>
+      <button class="sort-btn" id="sol-sort-platform" onclick="sortSolutions('platform')">📺 Platform (YT→TW→RD)</button>
+    </div>
+
+    <ol class="prob-list" id="sol-list">
+
+      <li data-rank="1" data-mentions="60" data-platform="yt">
+        <span class="prob-num">#1</span>
+        <div>
+          <strong>PvP Tutorial / Wave-based Proving Grounds / Bot Ladder — a structured minigame that teaches PvP mechanics against progressively harder NPCs, with escape mechanics and no permanent loot loss.</strong>
+          <div><span class="prob-covered">✔ Adjacent to Chdata's script · <strong style="color:var(--green-rs);">✅ OFFICIAL — the PvP Tutorial has now passed a lock-in poll, so it is confirmed going into the game</strong></span></div>
+          Framed's proposal from the "Dear Jagex" video, now official: the PvP Tutorial has passed a lock-in poll and is confirmed for development. Source 9 (new-sorted Reddit, June 2026) includes a post noting the Summer Campfire 2026 announcement that Jagex was polling a bot ladder where you face increasing difficulty bots in sequence; Framed had announced this a month prior, and it has since cleared its lock-in vote. Not Chdata's idea but directly relevant — all sources treat it as the highest-enthusiasm single concept, and it is the one community-favored solution in this list that has actually crossed the line into confirmed content. Variants include LMS bot difficulty modes, Fist of Guthix revival, and dedicated 1v1 NPC dueling rooms. The DMM Convert archetype (identified in source 9) is specifically the population this would serve: players who want structured, low-stakes PvP entry that isn't the open Wilderness.
+        </div>
+        <span class="prob-mentions">~60 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:100.0%"></div></div><span class="platform-label"><span class="yt-col">YT 100%</span></span></div>
+      </li>
+
+      <li data-rank="2" data-mentions="58" data-platform="yt">
+        <span class="prob-num">#2</span>
+        <div>
+          <strong>ELO / Matchmaking / Ranked System — bracket-based PvP where players fight opponents of similar skill, with seasonal rewards and a visible rating.</strong>
+          <div><span class="prob-covered">✔ Addressed in script (the existing PvP Arena is meant to have ranked matchmaking; script proposes a 6v6 PvP Arena that also uses a matchmaking/ranking system)</span></div>
+          The most independently convergent solution across all sources — dozens of commenters proposed it without having seen each other's suggestions. Scores well across nearly every archetype: beginners fight beginners, experienced players get real competition, and irons can potentially participate with no economy risk. Chdata's script engages this directly: the current PvP Arena is <em>supposed</em> to provide ranked matchmaking but has problems that the script discusses, and the script's proposed 6v6 PvP Arena is built around a matchmaking/ranking system of its own. The closest existing analogue, LMS, lacks true skill matching and has reward/bot problems. Estimated ~52% approval if polled.
+        </div>
+        <span class="prob-mentions">~58 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:70.0%"></div><div class="platform-bar-tw" style="width:16.0%"></div><div class="platform-bar-rd" style="width:14.0%"></div></div><span class="platform-label"><span class="yt-col">YT 70%</span> · <span class="tw-col">TW 16%</span> · <span class="rd-col">RD 14%</span></span></div>
+      </li>
+
+      <li data-rank="3" data-mentions="35" data-platform="yt">
+        <span class="prob-num">#3</span>
+        <div>
+          <strong>Wilderness-only Clues — a new clue scroll tier dropped exclusively within the Wilderness, replacing the frustration of mandatory wildy steps on regular clues.</strong>
+          <div><span class="prob-covered">✔ In Chdata's script</span></div>
+          Framed floated this as his example in the Twitter post and it generated strong agreement across all sources. Source 10 (wildy-relevance search) adds major confirmation: a 5-year-old suggestion post proposing exactly this — "wilderness-only clue scroll with PvP-related rewards, dropped from wildy slayer tasks" — sits at 6,312 upvotes and 834 comments, the highest-upvoted PvP proposal in the entire dataset. Separating "content designed for the Wilderness" from "content that forces everyone into the Wilderness" is the core design logic. Wilderness-only clues attract players who want to be there; removing steps from regular clues stops punishing players who don't. The 6,312-upvote ceiling on this proposal is also the strongest evidence in the dataset that solution #3 has genuine majority appeal despite the general anti-PvP sentiment.
+        </div>
+        <span class="prob-mentions">~35 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:75.0%"></div><div class="platform-bar-tw" style="width:22.0%"></div><div class="platform-bar-rd" style="width:3.0%"></div></div><span class="platform-label"><span class="yt-col">YT 75%</span> · <span class="tw-col">TW 22%</span> · <span class="rd-col">RD 3%</span></span></div>
+      </li>
+
+      <li data-rank="4" data-mentions="37" data-platform="yt">
+        <span class="prob-num">#4</span>
+        <div>
+          <strong>Iron-friendly Death Mechanics — a coffer, bond exchange, or insurance system letting ironmen cover the cost of lost items on PvP death, similar to Deaths Coffer but for Wilderness kills.</strong>
+          <div><span class="prob-covered">✔ In Chdata's script (Bond Coffer / Loot Key signal boost)</span></div>
+          Recurred across YouTube comments and the Twitter thread from ironmen themselves. The specific mechanic varies — bond coffer, GP coffer, "store pk'd keys for eventual bond" — but the core ask is the same: irons need a death state that doesn't require them to re-grind 40+ hours of content per kill. Without this, ironmen will never have incentive to fight back and will remain a permanent source of anti-PvP poll votes.
+        </div>
+        <span class="prob-mentions">~37 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:82.4%"></div><div class="platform-bar-tw" style="width:17.6%"></div></div><span class="platform-label"><span class="yt-col">YT 82%</span> · <span class="tw-col">TW 18%</span></span></div>
+      </li>
+
+      <li data-rank="5" data-mentions="30" data-platform="yt">
+        <span class="prob-num">#5</span>
+        <div>
+          <strong>World Count Reduction — cutting the number of worlds where the Wilderness is accessible, concentrating players and making the zone feel alive again.</strong>
+          <div><span class="prob-partial">◑ Mentioned in script</span></div>
+          Consistently proposed across many of the sources. The core logic: too many worlds means too few players per world, meaning PKers can't find each other and PvMers can safely world-hop away from any threat. Concerns include increased PKer pressure on the remaining worlds' PvMers, but counter-proposals pair world reduction with simultaneous PKer-vs-PKer incentives so the pressure lands on the right targets.
+        </div>
+        <span class="prob-mentions">~30 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:64.7%"></div><div class="platform-bar-tw" style="width:35.3%"></div></div><span class="platform-label"><span class="yt-col">YT 65%</span> · <span class="tw-col">TW 35%</span></span></div>
+      </li>
+
+      <li data-rank="6" data-mentions="22" data-platform="yt">
+        <span class="prob-num">#6</span>
+        <div>
+          <strong>Return of Multi Revs / Roaming Revenants — removing or heavily reducing the Rev Cave and returning revenants to roam the open Wilderness surface, forcing multi-combat encounters and group play.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script</span></div>
+          Strong nostalgia signal across all sources. The argument is that multi rev caves concentrated bots and PKers in one easily-avoided spot; roaming revs spread activity across the Wilderness and forced emergent group encounters — the "every world was full" era commenters consistently reference. Drop table concerns (bot farming) can be addressed with all-or-nothing rare loot tables rather than consistent GP/hr.
+        </div>
+        <span class="prob-mentions">~22 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:66.7%"></div><div class="platform-bar-tw" style="width:33.3%"></div></div><span class="platform-label"><span class="yt-col">YT 67%</span> · <span class="tw-col">TW 33%</span></span></div>
+      </li>
+
+      <li data-rank="7" data-mentions="20" data-platform="yt">
+        <span class="prob-num">#7</span>
+        <div>
+          <strong>Safe Boss Instances — purchasable or earnable temporary instances for Wilderness bosses so PvMers can kill the boss without being interrupted by PKers.</strong>
+          <div><span class="prob-partial">◑ Adjacent (script's "boss barricading" idea is similar but different; KBD already has a paid instance)</span></div>
+          Appeared across sources 3 and 4. The design tension is real: safe instances remove the risk that gives Wilderness items their exclusivity, but mandatory open-world access pushes PvMers away entirely. A middle path proposed by several commenters is gating instances behind a kill-count or diary requirement rather than GP, preserving some barrier while giving committed PvMers a path. Chdata's script proposes a related-but-distinct mechanism — a boss barricading idea — that shares the goal of giving a PvMer some protected control over a boss encounter, but works differently from a flat purchasable instance. Worth flagging as adjacent rather than identical: the community's "buy an instance" framing and the script's barricading approach are aiming at the same problem from different angles.
+        </div>
+        <span class="prob-mentions">~20 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:70.0%"></div><div class="platform-bar-tw" style="width:30.0%"></div></div><span class="platform-label"><span class="yt-col">YT 70%</span> · <span class="tw-col">TW 30%</span></span></div>
+      </li>
+
+      <li data-rank="8" data-mentions="18" data-platform="yt">
+        <span class="prob-num">#8</span>
+        <div>
+          <strong>Opt-in PvP / Non-PvP Worlds with Reduced Rates — making wilderness PvP voluntary with a meaningful drop rate penalty for opting out, rather than mandatory for all players.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script (Chdata explicitly argues against this)</span></div>
+          The most divisive solution in the dataset — the most commonly proposed by non-PvPers and the most opposed by PvPers. RS3 actually implemented this and is cited both as a cautionary tale (killed the PvP scene) and as a success (made the rest of the game more enjoyable). The rate penalty variant attempts a middle ground but runs into the same polling problem as every other compromise: non-PvPers will vote for it to escape the Wilderness, then complain about reduced rates.
+        </div>
+        <span class="prob-mentions">~18 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:70.8%"></div><div class="platform-bar-tw" style="width:29.2%"></div></div><span class="platform-label"><span class="yt-col">YT 71%</span> · <span class="tw-col">TW 29%</span></span></div>
+      </li>
+
+      <li data-rank="9" data-mentions="16" data-platform="yt">
+        <span class="prob-num">#9</span>
+        <div>
+          <strong>Combat Bracket Rework — replacing the current combat level ±X attack range with something that better reflects actual PvP capability, such as gear value tiers, build type matching, or separate brackets for pures/zerkers/mains.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script</span></div>
+          Raised in the Twitter thread specifically. The current CB bracket system was designed for a simpler era — it doesn't account for min-maxed pures being massively more dangerous than their level implies, or for maxed meds being outmatched by accounts technically within their bracket. Several commenters proposed PvP-worlds-style ±15 brackets as a minimum fix.
+        </div>
+        <span class="prob-mentions">~16 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:63.6%"></div><div class="platform-bar-tw" style="width:36.4%"></div></div><span class="platform-label"><span class="yt-col">YT 64%</span> · <span class="tw-col">TW 36%</span></span></div>
+      </li>
+
+      <li data-rank="10" data-mentions="14" data-platform="rd">
+        <span class="prob-num">#10</span>
+        <div>
+          <strong>Wilderness Hop Timer — a 30-second delay before players can world-hop while in a PvP-enabled area, reducing the effectiveness of alt scouts and instant-escape behavior.</strong>
+          <div><span class="prob-partial">◑ Adjacent to worldhopping problem (#5 in problems list)</span></div>
+          Specifically proposed by multiple Twitter respondents. A targeted mechanical fix for the worldhopping problem rather than a structural overhaul. Low controversy among PvP players but likely unpopular with PvMers who use world-hopping as a primary escape mechanism.
+        </div>
+        <span class="prob-mentions">~14 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-tw" style="width:42.9%"></div><div class="platform-bar-rd" style="width:57.1%"></div></div><span class="platform-label"><span class="tw-col">TW 43%</span> · <span class="rd-col">RD 57%</span></span></div>
+      </li>
+
+      <li data-rank="11" data-mentions="21" data-platform="yt">
+        <span class="prob-num">#11</span>
+        <div>
+          <strong>PKer vs PKer Incentives — explicit rewards and content designed to make PKers fight each other rather than exclusively hunting PvMers: BH target teleport revival, skulled-player bonuses, risk-scaled loot pools.</strong>
+          <div><span class="prob-covered">✔ Covered indirectly via Wildy Teams + Priority Ranking Poll</span></div>
+          The Twitter thread surfaced this explicitly. The underlying observation is that the current Wilderness economy gives PKers more incentive to hunt passive PvMers than to fight other PKers — because PvMers are easier kills with predictable loot. Fixing this requires either making PKer-vs-PKer more rewarding (BH-style reward structure) or making PvMer hunting less reliable (Blessed Status does this).
+        </div>
+        <span class="prob-mentions">~21 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:66.7%"></div><div class="platform-bar-tw" style="width:33.3%"></div></div><span class="platform-label"><span class="yt-col">YT 67%</span> · <span class="tw-col">TW 33%</span></span></div>
+      </li>
+
+      <li data-rank="12" data-mentions="12" data-platform="yt">
+        <span class="prob-num">#12</span>
+        <div>
+          <strong>PJ Timer Rework — adjusting the PJ (pile-jump) timer to allow skulled players to attack targets currently in combat, while preserving protection for unskulled PvMers.</strong>
+          <div><span class="prob-partial">◑ Mentioned in script context but no specific fix proposed</span></div>
+          Multiple Twitter respondents cited the current PJ timer as the single change that killed single clanning. The proposed fix distinguishes between skulled and unskulled attackers — skulled players who explicitly opted into PvP should be able to fight freely, while unskulled PvMers retain protection. Technically complex but conceptually clean.
+        </div>
+        <span class="prob-mentions">~12 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:75.0%"></div><div class="platform-bar-tw" style="width:25.0%"></div></div><span class="platform-label"><span class="yt-col">YT 75%</span> · <span class="tw-col">TW 25%</span></span></div>
+      </li>
+
+      <li data-rank="13" data-mentions="14" data-platform="yt">
+        <span class="prob-num">#13</span>
+        <div>
+          <strong>Wilderness Loot Accumulator / Activity Scaling — a system where staying in the Wilderness for extended periods increases drop rates or accumulates bonus loot, rewarding players who commit to being there.</strong>
+          <div><span class="prob-covered">✔ Covered in script (very close to the "Forinthry Artefacts" system Chdata proposes)</span></div>
+          Proposed across Twitter and source 3. The EP% system from pre-OSRS is the historical precedent. Several commenters explicitly referenced it positively. Chdata's script proposes a "Forinthry Artefacts" system that is very close to what these commenters are describing — a structure that rewards committed time spent in the Wilderness. The design challenge is the same one that killed EP%: any accumulating reward system is eventually solved by bots or boosting partners, so it needs an untradeable-rewards or time-gated structure to avoid this. The community arriving at the same idea independently is a point in the proposal's favor.
+        </div>
+        <span class="prob-mentions">~14 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:90.9%"></div><div class="platform-bar-tw" style="width:9.1%"></div></div><span class="platform-label"><span class="yt-col">YT 91%</span> · <span class="tw-col">TW 9%</span></span></div>
+      </li>
+
+      <li data-rank="14" data-mentions="12" data-platform="yt">
+        <span class="prob-num">#14</span>
+        <div>
+          <strong>Freeze Mechanic Changes — nerfing offensive freezes, adding single-freeze escape mechanics (one freeze shouldn't end an encounter), or adding consumable freeze immunity for unskulled players.</strong>
+          <div><span class="prob-partial">◑ Freeze problem listed but no fix proposed</span></div>
+          Freeze mechanics were the most-debated specific mechanical complaint across all sources. The no-freeze-escape situation means that a single successful freeze on a non-PvPer is effectively a death sentence with no skill expression on their part. Proposed fixes range from hard nerfs (reduce freeze duration) to new consumables (freeze immunity amulet for unskulled players) to movement changes (freeze-log escape mechanics like Framed's wave minigame).
+        </div>
+        <span class="prob-mentions">~12 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:75.0%"></div><div class="platform-bar-tw" style="width:25.0%"></div></div><span class="platform-label"><span class="yt-col">YT 75%</span> · <span class="tw-col">TW 25%</span></span></div>
+      </li>
+
+      <li data-rank="15" data-mentions="11" data-platform="tw">
+        <span class="prob-num">#15</span>
+        <div>
+          <strong>Move or Remove Forced Wilderness Items — relocating the next BiS mage cape, reducing the Voidwaker's Wilderness requirement, or adding wilderness-adjacent alternatives for key unlocks.</strong>
+          <div><span class="prob-covered">✔ Covered in script</span></div>
+          Specifically called out in the Twitter thread — the next BiS mage cape being in the Wilderness is cited as a guaranteed spite-vote generator. The script addresses the broader forced-items problem. The specific framing here ("next BiS cape NOT in the wildy") is sharper and more pre-emptive than the retrospective framing in the script.
+        </div>
+        <span class="prob-mentions">~11 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-tw" style="width:100.0%"></div></div><span class="platform-label"><span class="tw-col">TW 100%</span></span></div>
+      </li>
+
+      <li data-rank="16" data-mentions="10" data-platform="tw">
+        <span class="prob-num">#16</span>
+        <div>
+          <strong>GP-charged Wilderness Armor — gear that is charged with GP, loses the GP to the PKer on death rather than the item itself, reducing the effective death penalty while maintaining meaningful risk.</strong>
+          <div><span class="prob-covered">✔ In Chdata's script (Blessed Status is a variant of this concept)</span></div>
+          Proposed independently in the Twitter thread by RooK_OSRS. Functionally similar to Blessed Status but applied to gear rather than an overhead prayer. The core mechanic is the same — PKers get reliable GP income, PvMers lose a known fixed cost rather than their items. Could co-exist with Blessed Status as a complementary layer.
+        </div>
+        <span class="prob-mentions">~10 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-tw" style="width:57.1%"></div><div class="platform-bar-rd" style="width:42.9%"></div></div><span class="platform-label"><span class="tw-col">TW 57%</span> · <span class="rd-col">RD 43%</span></span></div>
+      </li>
+
+      <li data-rank="17" data-mentions="6" data-platform="yt">
+        <span class="prob-num">#17</span>
+        <div>
+          <strong>Wilderness Expansion — extending the Wilderness further north with new zones, cities, bosses, and content to give the deep Wilderness a reason to exist beyond "very dangerous nothing."</strong>
+          <div><span class="prob-partial">◑ Referenced in script, not a core proposal</span></div>
+          Recurring across sources 3 and 4. The deep Wilderness is currently almost entirely empty — the content clusters at the edges (Ferox, rev caves, wildy bosses at low-mid levels) and drops off sharply. An expanded northern zone with unique high-risk content could create new hotspots without disrupting existing lower-level Wilderness activity.
+        </div>
+        <span class="prob-mentions">~6 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-yt" style="width:50.0%"></div><div class="platform-bar-tw" style="width:50.0%"></div></div><span class="platform-label"><span class="yt-col">YT 50%</span> · <span class="tw-col">TW 50%</span></span></div>
+      </li>
+
+      <li data-rank="18" data-mentions="16" data-platform="tw">
+        <span class="prob-num">#18</span>
+        <div>
+          <strong>Mechanic Consistency Pass — removing or standardizing all the ways Wilderness mechanics differ from the rest of the game: trouver parchments, autocast behavior on weapon switch, PJ timer inconsistencies, and XP block availability.</strong>
+          <div><span class="prob-covered">✔ Covered in script (Chdata has a full deep-dive section on this)</span></div>
+          Raised in the Twitter thread. The Wilderness has accumulated years of one-off mechanical exceptions that create confusion for both new and returning players. A cleanup pass that asks "does this exception serve a design purpose or is it just legacy debt?" could reduce friction without touching the core PvP ecosystem. This is one of the more thoroughly-addressed items in Chdata's script — there's a dedicated deep-dive section walking through the inconsistencies between Wilderness mechanics and the rest of the game, so the community's call for a consistency pass lines up directly with material already in the video.
+        </div>
+        <span class="prob-mentions">~16 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-tw" style="width:50.0%"></div><div class="platform-bar-rd" style="width:50.0%"></div></div><span class="platform-label"><span class="tw-col">TW 50%</span> · <span class="rd-col">RD 50%</span></span></div>
+      </li>
+
+      <li data-rank="19" data-mentions="1" data-platform="tw">
+        <span class="prob-num">#19</span>
+        <div>
+          <strong>Stat Reduction on Wildy Entry — allow players to voluntarily reduce their stats when entering the wilderness to simulate different account builds without needing a separate account.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script</span></div>
+          Proposed by <strong>@RealMatK (Mod Mat K, former Jagex employee)</strong> in the Twitter/X thread. A player could voluntarily cap themselves to 70 combat before entering, making wilderness fights more level without requiring a new account. Addresses the skill gap and account accessibility problems simultaneously. Chdata's note: distinct from the Combat Bracket Rework solution (#9) which is matchmaking/server-side — this is voluntary and account-side, more like the XP block system. Mat K's background at Jagex gives this unusual weight as a design idea from someone who understands the implementation constraints.
+        </div>
+        <span class="prob-mentions">~1 mention across sources · proposed by @RealMatK (former Jagex employee)</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-tw" style="width:100.0%"></div></div><span class="platform-label"><span class="tw-col">TW 100%</span></span></div>
+      </li>
+
+      <li data-rank="20" data-mentions="6" data-platform="rd">
+        <span class="prob-num">#20</span>
+        <div>
+          <strong>Teleblock Duration Reduction — cut Teleblock from 5 minutes to 30-60 seconds so that surviving a PvP encounter actually means you can escape afterward.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script</span></div>
+          <div style="margin:6px 0;padding:6px 10px;background:rgba(255,180,80,0.08);border-left:2px solid var(--gold);font-size:0.92em;"><strong>Mechanics note:</strong> At some point Jagex changed Teleblock so its duration is <em>halved</em> when the victim has Protect from Magic active. So the live numbers are 5 minutes unprayed / 2.5 minutes with Protect from Magic — the prayer already provides partial mitigation, and several of these posts are really arguing about whether it should fully negate rather than halve.</div>
+          Proposed across Reddit sources as a companion to freeze nerfs but distinct enough to warrant its own entry. The current 5-minute Teleblock (2.5 min with Protect from Magic) is longer than almost any PvP encounter and longer than any reasonable resupply window. It means there's no in-game path from "tanked the PKer's spec" to "escaped" — only from "tanked the PKer's spec" to "still stuck for the remaining duration." Multiple high-engagement posts proposed either gutting the duration or making Protect from Magic fully negate it, not just halve it.
+        </div>
+        <span class="prob-mentions">~6 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+
+      <li data-rank="21" data-mentions="3" data-platform="rd">
+        <span class="prob-num">#21</span>
+        <div>
+          <strong>Legitimate In-Game Escape Mechanics — replace the log-out-spam meta with actual gameplay: terrain shortcuts, skill checks, lock-pickable rooms, escape consumables from wildy PvM drops.</strong>
+          <div><span class="prob-partial">◑ Partially covered (several script ideas fit this: a Wildy Agility Course change, Forinthry Gates, and Tiered Blessed Status)</span></div>
+          Argued in the highest-comment new post from Source 8 ("I think my biggest issue with wilderness content is that escape should also be thrilling," 979 upvotes, 915 comments). The core proposal: escape should have skill expression on both sides. Predators should have to work to corner prey; prey should have real options beyond "run 10 tiles and logout." Suggested mechanics include Agility/Thieving-gated terrain shortcuts PKers can't follow, NPC enemies that can be used to disrupt pursuers, cached supply areas mid-wilderness, and items that grant brief Teleblock immunity at a significant HP cost. Chdata's script lands on several ideas in this space: a proposed change to the Wilderness Agility Course that fits the "skill-gated escape route" concept, plus Forinthry Gates and Tiered Blessed Status, both of which discourage the logout-spam meta this post is reacting against. So while the script doesn't frame it as a single "escape mechanics" pillar, multiple of its proposals are pulling in this direction.
+        </div>
+        <span class="prob-mentions">~3 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+
+      <li data-rank="22" data-mentions="5" data-platform="rd">
+        <span class="prob-num">#22</span>
+        <div>
+          <strong>Wilderness Combat Level Brackets — enforce a ±15 combat level bracket in the open wilderness (matching PvP worlds) so mid-level players doing mid-level content can't be attacked by max mains.</strong>
+          <div><span class="prob-not-covered">✖ Not in Chdata's script</span></div>
+          BH uses ±5. PvP worlds use ±15. The open wilderness uses nothing. Multiple Reddit posts argue this is the core structural failure: a level 90 player doing content balanced around level 90 accounts gets attacked by level 126s. No amount of skill closes a 36-level combat gap when that gap translates directly into stat bonuses, HP, prayer levels, and gear access. The proposal is simply to apply the same bracket system that already exists in PvP worlds to the open wilderness PvP interactions, without changing anything else about how the wilderness works.
+        </div>
+        <span class="prob-mentions">~5 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="23" data-mentions="9" data-platform="rd">
+        <span class="prob-num">#23</span>
+        <div>
+          <strong>Freeze Counterplay Item (e.g. Dragonfire Potion) — a consumable that breaks an active freeze and grants brief freeze immunity, at a self-damage or inventory-slot cost, giving frozen players a skill-expression escape option.</strong>
+          <div><span class="prob-partial">◑ Adjacent to script (freeze problem #10 covered, this specific fix is not)</span></div>
+          Source 11's "It's time to debate counterplay to ice barrage (Dragonfire Potion)" (972 upvotes, 486 comments) argues the #1 thing keeping PvMers out of the wilderness is being frozen with zero counterplay. The proposal: a potion that, at the cost of 10 self-damage per dose and an inventory slot, removes freezes and prevents them for 5 seconds. This directly targets the "deer in headlights" loot-piñata dynamic that the community keeps citing. Distinct from Chdata's proposals (which work around freezes via Blessed Status reducing stakes rather than changing freeze mechanics), but it's the single most-upvoted concrete mechanical fix for the freeze problem in the dataset and worth acknowledging as the community's preferred direct solution.
+        </div>
+        <span class="prob-mentions">~9 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="24" data-mentions="6" data-platform="rd">
+        <span class="prob-num">#24</span>
+        <div>
+          <strong>Well-Designed Escape Mechanics — deliberate, skill-rewarding escape routes built into the Wilderness (agility shortcuts, lock-picks, item-gated passages, terrain disruption) to replace unintended exploits like client-closing and walk-under logout.</strong>
+          <div><span class="prob-partial">◑ Adjacent to script (escape-broken problem #17 covered, this proposal is not a core proposal)</span></div>
+          Source 11's "Add actual well designed escapes to the wilderness" (795 upvotes, 150 comments) argues that a player's primary escape shouldn't be an unintended mechanic, and proposes a variety of intentional escapes: agility shortcuts, skill checks (push a boulder, pick a lock), and item-based routes (slash a web, climb with a rope, burn a fallen tree). The design goal is to reward players who prepared and skilled up, giving non-combat-focused PvMers an edge through escape rather than fighting. DMM showed how exciting creative escapes can be; the proposal is to make that a core wilderness gameplay loop. This connects to Chdata's Blessed Status and Wildy Teams as part of a coherent "make the Wilderness fairer without removing risk" package.
+        </div>
+        <span class="prob-mentions">~6 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="25" data-mentions="11" data-platform="rd">
+        <span class="prob-num">#25</span>
+        <div>
+          <strong>Shift the Wilderness from Prey-vs-Predator to PKer-vs-PKer — redesign incentives so PKers are rewarded for fighting other PKers rather than hunting PvMers, restoring the historical food-chain ecosystem.</strong>
+          <div><span class="prob-covered">✔ Aligned with script's core thesis</span></div>
+          This is the single most-aligned community position with Chdata's entire argument, and it appears across multiple high-engagement source 11 posts. "Why is Jagex pushing prey vs predator instead of PKer vs PKer?" (1,029 upvotes, 830 comments) names the design problem directly. "The reason why PvP regularly falls short" (1,309 upvotes, 724 comments), written by a collection logger who completed every wildy boss and the 1K LMS cape, argues the successful PvP models (LMS, BH, PvP Arena, multi wildy bosses) all share one trait: two people actually engaging in PvP rather than one person DPSing a fleeing target. "The Wilderness was its healthiest in 2007" (925 upvotes, 474 comments) provides the food-chain analysis showing how the rising skill ceiling broke the bad-pker → okay-pker → good-pker hierarchy, leaving PvMers as everyone's preferred target. This is the strongest cluster of community support for the script's framing — the proposals (Wildy Teams creating PKer-vs-PKer context, Team Combat Zones structuring group fights) are mechanisms toward exactly this goal.
+        </div>
+        <span class="prob-mentions">~11 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="26" data-mentions="7" data-platform="rd">
+        <span class="prob-num">#26</span>
+        <div>
+          <strong>Skulled-Player Disadvantage Mechanics — make Wilderness content actively turn against attackers by giving the environment (bosses, NPCs, terrain) a bias toward whoever is skulled, so a PvMer mid-fight gets a built-in edge against an aggressor.</strong>
+          <div><span class="prob-partial">◑ Adjacent to script's goal (rebalances the predator-prey relationship without removing PvP)</span></div>
+          From source 12's "Special Mechanics for Skulled Players" (538 upvotes, 417 comments), a heavily-debated proposal: if you attack a PvMer, the content they're doing punishes you for being skulled. Black chins suicide-rush the attacker, revenants go multi toward the skulled player, Chaos Elemental prioritizes and binds the attacker. The design intent is exactly Chdata's: keep the risk and the PvP, but stop the interaction from being a free one-sided kill. It's a mechanically different route to the same destination as Blessed Status (which reduces the stakes of the loss) — this instead tilts the fight itself. Worth noting as a community-favored alternative mechanism toward the "make it a fight, not a piñata" goal, and a useful contrast to show the proposals aren't the only way to get there.
+        </div>
+        <span class="prob-mentions">~7 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="27" data-mentions="9" data-platform="rd">
+        <span class="prob-num">#27</span>
+        <div>
+          <strong>PvP-themed quest chains / forced onboarding — bake PvP learning into the core game through a questline (a recurring rival, "gym leader" PK encounters across build types) so reluctant PvMers are guided into fighting back rather than left to opt out forever.</strong>
+          <div><span class="prob-partial">◑ Adjacent to script (Chdata's whole thesis is the missing skill ladder / progression system; he favors structural on-ramps but doesn't propose a quest line specifically)</span></div>
+          The standout post is "OSRS should have PvP-Themed Quest Chains" (24 comments), written by a 2200+ iron who calls himself "classic Wilderness prey" — got slapped around in DMM, fought back, and found it fun. His argument: a tutorial minigame is fully optional, so to actually move people you have to integrate PvP into the quest progression players already grind, complete with a Pokémon-style rival and PK "gym leaders" for each build type (F2P, pure, zerk, main). "PvP Bot Practice Mode" (10 comments) and "3v3 Ranked Arena" (9 comments) push the same instinct from a different angle — structured, low-stakes places to learn. <strong>Script relationship:</strong> this lands squarely on the script's core diagnosis (no skill ladder, no understood progression system, no good way to bridge the gap), and the now-official PvP Tutorial is the first step. The specific "force it through quests" mechanism isn't something Chdata proposes — his approach leans on optional structured spaces plus reworking the Wilderness relationship — but the underlying goal is identical, and this is the community independently arriving at "make learning PvP a guided path, not a cliff."
+        </div>
+        <span class="prob-mentions">~9 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+      <li data-rank="28" data-mentions="6" data-platform="rd">
+        <span class="prob-num">#28</span>
+        <div>
+          <strong>Risk-capped learning worlds — designate worlds or zones where Wilderness risk is capped (e.g. risk +1, or a hard ceiling) so newer PKers can learn NHing and anti-PK against each other without being farmed by 100m-risk veterans.</strong>
+          <div><span class="prob-covered">✔ Same family as Chdata's argument (the script repeatedly frames the problem as veterans waiting right outside the front door with no bridged skill gap)</span></div>
+          From "Ideas about PVP progression" (14 comments): a player with ~90 LMS wins explains that the moment they take NHing into the real Wilderness it's a severe uphill battle, because common spots like north revs are full of 100m+ risk veterans who will farm anyone bringing 5m risk to learn. Their fix is capped-risk worlds or areas (risk +1) so people can learn with moderate stakes without lighting money on fire, and without those learners then ragging solo bossers. The community-built matchmaking plugin (source 13, "skill based pvp leaderboard," ~77k players rated) is the grassroots version of the same idea — players routing themselves into fair fights because the game won't. <strong>Script relationship:</strong> this is the same problem Chdata names repeatedly — the skill gap between new and veteran players is too big and you fight veterans right outside the front door — so a risk-capped learning environment is squarely in the spirit of his proposals, even though his specific vehicles are the PvP Arena rework and structured spaces rather than risk-tiered open worlds.
+        </div>
+        <span class="prob-mentions">~6 mentions across sources</span>
+        <div class="platform-bar-wrap"><div class="platform-bar-track"><div class="platform-bar-rd" style="width:100.0%"></div></div><span class="platform-label"><span class="rd-col">RD 100%</span></span></div>
+      </li>
+
+    </ol>
+  </div>
+</div>
+
+
+<div class="section" id="rebuttals-section">
   <div class="sec-head">Community Rebuttals &amp; Pushback</div>
-  <div class="sec-sub">Arguments denying, dismissing, or countering the problems above</div>
+  <div class="sec-sub">Arguments denying, dismissing, or countering the problems above · updated across 13 sources</div>
   <hr class="sec-divider">
   <div class="section-inner">
     <div class="subsec-head">Dismissals of Core Problems</div>
     <ul class="rs-list cross">
-      <li><strong>"Just don't go in the Wilderness."</strong> The most common rebuttal. Ignores that clue steps, MA2 capes, Voidwaker, and diary rewards force interaction.</li>
-      <li><strong>"You chose to play Ironman. Stop asking for changes to the core game."</strong> Ignores that ironmen are ~30% of the playerbase and their voting bloc has outsized poll influence.</li>
-      <li><strong>"I did 200 hard clues last month and never got PK'd on wildy steps."</strong> Survivorship bias rebuttal — ignores that the fear of being PK'd is itself a barrier regardless of frequency.</li>
-      <li><strong>"Just learn to anti-PK. PvP has been in the game for 20 years."</strong> Dismisses the skill ceiling problem. Doesn't address why someone should invest hundreds of hours for a frustrating experience.</li>
-      <li><strong>"The wilderness should stay risky, that's the whole point."</strong> Mischaracterizes proposals like Blessed Status as "removing risk" when it actually just changes what is risked.</li>
-      <li><strong>"You want the Wilderness to be Weenie Hut Jr."</strong> Strawman of compromise proposals — no serious suggestion actually removes all risk.</li>
-      <li><strong>"PvP updates just attract gold farmers and RWT. Jagex is right to deprioritize it."</strong> Real concern about integrity, but used as a blanket reason to avoid any PvP investment.</li>
-      <li><strong>"If people wanted PvP, they'd go to PvP worlds / BH / LMS already."</strong> Ignores that those venues are also struggling. The argument proves the broader problem rather than refuting it.</li>
+      <li><strong>"Just don't go in the Wilderness."</strong> The most common rebuttal across all sources. Ignores forced interaction via clue steps, MA2 capes, Voidwaker, diary rewards. Strongest in source 3 (Still Framed's wilderness video) where the audience skewed heavily toward non-PvP players.</li>
+      <li><strong>"You chose to play Ironman. Stop asking for changes to the core game."</strong> Ignores that ironmen are ~30% of the playerbase and their voting bloc has outsized poll influence. Ironmen largely agree they shouldn't be forced into the Wilderness at all — they want the items moved, not the risk reduced.</li>
+      <li><strong>"Just learn to anti-PK. PvP has been in the game for 20 years."</strong> Dominant rebuttal in sources 2-3. Source 5 produced the most precise counter — the Inferno analogy: nobody would learn the Inferno if there was no training between Fight Caves and the Inferno itself. Dismissing the learning gap doesn't make it disappear.</li>
+      <li><strong>"The Wilderness should be risky — that's the entire point."</strong> Mischaracterizes structural proposals as removing risk. Blessed Status doesn't remove risk — it redirects what is risked. Source 5 sharpened the rebuttal: the argument collapses when you distinguish between risk-as-design-tool and risk-as-griefing-vector.</li>
+      <li><strong>"LMS / BH / Castle Wars already exists. Just use those."</strong> Appeared heavily in sources 2-3 and 5. Ignores that LMS is bot-infested, BH has been through multiple death-and-rebirth cycles, and Castle Wars has been dead for years. The argument proves the problem.</li>
+      <li><strong>"PvP updates attract gold farmers and RWT. Jagex is right to deprioritize it."</strong> Genuine integrity concern with cross-archetype credibility. Source 5 added nuance: commenters noted that bot farms are nuking the value of wilderness items regardless of PvP updates, suggesting the bot problem and the PvP problem are separable.</li>
+      <li><strong>"PvP is a niche and will never be mainstream. Stop wasting dev time."</strong> Fatalism rebuttal that appeared strongly in source 5. Not angry, just resigned. Some of the most analytically rigorous comments in the dataset took this position — hard to dismiss as ignorance.</li>
+      <li><strong>"Juicing drop tables just creates better loot piñatas."</strong> New from source 5 — the most pointed structural critique of the standard "fix" the PvP community usually asks for. The argument: if you make wilderness content more rewarding, you just give PKers better victims, not better fights. Directly challenges the drop-table-boost approach that dominates PvP lobbying.</li>
+      <li><strong>"The sweats and streamers killed it. No update fixes that."</strong> Sources 2-3 and 5. Pins the problem on player behavior rather than design. Partially correct — the Nostalgic Ex-PKer archetype specifically cites the meta getting too sweaty as their exit reason — but ignores that design choices created the conditions for that meta to dominate.</li>
     </ul>
     <br>
-    <div class="subsec-head">Rebuttals to Specific Common Proposals</div>
+    <div class="subsec-head">Rebuttals to Specific Proposals</div>
     <ul class="rs-list cross">
-      <li><strong>Against opt-in PvP toggle:</strong> "That just makes the Wilderness RS3 and kills the entire point of it." Largely correct that a full opt-out breaks the ecosystem design.</li>
-      <li><strong>Against limiting world count:</strong> "I can't get a 10-min trip at Vetion and you want to make it worse?" — PvMers fear reducing worlds concentrates PKers on them more, not on each other.</li>
-      <li><strong>Against Wilderness clue step removal:</strong> "Clue scrolls need the wilderness steps — that's part of the content." Minority view but genuinely held.</li>
-      <li><strong>Against alternative sources for Wilderness items:</strong> "If Voidwaker is outside the Wilderness, why would anyone go there for the bosses?" A real tension point between ecosystem health and item exclusivity.</li>
-      <li><strong>Against PvP tutorials:</strong> "A tutorial won't teach you tick-perfect prayer switching and 8-way gear swaps. You have to just live it." Partially correct — tutorials help but don't close the gap alone.</li>
-      <li><strong>Against more Blighted Supplies:</strong> Mostly uncontested as a concept. A few comments argue more Blighted items devalue risk further.</li>
-      <li><strong>Against any development time spent on PvP:</strong> "Dev time should go to Sailing, new raids, etc." Political argument that any PvP investment is a waste versus other content.</li>
+      <li><strong>Against opt-in PvP toggle:</strong> "That just makes the Wilderness RS3." Largely correct — a full opt-out breaks the ecosystem. No serious proposal suggests this but it gets raised as a strawman whenever anyone asks for less forced interaction.</li>
+      <li><strong>Against PvP tutorials / wave minigames:</strong> "NPCs won't teach you tick-perfect prayer switches — you just have to get destroyed by real players." Most-debated specific rebuttal in sources 2-3 and 5. Partially valid. Source 5 added a nuance: the tutorial doesn't need to make you competitive against top-level players, it just needs to lower the floor enough that the Willing-but-Helpless can get started without losing their bank.</li>
+      <li><strong>Against ELO / matchmaking:</strong> "Bots will farm low-rank brackets and make it worthless." Legitimate concern given LMS's bot history. Source 5 commenters noted Emir's Arena already has elo but it's been ruined by players quitting early for imbue scroll rewards — the reward structure poisons the competitive intent.</li>
+      <li><strong>Against limiting world count:</strong> "That just concentrates PKers onto the PvMers who remain." PvMers fear this specifically. Requires simultaneous PKer-vs-PKer incentives.</li>
+      <li><strong>Against alternative sources for Wilderness items:</strong> "If Voidwaker leaves the Wilderness, why would anyone go there?" Genuine ecosystem tension. Source 5 noted the voidwaker passed polls with 85% approval as recently as 2023 — a signal that the community itself hasn't consistently opposed wilderness exclusives.</li>
+      <li><strong>Against any development time on PvP at all:</strong> "Sailing / new raids first." Cross-source political argument. Source 5 added a pointed version: 90% of the modern playerbase has no interest in PvP, so catering to the 10% is a poor resource allocation. The Priority Ranking Poll system is the direct answer.</li>
     </ul>
     <br>
-    <div class="subsec-head">Minority Hardline Positions (Ignore / Very Hard to Convince)</div>
+    <div class="subsec-head">Hardline Positions (Lost Votes — Argue Around, Not At)</div>
     <ul class="rs-list skull">
-      <li><strong>"Remove PvP from the Wilderness entirely"</strong> — mentioned by at least a dozen commenters. Not a compromise. Waste of time engaging with.</li>
-      <li><strong>"PvP is for RWT gold farmers and losers. Let it die."</strong> — entrenched hatred with no path to conversion.</li>
-      <li><strong>"I'll vote no on every PvP poll forever out of spite."</strong> — explicit statement made multiple times. These are lost votes regardless of proposal quality.</li>
-      <li><strong>"Just make it like RS3 and remove the wilderness."</strong> — not understanding OSRS's identity or player values at all.</li>
+      <li><strong>"Remove PvP from the Wilderness entirely."</strong> Identity-level opposition consistent across all eight sources at roughly the same frequency. Source 5 gave this position its most thoughtful expression — not spite-voting, but a reasoned argument that PvP's core mechanic (theft) is incompatible with a game where people pay real money for in-game progression. Don't engage; argue around them.</li>
+      <li><strong>"I'll vote no on every PvP poll forever out of spite."</strong> Explicitly stated in all eight sources. Acknowledge in the video and move on. Arguing with it gives it oxygen.</li>
+      <li><strong>"PvP is already dead and that's fine with me."</strong> Fatalistic but not hostile. Strongest in sources 3 and 5. Several source 5 commenters took this position from a structural analysis standpoint rather than spite — that's actually harder to rebut than simple spite.</li>
+      <li><strong>"The wilderness is fundamentally theft and I won't participate in or support it."</strong> New in source 5. Framed as a moral/economic argument, not a gameplay complaint. Not reachable by any design change.</li>
     </ul>
   </div>
 </div>
 
 <!-- ══════════════ SECTION 5: IDEA VERDICTS ══════════════ -->
-<div class="section">
+<div class="section" id="verdicts-section">
   <div class="sec-head">How Do Chdata's Ideas Land?</div>
-  <div class="sec-sub">Per-proposal breakdown of likely reception by player type</div>
+  <div class="sec-sub">Per-proposal breakdown of likely reception · updated across 13 sources</div>
   <hr class="sec-divider">
   <div class="section-inner">
 
     <div class="subsec-head">🛡️ Blessed Status</div>
-    <p>An opt-in overhead costing 100k where items are kept on death for a 5% fee paid to the PKer. Teams must be fully Blessed or not at all. PKers don't risk gear fighting Blessed players.</p>
+    <p>Opt-in overhead costing 100k. Items kept on death for a 5% fee paid to the PKer. Teams must be fully Blessed or not at all. PKers don't risk gear fighting Blessed players.</p>
     <div class="verdict-grid">
       <div class="verdict-box yes">
         <div class="verdict-label">Likely Yes</div>
-        <p>Reluctant Visitors, Willing-but-Helpless, Ironman Bloc who want some death protection. PvM Enjoyers who want to risk more gear safely.</p>
+        <p>Reluctant Visitors and Willing-but-Helpless who want some death protection. PvM Enjoyers who'd enter the Wilderness more if the downside was capped. Ironmen who hate losing gear to a random PKer mid-boss trip. Sources 2-3 added a new sympathetic group: Nostalgic Ex-PKers who want to dip back in but can't stomach the current death stakes.</p>
       </div>
       <div class="verdict-box split">
         <div class="verdict-label">Split / Skeptical</div>
-        <p>PvP Loyalists — some see it as a good way to get more bodies in the Wilderness, others see it as a "free pass" undermining risk culture. Very concept-dependent.</p>
+        <p>PvP Loyalists are deeply divided. Legitimate PKers who want real fights see potential value in more willing targets. Loot-pinata hunters specifically lose access to RNG item pulls and may oppose it. Sources 2-3 confirmed this internal split is real — the loot pinata vs. real PKer divide is not a framing device, it's a genuine faction difference.</p>
       </div>
       <div class="verdict-box no">
         <div class="verdict-label">Likely No</div>
-        <p>Anti-PvP Bloc who don't want to engage regardless. Hardcore PKers who feel it removes their earning potential from PvMer kills.</p>
+        <p>Anti-PvP Bloc who don't care about any Wilderness update. Hardcore PKers who read the 5% fee as "not enough" compared to current gambling on carry value. A small contingent who argue Blessed Status lets bots PvM in the Wilderness with reduced consequence.</p>
       </div>
     </div>
     <div class="callout green">
-      <strong>Appeal Strategy:</strong> Frame Blessed Status as "<em>deaths still hurt — you pay 5% to the PKer</em>" not as free protection. The PKer gets a guaranteed payment instead of gambling on what you're carrying. That's actually <em>more reliable income</em> for PKers, not less.
+      <strong>Key framing insight from multiple sources:</strong> The pitch to PKers should emphasize <em>guaranteed income over RNG gambling</em>. Killing a Blessed player is a reliable paycheck. Killing a random PvMer is a lottery ticket. Sources 2-3 showed many PKers don't frame it this way on their own — the video needs to make this explicit.
     </div>
 
     <div class="subsec-head">🏳️ Wildy Teams (6-player party system)</div>
-    <p>An official small-group party system with anti-friendly-fire and a recruitment board.</p>
+    <p>Official small-group party system with anti-friendly-fire, loot split mechanics, and a recruitment board at Ferox Enclave.</p>
     <div class="verdict-grid">
       <div class="verdict-box yes">
         <div class="verdict-label">Likely Yes</div>
-        <p>Players who mention "I'd PvP if I could do it with friends" — a recurring sentiment. The recruitment board appeals to solo players wanting to get into group content.</p>
+        <p>"I'd PvP if I could do it with friends" was a recurring sentiment across the sources. The Willing-but-Helpless specifically cite the social gap — no easy way to find or coordinate with other learners. The recruitment board component appeals to solo players who want group content without needing an existing clan.</p>
       </div>
       <div class="verdict-box split">
         <div class="verdict-label">Split</div>
-        <p>Existing PvP players — some already organize through Discord and don't want the overhead. Anti-PvP players who don't care either way.</p>
+        <p>Existing PvP clans who already organize through Discord don't see a need for it, but few actively oppose it. The anti-friendly-fire mechanic is the most contentious element — sources 2-3 showed a few comments reading it as "dumbing down" multi combat.</p>
       </div>
       <div class="verdict-box no">
         <div class="verdict-label">Likely No</div>
-        <p>Very few explicit objections in comments. Most opposition is passive (just not caring about PvP). One of the safer proposals.</p>
+        <p>Very few explicit objections across any source. Passive opposition (just not caring) rather than active. This is the safest proposal in the package.</p>
       </div>
     </div>
     <div class="callout green">
-      <strong>Appeal Strategy:</strong> This one mostly sells itself. Lean into the fact that multi-clan domination is a widely hated thing — Wildy Teams gives the "middle tier" players a real defense against being zerged.
+      <strong>Framing note:</strong> Source 3 added new context — the lone-wolf-vs-zerg experience came up repeatedly. Frame Wildy Teams as <em>the counter to being 20-manned</em>, not just as a social convenience feature. That framing connects to Team Combat Zones and makes the two proposals feel like a coherent system rather than separate asks.
     </div>
 
     <div class="subsec-head">🏟️ Team Combat Zones</div>
-    <p>A zone type where any one group can be attacked by at most 6 players. Turns multi into structured group PvP.</p>
+    <p>Zone type where any one group faces at most 6 attackers at a time. Structured multi combat rather than unrestricted pile-ons.</p>
+    <div class="callout green" style="margin-bottom:10px;">
+      <strong>Source 10 validation:</strong> "Just delete Multi from Wildy" (4,413 upvotes, 879 comments) is the highest-upvoted directly relevant post in the wildy-search dataset and independently restates the TCZ design principle: <em>"No one is scared of 1 pker. It's a fair fight with mechanics to learn. What isn't fun is dedicated multi teams that punish single players with 0 chance of fighting back. There's no mechanics to learn."</em> Additionally, two independent Reddit posts (source 10) propose capping attackers-per-player at 2-3 — discovering the same solution Chdata did. The community is converging on this design space without knowing about TCZ specifically.
+    </div>
     <div class="verdict-grid">
       <div class="verdict-box yes">
         <div class="verdict-label">Likely Yes</div>
-        <p>Anyone who has been zerged by 20 players in multi while doing boss content. Small-group PvPers who want fair fights. PvMers who want to do Wildy bosses without clan interference.</p>
+        <p>Anyone who has been 20-manned in multi doing boss content. Small-group PvPers who want fair structured fights. PvMers who want to do Wilderness bosses without a 30-man clan camping the entrance. Sources 2-3 showed the "pkers only hit pvmers and log when another pker logs in" complaint was widespread — TCZ is a structural answer to that.</p>
       </div>
       <div class="verdict-box split">
         <div class="verdict-label">Split</div>
-        <p>Clan players — this directly restricts their ability to flood a zone. Some may accept 6v6 as still being clan content. Others will resent any limitation on zerg potential.</p>
+        <p>Mid-sized clans (10-15 players) who aren't running zerg tactics but would be directly affected by the cap. Some read this as Jagex picking winners in the multi meta. Source 3 showed clan-oriented players specifically skeptical of anything that restricts their group size.</p>
       </div>
       <div class="verdict-box no">
         <div class="verdict-label">Likely No</div>
-        <p>Large clan leadership who rely on overwhelming numbers as their primary tactic. This is probably the proposal that faces the most organized pushback from that community.</p>
+        <p>Large clan leadership who rely on overwhelming numbers as their core tactic. This is the proposal with the most organized potential opposition. Notably, sources 2-3 didn't increase the "likely yes" — TCZ remains a hard sell because the people it helps aren't writing in to say so, while the people it hurts are.</p>
       </div>
     </div>
     <div class="callout yellow">
-      <strong>Appeal Strategy:</strong> Focus on framing TCZ as <em>making PvP actual PvP</em> instead of a zerg. If the PvP loyalist crowd wants to be taken seriously as a PvP game mode, capped engagements are more credible than pile-ons. Hard to sell to large clans directly — probably better to appeal around them.
+      <strong>Persuasion challenge:</strong> The people TCZ most helps — casual multi-PvMers and small-group fighters — are the least likely to be watching PvP YouTube content and voting in PvP polls. This is a structural problem with the proposal's political path, not a flaw in the design itself. Explicitly calling this out in the video might be the most honest move.
     </div>
 
     <div class="subsec-head">📊 Priority Ranking Poll System</div>
-    <p>Community ranks potential updates by tiers. Jagex commits to developing the top-ranked one.</p>
+    <p>Community ranks potential PvP updates by tier. Jagex commits to developing the top-ranked one next cycle.</p>
     <div class="verdict-grid">
       <div class="verdict-box yes">
         <div class="verdict-label">Likely Yes</div>
-        <p>Anyone frustrated with the broken polling system. A very broadly popular concept in principle. Gives all player types some agency without requiring everyone to agree on one update.</p>
+        <p>Anyone frustrated with the broken polling system — which is nearly everyone across the sources, PvP or not. Gives all player types agency without requiring agreement on one specific update. The concept that "the community picks what comes first" has near-universal surface appeal. Even commenters who oppose PvP generally liked the idea of structured prioritization.</p>
       </div>
       <div class="verdict-box split">
-        <div class="verdict-label">Split</div>
-        <p>People who are skeptical of Jagex following through on commitments. "They said they'd look into the Resource Area 2 years ago" is a common sentiment.</p>
+        <div class="verdict-label">Split / Skeptical</div>
+        <p>Jagex-trust skeptics appeared heavily in sources 2-3: "They'll run the poll and then do whatever they want anyway." The Priority Ranking Poll system only works if Jagex commits to the result publicly and follows through. Without that commitment being explicit and enforceable, the skepticism is valid.</p>
       </div>
       <div class="verdict-box no">
         <div class="verdict-label">Likely No</div>
-        <p>Hardline anti-PvP bloc who don't want ANY PvP updates regardless of process. Very few explicit objectors to the poll mechanism itself though.</p>
+        <p>Hardline anti-PvP bloc who don't want ANY PvP updates regardless of how they're selected. Very few people object to the poll mechanism itself — opposition is about the output, not the process.</p>
       </div>
     </div>
     <div class="callout blue">
-      <strong>Appeal Strategy:</strong> Pitch this to the non-PvP crowd as <em>giving them more control</em>, not less. If they rank PvP updates lower, they determine what comes first. The system doesn't force anything — it structures the conversation.
+      <strong>Cross-source insight (updated through source 5):</strong> The Jagex-trust deficit deepened in source 5 — "90% of the modern playerbase has no interest in PvP" was stated flatly by several commenters as a reason why any poll mechanism that gives non-PvPers a vote will always suppress PvP content. The Priority Ranking Poll system's pitch needs to address this directly: it doesn't ask non-PvPers to vote on PvP content, it asks the PvP community to prioritize <em>within</em> PvP content. That framing separates it from the broader polling problem. Source 5 also surfaced a specific vulnerability: Emir's Arena already has an elo system but it was poisoned by people farming imbue scroll rewards rather than competing — a cautionary tale about what happens when incentive structures aren't carefully designed around the competitive intent.
     </div>
 
   </div>
 </div>
 
 <!-- ══════════════ SECTION 6: WHO CAN AND CAN'T BE CONVINCED ══════════════ -->
-<div class="section">
+<div class="section" id="convert-section">
   <div class="sec-head">Who Can Be Converted &amp; Who Can't</div>
-  <div class="sec-sub">Calibrating where to spend persuasion energy</div>
+  <div class="sec-sub">Calibrating where to spend persuasion energy · updated across 13 sources</div>
   <hr class="sec-divider">
   <div class="section-inner">
 
     <div class="subsec-head" style="color:var(--green-bright);">✔ Good Targets to Persuade</div>
     <ul class="rs-list check">
-      <li><strong>The Willing-but-Helpless</strong> — they already want to engage but feel locked out. Any reduction in skill gap or entry cost resonates immediately with them. Large enough group to meaningfully shift poll numbers.</li>
-      <li><strong>Ironmen who do Wilderness PvM</strong> — the "I love chaos altar and slayer but getting pk'd sucks" crowd. The Bond Coffer and Blessed Status speak directly to their pain. They're not fundamentally anti-PvP.</li>
-      <li><strong>PvMers who've been zerged in multi</strong> — Team Combat Zones are directly solving their real lived experience. Show them the specific scenario and they'll get it.</li>
-      <li><strong>Players who miss the "old Wilderness" energy</strong> — several commenters expressed nostalgia for a time when the Wilderness felt alive. Wildy Teams and a better ecosystem appeals to that nostalgia without requiring them to defend the current broken state.</li>
-      <li><strong>People who think PvP updates can never pass polls</strong> — the Priority Ranking Poll system directly addresses this despair. Showing them a credible path forward is itself persuasive.</li>
+      <li><strong>The Willing-but-Helpless</strong> — the single most persuadable group and the largest one across sources 1-2 and 5. Source 5 gave this archetype its clearest expression — analytically framing the problem as a missing on-ramp between "zero PvP knowledge" and "competent enough to not lose your bank." The Inferno analogy resonated at 80 likes and 32 replies, the highest-engagement comment across all eight sources. Any credible reduction in barriers lands immediately with this group.</li>
+      <li><strong>The Nostalgic Ex-PKer</strong> — former PKers who quit when NHing became mandatory or when EOC dropped. Source 5 produced several long, thoughtful comments from this group specifically — they remember what PvP felt like when it was fun and are grieving that, not fundamentally opposed. Mechanically simpler engagement options (Blessed Status reducing stakes, Wildy Teams providing context for fights to happen) speak to them more than tutorials.</li>
+      <li><strong>Ironmen who do Wilderness PvM</strong> — the "chaos altar is great but getting PK'd is brutal" crowd. Bond Coffer and Blessed Status together address their actual situation. Sources 3-5 confirmed this group exists at scale and is under-targeted. Source 5 added a specific note: if irons could convert PK'd loot keys to bonds, a meaningful group would be converted from passive vote-no blocks to active participants.</li>
+      <li><strong>PvMers who've been zerged in multi</strong> — Team Combat Zones solves their specific lived experience. Source 5 added the framing that these players don't identify as a PvP audience at all — they need to be shown their specific scenario and see TCZ as the solution before they recognize it as a "PvP update."</li>
+      <li><strong>Legitimate PKers who want real fights</strong> — sources 2-3 and 5 consistently surfaced this faction. Source 5 specifically had comments from active PKers frustrated that the loot-pinata hunters dominate PvP's public image and poison every poll. They're natural allies for ELO matching, Wildy Teams, and TCZ. One source 5 commenter suggested clan-focused PvP with actual objectives — worth noting as signal that even within the PKer community, there's appetite for designed PvP over unstructured griefing.</li>
+      <li><strong>Players despairing about the poll system</strong> — widespread across all eight sources. Source 5 sharpened this: several commenters articulated that the polling system is structurally incapable of ever passing meaningful PvP content as long as non-PvPers are included in the vote. The Priority Ranking Poll system is the direct structural answer — but it needs to be pitched as changing the <em>process</em>, not just asking nicer.</li>
     </ul>
     <br>
     <div class="subsec-head" style="color:var(--red-rs);">✖ Hard or Impossible to Convince</div>
     <ul class="rs-list skull">
-      <li><strong>"Remove PvP entirely" contingent</strong> — this is identity-level opposition, not a design critique. No proposal fixes this.</li>
-      <li><strong>Players who will spite-vote no regardless</strong> — explicitly stated. Acknowledge them in the video, don't argue with them. Argue around them to the persuadable majority.</li>
-      <li><strong>Large clan PvP players who rely on zerg mechanics</strong> — Team Combat Zones specifically hurt their current playstyle. May need to accept losing this group's support for the TCZ proposal.</li>
-      <li><strong>"PvP is already dead and that's fine"</strong> — fatalistic but not necessarily hostile. May be swayed if the argument is that a healthier PvP ecosystem benefits everyone, not just PKers.</li>
-      <li><strong>Hardcore risk purists who see Blessed Status as "softening" the Wilderness</strong> — the counterargument (PKers get guaranteed income from Blessed players) is your best tool here, but some won't be moved.</li>
+      <li><strong>"Remove PvP entirely" contingent</strong> — identity-level opposition consistent across all eight sources. Several source 5 comments took this position from a reasoned structural analysis rather than spite, making it harder to dismiss. No proposal engages with this. Argue around them.</li>
+      <li><strong>Spite voters</strong> — explicitly stated across all eight sources. Source 5 added a specific flavour: commenters who were camped at Mage Arena, or killed for monk robes at Calvarion, and made a permanent decision to vote no on all PvP forever. These are lost votes regardless of proposal quality. Acknowledge them and move on.</li>
+      <li><strong>Large clan players who rely on zerg mechanics</strong> — TCZ directly curtails their playstyle. Unchanged across eight sources.</li>
+      <li><strong>Loot-pinata-only PKers</strong> — the faction who specifically want to hunt non-PvP players and have no interest in fair fights. Sources 2-3 and 5 confirmed they're a real group. Blessed Status reduces access to their preferred targets. Won't be turned.</li>
+      <li><strong>Deep structural skeptics</strong> — new in source 5. Commenters who accept that PvP is declining, have analyzed why (skill gap death spiral, parasitic reward structure, aging playerbase), and have concluded that no design change within the current framework can fix it. These are not emotional arguments — they're the hardest to rebut because several of them are analytically sound. The best response is Chdata's portfolio itself: demonstrating that <em>none of these specific proposals have actually been tried</em>.</li>
     </ul>
   </div>
 </div>
 
 <!-- ══════════════ SECTION 7: SCRIPT COVERAGE SUMMARY ══════════════ -->
-<div class="section">
+<div class="section" id="coverage-section">
   <div class="sec-head">Coverage Summary</div>
-  <div class="sec-sub">How well does Chdata's script address the community's stated concerns?</div>
+  <div class="sec-sub">How well does Chdata's script address the community's stated concerns? · updated across 13 sources</div>
   <hr class="sec-divider">
   <div class="section-inner">
     <div class="stat-row">
@@ -938,14 +1847,45 @@ strong { color: var(--white-rs); }
       <div class="stat-pill"><span class="neg">4 / 30</span>Not addressed</div>
     </div>
     <br>
-    <p>Coverage is strong for the <em>structural and psychological</em> problems — the script directly addresses the polling doom spiral, the us-vs-them mentality, the skill barrier, the risk problem, the ironman problem, and the predator-prey design failure. These are the hardest problems and the ones most people talk past.</p>
-    <p>The gaps are mostly in <em>specific mechanical complaints</em> (freeze mechanics, UIM deaths, mobile players, no safe low-level content) and <em>enforcement issues</em> (bots, AHK, world-hop scouting). These are areas where either Jagex's engine or anti-cheat are the real lever, not player-facing design changes.</p>
+    <p>Coverage remains strong on structural and psychological problems — polling doom loop, us-vs-them mentality, skill barrier, asymmetric risk, ironman situation, predator-prey design failure. The Reddit sources revealed nine new problem categories (#31-39) not previously on the list: trip interruption/wasted time (#31), the absence of combat level brackets in the open wilderness (#32), Teleblock duration as the root cause of the logout-or-die binary (#33), incoming gear power creep from Raids 4 (#34), the LMS win-requirement gatekeeping (now being addressed via the bot ladder poll, #35), WildyCCTV/external scouting tools as a distinct surveillance problem on top of cheating (#36), skull-tricking and lure exploits that force bank loss without consensual PvP (#37), and FOMO/BIS-gated content design as engagement coercion (#38), and poorly-tuned Wilderness bosses whose bad locations/loot/multi-combat deter engagement independent of PK pressure (#39). What all sources combined have done is sharpen the weight of specific issues and surface framing angles the script underuses.</p>
 
-    <div class="callout yellow" style="margin-top:12px;">
-      <strong>Biggest uncovered gap in the comments:</strong> The <strong>mobile player PvP experience</strong> barely appears in the script but is a real demographic concern. As mobile grows, PvP's complexity becomes a harder and harder sell. Even acknowledging it briefly in the video would go a long way with that audience.
+    <div class="callout red" style="margin-top:12px;">
+      <strong>Gap 1 — Cheating / AHK enforcement (#6, ~184 mentions across 13 sources):</strong> Source 5 confirmed this is not a background complaint — it's a direct reason people stopped trying, and it's framed by the TheoryWiser audience as a structural failure of Jagex specifically, not just a community nuisance. The video doesn't need a solution (there isn't a clean one) but should probably spend more time framing it as an <em>unsolved infrastructure problem</em> that is independently killing PvP alongside design problems.
     </div>
-    <div class="callout blue">
-      <strong>Script strength that may be underutilized:</strong> The <em>fishing trawler metaphor</em> — every problem is a hole in the side — is genuinely great for the video. The comment section demonstrates exactly what this looks like: everyone fixates on their one biggest complaint without connecting how they all reinforce each other. Drive that point home early.
+    <div class="callout yellow" style="margin-top:10px;">
+      <strong>Gap 2 — ELO / Matchmaking (~61 mentions across all sources, not in script):</strong> Now the second most-mentioned community solution after the PvP tutorial. The chess grandmaster analogy from source 5 (80 likes, 32 replies — highest single comment engagement across all sources) is the single most compelling framing in the dataset. Worth explicit acknowledgment in the video even if it's outside the scope of the four core proposals.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 10 — The single best community articulation of the Labeling Problem:</strong> "Jagex needs to start asking 'What's stopping players from engaging in the Wilderness?' instead of 'How can we draw players to the Wilderness?'" (3,852 upvotes, 1,217 comments). This post is the community independently discovering and naming the exact design inversion that Chdata's script is built on. It's useful confirmation that the framing lands — and that the community already accepts the premise. The video should reference this mindset directly: Chdata is answering the right question, not the one Jagex keeps asking.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 10 — WildyCCTV as the specific mechanism killing low-risk PvM (#36):</strong> The wildy search surfaces a distinct problem not captured in the PvP search: external bot-powered scouting tools that remove any safe window for PvMers. This is relevant because it explains <em>why</em> gear minimization, world selection, and off-peak timing don't work — they're all defeated by surveillance infrastructure. Worth one sentence in the video: "You can minimize your risk to almost nothing and still get found in 30 seconds because there are bots watching for you."
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 10 — "Just delete Multi" (4,413 upvotes) independently validates Team Combat Zones:</strong> The highest-upvoted wildy-PvP post in the dataset is a community member independently arriving at the TCZ design principle. The post even articulates the exact mechanism: "No one is scared of 1 pker — it's a fair fight with mechanics to learn. Multi teams punish single players with zero chance of fighting back." Two additional source 10 posts propose "cap attackers to 2-3 per player" — discovering the same solution independently. This is strong evidence that TCZ is solving a real, widely-felt problem, not a niche design preference.</div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 5 — The "juiced drop tables = better loot piñatas" rebuttal:</strong> Several source 5 commenters made the specific argument that the standard PvP lobby position (add more rewards to wilderness content) is self-defeating — it just creates better victims without fixing the predator-prey relationship. This is a smart critique and one Chdata's script should probably pre-empt directly, since the proposals (Blessed Status, Wildy Teams) are <em>specifically not</em> drop-table boosts. Distinguishing the approach from the standard lobbying position strengthens the credibility of the proposals.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 11 — The community already names "PKer-vs-PKer vs prey-vs-predator" as THE problem:</strong> "Why is Jagex pushing prey vs predator instead of PKer vs PKer?" (1,029 upvotes) and "The reason why PvP regularly falls short" (1,309 upvotes, written by a maxed collection logger) state Chdata's central thesis almost verbatim. The latter identifies the successful PvP models — LMS, BH, PvP Arena, multi wildy bosses — and notes they all share one trait: two people actually fighting, not one person DPSing a fleeing target. This is the strongest external confirmation that the script's core framing is not a fringe position; it's the community's own diagnosis. The video can lean on this: "I'm not the first person to say this — it's the most-upvoted explanation of why PvP keeps failing."
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 11 — "Wrathmaw MUST Fail" independently uses the fishing trawler metaphor (2,636 upvotes):</strong> The community rejected a FOMO-spawn, BIS-gated wilderness boss using the exact rhetorical device in Chdata's script — "it may as well be another fishing trawler, something most of us hate to do, but a grind everyone must do." This is striking convergence. It means the fishing-trawler frame already has currency with the audience, and it confirms the community will vote down content that coerces engagement rather than attracting it. Reinforces that the proposals' "design FOR the Wilderness, not content that forces everyone in" principle is already the community's stated standard.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 11 — Bots are the most-upvoted wilderness grievance, dwarfing design complaints:</strong> "JAGEX BAN THE BOTS" (3,211), "Quitting if bots aren't dealt with" (1,865), "Zombie pirates 95% bots" (1,972), plus the Sir Puggers bot-protection-clan exposé. The aggregate upvote weight on the bot crisis exceeds any single design-problem post. This matters for the video's framing of Gap 1 (cheating/bots): it's not a side issue, it's arguably the #1 thing the broader playerbase is angry about in the Wilderness right now. The script should treat the bot/cheating infrastructure problem as co-equal with the design problems, not subordinate to them.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 12 — The community literally argues "the Wilderness isn't designed for PvPers, it's designed for PKers" (665 comments):</strong> This is the Labeling Problem stated outright. The post distinguishes a PvPer (wants a fair fight, goes to PvP worlds / LMS) from a PKer (wants to win using every advantage, hunts in the wildy), and concludes the Wilderness is a "cat and mouse zone" by default because nobody ever defined it otherwise. With 665 comments it's one of the most-argued threads in the entire dataset — the community is actively fighting over what the Wilderness is FOR, which is exactly the gap Chdata's Labeling Problem names. The script can cite this directly: the absence of a stated design goal isn't a theoretical concern, it's generating hundreds of comments of unresolved conflict.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 12 — The Perception Gap is the most-debated theme, and both sides feel caricatured:</strong> Sorting by comment count surfaces the conflict threads, and they cluster hard on mutual misunderstanding: "What the hell is wrong with this community" (820 comments, a PvMer defending PKers), "What's this sub's deal with the wildy" (773), "A serious question for PKers" (470, sincerely asking why they seek one-sided kills), "Unpopular opinion: PKing is still one of the most fun parts" (158, a PKer feeling dismissed). The recurring PKer answer to "why do you do it" is "the rush of the hunt, it's fun" — not superiority. This strongly validates Chdata's mutual-perception-gap framing, and points to a concrete script move: explicitly separate the honest fair-fight PKer from the lurer / skull-tricker / multi-clan, because the community itself keeps drawing (and fighting over) that exact line. Collapsing them is what makes each side feel caricatured.
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>New from source 12 — A lived-experience counter-narrative worth pre-empting:</strong> "Has anyone here actually been in the wildy these last few weeks?" (473 comments) argues the reddit doom-and-gloom overstates how often you actually get PK'd at common content. This is itself a facet of the Perception Gap — PvMers may overestimate the danger, PKers may underestimate how the loss feels. The script's problem framing is stronger if it acknowledges this honestly rather than leaning only on worst-case anecdotes; the credible version is "the feeling of forced, unfair interaction is the problem," not "you die every thirty seconds."
+    </div>
+    <div class="callout blue" style="margin-top:10px;">
+      <strong>Underutilized script element — "None of these specific proposals have been tried":</strong> The strongest counter to deep structural skeptics (who correctly identify the skill-gap death spiral and polling doom loop) is that Chdata's proposals are genuinely novel — not more drop table boosts, not another BH iteration, not another minigame. The fishing trawler metaphor remains the best rhetorical frame for this: most PvP lobbying patches one hole; the script addresses the ship.
     </div>
   </div>
 </div>
@@ -953,12 +1893,75 @@ strong { color: var(--white-rs); }
 <div class="brick-strip"></div>
 
 <div class="footer">
-  Source: Still Framed "Jagex, we need to talk about the Wilderness." YouTube comment section (~1,440 comments) · Chdata's OSRS PvP 2026 script · Analysis compiled June 2026
+  Source 1: YouTube — Framed "Dear Jagex, PvP Has a serious problem." (Feb 22 2026, ~2,980 comments) · Source 2: YouTube — Odablock Clips "PvP in Runescape will die if Jagex doesn't listen.." (Feb 23 2026, ~1,104 comments) · Source 3: YouTube — Still Framed "Jagex, we need to talk about the Wilderness." (Mar 30 2026, ~1,440 comments) · Source 4: Twitter/X — @KFramed "What are some current pain points of the wilderness..." (Mar 29 2026, ~130 replies) · Source 5: YouTube — TheoryWiser ft. Framed "The PvP Situation in Old School Runescape (is bad)" (Apr 3 2026, ~357 comments) · Source 6: Reddit — r/2007scape search "pvp" relevance-sorted (~200 posts, ~553K upvotes) · Source 7: Reddit — r/2007scape search "pvp" top-sorted (~28 unique posts, ~89K additional upvotes) · Source 8: Reddit — r/2007scape search "pvp" comments-sorted (~27 unique posts, Reddit comments tracked per problem) · Source 9: Reddit — r/2007scape search "pvp" new-sorted (~38 unique posts, most recent data including June 2026) · Source 10: Reddit — r/2007scape search "wildy" relevance-sorted (~35 unique posts, captures wilderness-framed PvP discourse) · Source 11: Reddit — r/2007scape search "wildy" top-sorted (~29 unique posts, highest all-time upvoted wilderness posts) · Source 12: Reddit — r/2007scape search "wildy" comments-sorted (~43 unique posts, most-debated wilderness threads by comment volume) · Chdata's OSRS PvP 2026 script · Analysis compiled June 2026
 </div>
 
 </div>
-<!-- BACK TO TOP -->
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
-<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+
+<button id="top-btn">⬆ Top</button>
+
+<script>
+function sortSolutions(key) {
+  const list = document.getElementById('sol-list');
+  const items = Array.from(list.querySelectorAll('li[data-rank]'));
+
+  items.sort((a, b) => {
+    if (key === 'mentions') return +b.dataset.mentions - +a.dataset.mentions;
+    if (key === 'platform') {
+      const order = { yt: 0, tw: 1, rd: 2 };
+      const pa = order[a.dataset.platform] ?? 9;
+      const pb = order[b.dataset.platform] ?? 9;
+      if (pa !== pb) return pa - pb;
+      return +a.dataset.rank - +b.dataset.rank;
+    }
+    return +a.dataset.rank - +b.dataset.rank;
+  });
+
+  items.forEach(li => list.appendChild(li));
+
+  document.querySelectorAll('[id^="sol-sort-"]').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('sol-sort-' + key) && document.getElementById('sol-sort-' + key).classList.add('active');
+}
+
+function sortProblems(key) {
+  const list = document.getElementById('prob-list');
+  const items = Array.from(list.querySelectorAll('li[data-rank]'));
+
+  items.sort((a, b) => {
+    const num = (el, k) => +String(el.dataset[k]).replace(/,/g, '');
+    if (key === 'mentions') return num(b,'mentions') - num(a,'mentions');
+    if (key === 'likes')    return num(b,'likes')    - num(a,'likes');
+    if (key === 'replies')  return num(b,'replies')  - num(a,'replies');
+    if (key === 'upvotes')    return num(b,'upvotes')    - num(a,'upvotes');
+    if (key === 'rdcomments') return num(b,'rdcomments') - num(a,'rdcomments');
+    return +a.dataset.rank - +b.dataset.rank;
+  });
+
+  items.forEach(li => list.appendChild(li));
+
+  document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('sort-' + key).classList.add('active');
+}
+
+// Section index smooth-scroll (avoids hash navigation inside sandboxed iframes)
+function jumpTo(id){
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Back-to-top button: appear after scrolling down
+(function(){
+  var btn = document.getElementById('top-btn');
+  if (!btn) return;
+  function toggle(){
+    btn.style.display = (window.pageYOffset > 400) ? 'inline-flex' : 'none';
+  }
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+})();
+</script>
 </body>
 </html>
