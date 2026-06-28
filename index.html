@@ -25,9 +25,9 @@
   --gold:      #d4b866;
   --gold-hi:   #f0d890;
   --amber:     #c8903a;
-  --dim:       #8a7850;
+  --dim:       #b8a064;
   --text:      #e8d8a8;
-  --muted:     #a09060;
+  --muted:     #cdb985;
   --red:       #d04030;
   --brick:     #3a2a18;
 }
@@ -37,7 +37,9 @@ body {
   color: var(--text);
   font-family: 'RSUF', 'Times New Roman', serif;
   min-height: 100vh;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-size: 16.5px;
+  zoom: 1.2;
 }
 
 /* ── BRICK STRIPE ── */
@@ -149,6 +151,52 @@ body {
   border-bottom: 1px solid var(--brick);
   text-shadow: 1px 1px 0 #000;
 }
+
+/* ── PAGE NAV (JUMP TO SECTION) ── */
+.page-nav {
+  background: linear-gradient(180deg, #181208 0%, var(--stone) 100%);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+}
+.page-nav-label {
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 1px 1px 0 #000;
+}
+.page-nav-links {
+  display: flex;
+  gap: 11px;
+  flex-wrap: wrap;
+}
+.page-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 9px 15px;
+  font-size: 16px;
+  color: var(--text);
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.page-nav-link:hover { border-color: var(--gold-hi); color: var(--gold-hi); background: rgba(200,144,58,0.08); }
+.page-nav-num {
+  font-size: 13px;
+  color: var(--amber);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 7px;
+  opacity: 0.85;
+}
+#overview, #problems, #data, #proposals, #concepts, #suggestions { scroll-margin-top: 18px; }
 
 /* ── CONTEXT BOX ── */
 .context-box {
@@ -326,7 +374,7 @@ footer {
 <div class="about-strip">
   <div class="about-inner">
     <div class="about-stat">
-      <span class="num">9</span>
+      <span class="num">12</span>
       <span class="lbl">Design documents</span>
     </div>
     <div class="about-stat">
@@ -343,44 +391,57 @@ footer {
 <div class="brick-stripe"></div>
 
 <main class="section">
-  <div class="section-label">Overview</div>
+
+  <nav class="page-nav" aria-label="Section index">
+    <div class="page-nav-label">Jump to Section</div>
+    <div class="page-nav-links">
+      <a class="page-nav-link" href="#" onclick="jumpTo('overview');return false;"><span class="page-nav-num">1</span>About</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('problems');return false;"><span class="page-nav-num">2</span>Core Problems</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('data');return false;"><span class="page-nav-num">3</span>Supporting Data</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('proposals');return false;"><span class="page-nav-num">4</span>Main Design Documents</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('concepts');return false;"><span class="page-nav-num">5</span>Bonus Design Documents</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('suggestions');return false;"><span class="page-nav-num">6</span>Other Players' Suggestions</a>
+    </div>
+  </nav>
+
+  <div class="section-label" id="overview">Overview</div>
   <div class="section-title">About This Project</div>
 
   <div class="context-box">
     This is the design research behind <strong>"Chdata on OSRS PvP in 2026"</strong>, a longform YouTube video pitching concrete improvements to the Wilderness. The pages below represent each major proposal or supporting analysis.
   </div>
 
-  <div class="section-label">Analysis</div>
+  <div class="section-label" id="problems">Analysis</div>
   <div class="section-title">The Core Problems of PvP</div>
 
-  <div style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">PvP is like a Fishing Trawler, and it's full of holes. Fixing just one or two problems while leaving the others means the ship is still sinking. For example even if we fix the skill gap, players not liking risk is still a problem. Even if we fix those, the polling system is still a problem. Even if we fix all of that, that doesn't guarantee that the actual design of specific activities is any good. Every problem below is a separate limiting factor on the same thing: the growth of the PvP playerbase. The three biggest problems are listed first.</div>
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">PvP is like a Fishing Trawler, and it's full of holes. Fixing just one or two problems while leaving the others means the ship is still sinking. For example even if we fix the skill gap, players not liking risk is still a problem. Even if we fix those, the polling system is still a problem. Even if we fix all of that, that doesn't guarantee that the actual design of specific activities is any good. Every problem below is a separate limiting factor on the same thing: the growth of the PvP playerbase. The three biggest problems are listed first.</div>
 
   <!-- CORE PROBLEM 1 -->
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#1</div>
+        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#1</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Risk is Not Worth the Reward</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">This is one of the largest single barriers to entry. Most players will never engage with the Wilderness because they don't want to risk losing their items. And those who might engage are turned away because the risk-to-reward ratio is simply not competitive with the rest of the game. Even safe PvP minigames are not rewarding enough for your time spent.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Risk is Not Worth the Reward</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">This is one of the largest single barriers to entry. Most players will never engage with the Wilderness because they don't want to risk losing their items. And those who might engage are turned away because the risk-to-reward ratio is simply not competitive with the rest of the game. Even safe PvP minigames are not rewarding enough for your time spent.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show related problems" data-close="Hide related problems">Show related problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Wilderness rewards have to compete with the rest of the game, including 18m/h from bosses like the Doom of Mokhaiotl - a value that no Wilderness activity can realistically match without creating other integrity problems</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKing is a negative-sum game due to the cost of supplies (food, potions, runes, ammo) and degrading equipment charges lost by both players every fight.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The risk of being killed after farming for an hour means a player can end a session with less GP than they started with, while a non-Wildy player in the same time would always profit</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Content like the Wildy Altar fills your inventory with bones, leaving you at an inherent gear and supply disadvantage even if you wanted to PvP while doing that</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Anti-PKing while doing Wilderness bosses means your gear is optimized for the boss, not for player combat - a commonly debated gear disadvantage. You have to bring 3-way tribridding switches to be competitive, which means you have to risk more, which brings us back to the problem of players not wanting to risk</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>A large majority of the playerbase is genuinely risk-averse in a way that can't be solved by just raising the rewards - plenty of players will never take any level of GP risk in PvP</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ironmen lose too much on death in the Wilderness but also gain absolutely nothing from killing other players, making most Wilderness content feel like dead content for a growing share of the votable playerbase</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Safe PvP minigames share the same reward-competition problem - even with zero risk, their rewards don't compete with normal PvM content, so players don't engage</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Arbitrary costs gatekeep basic PKing infrastructure: 1m to unlock loot keys, 5m for nearby respawn points at Edgeville or Ferox Enclave, years of Trouver parchment problems</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Many players, specifically ironmen, are forced into the Wilderness if they wish to obtain items usable outside it (Voidwaker, Mage Arena II capes, previously Dragon Pickaxes), generating hostility between PvP and non-PvP players that is not mutual interest</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Wilderness rewards have to compete with the rest of the game, including 18m/h from bosses like the Doom of Mokhaiotl - a value that no Wilderness activity can realistically match without creating other integrity problems</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKing is a negative-sum game due to the cost of supplies (food, potions, runes, ammo) and degrading equipment charges lost by both players every fight.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The risk of being killed after farming for an hour means a player can end a session with less GP than they started with, while a non-Wildy player in the same time would always profit</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Content like the Wildy Altar fills your inventory with bones, leaving you at an inherent gear and supply disadvantage even if you wanted to PvP while doing that</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Anti-PKing while doing Wilderness bosses means your gear is optimized for the boss, not for player combat - a commonly debated gear disadvantage. You have to bring 3-way tribridding switches to be competitive, which means you have to risk more, which brings us back to the problem of players not wanting to risk</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>A large majority of the playerbase is genuinely risk-averse in a way that can't be solved by just raising the rewards - plenty of players will never take any level of GP risk in PvP</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ironmen lose too much on death in the Wilderness but also gain absolutely nothing from killing other players, making most Wilderness content feel like dead content for a growing share of the votable playerbase</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Safe PvP minigames share the same reward-competition problem - even with zero risk, their rewards don't compete with normal PvM content, so players don't engage</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Arbitrary costs gatekeep basic PKing infrastructure: 1m to unlock loot keys, 5m for nearby respawn points at Edgeville or Ferox Enclave, years of Trouver parchment problems</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Many players, specifically ironmen, are forced into the Wilderness if they wish to obtain items usable outside it (Voidwaker, Mage Arena II capes, previously Dragon Pickaxes), generating hostility between PvP and non-PvP players that is not mutual interest</li>
       </ul>
     </div>
   </div>
@@ -389,28 +450,28 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#2</div>
+        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#2</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Skill Gap is Too Large</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">New players are fighting veterans the moment they step foot into the Wilderness, and pretty much any PvP activity for that matter. The skill floor is too high, the skill ceiling is even higher with NH bridding, and there is no understood progression ladder. Unlike PvM - which has content for every skill level - PvP has almost nothing literally designed for casual or new players.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Skill Gap is Too Large</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">New players are fighting veterans the moment they step foot into the Wilderness, and pretty much any PvP activity for that matter. The skill floor is too high, the skill ceiling is even higher with NH bridding, and there is no understood progression ladder. Unlike PvM - which has content for every skill level - PvP has almost nothing literally designed for casual or new players.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show related problems" data-close="Hide related problems">Show related problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>It costs too much to even try out Wilderness PvP due to risk - the financial entry cost alone discourages experimentation before the skill gap is even a factor, especially more so for newer players who don't have a steady way to earn gold yet</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is no obvious skill ladder, no understood progression system, and no clear path for bridging the gap between a new player and a competent PKer</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>LMS gives players free gear but the skill gap problem persists inside LMS itself - equalized levels and gear just makes the mechanical skill gap more visible, not less</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP Arena's meta quickly devolved into players instantly forfeiting for the reward points, bypassing any meaningful competitive play where one could potentially learn</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Casual PvP is essentially dead - low-stakes PvP venues that once kept the skill pipeline healthy (Castle Wars, Soul Wars) are no longer active enough to actually train in</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The Wilderness functions differently from LMS and the PvP Arena, meaning those activities only partially teach transferable skills. Multi combat, world dynamics, chasing and escape gameplay, good gear setups for the Wilderness, are all untouched</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is no safe PvP minigame venue for "honor PvP" - aka what Bounty Hunter does where it has rules that promote Edge-style Venge PvP with no protection prayers and no magical freezes</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Gear disparity compounds the skill gap - players in max gear fighting players in budget gear creates a compounding disadvantage that is hard to distinguish from being outplayed. This is especially prominent in Castle Wars and Soul Wars.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP population is declining, not growing alongside the OSRS population - new players are not being converted into PvPers at any meaningful rate. We should be expecting PvP to grow as OSRS itself gets more players, not diminish. This is a LARGELY alarming sign to me about the state of PvP as a whole</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The OSRS PvP wiki could probably do with better information and findable pages about PvP, especially because it's probably most player's biggest resources for learning about the game</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>It costs too much to even try out Wilderness PvP due to risk - the financial entry cost alone discourages experimentation before the skill gap is even a factor, especially more so for newer players who don't have a steady way to earn gold yet</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is no obvious skill ladder, no understood progression system, and no clear path for bridging the gap between a new player and a competent PKer</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>LMS gives players free gear but the skill gap problem persists inside LMS itself - equalized levels and gear just makes the mechanical skill gap more visible, not less</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP Arena's meta quickly devolved into players instantly forfeiting for the reward points, bypassing any meaningful competitive play where one could potentially learn</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Casual PvP is essentially dead - low-stakes PvP venues that once kept the skill pipeline healthy (Castle Wars, Soul Wars) are no longer active enough to actually train in</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The Wilderness functions differently from LMS and the PvP Arena, meaning those activities only partially teach transferable skills. Multi combat, world dynamics, chasing and escape gameplay, good gear setups for the Wilderness, are all untouched</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is no safe PvP minigame venue for "honor PvP" - aka what Bounty Hunter does where it has rules that promote Edge-style Venge PvP with no protection prayers and no magical freezes</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Gear disparity compounds the skill gap - players in max gear fighting players in budget gear creates a compounding disadvantage that is hard to distinguish from being outplayed. This is especially prominent in Castle Wars and Soul Wars.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP population is declining, not growing alongside the OSRS population - new players are not being converted into PvPers at any meaningful rate. We should be expecting PvP to grow as OSRS itself gets more players, not diminish. This is a LARGELY alarming sign to me about the state of PvP as a whole</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The OSRS PvP wiki could probably do with better information and findable pages about PvP, especially because it's probably most player's biggest resources for learning about the game</li>
       </ul>
     </div>
   </div>
@@ -419,29 +480,29 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#3</div>
+        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#3</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Self-Defeating PvP Polls</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">PvP needs updates to improve. But because PvP has a terrible reputation, most players vote no on PvP updates. So they don't pass. So PvP never improves. So the reputation stays bad. Jagex, seeing the pattern, reduces development resources on PvP. The cycle feeds itself.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Self-Defeating PvP Polls</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">PvP needs updates to improve. But because PvP has a terrible reputation, most players vote no on PvP updates. So they don't pass. So PvP never improves. So the reputation stays bad. Jagex, seeing the pattern, reduces development resources on PvP. The cycle feeds itself.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show related problems" data-close="Hide related problems">Show related problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvP updates have consistently failed to pass 70% polls, so Jagex deprioritizes development resources for PvP, making future updates even less likely</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The 70% poll threshold is often antithetical to PvP game balance - 90% of players not engaging in PvP voting on PvP balance changes is a self-fulfilling prophecy that says PvP polls will rarely ever pass because it's not in the interests of 90% of the community</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Likewise, if only PKers are asked to design the Wilderness, they will create a Wilderness that is great for them, but extremely adverse to PvMers, thus also limiting potential growth of PvP as a whole. What is truly needed are compromises between both sides</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>It's almost a given that any update that is meant to be a 50/50 fair split in how it affects PvPers and PvMers, is something that can only appeal to 50% of players rather than 70%. Likewise if any update favors PvPers 100% more, well it's not going to pass a 70% threshold from the FULL community</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The negative reputation of PvP is self-perpetuating - if everyone tells new players the Wilderness sucks, new players never try it, so the community stays small and stagnates</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>An "us vs them" mentality between PvMers and PvPers means both sides treat polls as a fight to win rather than a system for finding compromise that works for the whole community</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvPers rarely ask "what would make non-PvPers or "fence sitters" actually enjoy PvP?" - instead defaulting to "just try it" or "you don't get it", which does not bring new players in</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvMers who say "just remove PvP" are offering an amputation, not a cure - and they underestimate how much of OSRS's identity is tied to the Wilderness existing</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Jagex has proposed the same category of solutions (new content, new rewards, new bosses) for 10+ years without addressing actual core problems - so the community has learned to distrust PvP updates before they even launch</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ironmen represent a large and growing share of the playerbase. If PvP updates are universally seen as dead content for ironmen, that's a near-automatic bloc of no votes against anything PvP-related. And many players have estimated that ironmen are over 30% of the population, which means almost automatic poll failures for PvP</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The only way Jagex seriously considers a PvP update is when there's a major community outcry - meaning reactive development rather than proactive design is the default mode</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvP updates have consistently failed to pass 70% polls, so Jagex deprioritizes development resources for PvP, making future updates even less likely</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The 70% poll threshold is often antithetical to PvP game balance - 90% of players not engaging in PvP voting on PvP balance changes is a self-fulfilling prophecy that says PvP polls will rarely ever pass because it's not in the interests of 90% of the community</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Likewise, if only PKers are asked to design the Wilderness, they will create a Wilderness that is great for them, but extremely adverse to PvMers, thus also limiting potential growth of PvP as a whole. What is truly needed are compromises between both sides</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>It's almost a given that any update that is meant to be a 50/50 fair split in how it affects PvPers and PvMers, is something that can only appeal to 50% of players rather than 70%. Likewise if any update favors PvPers 100% more, well it's not going to pass a 70% threshold from the FULL community</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The negative reputation of PvP is self-perpetuating - if everyone tells new players the Wilderness sucks, new players never try it, so the community stays small and stagnates</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>An "us vs them" mentality between PvMers and PvPers means both sides treat polls as a fight to win rather than a system for finding compromise that works for the whole community</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvPers rarely ask "what would make non-PvPers or "fence sitters" actually enjoy PvP?" - instead defaulting to "just try it" or "you don't get it", which does not bring new players in</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvMers who say "just remove PvP" are offering an amputation, not a cure - and they underestimate how much of OSRS's identity is tied to the Wilderness existing</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Jagex has proposed the same category of solutions (new content, new rewards, new bosses) for 10+ years without addressing actual core problems - so the community has learned to distrust PvP updates before they even launch</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ironmen represent a large and growing share of the playerbase. If PvP updates are universally seen as dead content for ironmen, that's a near-automatic bloc of no votes against anything PvP-related. And many players have estimated that ironmen are over 30% of the population, which means almost automatic poll failures for PvP</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The only way Jagex seriously considers a PvP update is when there's a major community outcry - meaning reactive development rather than proactive design is the default mode</li>
       </ul>
     </div>
   </div>
@@ -450,27 +511,27 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:13px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#128481;</div>
+        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:14.5px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#128481;</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Predator-Prey Design Problems</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">The core loop of the Wilderness - PKers hunting players doing content - creates structural frustration for both sides, and the food chain that's supposed to generate healthy activity isn't producing the population flow it needs to function.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Predator-Prey Design Problems</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">The core loop of the Wilderness - PKers hunting players doing content - creates structural frustration for both sides, and the food chain that's supposed to generate healthy activity isn't producing the population flow it needs to function.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show problems" data-close="Hide problems">Show problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvMers feel constantly interrupted and hunted even when just trying to complete content - world-hopping scouts and clans mean there's no quiet moment</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKers simultaneously feel the Wilderness is empty - they hop 50 to 300 worlds to find one player risking almost nothing</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKers killing clue scroll hunters for minimal GP reward is anti-fun for both parties - it wastes everyone's time and resources without meaningful interaction</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The predator-prey model has not been rejuvenating the Wilderness for 13+ years - luring PvMers in with better rewards has never converted them into PvPers</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There are no PvM bosses, monsters, dungeons, or skilling resources that can by themselves revive the Wilderness - that approach has been tried repeatedly and has not worked</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Multi Rev Caves brought significant activity but also brought serious integrity problems (botting, scouting, clans monopolizing, rwt, gold inflation) that are difficult to manage at scale. PKers will forgive these problems, but potential new PvPers are not sold that these are not problems</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>World-hopping and logging out is mandatory optimal gameplay rather than actually roaming through the Wilderness. Freeze logging is the most prominent escape strategy instead of actually gearing up to survive running away. Plugins like Wilderness Player Alarm bring frustrations about making it too easy for players to escape without even having to pay attention.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>As OSRS adds more game worlds to handle general population growth, the Wilderness spreads thinner - more worlds, same (declining) PvP players, less activity per world</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The Wilderness has no stated design goal - players, PKers, and Jagex all assign different implicit labels to it, making it impossible to evaluate whether it's succeeding at anything</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PvMers feel constantly interrupted and hunted even when just trying to complete content - world-hopping scouts and clans mean there's no quiet moment</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKers simultaneously feel the Wilderness is empty - they hop 50 to 300 worlds to find one player risking almost nothing</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PKers killing clue scroll hunters for minimal GP reward is anti-fun for both parties - it wastes everyone's time and resources without meaningful interaction</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The predator-prey model has not been rejuvenating the Wilderness for 13+ years - luring PvMers in with better rewards has never converted them into PvPers</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There are no PvM bosses, monsters, dungeons, or skilling resources that can by themselves revive the Wilderness - that approach has been tried repeatedly and has not worked</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Multi Rev Caves brought significant activity but also brought serious integrity problems (botting, scouting, clans monopolizing, rwt, gold inflation) that are difficult to manage at scale. PKers will forgive these problems, but potential new PvPers are not sold that these are not problems</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>World-hopping and logging out is mandatory optimal gameplay rather than actually roaming through the Wilderness. Freeze logging is the most prominent escape strategy instead of actually gearing up to survive running away. Plugins like Wilderness Player Alarm bring frustrations about making it too easy for players to escape without even having to pay attention.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>As OSRS adds more game worlds to handle general population growth, the Wilderness spreads thinner - more worlds, same (declining) PvP players, less activity per world</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The Wilderness has no stated design goal - players, PKers, and Jagex all assign different implicit labels to it, making it impossible to evaluate whether it's succeeding at anything</li>
       </ul>
     </div>
   </div>
@@ -479,27 +540,27 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:13px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#9888;</div>
+        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:14.5px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#9888;</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Integrity & Cheating</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">The PvP environment has a serious fairness problem. Cheating tools are widespread and Jagex's response has been inconsistent. When a bot ban wave cleared the Wilderness, it revealed just how little legitimate PvP was actually happening. I think the biggest problem here is lack of communication that Jagex actually cares to take a stance on some of these problems and say they are taking action, such as when Wildy CCTV existed for around a year.
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Integrity & Cheating</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">The PvP environment has a serious fairness problem. Cheating tools are widespread and Jagex's response has been inconsistent. When a bot ban wave cleared the Wilderness, it revealed just how little legitimate PvP was actually happening. I think the biggest problem here is lack of communication that Jagex actually cares to take a stance on some of these problems and say they are taking action, such as when Wildy CCTV existed for around a year.
           </div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show problems" data-close="Hide problems">Show problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Cheat clients that auto-pray and auto-eat remove a large part of the mechanical skill from PvP, giving a significant competitive advantage over legitimate players</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>AHK and similar scripts that perform instant weapon switches automatically reduce a high-skill-ceiling mechanic to a zero-effort action</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Bots farming GP in the Wilderness suppress organic activity and distort the population numbers Jagex uses to evaluate PvP health. To be honest, it's a little goofy that PKers often recommend people use "killing bots" as an introductory way to engage with the Wilderness</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>World-hop scouting bots and tools like WildyCCTV (when it existed) let players see Wilderness activity across all worlds, giving a systematic information advantage to those willing to use them</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Alt account scouting is abused by pretty much everyone, and I think it's a symptom of how empty the Wilderness is. People couldn't be doing that if there were so much activity, their alts were regularly being killed. The emptiness of the Wilderness allows for these kinds of loopholes that both PvMers and PvPers detest more than if they were just organically running into each other</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The wilderness player alarm Runelite plugin allows PvMers to instantly log out when another player appears, while barely having to pay attention at all to the game, make it that much more impossible for a PKer to actually catch them. Most importantly, it's just inorganic gameplay that wasn't always in the game, was not polled for acceptance, and was created by a third party.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ragging - repeatedly attacking a player with low-risk gear to waste their supplies or get a lucky kill on them - has no good systemic counter in the current game</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Many Wilderness reward sources have low combat requirements but high GP yields, making them attractive botting targets and an ongoing source of economy problems. Even singles revs was just full of bots before the ban waves. Even PKers were making tutorials about how to farm killing the BOTS</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Cheat clients that auto-pray and auto-eat remove a large part of the mechanical skill from PvP, giving a significant competitive advantage over legitimate players</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>AHK and similar scripts that perform instant weapon switches automatically reduce a high-skill-ceiling mechanic to a zero-effort action</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Bots farming GP in the Wilderness suppress organic activity and distort the population numbers Jagex uses to evaluate PvP health. To be honest, it's a little goofy that PKers often recommend people use "killing bots" as an introductory way to engage with the Wilderness</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>World-hop scouting bots and tools like WildyCCTV (when it existed) let players see Wilderness activity across all worlds, giving a systematic information advantage to those willing to use them</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Alt account scouting is abused by pretty much everyone, and I think it's a symptom of how empty the Wilderness is. People couldn't be doing that if there were so much activity, their alts were regularly being killed. The emptiness of the Wilderness allows for these kinds of loopholes that both PvMers and PvPers detest more than if they were just organically running into each other</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The wilderness player alarm Runelite plugin allows PvMers to instantly log out when another player appears, while barely having to pay attention at all to the game, make it that much more impossible for a PKer to actually catch them. Most importantly, it's just inorganic gameplay that wasn't always in the game, was not polled for acceptance, and was created by a third party.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Ragging - repeatedly attacking a player with low-risk gear to waste their supplies or get a lucky kill on them - has no good systemic counter in the current game</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Many Wilderness reward sources have low combat requirements but high GP yields, making them attractive botting targets and an ongoing source of economy problems. Even singles revs was just full of bots before the ban waves. Even PKers were making tutorials about how to farm killing the BOTS</li>
       </ul>
     </div>
   </div>
@@ -508,23 +569,23 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:13px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#9881;</div>
+        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:14.5px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#9881;</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">PvM vs PvP Mechanical Inconsistencies</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">A significant number of items, staves, and mechanics work differently in PvP versus PvM, or in the Wilderness versus the rest of the game. This creates a hidden layer of knowledge new players don't know to look for that even confuses some veteran players.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">PvM vs PvP Mechanical Inconsistencies</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">A significant number of items, staves, and mechanics work differently in PvP versus PvM, or in the Wilderness versus the rest of the game. This creates a hidden layer of knowledge new players don't know to look for that even confuses some veteran players.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show problems" data-close="Hide problems">Show problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The elemental tomes (fire, water, earth) have wildly different stats in PvM and PvP</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Autocasting on staves behaves differently between PvP and PvM contexts, creating confusion for players transitioning between modes. It's not just inconsistent between PvM and PvP. It's inconsistent between PvP and PvP. Autocast works different in the Wilderness, in Castle Wars, in Soul Wars, in the PvP Arena, in Bounty Hunter, and so on and so forth. It's a core game mechanic and even some of the developers at Jagex have acknowledged they'd rather clear this one up. You can find quotes in the official OSRS PvP Feedback Discord.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Most powered staves are disabled in PvP, which is counterintuitive and limits the viability of several otherwise useful magic weapons.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Spellbook and prayer icon resizing is disabled in PvP - a small but representative example of many differences that accumulate into a confusing and annoying experience. Players cannot comfortably use the interface setups they are used to, and are instead forced to play with a generalized setup should they choose to engage with the content at all.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Boxing - repeatedly attacking a player with weak equipment to prevent anyone else from attacking - is an exploit-adjacent loophole in combat mechanics</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The elemental tomes (fire, water, earth) have wildly different stats in PvM and PvP</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Autocasting on staves behaves differently between PvP and PvM contexts, creating confusion for players transitioning between modes. It's not just inconsistent between PvM and PvP. It's inconsistent between PvP and PvP. Autocast works different in the Wilderness, in Castle Wars, in Soul Wars, in the PvP Arena, in Bounty Hunter, and so on and so forth. It's a core game mechanic and even some of the developers at Jagex have acknowledged they'd rather clear this one up. You can find quotes in the official OSRS PvP Feedback Discord.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Most powered staves are disabled in PvP, which is counterintuitive and limits the viability of several otherwise useful magic weapons.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Spellbook and prayer icon resizing is disabled in PvP - a small but representative example of many differences that accumulate into a confusing and annoying experience. Players cannot comfortably use the interface setups they are used to, and are instead forced to play with a generalized setup should they choose to engage with the content at all.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Boxing - repeatedly attacking a player with weak equipment to prevent anyone else from attacking - is an exploit-adjacent loophole in combat mechanics</li>
       </ul>
     </div>
   </div>
@@ -533,35 +594,35 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--dim);border-radius:3px;margin-bottom:32px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:rgba(138,120,80,0.2);border:1px solid var(--dim);color:var(--dim);font-size:16px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">+</div>
+        <div style="min-width:28px;height:28px;background:rgba(138,120,80,0.2);border:1px solid var(--dim);color:var(--dim);font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">+</div>
         <div>
-          <div style="font-size:20px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Other Problems</div>
-          <div style="font-size:15px;color:var(--muted);text-shadow:1px 1px 0 #000;">Additional specific problems that don't fit neatly under one of the above categories, but are each a real hole in the ship.</div>
+          <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Other Problems</div>
+          <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">Additional specific problems that don't fit neatly under one of the above categories, but are each a real hole in the ship.</div>
         </div>
       </div>
     </div>
-    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:14px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
+    <div class="cp-toggle" onclick="toggleProblems(this)" style="padding:9px 20px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--amber);font-size:15.5px;letter-spacing:0.08em;text-shadow:1px 1px 0 #000;user-select:none;">
       &#9658; <span class="cp-label" data-open="Show problems" data-close="Hide problems">Show problems</span>
     </div>
     <div class="cp-panel" style="display:none;padding:14px 20px 16px;border-top:1px solid var(--brick);">
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP Arena has its own separate set of problems and is effectively non-functional as a competitive venue or activity at all in its current state</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The content gap: almost all PvP content is designed around high-skill solo NH bridding or large clan warfare, leaving a near-total gap for small teams, risk-averse players, or forms of PvP that are generally easier for players to engage with, like Honor Fights.</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Deathdotting - standing on the exact same tile as another player after freezing them to make targeting difficult - is a widespread nuisance technique that many players dislike. Many players also do like it. This is another example of content gap. Something like a safe version of Bounty Hunter would address this problem as a way players can engage with PvP without dealing with a mechanic they don't like, without having to change the rest of PvP in the game</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PJ Timer mechanics are killed off singles teams, leaving no place in the game for them to enjoy PvP</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Various Wilderness hotspots can be monopolized by organized clans, making the Wilderness functionally inaccessible to solo players or small groups</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is a measurable perception gap between how PvMers and PKers each estimate "risk" - they are not having the same conversation because they are not talking about the same numbers or situations</li>
-        <li style="font-size:15px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Mobile players have a meaningfully different and underaddressed experience - the interface and controls for PvP on mobile are not well-suited to the speed and complexity of OSRS PvP</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The PvP Arena has its own separate set of problems and is effectively non-functional as a competitive venue or activity at all in its current state</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>The content gap: almost all PvP content is designed around high-skill solo NH bridding or large clan warfare, leaving a near-total gap for small teams, risk-averse players, or forms of PvP that are generally easier for players to engage with, like Honor Fights.</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Deathdotting - standing on the exact same tile as another player after freezing them to make targeting difficult - is a widespread nuisance technique that many players dislike. Many players also do like it. This is another example of content gap. Something like a safe version of Bounty Hunter would address this problem as a way players can engage with PvP without dealing with a mechanic they don't like, without having to change the rest of PvP in the game</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>PJ Timer mechanics are killed off singles teams, leaving no place in the game for them to enjoy PvP</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Various Wilderness hotspots can be monopolized by organized clans, making the Wilderness functionally inaccessible to solo players or small groups</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>There is a measurable perception gap between how PvMers and PKers each estimate "risk" - they are not having the same conversation because they are not talking about the same numbers or situations</li>
+        <li style="font-size:16.5px;color:var(--text);text-shadow:1px 1px 0 #000;"><span style="color:var(--dim);margin-right:6px;">&#9658;</span>Mobile players have a meaningfully different and underaddressed experience - the interface and controls for PvP on mobile are not well-suited to the speed and complexity of OSRS PvP</li>
       </ul>
     </div>
   </div>
 
   <div><br></div>
 
-  <div class="section-label">Supporting Data</div>
+  <div class="section-label" id="data">Supporting Data</div>
   <div class="section-title">An Analysis of ~7,000 Community Comments About PvP Problems &amp; A Full History of OSRS PvP Polls</div>
 
-  <div style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Earlier this year, Framed released a few videos to talk about the state of PvP in 2026, and he asked everyone to comment saying what they feel is the "real problem" with PvP.
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Earlier this year, Framed released a few videos to talk about the state of PvP in 2026, and he asked everyone to comment saying what they feel is the "real problem" with PvP.
 
     <br><br>I copy-pasted the entire comment section into Claude AI and asked it to analyze what the players were saying and cross-reference it with the solutions I've come up with. Since then I've expanded it well beyond that one video - it now pulls from about 7,000 comments, posts, and replies across 13 YouTube, Reddit, and Twitter/X sources.
 
@@ -571,6 +632,8 @@ footer {
 
     <br><br>Also included is a history of all PvP related updates for OSRS.
   </div>
+
+  <div style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;padding:16px 20px;margin-bottom:24px;font-size:18px;color:var(--muted);line-height:1.7;text-shadow:1px 1px 0 #000;"><div style="font-size:14.5px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;">Disclaimer</div>These analyses are compiled and analyzed by Claude AI.<br><br>There are some spots where it gets some things a little inaccurate, but I did feed it over 7000+ comments and make it read the entire polling history of OSRS. I tried to give it corrections where I noticed mistakes and inconsistencies, but overall those were few and far between.<br><br>Nonetheless, I think you'll find the data interesting.</div>
 
   <div class="card-grid">
 
@@ -601,10 +664,10 @@ footer {
 
   <div><br><br></div>
 
-  <div class="section-label">Wilderness Solution Proposals</div>
+  <div class="section-label" id="proposals">Wilderness Solution Proposals</div>
   <div class="section-title">Main Design Documents</div>
 
-  <div style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Given all of this information, I've come up with 4 major systems to help improve the Wilderness and turn a dying activity into a growing activity.</div>
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Given all of this information, I've come up with 4 major systems to help improve the Wilderness and turn a dying activity into a growing activity.</div>
 
   <div class="card-grid">
 
@@ -673,10 +736,10 @@ footer {
 
   <div><br><br></div>
 
-  <div class="section-label">Additional PvP Concepts</div>
+  <div class="section-label" id="concepts">Additional PvP Concepts</div>
   <div class="section-title">Bonus Design Documents</div>
 
-  <div style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">I have various other ideas that I think would be great for PvP. But I think these are a lower priority to the main big 4 above. In some cases, some of these ideas require something from the big 4 to be implemented first, or success of the big 4 obsoletes some of these ideas.</div>
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">I have various other ideas that I think would be great for PvP. But I think these are a lower priority to the main big 4 above. In some cases, some of these ideas require something from the big 4 to be implemented first, or success of the big 4 obsoletes some of these ideas.</div>
 
   <div class="card-grid">
 
@@ -769,10 +832,10 @@ footer {
 
   <div><br><br></div>
 
-  <div class="section-label">Other Players' Suggestions</div>
+  <div class="section-label" id="suggestions">Other Players' Suggestions</div>
   <div class="section-title">Ideas Worth Signal Boosting</div>
 
-  <div style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">These are not my original ideas, but they are ideas I think deserve more attention. Some of them have been floating around the community for years. All of them would materially improve the Wilderness.</div>
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">These are not my original ideas, but they are ideas I think deserve more attention. Some of them have been floating around the community for years. All of them would materially improve the Wilderness.</div>
 
   <div class="card-grid">
 
@@ -812,8 +875,12 @@ footer {
 </footer>
 
 <!-- BACK TO TOP -->
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:13.5px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
 <script>
+function jumpTo(id){
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 function toggleProblems(toggleEl) {
   var panel = toggleEl.nextElementSibling;
   var label = toggleEl.querySelector('.cp-label');
