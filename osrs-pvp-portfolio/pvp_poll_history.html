@@ -669,7 +669,7 @@ footer {
     <div class="page-nav-links">
       <a class="page-nav-link" href="#" onclick="jumpTo('about-section');return false;"><span class="page-nav-num">1</span>About</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('poll-section');return false;"><span class="page-nav-num">2</span>Polled Questions</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('unpolled-section');return false;"><span class="page-nav-num">3</span>Unpolled Changes</a>
+            <a class="page-nav-link" href="#" onclick="jumpTo('unpolled-section');return false;"><span class="page-nav-num">3</span>Unpolled Changes</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('scrapped-section');return false;"><span class="page-nav-num">4</span>Proposed Then Dropped</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('chdata-analysis');return false;"><span class="page-nav-num">5</span>Chdata's Analysis</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('analysis-section');return false;"><span class="page-nav-num">6</span>AI Data Analysis</a>
@@ -700,29 +700,30 @@ footer {
       <div class="overall-stats-grid">
         <div class="overall-stat-cell">
           <div class="overall-stat-label">PvP &amp; Wilderness questions</div>
-          <div class="overall-stat-value pvp-color">225 / 397 passed</div>
-          <div class="overall-stat-pct pvp-color">56.7%</div>
+          <div class="overall-stat-value pvp-color">227 / 402 passed</div>
+          <div class="overall-stat-pct pvp-color">56.5%</div>
           <div class="overall-stat-note">at applicable threshold (75% pre-Oct 2022, 70% after)</div>
         </div>
         <div class="overall-stat-divider"></div>
         <div class="overall-stat-cell">
           <div class="overall-stat-label">Non-PvP questions (all other polls)</div>
-          <div class="overall-stat-value nonpvp-color">1,238 / 1,285 passed</div>
-          <div class="overall-stat-pct nonpvp-color">96.3%</div>
-          <div class="overall-stat-note">across ~250+ polls covering skills, quests, bosses, and QoL</div>
+          <div class="overall-stat-value nonpvp-color">2,361 / 2,770 passed</div>
+          <div class="overall-stat-pct nonpvp-color">85.2%</div>
+          <div class="overall-stat-note">every content poll 2013&ndash;2026 &mdash; skills, quests, bosses, QoL. Incl. 72 rare-item reintroduction sub-questions (all failed); excluding those, the rate is 87.5%.</div>
         </div>
         <div class="overall-stat-divider"></div>
         <div class="overall-stat-cell">
           <div class="overall-stat-label">All poll questions combined</div>
-          <div class="overall-stat-value all-color">1,463 / 1,682 passed</div>
-          <div class="overall-stat-pct all-color">87.0%</div>
-          <div class="overall-stat-note">397 of 1,682 total questions are PvP (23.6%) &mdash; PvP pass rate is ~30 percentage points below the game-wide average</div>
+          <div class="overall-stat-value all-color">2,588 / 3,172 passed</div>
+          <div class="overall-stat-pct all-color">81.6%</div>
+          <div class="overall-stat-note">402 of 3,172 total questions are PvP (12.7%) &mdash; PvP pass rate is ~25 percentage points below the game-wide average</div>
         </div>
       </div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5;text-align:center;">Counting note: two general QoL questions (camera-zoom, spellbook-icon) from the 2018 &ldquo;PvP Suggestions&rdquo; poll are counted in both buckets, since they sit in the analysed PvP set yet are non-PvP by nature &mdash; so the distinct question total is 3,170. The 0.06% overlap does not move any figure above.</div>
     </div>
 
     <div id="category-defs-box" style="background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:20px 24px;margin-bottom:20px;">
-      <div style="font-size:15px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;text-shadow:1px 1px 0 #000;">Question Type Breakdown</div>
+      <div style="font-size:15px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;text-shadow:1px 1px 0 #000;">PvP Question Type Breakdown</div>
       <div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
 
         <div style="flex:1;min-width:220px;padding:0 20px 0 0;">
@@ -757,6 +758,45 @@ footer {
           <div id="cat-stat-other" style="font-size:18px;color:#7090d0;text-shadow:1px 1px 0 #000;margin-bottom:6px;">-</div>
           <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;margin-bottom:10px;">UI, overlays, QoL, world management, and changes that don't fit neatly into either category - K/D tracking, warning messages, Shard Share, combat XP rewards, obelisk behaviour.</div>
           <button class="sort-btn" onclick="bumpCategory('other')">Bump to top</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="nonpvp-category-defs-box" style="background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:20px 24px;margin-bottom:20px;">
+      <div style="font-size:15px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:6px;text-shadow:1px 1px 0 #000;">Non-PvP Question Type Breakdown</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:16px;text-shadow:1px 1px 0 #000;">The same three buckets applied to the <strong style="color:#70c060;">2,770 non-PvP questions</strong> Jagex polled over 2013&ndash;2026 - skills, quests, bosses, minigames and QoL, everything outside PvP and the Wilderness. This is the comparison set behind the pass-rate gaps shown further down the page. The headline: unlike PvP, the category barely matters here - all three land in a tight 83&ndash;88% band.</div>
+      <div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
+
+        <div style="flex:1;min-width:220px;padding:0 20px 0 0;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#70c060;text-shadow:1px 1px 0 #000;font-weight:bold;">Balance Changes</span>
+            <span class="cat-badge cat-badge-content">Balance</span>
+          </div>
+          <div style="font-size:18px;color:#70c060;text-shadow:1px 1px 0 #000;margin-bottom:6px;">478 questions - 397 / 478 passed (83.1%)</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;">Tuning systems that already exist - weapon and armour stats, drop rates, XP rates, monster and boss stats, requirements, costs, spawn rates, difficulty. Nothing new is added; an existing number or rule is adjusted.</div>
+        </div>
+
+        <div style="width:1px;background:var(--brick);flex-shrink:0;align-self:stretch;margin:0 20px;"></div>
+
+        <div style="flex:1;min-width:220px;padding:0 20px;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#70c060;text-shadow:1px 1px 0 #000;font-weight:bold;">Content Changes</span>
+            <span class="cat-badge cat-badge-content">Content</span>
+          </div>
+          <div style="font-size:18px;color:#70c060;text-shadow:1px 1px 0 #000;margin-bottom:6px;">1,108 questions - 919 / 1,108 passed (82.9%)</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;">Brand-new additions players did not have before - bosses, quests, skills, minigames, items, rewards, zones, NPCs and cosmetics. The bulk of every content poll.</div>
+        </div>
+
+        <div style="width:1px;background:var(--brick);flex-shrink:0;align-self:stretch;margin:0 20px;"></div>
+
+        <div style="flex:1;min-width:220px;padding:0 0 0 20px;">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+            <span style="font-size:17px;color:#70c060;text-shadow:1px 1px 0 #000;font-weight:bold;">Other Changes</span>
+            <span class="cat-badge cat-badge-content">Other</span>
+          </div>
+          <div style="font-size:18px;color:#70c060;text-shadow:1px 1px 0 #000;margin-bottom:6px;">1,184 questions - 1,045 / 1,184 passed (88.3%)</div>
+          <div style="font-size:15px;color:#c0a870;line-height:1.6;text-shadow:1px 1px 0 #000;">Quality-of-life and access changes - interface and UI, banking and storage, teleports, toggles, shortcuts, naming - that neither add new content nor rebalance an existing system.</div>
         </div>
 
       </div>
@@ -868,8 +908,8 @@ footer {
       <div style="font-size:16.5px;letter-spacing:0.15em;color:#6da0e0;text-transform:uppercase;margin-bottom:12px;text-shadow:1px 1px 0 #000;">Note from Claude</div>
       <div style="font-size:18px;color:#dce6f2;line-height:1.7;text-shadow:1px 1px 0 #000;">
         <p style="margin-bottom:14px;">Does the take fit the data? Mostly yes, and the strongest part is the strongest claim. The "cat and mouse" argument - that zero-sum PvP balance can't reach 70% because it pits players against each other - shows up cleanly in the voting record. Every one of the 13 questions that landed in the 45-55% dead-heat band is a balance change; not a single one is content. The exact risk-shifting changes the argument predicts would split the room did split it: Protect Item on PvP worlds (42.8%), making dropped food/potions invisible (48.5%), instant drop visibility (51.8%), the multi-combat rev zone (50.6%). And all nine "should this PvP reward also work against NPCs / outside PvP" questions failed - the PvM majority vetoing PvP power leaking into PvE is the cat-and-mouse dynamic in miniature.</p>
-        <p style="margin-bottom:14px;">The "we keep proposing the wrong thing" point also holds up, maybe more than the script claims. The accessibility content aimed straight at the skill-gap problem actually passed comfortably - the LMS minigame at 87.6% and the PvP Tutorial at 83.1%. So the lever Chdata points to (positive-sum content that helps everyone rather than redistributing risk) is exactly what the data says clears the bar. The deprioritization worry has a real signature too: contested balance questions fell from 24% of the PvP slate before Oct 2022 to 13% after, with the hardest ones quietly routed to unpolled integrity updates instead.</p>
-        <p style="margin-bottom:0;">Where I'd add precision: "PvP almost never passes" is a touch overstated as written. Across the whole record it's 56.2%, and content-type questions pass 63% - it's <em>balance</em> changes that fail (33%), not PvP wholesale. Chdata's own "not all PvP polls fail" caveat is the more accurate framing, and it's worth leading with because it's harder to dismiss. The ironman-30%-bloc mechanism is plausible and consistent with the pattern, but this dataset can't directly measure who voted which way, so it should be presented as a reasonable inference rather than a proven number. Net: the core thesis - that a 70% consensus is structurally hostile to zero-sum PvP balance, and the way out is positive-sum design plus a ranking system - is well-supported. The one edit I'd make is to say "balance changes fail," not "PvP fails."</p>
+        <p style="margin-bottom:14px;">The "we keep proposing the wrong thing" point also holds up, maybe more than the script claims. The accessibility content aimed straight at the skill-gap problem actually passed comfortably - the LMS minigame at 87.6% and the PvP Tutorial at 83.1%. So the lever Chdata points to (positive-sum content that helps everyone rather than redistributing risk) is exactly what the data says clears the bar. The deprioritization worry has a real signature too: contested balance questions fell from 25% of the PvP slate before Oct 2022 to 13% after, with the hardest ones quietly routed to unpolled integrity updates instead.</p>
+        <p style="margin-bottom:0;">Where I'd add precision: "PvP almost never passes" is a touch overstated as written. Across the whole record it's 56.5%, and content-type questions pass 63% - it's <em>balance</em> changes that fail (34%), not PvP wholesale. Chdata's own "not all PvP polls fail" caveat is the more accurate framing, and it's worth leading with because it's harder to dismiss. The ironman-30%-bloc mechanism is plausible and consistent with the pattern, but this dataset can't directly measure who voted which way, so it should be presented as a reasonable inference rather than a proven number. Net: the core thesis - that a 70% consensus is structurally hostile to zero-sum PvP balance, and the way out is positive-sum design plus a ranking system - is well-supported. The one edit I'd make is to say "balance changes fail," not "PvP fails."</p>
       </div>
     </div>
 
@@ -882,7 +922,7 @@ footer {
     <div class="section-title">What the Numbers Actually Say</div>
 
     <div class="context-box">
-      This section analyses the <strong>397 scored yes/no questions</strong> above (the single multiple-choice question is excluded from rates). Every figure is computed directly from the data on this page. A question "passed" if its Yes% met the threshold that applied on its date - <strong>75%</strong> before 27 Oct 2022, <strong>70%</strong> after. Where a claim is a genuine causal story it is labelled; where it is only a correlation - or a time artifact dressed up as one - that is said plainly, because a portfolio that overclaims is easy to shoot down.
+      This section analyses the <strong>402 scored yes/no questions</strong> above (the single multiple-choice question is excluded from rates). Every figure is computed directly from the data on this page. A question "passed" if its Yes% met the threshold that applied on its date - <strong>75%</strong> before 27 Oct 2022, <strong>70%</strong> after. Where a claim is a genuine causal story it is labelled; where it is only a correlation - or a time artifact dressed up as one - that is said plainly, because a portfolio that overclaims is easy to shoot down.
     </div>
 
     <div style="background:rgba(204,34,34,0.10);border:2px solid #cc2222;border-radius:6px;padding:18px 22px;margin-top:20px;">
@@ -896,11 +936,102 @@ footer {
     <div class="overall-stats-box" style="margin-top:24px;">
       <div class="overall-stats-title">The Single Biggest Finding</div>
       <div style="font-size:18.5px;color:#e8d8a8;line-height:1.75;text-shadow:1px 1px 0 #000;padding:4px 2px;">
-        PvP polls did <strong style="color:#f0d890;">not</strong> gradually get harder or easier to pass. The headline jump - from a <strong style="color:#e07060;">47%</strong> pass rate (142/305) under the old 75% threshold to <strong style="color:#70c060;">91%</strong> (79/87) after the charter dropped it to 70% on 27 Oct 2022 - has <strong style="color:#f0d890;">two</strong> drivers, and the second one matters more than it first appears.
+        PvP polls did <strong style="color:#f0d890;">not</strong> gradually get harder or easier to pass. The headline jump - from a <strong style="color:#e07060;">47%</strong> pass rate (147/314) under the old 75% threshold to <strong style="color:#70c060;">91%</strong> (80/88) after the charter dropped it to 70% on 27 Oct 2022 - has <strong style="color:#f0d890;">two</strong> drivers, and the second one matters more than it first appears.
         <br><br>
         The first is mechanical: the lower bar plus a rise in average Yes% (72.7% to 80.1%) lifts the rate directly. The second is <strong style="color:#f0d890;">selection</strong>. The threshold change came right after the PvP Arena poll, where 13 contested balance questions failed in a single sheet. <strong style="color:#f0d890;">Chdata's deduction: that failure marks the point where Jagex grew hesitant to put controversial PvP changes to a poll at all.</strong> The data fits this. Balance questions fell from <strong style="color:#e07060;">24%</strong> of the PvP slate before Oct 2022 to just <strong style="color:#70c060;">13%</strong> after, with 2025 and 2026 polling <strong>zero</strong> of them. Those that did survive to a vote post-2022 skewed toward safer tweaks - Soul Wars safespotting fixes, Castle Wars restorations, and Wilderness-boss adjustments like Callisto's magic immunity - passing at an 82% clip (9 of 11). The genuinely divisive zero-sum changes were mostly off the ballot rather than being approved by a more agreeable electorate; the clearest exception, Poll 80's Pirate Ship freeze-escape, was polled and failed at 62%. They moved instead to the unpolled / integrity channel (see the Unpolled section).
         <br><br>
         This is why the <strong style="color:#f0d890;">"self-defeating polls"</strong> dynamic is better described as persistent than as a one-year spike. Whenever a contested balance change was actually polled - 2013, 2014, 2016, 2017, 2021, 2022 - it tended to fail, across the entire timeline. The post-2022 pass rate is partly a <strong style="color:#f0d890;">survivorship statistic</strong>: it looks like the problem was solved, when in practice the questions that would have failed simply stopped being asked. The cleanest takeaway still holds, and gets sharper under this lens: <strong style="color:#f0d890;">the type of change predicts the outcome far better than the year does - and after 2022 the hardest types were quietly routed around the poll entirely.</strong>
+      </div>
+    </div>
+
+    <!-- PvP vs NON-PvP BY TYPE -->
+    <div style="font-size:17.5px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:32px 0 14px;text-shadow:1px 1px 0 #000;">Same Question Type, Two Different Ballots</div>
+    <div class="overall-stats-box" style="margin-top:0;">
+      <div style="font-size:18px;color:#e8d8a8;line-height:1.7;text-shadow:1px 1px 0 #000;margin-bottom:20px;">
+        The clearest way to isolate the <em>who's-voting</em> effect from the <em>what's-being-asked</em> effect is to hold the question type constant and swap the subject. Below, every Balance / Content / Other pass rate from the <strong style="color:#e07060;">402 PvP</strong> questions on this page is placed next to the same category computed across all <strong style="color:#70c060;">2,770 non-PvP</strong> questions polled in the same 2013&ndash;2026 window (recounted directly from the official results). If the low PvP pass rates were really about the <em>kind</em> of change, non-PvP changes of the same kind would fail at similar rates. They don't.
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:22px;">
+
+        <!-- BALANCE ROW -->
+        <div>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
+            <span style="font-size:17px;color:#e07060;text-shadow:1px 1px 0 #000;font-weight:bold;">Balance Changes</span>
+            <span class="cat-badge cat-badge-balance">Balance</span>
+            <span style="font-size:15px;color:var(--muted);margin-left:auto;">a 49.0-point gap &mdash; the widest of the three</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:7px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#e0a0a0;text-align:right;">PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:34.1%;height:100%;background:linear-gradient(90deg,#a83232,#e07060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">34.1%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">30 / 88</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#a0d0a0;text-align:right;">Non-PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:83.1%;height:100%;background:linear-gradient(90deg,#3a7a3a,#70c060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">83.1%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">397 / 478</span>
+          </div>
+        </div>
+
+        <!-- CONTENT ROW -->
+        <div>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
+            <span style="font-size:17px;color:#70c060;text-shadow:1px 1px 0 #000;font-weight:bold;">Content Changes</span>
+            <span class="cat-badge cat-badge-content">Content</span>
+            <span style="font-size:15px;color:var(--muted);margin-left:auto;">a 19.8-point gap</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:7px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#e0a0a0;text-align:right;">PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:63.1%;height:100%;background:linear-gradient(90deg,#a83232,#e07060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">63.1%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">164 / 260</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#a0d0a0;text-align:right;">Non-PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:82.9%;height:100%;background:linear-gradient(90deg,#3a7a3a,#70c060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">82.9%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">919 / 1,108</span>
+          </div>
+        </div>
+
+        <!-- OTHER ROW -->
+        <div>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
+            <span style="font-size:17px;color:#7090d0;text-shadow:1px 1px 0 #000;font-weight:bold;">Other Changes</span>
+            <span class="cat-badge cat-badge-other">Other</span>
+            <span style="font-size:15px;color:var(--muted);margin-left:auto;">a 27.2-point gap</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:7px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#e0a0a0;text-align:right;">PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:61.1%;height:100%;background:linear-gradient(90deg,#a83232,#e07060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">61.1%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">33 / 54</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:78px;flex-shrink:0;font-size:15px;color:#a0d0a0;text-align:right;">Non-PvP</span>
+            <div style="flex:1;background:rgba(0,0,0,0.35);border-radius:3px;height:26px;position:relative;overflow:hidden;">
+              <div style="width:88.3%;height:100%;background:linear-gradient(90deg,#3a7a3a,#70c060);"></div>
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#fff;text-shadow:1px 1px 2px #000;font-weight:bold;">88.3%</span>
+            </div>
+            <span style="width:74px;flex-shrink:0;font-size:14px;color:var(--muted);">1,045 / 1,184</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="border-top:1px solid var(--brick);margin-top:22px;padding-top:18px;font-size:18px;color:#e8d8a8;line-height:1.7;text-shadow:1px 1px 0 #000;">
+        Two things jump out. <strong style="color:#f0d890;">First, within non-PvP the category barely matters</strong> - balance, content and other all land in a tight 83&ndash;88% band. A non-PvP <em>balance</em> change (a drop-rate tweak, a stat adjustment, a requirement change) passes at <strong style="color:#70c060;">83.1%</strong>, essentially the same as non-PvP content. <strong style="color:#f0d890;">Second, within PvP the category matters enormously</strong> - the rates scatter from 34% to 63%, and Balance is the floor. Same word, same kind of change: a <em>Balance</em> question passes at <strong style="color:#70c060;">83.1%</strong> when it's non-PvP and <strong style="color:#e07060;">34.1%</strong> when it's PvP. The change type didn't get harder; the electorate did. This is the single cleanest piece of evidence on the page that PvP balance polls fail because of <em>who</em> votes on them, not because the proposals are worse - a general-interest majority approves balance changes routinely, right up until the balance in question is between PKer and target.
       </div>
     </div>
 
@@ -918,17 +1049,17 @@ footer {
       <tbody>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">More/less likely to pass over time?</td>
-          <td style="padding:12px;vertical-align:top;">By year:<br>2013 - 43%<br>2014 - 62%<br>2015 - 57%<br>2016 - 38%<br>2017 - 46%<br>2018 - 63%<br>2019 - 37%<br>2020 - 90%<br>2021 - 33%<br>2022 - 30%<br>2023 - 90%<br>2024 - 90%<br>2025 - 100%<br>2026 - 100%<br><br>No smooth trend - a step change at the Oct 2022 threshold cut.</td>
+          <td style="padding:12px;vertical-align:top;">By year:<br>2013 - 43%<br>2014 - 60%<br>2015 - 57%<br>2016 - 38%<br>2017 - 47%<br>2018 - 63%<br>2019 - 37%<br>2020 - 90%<br>2021 - 50%<br>2022 - 30%<br>2023 - 90%<br>2024 - 90%<br>2025 - 100%<br>2026 - 100%<br><br>No smooth trend - a step change at the Oct 2022 threshold cut.</td>
           <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Yes, but it's the rule change plus selection, not time.</strong> The "year" correlation is mostly a proxy for "which threshold applied" (pre/post split: 47% vs 91%) and for the fact that after 2022 the controversial questions stopped being polled - so the recent slate is pre-filtered toward things that pass.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">More likely to pass with more votes?</td>
-          <td style="padding:12px;vertical-align:top;">corr(total votes, Yes%) = +0.18. Turnout tertiles: low 47%, mid 56%, high 64% pass. <em>But</em> within the old-threshold era alone the correlation weakens to +0.03.</td>
+          <td style="padding:12px;vertical-align:top;">corr(total votes, Yes%) = +0.15. Turnout tertiles: low 46%, mid 58%, high 65% pass. <em>But</em> within the old-threshold era alone the correlation weakens to -0.03.</td>
           <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Mostly a time artifact.</strong> High-turnout polls are recent (turnout grew ~6x since 2013), and recent polls pass more because of the threshold and a content-heavy slate. Turnout is a symptom of broad appeal, not a cause of passing. Do not claim "more votes = more likely to pass."</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Pass/fail by content of the question?</td>
-          <td style="padding:12px;vertical-align:top;">Balance changes pass <strong style="color:#e07060;">33%</strong> (28/84), Content <strong style="color:#70c060;">63%</strong> (163/258), Other 61% (33/54). Balance is worst in <em>both</em> eras (26% pre, 82% post). Mean Yes%: balance 67.1 vs content 75.9.</td>
+          <td style="padding:12px;vertical-align:top;">Balance changes pass <strong style="color:#e07060;">34%</strong> (30/88), Content <strong style="color:#70c060;">63%</strong> (164/260), Other 61% (33/54). Balance is worst in <em>both</em> eras (27% pre, 82% post). Mean Yes%: balance 67.4 vs content 75.9.</td>
           <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Yes - the strongest content signal on the page.</strong> What a change <em>is</em> predicts its fate more reliably than when it ran.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
@@ -938,12 +1069,12 @@ footer {
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Anything in the skip votes?</td>
-          <td style="padding:12px;vertical-align:top;">corr(skip rate, Yes%) = -0.14. The highest-skip questions (around 90% skipped) are restricted-audience reward questions - PvP Arena rewards and the restricted Vesta's Longsword re-poll - where most voters were auto-skipped. Mean skip rate ~12%.</td>
+          <td style="padding:12px;vertical-align:top;">corr(skip rate, Yes%) = -0.07. The highest-skip questions (around 90% skipped) are restricted-audience reward questions - PvP Arena rewards and the restricted Vesta's Longsword re-poll - where most voters were auto-skipped. Mean skip rate ~11%.</td>
           <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Weak but real.</strong> A high skip rate flags "this doesn't affect me / I don't get it," and those niche items also under-perform with the people who do vote. Skip rate is a usable <em>relevance</em> gauge.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">Fewer PvP updates polled per year over time?</td>
-          <td style="padding:12px;vertical-align:top;">Total PvP/Wilderness questions per year is lumpy rather than declining - 2019 is the peak (81). But <strong style="color:#e07060;">contested balance</strong> questions collapsed: 73 before Oct 2022 vs 11 after, with 0 in 2025 and 2026. The modern slate is dominated by minigame QoL and Wilderness resource tweaks, not core combat balance.</td>
+          <td style="padding:12px;vertical-align:top;">Total PvP/Wilderness questions per year is lumpy rather than declining - 2019 is the peak (82). But <strong style="color:#e07060;">contested balance</strong> questions collapsed: 77 before Oct 2022 vs 11 after, with 0 in 2025 and 2026. The modern slate is dominated by minigame QoL and Wilderness resource tweaks, not core combat balance.</td>
           <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Not in raw volume - but yes for the controversial kind.</strong> Caveat: this is a curated PvP set, not a full census, and much PvP change now ships unpolled, so read this as "controversial PvP <em>polling</em> dried up," not "fewer PvP updates shipped."</td>
         </tr>
       </tbody>
@@ -1008,7 +1139,7 @@ footer {
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--gold-hi);border-radius:3px;padding:15px 20px;">
         <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">The dev slate mirrors the playerbase: ~90% non-PvP on both sides</div>
-        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">PvP/Wilderness questions are just <strong>397 of 1,682</strong> total poll questions - <strong style="color:#e07060;">23.6%</strong>, so just under <strong>90% of everything polled is non-PvP</strong>. That lines up almost exactly with the commonly-cited estimate that roughly <strong>90% of the playerbase doesn't engage with PvP</strong>. The two figures reinforce each other: Jagex allocates development and polling roughly in proportion to demonstrated demand, so the share of PvP <em>updates</em> tracks the share of PvP <em>players</em>. Caveat worth stating out loud - the ~76.4% is measured directly here, but the 90%-non-PvP-population figure is a widely-repeated estimate, not something this voting record can prove. The honest framing is that the update mix is consistent with the population estimate, which is exactly the "invest in proportion to current demand" loop the proposals are trying to break.</div>
+        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">PvP/Wilderness questions are just <strong>402 of 3,172</strong> total poll questions - <strong style="color:#e07060;">12.7%</strong>, so just under <strong>90% of everything polled is non-PvP</strong>. That lines up almost exactly with the commonly-cited estimate that roughly <strong>90% of the playerbase doesn't engage with PvP</strong>. The two figures reinforce each other: Jagex allocates development and polling roughly in proportion to demonstrated demand, so the share of PvP <em>updates</em> tracks the share of PvP <em>players</em>. Caveat worth stating out loud - the ~87.3% is measured directly here, but the 90%-non-PvP-population figure is a widely-repeated estimate, not something this voting record can prove. The honest framing is that the update mix is consistent with the population estimate, which is exactly the "invest in proportion to current demand" loop the proposals are trying to break.</div>
       </div>
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
@@ -1061,7 +1192,7 @@ footer {
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:3px;padding:16px 20px;">
         <div style="font-size:19px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Problem 3 - The self-defeating PvP polls</div>
-        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#70c060;">This is the one the data backs most directly.</strong> The "90% non-PvPers vote on PvP balance and it can't reach 70%" claim is visible in the numbers: balance changes pass 33% vs content's 63%, and 15 of the 16 questions in the 45-55% dead-heat band are balance, with one content exception. The "us vs them / it can only please ~50%" point is literally the shape of the data - a fair 50/50 split is the signature of a contested balance question. And the deprioritization loop shows up as the post-2022 collapse in contested balance polling (24% of the slate down to 13%), with the hardest changes rerouted to unpolled integrity updates. The ironman-bloc mechanism is consistent with all of this but can't be measured from vote totals alone, so treat it as a strong inference rather than a proven figure.</div>
+        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#70c060;">This is the one the data backs most directly.</strong> The "90% non-PvPers vote on PvP balance and it can't reach 70%" claim is visible in the numbers: balance changes pass 34% vs content's 63%, and 15 of the 16 questions in the 45-55% dead-heat band are balance, with one content exception. The "us vs them / it can only please ~50%" point is literally the shape of the data - a fair 50/50 split is the signature of a contested balance question. And the deprioritization loop shows up as the post-2022 collapse in contested balance polling (25% of the slate down to 13%), with the hardest changes rerouted to unpolled integrity updates. The ironman-bloc mechanism is consistent with all of this but can't be measured from vote totals alone, so treat it as a strong inference rather than a proven figure.</div>
       </div>
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:3px;padding:16px 20px;">
@@ -1072,7 +1203,7 @@ footer {
     </div>
 
     <div style="margin-top:26px;font-size:17.5px;color:var(--muted);line-height:1.6;text-shadow:1px 1px 0 #000;border-top:1px solid var(--brick);padding-top:14px;">
-      Method note: rates cover the 397 scored yes/no questions in the list above; the one multiple-choice question is excluded. Correlations are Pearson on Yes% / pass (1/0) against total votes or skip rate. "Near miss" = failed and within 2.5pp below its threshold; "very split" = within N points of 50%. Pass tested against each question's own threshold (75% pre-27-Oct-2022, 70% after). The Wrathmaw Greenlight failure (49.1%) and other Greenlight/beta polls in the Scrapped section are not part of this scored set.
+      Method note: rates cover the 402 scored yes/no questions in the list above; the one multiple-choice question is excluded. Correlations are Pearson on Yes% / pass (1/0) against total votes or skip rate. "Near miss" = failed and within 2.5pp below its threshold; "very split" = within N points of 50%. Pass tested against each question's own threshold (75% pre-27-Oct-2022, 70% after). The Wrathmaw Greenlight failure (49.1%) and other Greenlight/beta polls in the Scrapped section are not part of this scored set.
     </div>
 
   </div>
@@ -1084,14 +1215,14 @@ footer {
     <div class="section-title">Community Sentiment vs. The Poll Record</div>
 
     <div class="context-box">
-      This section holds the <a href="osrs_pvp_review_analysis.html"><strong>Community Sentiment Analysis</strong></a> - roughly 7,000 comments, posts and replies across 13 YouTube, Twitter/X and Reddit sources - up against the 397-question voting record above. The question is simple: when players say "PvP polls are broken" or "nobody will ever approve this," does the actual ballot back them up? Mostly it does. And where the two disagree, it's usually because the comment sections are <em>more</em> pessimistic than the votes actually are.
+      This section holds the <a href="osrs_pvp_review_analysis.html"><strong>Community Sentiment Analysis</strong></a> - roughly 7,000 comments, posts and replies across 13 YouTube, Twitter/X and Reddit sources - up against the 402-question voting record above. The question is simple: when players say "PvP polls are broken" or "nobody will ever approve this," does the actual ballot back them up? Mostly it does. And where the two disagree, it's usually because the comment sections are <em>more</em> pessimistic than the votes actually are.
     </div>
 
     <!-- HEADLINE -->
     <div class="overall-stats-box" style="margin-top:24px;">
       <div class="overall-stats-title">The Headline</div>
       <div style="font-size:18.5px;color:#e8d8a8;line-height:1.75;text-shadow:1px 1px 0 #000;padding:4px 2px;">
-        The community's single most poll-relevant grievance - <strong style="color:#f0d890;">"PvP updates fail the 70% threshold because the non-PvP majority votes no"</strong> - is the <strong style="color:#f0d890;">4th most-mentioned problem</strong> in the sentiment data and the highest-engagement one on Reddit by a wide margin (210,302 upvotes, 32,417 comments across the threads). It is also the grievance the voting record confirms most cleanly: balance changes pass 33% vs content's 63%, and 15 of the 16 dead-heat (45-55%) questions are balance changes. <strong style="color:#f0d890;">The players diagnosed the exact failure mode the data shows.</strong> The one correction the ballot makes to the mood is hopeful: the things commenters assume will fail often don't.
+        The community's single most poll-relevant grievance - <strong style="color:#f0d890;">"PvP updates fail the 70% threshold because the non-PvP majority votes no"</strong> - is the <strong style="color:#f0d890;">4th most-mentioned problem</strong> in the sentiment data and the highest-engagement one on Reddit by a wide margin (210,302 upvotes, 32,417 comments across the threads). It is also the grievance the voting record confirms most cleanly: balance changes pass 34% vs content's 63%, and 15 of the 16 dead-heat (45-55%) questions are balance changes. <strong style="color:#f0d890;">The players diagnosed the exact failure mode the data shows.</strong> The one correction the ballot makes to the mood is hopeful: the things commenters assume will fail often don't.
       </div>
     </div>
 
@@ -1109,7 +1240,7 @@ footer {
       <tbody>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">"The 70% poll is rigged against PvP - the non-PvP majority just votes no." <span style="color:var(--muted);">(#4 problem, 271 mentions, 210K Reddit upvotes)</span></td>
-          <td style="padding:12px;vertical-align:top;">Balance changes pass 33% vs content 63%. 15 of the 16 questions in the 45-55% dead heat are balance. Contested changes cluster at a coin flip, exactly as a self-interested split predicts.</td>
+          <td style="padding:12px;vertical-align:top;">Balance changes pass 34% vs content 63%. 15 of the 16 questions in the 45-55% dead heat are balance. Contested changes cluster at a coin flip, exactly as a self-interested split predicts.</td>
           <td style="padding:12px;vertical-align:top;color:#70c060;"><strong>Confirmed.</strong> The most-upvoted poll complaint is the best-supported one in the data.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
@@ -1134,7 +1265,7 @@ footer {
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">"Jagex runs the poll then does whatever it wants anyway." <span style="color:var(--muted);">(Jagex-trust deficit, sources 2-5)</span></td>
-          <td style="padding:12px;vertical-align:top;">There's a real signature for this: contested balance polling fell from 24% of the slate to 13% after Oct 2022, and several changes that failed polls (drop visibility, Rev Caves singles) shipped anyway as unpolled integrity updates.</td>
+          <td style="padding:12px;vertical-align:top;">There's a real signature for this: contested balance polling fell from 25% of the slate to 13% after Oct 2022, and several changes that failed polls (drop visibility, Rev Caves singles) shipped anyway as unpolled integrity updates.</td>
           <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Partly borne out.</strong> Not "ignoring polls" so much as routing the hard stuff around them.</td>
         </tr>
       </tbody>
@@ -1152,7 +1283,7 @@ footer {
     <!-- WHAT JAGEX POLLS VS WHAT COMMUNITY ASKS -->
     <div style="font-size:17.5px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin:36px 0 14px;text-shadow:1px 1px 0 #000;">What Jagex Polls vs. What the Community Is Loudest About</div>
     <div style="font-size:18px;color:#e8d8a8;line-height:1.7;text-shadow:1px 1px 0 #000;margin-bottom:18px;">
-      Classify the 397 questions Jagex actually polled by what they do, and a lopsided diet appears: roughly <strong>240</strong> add a reward or item, <strong>83</strong> add new content (bosses, minigames, zones), about <strong>46</strong> touch death or risk mechanics, and a grand total of <strong style="color:#e07060;">4</strong> touch bots, cheating or enforcement. Now line that up against what the community is loudest about. The five highest-engagement grievances by Reddit upvotes are the broken poll system (210K), predator-prey toxicity (148K), the us-vs-them culture war (121K), bots and AHK cheating (111K), and forced-Wilderness rewards (101K). <strong style="color:#f0d890;">Almost none of those are things Jagex puts to a poll.</strong>
+      Classify the 402 questions Jagex actually polled by what they do, and a lopsided diet appears: roughly <strong>245</strong> add a reward or item, <strong>83</strong> add new content (bosses, minigames, zones), about <strong>46</strong> touch death or risk mechanics, and a grand total of <strong style="color:#e07060;">4</strong> touch bots, cheating or enforcement. Now line that up against what the community is loudest about. The five highest-engagement grievances by Reddit upvotes are the broken poll system (210K), predator-prey toxicity (148K), the us-vs-them culture war (121K), bots and AHK cheating (111K), and forced-Wilderness rewards (101K). <strong style="color:#f0d890;">Almost none of those are things Jagex puts to a poll.</strong>
     </div>
     <div style="overflow-x:auto;margin-bottom:18px;">
     <table style="width:100%;border-collapse:collapse;font-size:17.5px;color:#e8d8a8;text-shadow:1px 1px 0 #000;">
@@ -1166,7 +1297,7 @@ footer {
         <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#4 The 70% poll is broken (210K)</td><td style="padding:11px 12px;vertical-align:top;">No - it's a meta-problem about polling itself. Jagex's response was an unpolled charter change to the threshold, not a poll.</td></tr>
         <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#11 Predator-prey toxicity (148K)</td><td style="padding:11px 12px;vertical-align:top;">No direct poll. It's a structural design tension; no binary question can resolve it, so it never reaches the ballot.</td></tr>
         <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#23 "Us vs them" culture (121K)</td><td style="padding:11px 12px;vertical-align:top;">Unpollable by nature - it's a sentiment problem between two player camps, not a feature toggle.</td></tr>
-        <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#6 Bots &amp; AHK cheating (111K)</td><td style="padding:11px 12px;vertical-align:top;">Barely - only ~4 of 397 questions touch integrity at all. It's an enforcement problem Jagex handles outside polls (and is widely seen as failing at).</td></tr>
+        <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#6 Bots &amp; AHK cheating (111K)</td><td style="padding:11px 12px;vertical-align:top;">Barely - only ~4 of 402 questions touch integrity at all. It's an enforcement problem Jagex handles outside polls (and is widely seen as failing at).</td></tr>
         <tr style="border-bottom:1px solid var(--brick);"><td style="padding:11px 12px;vertical-align:top;color:var(--gold-hi);">#9 Forced-Wilderness rewards (101K)</td><td style="padding:11px 12px;vertical-align:top;">Attempted and rejected - all 9 "make this PvP reward usable against NPCs / outside PvP" questions failed. The one structural grievance that did reach a poll got voted down every time.</td></tr>
       </tbody>
     </table>
@@ -1193,7 +1324,7 @@ footer {
     </div>
 
     <div style="margin-top:24px;font-size:17.5px;color:var(--muted);line-height:1.6;text-shadow:1px 1px 0 #000;border-top:1px solid var(--brick);padding-top:14px;">
-      Cross-reference note: community figures are engagement-weighted estimates from the <a href="osrs_pvp_review_analysis.html" style="color:var(--amber);">Community Sentiment Analysis</a> (~7,000 data points, 13 sources), not vote counts, and the approval percentages there are directional estimates against the 70% threshold rather than real poll results. Poll figures are the measured 397-question record above. The two datasets are independent: one is what players <em>said</em>, the other is how the game actually <em>voted</em>.
+      Cross-reference note: community figures are engagement-weighted estimates from the <a href="osrs_pvp_review_analysis.html" style="color:var(--amber);">Community Sentiment Analysis</a> (~7,000 data points, 13 sources), not vote counts, and the approval percentages there are directional estimates against the 70% threshold rather than real poll results. Poll figures are the measured 402-question record above. The two datasets are independent: one is what players <em>said</em>, the other is how the game actually <em>voted</em>.
     </div>
 
   </div>
@@ -2815,6 +2946,21 @@ const POLLS = [
     questions: [
       { text: "Should we replace the Wilderness ditch with a less intrusive barrier that offers the same protection against luring? Players would get a toggleable warning when crossing.", yesPct: 71.9, noPct: 28.1, yesVotes: 26034, noVotes: 10179, totalVotes: 36213, skipped: 0, category: "balance" },
       { text: "Should players be able to set a toggle on the Looting Bag to deposit all of an item used on it into the bag?", yesPct: 95.9, noPct: 4.1, yesVotes: 32204, noVotes: 1392, totalVotes: 36213, skipped: 2617, category: "other" }
+    ]
+  },
+  {
+    id: "wilderness-ring-rewards-2014",
+    title: "Wilderness Boss Ring Rewards",
+    date: "2014-06-11", dateDisplay: "Jun\u2013Jul 2014",
+    url: "https://oldschool.runescape.com/polls/2014/974",
+    threshold: 75,
+    note: "The Ring of the Gods, Treasonous ring and Tyrannical ring drop only from the Wilderness bosses (Vet'ion, Venenatis, Callisto), so their alignment, imbue and combine questions are Wilderness content. Spread across Rewarding Rewards (Jun 2014) and Content Poll #22 (Jul 2014).",
+    questions: [
+      { text: "If the Wilderness-boss rings are introduced, should the Ring of the Gods act as a god item aligned to all gods at the same time?", yesPct: 67.9, noPct: 32.1, yesVotes: 12136, noVotes: 5747, totalVotes: 17883, skipped: 0, category: "balance" },
+      { text: "If the Wilderness-boss rings are introduced, should you be able to imbue the Ring of the Gods, Treasonous ring and Tyrannical ring at the minigame reward shop to double their bonuses?", yesPct: 69.9, noPct: 30.1, yesVotes: 12493, noVotes: 5390, totalVotes: 17883, skipped: 0, category: "balance" },
+      { text: "If the Wilderness-boss rings are introduced, should you be able to combine the Warrior, Treasonous & Tyrannical rings to create a Ring of Aggression?", yesPct: 71.4, noPct: 28.6, yesVotes: 12777, noVotes: 5106, totalVotes: 17883, skipped: 0, category: "content" },
+      { text: "Should players be able to imbue the Treasonous ring (a Wilderness-boss drop) to increase its bonuses to +8 Stab attack and defence?", yesPct: 79.6, noPct: 20.4, yesVotes: 16127, noVotes: 4130, totalVotes: 20257, skipped: 0, category: "balance" },
+      { text: "Should players be able to imbue the Tyrannical ring (a Wilderness-boss drop) to increase its bonuses to +8 Crush attack and defence?", yesPct: 79.3, noPct: 20.7, yesVotes: 16063, noVotes: 4194, totalVotes: 20257, skipped: 0, category: "balance" }
     ]
   },
 ];
