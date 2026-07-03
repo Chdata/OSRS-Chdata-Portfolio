@@ -347,6 +347,111 @@ footer {
   .about-inner { grid-template-columns: 1fr; gap: 12px; }
   .card-grid { grid-template-columns: 1fr; }
 }
+.pvp-carousel { position: relative; margin-bottom: 28px; }
+.pvp-title {
+  text-align: center;
+  color: var(--gold-hi);
+  font-family: 'RSUF','Cinzel','Lato',monospace;
+  font-size: 19px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  min-height: 1.35em;
+  text-shadow: 1px 1px 0 #000;
+}
+.pvp-stage-wrap { position: relative; }
+.pvp-stage {
+  position: relative;
+  height: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.pvp-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.pvp-slide.active { opacity: 1; pointer-events: auto; }
+.pvp-slide img, .pvp-slide a {
+  max-height: 225px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+.pvp-slide img {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--card-bg);
+}
+.pvp-slide a { line-height: 0; }
+.pvp-slide a img { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.pvp-slide a:hover img { border-color: var(--amber); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+
+.pvp-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  width: 42px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18,14,8,0.86);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--amber);
+  font-family: 'RSUF','Cinzel','Lato',monospace;
+  font-size: 30px;
+  line-height: 1;
+  padding: 0 0 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.55);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+  text-shadow: 1px 1px 0 #000;
+}
+.pvp-arrow:hover { background: var(--card-bg); color: var(--gold-hi); border-color: var(--amber); }
+.pvp-arrow-left { left: 8px; }
+.pvp-arrow-right { right: 8px; }
+.pvp-arrow[disabled] { opacity: 0; pointer-events: none; }
+
+.pvp-dotnav { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 14px; }
+.pvp-dots { display: flex; justify-content: center; align-items: center; gap: 9px; flex-wrap: wrap; }
+.pvp-dot-arrow {
+  background: transparent;
+  border: none;
+  color: var(--amber);
+  font-size: 13px;
+  line-height: 1;
+  padding: 0 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  text-shadow: 1px 1px 0 #000;
+}
+.pvp-dot-arrow:hover { color: var(--gold-hi); }
+.pvp-dot-arrow[disabled] { opacity: 0.3; pointer-events: none; }
+.pvp-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.pvp-dot:hover { border-color: var(--amber); transform: scale(1.15); }
+.pvp-dot.active { background: var(--amber); border-color: var(--amber); }
+.pvp-gallery-empty { color: var(--dim); font-size: 15px; padding: 8px 2px; text-shadow: 1px 1px 0 #000; }
 </style>
 </head>
 <body>
@@ -395,6 +500,202 @@ footer {
   <div class="context-box">
     You've already heard this headline before. You've heard it this year, and the year before that, and you probably even remember people saying similar since before OSRS even existed.<br><br>I've read the discussions throughout all these years and I think the biggest problems are obviously known to everyone.<br><br>Main-game PvP is not in a state of overall growth, despite OSRS's playerbase itself growing.<br><br>This page serves as my design portfolio for proposed solutions to improve the state of PvP.
   </div>
+
+  <!-- ================= IMAGE CAROUSEL ================= -->
+  <!-- To add images: drop the files into the  pvpisdying/  folder, then list the
+       filenames in the pvpImages array below. Two formats are accepted:
+         "thumbnail.jpg"                                    (image only)
+         { src: "thumbnail.jpg", href: "https://youtu.be/ID", alt: "Video title" }
+       The href/alt are optional. Order below = display order. -->
+  <div class="pvp-carousel">
+    <div class="pvp-title" id="pvpTitle"></div>
+    <div class="pvp-stage-wrap">
+      <button class="pvp-arrow pvp-arrow-left" type="button" aria-label="Previous">&#8249;</button>
+      <div class="pvp-stage" id="pvpStage"></div>
+      <button class="pvp-arrow pvp-arrow-right" type="button" aria-label="Next">&#8250;</button>
+    </div>
+    <div class="pvp-dotnav" id="pvpDotNav">
+      <button class="pvp-dot-arrow" id="pvpDotPrev" type="button" aria-label="Previous">&#9668;</button>
+      <div class="pvp-dots" id="pvpDots"></div>
+      <button class="pvp-dot-arrow" id="pvpDotNext" type="button" aria-label="Next">&#9658;</button>
+    </div>
+  </div>
+
+  <script>
+    const pvpImages = [
+      // Plain filename, OR an object to add a title / link / alt text:
+      //   { src: "file.png", title: "Caption above the image", href: "https://youtu.be/ID", alt: "..." }
+      //   Titles support Discord timestamps, e.g. "Posted <t:1696960800:R>" -> "Posted 2 years ago"
+      { src: "7yearsgudi.png", title: "<t:1550170800:R>", href: "https://youtu.be/FLDJ2Q6qFuA" },
+      { src: "7yearsfreddo.png", title: "<t:1553709600:R>", href: "https://youtu.be/4zLHSWQ1nD4" },
+      { src: "7years.png", title: "<t:1556647200:R>", href: "https://youtu.be/j8ela_-ZcO4" },
+      { src: "6years2.png", title: "GREAT video from <t:1557770400:R>", href: "https://youtu.be/utP2sAoj8f0" },
+      { src: "6years.png", title: "<t:1579633200:R>", href: "https://youtu.be/N1IRAjRkUIQ" },
+      { src: "6yearsfreddo.png", title: "<t:1586023200:R>", href: "https://youtu.be/QB8Aj540_NQ" },
+      { src: "5years.png", title: "<t:1606590000:R>", href: "https://youtu.be/fd82eNcwkAc" },
+      { src: "5yearsframed.png", title: "Many good points in this video from <t:1607454000:R>", href: "https://youtu.be/LxPdjqIZKaQ" },
+      { src: "4yearsrsabyss.png", title: "<t:1626804000:R>", href: "https://youtu.be/Ip8mHzBhTX0" },
+      { src: "4yearsrschronicle.png", title: "<t:1651082400:R>", href: "https://youtu.be/y1z-qi6-cbE" },
+      { src: "Gnomonkey.png", title: "<t:1657735200:R>", href: "https://youtu.be/uuJsdK3_KRQ" },
+      { src: "3yearspoisonedpotion.png", title: "<t:1677610800:R>", href: "https://youtu.be/48uvFzJW8hQ" },
+      { src: "2years2.png", title: "Cheating problems from <t:1690740000:R>", href: "https://youtu.be/PS0AJcw6ol4" },
+      { src: "2years.png", title: "Ragging problem from <t:1696960800:R>", href: "https://youtu.be/r-si_ag1YC0" },
+      { src: "2yearsclans.png", title: "The one positive video in this list from <t:1714759200:R>", href: "https://youtu.be/O62InRG-G1I" },
+      { src: "4months.png", title: "<t:1763319600:R>", href: "https://youtu.be/hmiCxavN6UQ" },
+      { src: "3weeks.png", title: "<t:1771786800:R>", href: "https://youtu.be/mpAikQy8ZSA" },
+      { src: "3weeks2.png", title: "<t:1771873200:R>", href: "https://youtu.be/N1iI5DpFay8" },
+      { src: "Sardaco.png", title: "<t:1772046000:R>", href: "https://youtu.be/LhuymbijcaY" },
+      { src: "3monthsardaco2.png", title: "<t:1773252000:R>", href: "https://youtu.be/i1CtGUPrgBU" },
+      { src: "5days.png", title: "<t:1773684000:R>", href: "https://youtu.be/qCJZ2zJNVOg" },
+      { src: "3monthsardaco.png", title: "<t:1774288800:R>", href: "https://youtu.be/fLpSNYRZssU" },
+      { src: "6days.png", title: "<t:1774893600:R>", href: "https://youtu.be/88kwn4dhk9U" },
+      { src: "TheoryWiser.png", title: "<t:1775239200:R>", href: "https://youtu.be/gCjrEimWs0U" },
+      { src: "3days.png", title: "<t:1775239200:R>", href: "https://youtu.be/gCjrEimWs0U" },
+      { src: "6days2.png", title: "<t:1777312800:R>", href: "https://youtu.be/Gi0Y9Bv7Cn8" },
+
+      { src: "reddit1.png", title: "<t:1479236400:R>", href: "https://www.reddit.com/r/2007scape/comments/3sx2p8/osrs_pking_is_slowly_dying_has_some_flaws_and/" },
+      { src: "reddit4.png", title: "<t:1480446000:R>", href: "https://www.reddit.com/r/2007scape/comments/3uq21d/jagex_please_dont_ignore_osrs_pvp/" },
+      { src: "reddit3.png", title: "<t:1500400800:R>", href: "https://www.reddit.com/r/2007scape/comments/6m0883/pvp_isnt_dying_because_jagex_isnt_doing_enough_to/" },
+      { src: "reddit5.png", title: "<t:1545505200:R>", href: "https://www.reddit.com/r/2007scape/comments/a8h4us/osrs_is_more_active_than_ever_but_pking_is_still/" },
+      { src: "reddit7.png", title: "<t:1569088800:R>", href: "https://www.reddit.com/r/2007scape/comments/d7iv1l/the_problem_with_pvp_polls_isnt_the_pvmers_its/" },
+      { src: "reddit6.png", title: "<t:1730919600:R>", href: "https://www.reddit.com/r/2007scape/comments/1gkuq3v/jagex_needs_to_start_asking_whats_stopping/" },
+      { src: "reddit2.png", title: "<t:1731697200:R>", href: "https://www.reddit.com/r/2007scape/comments/1grlilh/runescape_pking_is_dead_for_new_players/" },
+    ];
+
+    (function () {
+      var stage = document.getElementById('pvpStage');
+      var dotsWrap = document.getElementById('pvpDots');
+      var titleEl = document.getElementById('pvpTitle');
+      if (!stage) return;
+      var wrap = stage.parentNode;
+      var leftBtn = wrap.querySelector('.pvp-arrow-left');
+      var rightBtn = wrap.querySelector('.pvp-arrow-right');
+      var dotNav = document.getElementById('pvpDotNav');
+      var dotPrev = document.getElementById('pvpDotPrev');
+      var dotNext = document.getElementById('pvpDotNext');
+
+      if (!pvpImages.length) {
+        stage.className = 'pvp-gallery-empty';
+        stage.textContent = 'Add image filenames to the pvpImages list to populate this carousel.';
+        leftBtn.style.display = 'none';
+        rightBtn.style.display = 'none';
+        if (titleEl) titleEl.style.display = 'none';
+        if (dotNav) dotNav.style.display = 'none';
+        return;
+      }
+
+      function titleFor(i) {
+        var it = pvpImages[i];
+        return (it && typeof it === 'object' && it.title) ? it.title : '';
+      }
+      var hasAnyTitle = pvpImages.some(function (_, i) { return titleFor(i); });
+      if (titleEl && !hasAnyTitle) titleEl.style.display = 'none';
+
+      // ---- Discord-style timestamp support:  <t:UNIX>  or  <t:UNIX:X>  ----
+      function relativeDiscord(unixSec) {
+        var diff = unixSec - Date.now() / 1000;      // + future, - past
+        var future = diff >= 0;
+        var seconds = Math.round(Math.abs(diff));
+        var minutes = Math.round(seconds / 60);
+        var hours = Math.round(seconds / 3600);
+        var days = Math.round(seconds / 86400);
+        var months = Math.round(days / 30.4368);
+        var years = Math.round(days / 365.25);
+        var out;
+        if (seconds < 45) out = 'a few seconds';
+        else if (seconds < 90) out = 'a minute';
+        else if (minutes < 45) out = minutes + ' minutes';
+        else if (minutes < 90) out = 'an hour';
+        else if (hours < 22) out = hours + ' hours';
+        else if (hours < 36) out = 'a day';
+        else if (days < 26) out = days + ' days';
+        else if (days < 46) out = 'a month';
+        else if (months < 11) out = months + ' months';
+        else if (months < 18) out = 'a year';
+        else out = years + ' years';
+        return future ? ('in ' + out) : (out + ' ago');
+      }
+      function formatDiscordTimestamp(unixSec, fmt) {
+        var d = new Date(unixSec * 1000);
+        var timeShort = { hour: 'numeric', minute: '2-digit' };
+        switch (fmt) {
+          case 't': return d.toLocaleTimeString([], timeShort);
+          case 'T': return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+          case 'd': return d.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' });
+          case 'D': return d.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' });
+          case 'F': return d.toLocaleDateString([], { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ' ' + d.toLocaleTimeString([], timeShort);
+          case 'R': return relativeDiscord(unixSec);
+          case 'f':
+          default:  return d.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' }) + ' ' + d.toLocaleTimeString([], timeShort);
+        }
+      }
+      function resolveTitle(text) {
+        return String(text).replace(/<t:(\d+)(?::([tTdDfFR]))?>/g, function (m, ts, fmt) {
+          return formatDiscordTimestamp(parseInt(ts, 10), fmt || 'f');
+        });
+      }
+      function paintTitle() {
+        if (titleEl && hasAnyTitle) titleEl.textContent = resolveTitle(titleFor(current));
+      }
+
+      var current = 0;
+      var slides = [];
+      var dots = [];
+
+      pvpImages.forEach(function (item, i) {
+        var isObj = (item && typeof item === 'object');
+        var name = isObj ? item.src : item;
+        var img = document.createElement('img');
+        img.src = 'pvpisdying/' + name;
+        img.loading = (i === 0) ? 'eager' : 'lazy';
+        img.alt = (isObj && item.alt) ? item.alt : '';
+
+        var content = img;
+        if (isObj && item.href) {
+          var a = document.createElement('a');
+          a.href = item.href; a.target = '_blank'; a.rel = 'noopener';
+          a.appendChild(img);
+          content = a;
+        }
+        var slide = document.createElement('div');
+        slide.className = 'pvp-slide' + (i === 0 ? ' active' : '');
+        slide.appendChild(content);
+        stage.appendChild(slide);
+        slides.push(slide);
+
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pvp-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+
+      function goTo(i) {
+        if (i < 0) i = 0;
+        if (i > slides.length - 1) i = slides.length - 1;
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = i;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        paintTitle();
+        leftBtn.disabled = dotPrev.disabled = (current <= 0);
+        rightBtn.disabled = dotNext.disabled = (current >= slides.length - 1);
+      }
+
+      leftBtn.addEventListener('click', function () { goTo(current - 1); });
+      rightBtn.addEventListener('click', function () { goTo(current + 1); });
+      dotPrev.addEventListener('click', function () { goTo(current - 1); });
+      dotNext.addEventListener('click', function () { goTo(current + 1); });
+
+      if (slides.length < 2) { dotNav.style.display = 'none'; }
+      goTo(0);
+      if (hasAnyTitle) { setInterval(paintTitle, 60000); }
+    })();
+  </script>
+  <!-- ================================================= -->
 
   <div class="section-title" id="problems">The Core Problems of PvP</div>
 
