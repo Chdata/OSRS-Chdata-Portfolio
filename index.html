@@ -373,6 +373,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 56px;
+  box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -393,6 +395,19 @@ footer {
 .pvp-slide a { line-height: 0; }
 .pvp-slide a img { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
 .pvp-slide a:hover img { border-color: var(--amber); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+.pvp-video-wrap { position: relative; cursor: pointer; line-height: 0; display: inline-block; }
+.pvp-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 58px; height: 40px; border-radius: 9px;
+  background: rgba(0,0,0,0.72); border: 1px solid rgba(255,255,255,0.4);
+  color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center;
+  padding-left: 3px; pointer-events: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  text-shadow: none;
+}
+.pvp-video-wrap:hover .pvp-play { background: #cc0000; border-color: #cc0000; }
+.pvp-video-wrap:hover img { border-color: var(--amber); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+.pvp-embed { width: min(100%, 400px); aspect-ratio: 16 / 9; border: 1px solid var(--border); border-radius: 3px; display: block; background: #000; }
 
 .pvp-arrow {
   position: absolute;
@@ -656,24 +671,62 @@ footer {
       var slides = [];
       var dots = [];
 
+      function ytId(url) {
+        if (!url) return null;
+        var m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/|v\/))([\w-]{11})/);
+        return m ? m[1] : null;
+      }
+
       pvpImages.forEach(function (item, i) {
         var isObj = (item && typeof item === 'object');
         var name = isObj ? item.src : item;
+        var href = (isObj && item.href) ? item.href : '';
         var img = document.createElement('img');
         img.src = 'pvpisdying/' + name;
         img.loading = (i === 0) ? 'eager' : 'lazy';
         img.alt = (isObj && item.alt) ? item.alt : '';
 
-        var content = img;
-        if (isObj && item.href) {
-          var a = document.createElement('a');
-          a.href = item.href; a.target = '_blank'; a.rel = 'noopener';
-          a.appendChild(img);
-          content = a;
-        }
         var slide = document.createElement('div');
         slide.className = 'pvp-slide' + (i === 0 ? ' active' : '');
-        slide.appendChild(content);
+
+        var vid = ytId(href);
+        if (vid) {
+          // YouTube: clicking swaps the thumbnail for an inline player
+          var vwrap = document.createElement('div');
+          vwrap.className = 'pvp-video-wrap';
+          var play = document.createElement('span');
+          play.className = 'pvp-play';
+          play.innerHTML = '&#9658;';
+          vwrap.appendChild(img);
+          vwrap.appendChild(play);
+          vwrap.addEventListener('click', function () {
+            if (slide.__playing) return;
+            var frame = document.createElement('iframe');
+            frame.className = 'pvp-embed';
+            frame.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0';
+            frame.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+            frame.setAttribute('allowfullscreen', '');
+            vwrap.innerHTML = '';
+            vwrap.appendChild(frame);
+            slide.__playing = true;
+          });
+          slide.__reset = function () {
+            if (!slide.__playing) return;
+            vwrap.innerHTML = '';
+            vwrap.appendChild(img);
+            vwrap.appendChild(play);
+            slide.__playing = false;
+          };
+          slide.appendChild(vwrap);
+        } else if (href) {
+          var a = document.createElement('a');
+          a.href = href; a.target = '_blank'; a.rel = 'noopener';
+          a.appendChild(img);
+          slide.appendChild(a);
+        } else {
+          slide.appendChild(img);
+        }
+
         stage.appendChild(slide);
         slides.push(slide);
 
@@ -689,6 +742,7 @@ footer {
       function goTo(i) {
         if (i < 0) i = 0;
         if (i > slides.length - 1) i = slides.length - 1;
+        if (slides[current].__reset) slides[current].__reset();
         slides[current].classList.remove('active');
         dots[current].classList.remove('active');
         current = i;
