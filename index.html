@@ -196,7 +196,7 @@ body {
   padding: 1px 7px;
   opacity: 0.85;
 }
-#overview, #problems, #data, #proposals, #concepts, #suggestions { scroll-margin-top: 18px; }
+#overview, #problems, #data, #proposals, #concepts, #bonus, #suggestions { scroll-margin-top: 18px; }
 
 /* ── CONTEXT BOX ── */
 .context-box {
@@ -355,10 +355,9 @@ footer {
 
 <header class="hero">
   <div class="hero-skull"><img src="assets/wilderness-skull.png" alt="Wilderness skull" style="width:60px;height:60px;image-rendering:pixelated;"></div>
-  <div class="hero-name">Chdata &mdash; OSRS PvP Design Portfolio</div>
-  <h1 class="hero-title">Fixing PvP and the Wilderness:<br>A Design Document Series</h1>
+  <h1 class="hero-title">Fixing PvP and the Wilderness</h1>
   <p class="hero-sub">
-    A longform proposal for Old School RuneScape PvP, built over years of feedback.
+    A comprehensive analysis of OSRS PvP problems and solutions by Chdata.
   </p>
   <!--<div class="hero-tags">
     <span class="tag">Playing since 2004</span>
@@ -368,25 +367,6 @@ footer {
     <span class="tag">TF2 server dev background</span>
   </div>-->
 </header>
-
-<div class="brick-stripe"></div>
-
-<div class="about-strip">
-  <div class="about-inner">
-    <div class="about-stat">
-      <span class="num">12</span>
-      <span class="lbl">Design documents</span>
-    </div>
-    <div class="about-stat">
-      <span class="num">54+</span>
-      <span class="lbl">Identified PvP problems</span>
-    </div>
-    <div class="about-stat">
-      <span class="num">4</span>
-      <span class="lbl">Core systemic proposals</span>
-    </div>
-  </div>
-</div>
 
 <div class="brick-stripe"></div>
 
@@ -402,22 +382,21 @@ footer {
     <div class="page-nav-links">
       <a class="page-nav-link" href="#" onclick="jumpTo('overview');return false;"><span class="page-nav-num">1</span>About</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('problems');return false;"><span class="page-nav-num">2</span>Core Problems</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('data');return false;"><span class="page-nav-num">3</span>Supporting Data</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('proposals');return false;"><span class="page-nav-num">4</span>Main Design Documents</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('concepts');return false;"><span class="page-nav-num">5</span>Bonus Design Documents</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('suggestions');return false;"><span class="page-nav-num">6</span>Other Players' Suggestions</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('proposals');return false;"><span class="page-nav-num">3</span>Main Solutions</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('concepts');return false;"><span class="page-nav-num">4</span>Additional Ideas</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('suggestions');return false;"><span class="page-nav-num">5</span>Community Ideas</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('bonus');return false;"><span class="page-nav-num">6</span>Bonus Ideas</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('data');return false;"><span class="page-nav-num">7</span>Supporting Data</a>
     </div>
   </nav>
 
-  <div class="section-label" id="overview">Overview</div>
-  <div class="section-title">About This Project</div>
+  <div class="section-title" id="overview">PvP in OSRS is Dying.</div>
 
   <div class="context-box">
-    This is the design research behind <strong>"Chdata on OSRS PvP in 2026"</strong>, a longform YouTube video pitching concrete improvements to the Wilderness. The pages below represent each major proposal or supporting analysis.
+    You've already heard this headline before. You've heard it this year, and the year before that, and you probably even remember people saying similar since before OSRS even existed.<br><br>I've read the discussions throughout all these years and I think the biggest problems are obviously known to everyone.<br><br>Main-game PvP is not in a state of overall growth, despite OSRS's playerbase itself growing.<br><br>This page serves as my design portfolio for proposed solutions to improve the state of PvP.
   </div>
 
-  <div class="section-label" id="problems">Analysis</div>
-  <div class="section-title">The Core Problems of PvP</div>
+  <div class="section-title" id="problems">The Core Problems of PvP</div>
 
   <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">PvP is like a Fishing Trawler, and it's full of holes. Fixing just one or two problems while leaving the others means the ship is still sinking. For example even if we fix the skill gap, players not liking risk is still a problem. Even if we fix those, the polling system is still a problem. Even if we fix all of that, that doesn't guarantee that the actual design of specific activities is any good. Every problem below is a separate limiting factor on the same thing: the growth of the PvP playerbase. The three biggest problems are listed first.</div>
 
@@ -425,7 +404,7 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#1</div>
+        <div style="min-width:28px;height:28px;background:#000;color:#ead0cb;border:1px solid var(--red);box-sizing:border-box;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#1</div>
         <div>
           <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Risk is Not Worth the Reward</div>
           <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">This is one of the largest single barriers to entry. Most players will never engage with the Wilderness because they don't want to risk losing their items. And those who might engage are turned away because the risk-to-reward ratio is simply not competitive with the rest of the game. Even safe PvP minigames are not rewarding enough for your time spent.</div>
@@ -455,7 +434,7 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#2</div>
+        <div style="min-width:28px;height:28px;background:#000;color:#ead0cb;border:1px solid var(--red);box-sizing:border-box;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#2</div>
         <div>
           <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Skill Gap is Too Large</div>
           <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">New players are fighting veterans the moment they step foot into the Wilderness, and pretty much any PvP activity for that matter. The skill floor is too high, the skill ceiling is even higher with NH bridding, and there is no understood progression ladder. Unlike PvM - which has content for every skill level - PvP has almost nothing literally designed for casual or new players.</div>
@@ -485,7 +464,7 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:var(--red);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#3</div>
+        <div style="min-width:28px;height:28px;background:#000;color:#ead0cb;border:1px solid var(--red);box-sizing:border-box;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">#3</div>
         <div>
           <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">The Self-Defeating PvP Polls</div>
           <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">PvP needs updates to improve. But because PvP has a terrible reputation, most players vote no on PvP updates. So they don't pass. So PvP never improves. So the reputation stays bad. Jagex, seeing the pattern, reduces development resources on PvP. The cycle feeds itself.</div>
@@ -516,7 +495,7 @@ footer {
   <div class="core-problem" style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;margin-bottom:14px;">
     <div style="padding:16px 20px 12px;border-bottom:1px solid var(--brick);">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:14.5px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#128481;</div>
+        <div style="min-width:28px;height:28px;background:rgba(200,144,58,0.2);border:1px solid var(--amber);color:var(--amber);font-size:14.5px;display:flex;align-items:center;justify-content:center;border-radius:2px;text-shadow:none;flex-shrink:0;">&#9876;</div>
         <div>
           <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:4px;">Predator-Prey Design Problems</div>
           <div style="font-size:16.5px;color:var(--muted);text-shadow:1px 1px 0 #000;">The core loop of the Wilderness - PKers hunting players doing content - creates structural frustration for both sides, and the food chain that's supposed to generate healthy activity isn't producing the population flow it needs to function.</div>
@@ -622,55 +601,9 @@ footer {
     </div>
   </div>
 
-  <div><br></div>
-
-  <div class="section-label" id="data">Supporting Data</div>
-  <div class="section-title">An Analysis of ~7,000 Community Comments About PvP Problems &amp; A Full History of OSRS PvP Polls</div>
-
-  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Earlier this year, Framed released a few videos to talk about the state of PvP in 2026, and he asked everyone to comment saying what they feel is the "real problem" with PvP.
-
-    <br><br>I copy-pasted the entire comment section into Claude AI and asked it to analyze what the players were saying and cross-reference it with the solutions I've come up with. Since then I've expanded it well beyond that one video - it now pulls from about 7,000 comments, posts, and replies across 13 YouTube, Reddit, and Twitter/X sources.
-
-    <br><br>But hey, even without this analysis, I've read the discussions about PvP for the past decade. I think you and I already know all the problems. This is just putting it into a nice list.
-
-    <br><br>You can find Framed's video, "Jagex, we need to talk about the Wilderness." from this link: https://youtu.be/88kwn4dhk9U
-
-    <br><br>Also included is a history of all PvP related updates for OSRS.
-  </div>
-
-  <div style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;padding:16px 20px;margin-bottom:24px;font-size:18px;color:var(--muted);line-height:1.7;text-shadow:1px 1px 0 #000;"><div style="font-size:14.5px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;">Disclaimer</div>These analyses are compiled and analyzed by Claude AI.<br><br>There are some spots where it gets some things a little inaccurate, but I did feed it over 7000+ comments and make it read the entire polling history of OSRS. I tried to give it corrections where I noticed mistakes and inconsistencies, but overall those were few and far between.<br><br>Nonetheless, I think you'll find the data interesting.</div>
-
-  <div class="card-grid">
-
-    <a class="card" href="osrs-pvp-portfolio/osrs_pvp_review_analysis.html">
-      <div class="card-top">
-        <span class="card-badge badge-data">Data</span>
-        <div class="card-title">Community Sentiment Analysis</div>
-        <div class="card-desc">An aggregated analysis of ~7,000 comments, posts, and replies from the OSRS community across 13 YouTube, Reddit, and Twitter/X sources, cross-referenced with Chdata's design concepts. Covers player archetypes, a pro-vs-anti PvP sentiment breakdown, proposal approval estimates, and a ranked 40-item list of the most commonly mentioned problems with mention counts and engagement.</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View analysis</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
-
-    <a class="card" href="osrs-pvp-portfolio/pvp_poll_history.html">
-      <div class="card-top">
-        <span class="card-badge badge-data">Data</span>
-        <div class="card-title">PvP &amp; Wilderness Poll History</div>
-        <div class="card-desc">Every polled PvP and Wilderness question from 2013 to 2026, sourced directly from oldschool.runescape.com - exact wording, vote percentages, and pass/fail status, plus significant unpolled and scrapped changes. Sortable by date, approval %, vote count, skip votes, near-misses, and most-split questions. Now includes three analysis layers: an AI data analysis of pass-rate trends and what predicts a pass, Chdata's own breakdown of why the 70% poll fails PvP (with interactive ranking-poll demos), and a cross-reference matching community sentiment against the actual voting record.</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View poll history</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
-  </div>
-
   <div><br><br></div>
 
-  <div class="section-label" id="proposals">Wilderness Solution Proposals</div>
-  <div class="section-title">Main Design Documents</div>
+  <div class="section-title" id="proposals">Chdata's Main Proposed Solutions For The Wilderness</div>
 
   <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Given all of this information, I've come up with 4 major systems to help improve the Wilderness and turn a dying activity into a growing activity.</div>
 
@@ -741,54 +674,17 @@ footer {
 
   <div><br><br></div>
 
-  <div class="section-label" id="concepts">Additional PvP Concepts</div>
-  <div class="section-title">Bonus Design Documents</div>
+  <div class="section-title" id="concepts">Additional Important PvP Ideas</div>
 
-  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">I have various other ideas that I think would be great for PvP. But I think these are a lower priority to the main big 4 above. In some cases, some of these ideas require something from the big 4 to be implemented first, or success of the big 4 obsoletes some of these ideas.</div>
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">These are standalone ideas that fix smaller problems of the Wilderness. Although they don't address the biggest core issues of the Wilderness, they do tackle important long-standing problems.</div>
 
   <div class="card-grid">
-
-    <a class="card" href="osrs-pvp-portfolio/Forinthry_Castle___Deep_Wildy_Clan_Sieges.html">
-      <div class="card-top">
-        <span class="card-badge badge-proposal">Core Proposal</span>
-        <div class="card-title">Forinthry Castle</div>
-        <div class="card-desc">Deep Wilderness clan siege content. A structured objective-based PvP zone in the Deepest Wilderness designed to give large groups a reason to fight over territory with meaningful rewards. It requires the implementation of Blessed Status, and it's riding off of the old version of the community-created Wilderness Expansion concept. We sure as hell are not getting a Wilderness Expansion when PvP is in such a terrible spot. Fixing that precedes this.</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View document</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
-
-    <a class="card" href="osrs-pvp-portfolio/forinthry_gates.html">
-      <div class="card-top">
-        <span class="card-badge badge-proposal">Extended Proposal</span>
-        <div class="card-title">Forinthry Gates &amp; Artefacts</div>
-        <div class="card-desc">A supplementary proposal that builds on Blessed Status. Forinthry Gates let non-Blessed players consolidate their Wilderness PvM earnings into protectable artefacts without leaving the Wilderness — insuring loot you've earned rather than risking all of it on the run back to the bank. Requires Blessed Status to already be in the game.</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View document</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
-
-    <a class="card" href="osrs-pvp-portfolio/Colosseum_of_Zeah_6v6_PvP_Arena__4_.html">
-      <div class="card-top">
-        <span class="card-badge badge-proposal">Extended Proposal</span>
-        <div class="card-title">6v6 PvP Arena</div>
-        <div class="card-desc">A 6v6 structured PvP arena minigame. Tiered reward shops, season modifiers, ELO matchmaking, and anti-bot-abuse measures. A fun PvP minigame in its own right, but also designed to onboard players into PvP without the chaos of the open Wilderness. I would love to see a minigame like this some day, but if we can't fix our current PvP first, why would we make a new PvP minigame?</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View document</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
 
     <a class="card" href="osrs-pvp-portfolio/rag_skull__1_.html">
       <div class="card-top">
         <span class="card-badge badge-mechanic">Mechanic</span>
         <div class="card-title">Rag Skull</div>
-        <div class="card-desc">An anti-ragging mechanic proposal. When a player skulls against another player, if the initiator is not risking enough, a Rag Skull is applied which acts identical to a High Risk Skull. Targets the ragging problem without the need for manual case-by-case moderation by Jagex. This is something that I think would be great for Jagex to add right now. Both PvMers and PvPers I've talked to seem to universally hate ragging. This is the best way to diminish it.</div>
+        <div class="card-desc">A permanent solution to prevent ragging without requiring manual moderation by the Jagex team.</div>
       </div>
       <div class="card-bottom">
         <span class="card-link-text">View document</span>
@@ -800,7 +696,7 @@ footer {
       <div class="card-top">
         <span class="card-badge badge-mechanic">Mechanic</span>
         <div class="card-title">Removal of Trouver Parchments</div>
-        <div class="card-desc">Jagex already said they want to remove Trouver Parchments — the blocker is GP generation. This proposal removes that blocker entirely: untradeable items drop as tradeable broken or mangled shards on death, giving the killer something to sell and the owner something to buy back. No raw GP enters the game at any point.</div>
+        <div class="card-desc">Jagex has already said they want to remove Trouver Parchments, but they are worried about creating a system that generates more gold into the game.<br><br>Additionally, a lot of player feedback on the recent Trouver changes have criticized it for "being convoluted".<br><br>Here is a simple, intuitive, permanent solution where no raw gold enters the game at any point.</div>
       </div>
       <div class="card-bottom">
         <span class="card-link-text">View document</span>
@@ -808,23 +704,11 @@ footer {
       </div>
     </a>
 
-    <a class="card" href="osrs-pvp-portfolio/wilderness_activity_world_hop_v8.html">
+    <a class="card" href="osrs-pvp-portfolio/forinthry_gates.html">
       <div class="card-top">
-        <span class="card-badge badge-ui">UI Mockup</span>
-        <div class="card-title">Wilderness Activity Listing</div>
-        <div class="card-desc">A mockup of the in-game world hop list extended with a Wilderness activity flame indicator. Players can see at a glance which worlds have active PvP before hopping. It's a better solution than reducing the Wilderness to a limited number of worlds. Theoretically, if the Wilderness just becomes more active on ALL worlds, which is the goal of my big 4 solutions, then this shouldn't be necessary at all.</div>
-      </div>
-      <div class="card-bottom">
-        <span class="card-link-text">View mockup</span>
-        <span class="card-arrow">&#9658;</span>
-      </div>
-    </a>
-
-    <a class="card" href="osrs-pvp-portfolio/arceuus_spellbook_2018.html">
-      <div class="card-top">
-        <span class="card-badge badge-data">Archive</span>
-        <div class="card-title">Arceuus Spellbook Rework (2018)</div>
-        <div class="card-desc">A design document I wrote in 2018 during the period when the Arceuus spellbook was actively being reworked. I still have hope that these could make it in the game some day, even if the Heart Spells overlap the Ancient Sceptre buffs to Smoke Spells.</div>
+        <span class="card-badge badge-proposal">Extended Proposal</span>
+        <div class="card-title">Forinthry Gates &amp; Forinthry Artefacts</div>
+        <div class="card-desc">This is an idea that builds on the concept of Blessed Status. Click the link to read about it.</div>
       </div>
       <div class="card-bottom">
         <span class="card-link-text">View document</span>
@@ -837,8 +721,7 @@ footer {
 
   <div><br><br></div>
 
-  <div class="section-label" id="suggestions">Other Players' Suggestions</div>
-  <div class="section-title">Ideas Worth Signal Boosting</div>
+  <div class="section-title" id="suggestions">Community Ideas Worth Signal Boosting</div>
 
   <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">These are not my original ideas, but they are ideas I think deserve more attention. Some of them have been floating around the community for years. All of them would materially improve the Wilderness.</div>
 
@@ -871,12 +754,140 @@ footer {
   </div>
 
 
+  <div><br><br></div>
+
+  <div class="section-title" id="bonus">Bonus PvP Ideas (If We Fix The Rest)</div>
+
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">I have various other ideas that I think would be great for PvP. But I think these are a lower priority to the main big 4 above. In some cases, some of these ideas require something from the big 4 to be implemented first, or success of the big 4 obsoletes some of these ideas.<br><br>In other cases, such as new PvP minigame ideas, I think we should not create more PvP activities until we can make ALL of our existing PvP activities good and active. Not just the Wilderness.</div>
+
+  <div class="card-grid">
+
+    <a class="card" href="osrs-pvp-portfolio/Forinthry_Castle___Deep_Wildy_Clan_Sieges.html">
+      <div class="card-top">
+        <span class="card-badge badge-proposal">Core Proposal</span>
+        <div class="card-title">Forinthry Castle</div>
+        <div class="card-desc">This concept builds upon the community's Wilderness Expansion concept to add Deep Wilderness "clan castle siege" content.<br><br>It requires implementation of Blessed Status, and we sure as hell are not getting a Wilderness Expansion when PvP is in such a terrible spot. Fixing the current Wilderness precedes this.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View document</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/Colosseum_of_Zeah_6v6_PvP_Arena__4_.html">
+      <div class="card-top">
+        <span class="card-badge badge-proposal">Extended Proposal</span>
+        <div class="card-title">Unbottable 6v6 PvP Arena (2019)</div>
+        <div class="card-desc">The title is self-explanatory. Click to read more.<br><br>I would love to see a minigame like this some day, but if we can't fix our current PvP first, why would we make a new PvP minigame?</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View document</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/wilderness_activity_world_hop_v8.html">
+      <div class="card-top">
+        <span class="card-badge badge-ui">UI Mockup</span>
+        <div class="card-title">Wilderness Activity Listing</div>
+        <div class="card-desc">This is a mockup of the in-game world hop list that shows a little flame icon indicating how active the Wilderness is on every world.<br><br>It's an alternative suggestion to "Just reduce the Wilderness to only a few worlds".<br><br>Both address the problem of new worlds being added to the game causing the remaining population of the Wilderness to be stretched thin.<br><br>HOWEVER, either idea should be a last-resort solution. Theoretically, if the Wilderness just becomes a growing activity and active on ALL worlds, which is the goal of my big 4 solutions, then this shouldn't be necessary at all.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View mockup</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/arceuus_spellbook_2018.html">
+      <div class="card-top">
+        <span class="card-badge badge-data">Archive</span>
+        <div class="card-title">Arceuus Spellbook Rework (2018)</div>
+        <div class="card-desc">This is a suggestion post I wrote in 2018 during the period when the Arceuus spellbook was actively being reworked. I still have hope that these could make it in the game some day, even if the Heart Spells overlap the Ancient Sceptre buffs to Smoke Spells.<br><br>However, in terms of where dev time should be the most prioritized towards, I don't think these spells are the most important.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View document</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/ConcordIsle_Research_Lab_PvP.html">
+      <div class="card-top">
+        <span class="card-badge badge-design">Experimental Minigame</span>
+        <div class="card-title">Concord Isle</div>
+        <div class="card-desc">This is a safe PvP minigame where players join one of two magical-science research labs to steal blueprints from the other and craft ridiculous equipment.<br><br>For Jagex, it's a minigame where we can "beta test" creative community ideas without affecting the rest of the main game.<br><br>Naturally, and again, Jagex should not be making a new PvP minigame when our current ones are so dead.<br><br>However, I hope this can serve as a proof-of-concept at least that the community is not lacking in potential ideas for item rewards for PvP minigames.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View document</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/MultiWars_Multi_PvP.html">
+      <div class="card-top">
+        <span class="card-badge badge-design">Minigame Concept</span>
+        <div class="card-title">Multi Wars</div>
+        <div class="card-desc">This idea is just Clan Wars but with a Soul Wars lobby, a reward shop so that players actually play it, and some potential rules for how it could work.<br><br>It utilizes all of the unique arenas that already exist in Clan Wars.<br><br>I believe this would be a great idea for PvP, but yet again though, why make a new PvP minigame if the currently existing ones are faulty?</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View document</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+  </div>
+
+
+  <div><br></div>
+
+  <div class="section-title" id="data">An Analysis of ~7,000 Community Comments About PvP Problems &amp; A Full History of OSRS PvP Polls</div>
+
+  <div style="font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:24px;text-shadow:1px 1px 0 #000;">Earlier this year, Framed released a few videos to talk about the state of PvP in 2026, and he asked everyone to comment saying what they feel is the "real problem" with PvP.
+
+    <br><br>I copy-pasted the entire comment section into Claude AI and asked it to analyze what the players were saying and cross-reference it with the solutions I've come up with. Since then I've expanded it well beyond that one video - it now pulls from about 7,000 comments, posts, and replies across 13 YouTube, Reddit, and Twitter/X sources.
+
+    <br><br>But hey, even without this analysis, I've read the discussions about PvP for the past decade. I think you and I already know all the problems. This is just putting it into a nice list.
+
+    <br><br>You can find Framed's video, "Jagex, we need to talk about the Wilderness." from this link: https://youtu.be/88kwn4dhk9U
+
+    <br><br>Also included is a history of all PvP related updates for OSRS.
+  </div>
+
+  <div style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:3px;padding:16px 20px;margin-bottom:24px;font-size:18px;color:var(--muted);line-height:1.7;text-shadow:1px 1px 0 #000;"><div style="font-size:14.5px;letter-spacing:0.15em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;">Disclaimer</div>These analyses are compiled and analyzed by Claude AI.<br><br>There are some spots where it gets some things a little inaccurate, but I did feed it over 7000+ comments and make it read the entire polling history of OSRS. I tried to give it corrections where I noticed mistakes and inconsistencies, but overall those were few and far between.<br><br>Nonetheless, I think you'll find the data interesting.</div>
+
+  <div class="card-grid">
+
+    <a class="card" href="osrs-pvp-portfolio/osrs_pvp_review_analysis.html">
+      <div class="card-top">
+        <span class="card-badge badge-data">Data</span>
+        <div class="card-title">Community Sentiment Analysis</div>
+        <div class="card-desc">An aggregated analysis of ~7,000 comments, posts, and replies from the OSRS community across 13 YouTube, Reddit, and Twitter/X sources, cross-referenced with Chdata's design concepts. Covers player archetypes, a pro-vs-anti PvP sentiment breakdown, proposal approval estimates, and a ranked 40-item list of the most commonly mentioned problems with mention counts and engagement.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View analysis</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+
+    <a class="card" href="osrs-pvp-portfolio/pvp_poll_history.html">
+      <div class="card-top">
+        <span class="card-badge badge-data">Data</span>
+        <div class="card-title">PvP &amp; Wilderness Poll History</div>
+        <div class="card-desc">Every polled PvP and Wilderness question from 2013 to 2026, sourced directly from oldschool.runescape.com - exact wording, vote percentages, and pass/fail status, plus significant unpolled and scrapped changes. Sortable by date, approval %, vote count, skip votes, near-misses, and most-split questions. Now includes three analysis layers: an AI data analysis of pass-rate trends and what predicts a pass, Chdata's own breakdown of why the 70% poll fails PvP (with interactive ranking-poll demos), and a cross-reference matching community sentiment against the actual voting record.</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-link-text">View poll history</span>
+        <span class="card-arrow">&#9658;</span>
+      </div>
+    </a>
+  </div>
+
+
 </main>
 
 <div class="brick-stripe"></div>
 
 <footer>
-  Chdata &mdash; OSRS PvP Design Portfolio &mdash; 2026 &nbsp;
+  Chdata - OSRS PvP Design Portfolio - 2026 &nbsp;
 </footer>
 
 <!-- BACK TO TOP -->
