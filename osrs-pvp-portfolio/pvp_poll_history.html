@@ -245,7 +245,7 @@ body {
   padding: 1px 6px;
   opacity: 0.85;
 }
-.section-label, #poll-section, #unpolled-section, #scrapped-section, #chdata-analysis, #analysis-section, #community-section { scroll-margin-top: 18px; }
+.section-label, #poll-section, #restricted-section, #unpolled-section, #scrapped-section, #chdata-analysis, #analysis-section, #community-section { scroll-margin-top: 18px; }
 
 .filter-input {
   background: var(--card-bg);
@@ -486,6 +486,9 @@ body {
 .unpolled-desc .unpolled-p:last-child { margin-bottom: 0; }
 .unpolled-list { margin: 6px 0 10px; padding-left: 26px; }
 .unpolled-list li { margin-bottom: 6px; line-height: 1.55; padding-left: 3px; }
+.unpolled-sublist { margin: 5px 0 4px; padding-left: 22px; list-style: disc; }
+.unpolled-sublist li { margin-bottom: 3px; line-height: 1.5; }
+.unpolled-sublist li::marker { color: #b09060; }
 .unpolled-list li::marker { color: var(--gold-hi); font-weight: bold; }
 
 .unpolled-link {
@@ -674,11 +677,12 @@ footer {
     <div class="page-nav-links">
       <a class="page-nav-link" href="#" onclick="jumpTo('about-section');return false;"><span class="page-nav-num">1</span>About</a>
       <a class="page-nav-link" href="#" onclick="jumpTo('poll-section');return false;"><span class="page-nav-num">2</span>Polled Questions</a>
-            <a class="page-nav-link" href="#" onclick="jumpTo('unpolled-section');return false;"><span class="page-nav-num">3</span>Unpolled Changes</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('scrapped-section');return false;"><span class="page-nav-num">4</span>Proposed Then Dropped</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('chdata-analysis');return false;"><span class="page-nav-num">5</span>Chdata's Analysis</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('analysis-section');return false;"><span class="page-nav-num">6</span>AI Data Analysis</a>
-      <a class="page-nav-link" href="#" onclick="jumpTo('community-section');return false;"><span class="page-nav-num">7</span>Community vs. Polls</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('restricted-section');return false;"><span class="page-nav-num">3</span>Restricted Voting</a>
+            <a class="page-nav-link" href="#" onclick="jumpTo('unpolled-section');return false;"><span class="page-nav-num">4</span>Unpolled Changes</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('scrapped-section');return false;"><span class="page-nav-num">5</span>Proposed Then Dropped</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('chdata-analysis');return false;"><span class="page-nav-num">6</span>Chdata's Analysis</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('analysis-section');return false;"><span class="page-nav-num">7</span>AI Data Analysis</a>
+      <a class="page-nav-link" href="#" onclick="jumpTo('community-section');return false;"><span class="page-nav-num">8</span>Community vs. Polls</a>
     </div>
   </nav>
 
@@ -834,6 +838,18 @@ footer {
     </div>
 
     <div id="polls-container"></div>
+  </div>
+
+  <div style="margin-top:48px;" id="restricted-section">
+    <div class="section-label">Restricted Voting</div>
+    <div class="section-title">Polls With Voting Restrictions</div>
+    <div style="font-size:16px;color:#c0a870;line-height:1.65;text-shadow:1px 1px 0 #000;margin-bottom:8px;max-width:900px;">
+      Old School polls are normally open to any member meeting a baseline account requirement. On a handful of occasions Jagex has narrowed who may vote on specific questions &ndash; by account type, or (more controversially) by activity. A restricted question auto-skips everyone outside the eligible group, which is why these surface in the data with very high skip rates.
+    </div>
+    <div style="font-size:16px;color:#c0a870;line-height:1.65;text-shadow:1px 1px 0 #000;margin-bottom:16px;max-width:900px;">
+      The milestone worth being precise about: the <strong style="color:#e0a84a;">PvP Arena Rewards</strong> poll was <em>not</em> the first restricted poll &ndash; account-type restrictions came earlier &ndash; but it was the first to restrict voting by <strong>activity</strong> (PvP participation), and by Jagex's own account the first to restrict the majority of a poll's questions.
+    </div>
+    <div id="restricted-container"></div>
   </div>
 
   <div style="margin-top:48px;" id="unpolled-section">
@@ -1119,7 +1135,7 @@ footer {
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid #e07060;border-radius:3px;padding:16px 20px;">
         <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;"><span style="font-size:19px;color:#e07060;font-weight:bold;text-shadow:1px 1px 0 #000;">6. Zero-sum combat / interaction rules</span><span class="cat-badge cat-badge-balance">Worst</span></div>
-        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Drop visibility, singles vs multi, Protect Item on/off, attack-while-in-NPC-combat, KBD tele-lock. These directly move risk from one camp to the other and stall near 50/50. Tellingly, several were eventually shipped by Jagex as unpolled integrity changes <em>because</em> they could never clear a poll - see the Unpolled section above.</div>
+        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Drop visibility (51.8%), singles-plus / attack-while-in-NPC-combat (51.5%) and the multi-combat rev zone (50.6%) all stalled at a coin flip; Protect Item on PvP worlds (42.8%) and the KBD tele-lock (29.1%) failed harder still. These directly move risk from one camp to the other. Two of them were later shipped by Jagex as unpolled changes <em>because</em> they could never clear a poll - instant drop visibility, and singles-plus in the Revenant Caves - while the rest (Protect Item, the KBD tele-lock, the overworld multi zone) were simply rejected and never implemented. See the Documented Overrides list below.</div>
       </div>
 
     </div>
@@ -1174,7 +1190,7 @@ footer {
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:3px;padding:15px 20px;">
         <div style="font-size:17.5px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:5px;">"Failed a poll" is not the end of the road</div>
-        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Several zero-sum balance changes that could not pass were later shipped as unpolled integrity updates (instant drop visibility failed twice at 51-57%, then went in anyway; Rev Caves multi-to-singles). The polling record understates how much contested change actually happens - it just happens through a different door. A proposal framed as integrity rather than as a vote-bait balance question follows a completely different, and often more permissive, path.</div>
+        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;">Several zero-sum balance changes that could not pass were later shipped as unpolled integrity updates (instant drop visibility failed twice at 51-57%, and Loot Keys failed twice at 70-74%, before both went in anyway). The polling record understates how much contested change actually happens - it just happens through a different door. A proposal framed as integrity rather than as a vote-bait balance question follows a completely different, and often more permissive, path.</div>
       </div>
 
       <div style="background:var(--stone);border:1px solid var(--border);border-radius:3px;padding:18px 22px;margin-top:16px;">
@@ -1201,6 +1217,14 @@ footer {
             <br><a href="https://oldschool.runescape.com/polls/2017/1472" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Wilderness Rejuvenation II</a> (2017) &ndash; tradeable Loot Key Scroll from Revenants: <strong style="color:#e07060;">73.9%</strong>
             <br><a href="https://oldschool.runescape.com/polls/2017/1473" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Wilderness Rejuvenation II: Revenant Caves</a> (2017 re-poll) &ndash; same feature: <strong style="color:#e07060;">70.3%</strong>
             <br><strong style="color:#70c060;">Shipped anyway.</strong> Re-introduced without a poll in the <a href="https://secure.runescape.com/m=news/wilderness-changes?oldschool=1" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Wilderness Changes</a> blog (Jun 2021) &ndash; in a modified form (a purchasable permanent unlock, 5M then 1M GP, rather than a tradeable drop) &ndash; and went live on 23 Feb 2022. Jagex's own blog cited the earlier 73.9% failure before deciding to add it unpolled.
+          </div>
+        </div>
+        <div style="padding-left:14px;border-left:2px solid var(--brick);margin-top:14px;">
+          <div style="font-size:17px;color:#f0d890;text-shadow:1px 1px 0 #000;">Singles-plus &ndash; attacking a player who is already in combat with an NPC</div>
+          <div style="font-size:15px;color:#e8d8a8;line-height:1.6;text-shadow:1px 1px 0 #000;margin-top:4px;">
+            <strong style="color:#e07060;">Failed.</strong>
+            <br><a href="https://oldschool.runescape.com/polls/2014/737" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Rejuvenating the Wilderness</a> (2014) &ndash; "allow players to attack others in a single-way area even if either is in combat with an NPC": <strong style="color:#e07060;">51.5%</strong>
+            <br><strong style="color:#70c060;">Shipped anyway.</strong> This is exactly the "singles-plus" rule (PvP takes priority over NPC combat). Jagex shipped it as an unpolled integrity change in the <a href="https://secure.runescape.com/m=news/revenant-caves-proposal?oldschool=1" target="_blank" rel="noopener noreferrer" style="color:var(--amber);">Revenant Caves</a> (Oct 2020), and it governs the singles-plus areas covered by the 2022 PJ Timer rollout. A 2021 proposal to convert <em>every</em> single-way area to singles-plus was dropped after backlash (see Proposed Then Dropped), but the Rev Caves version stuck.
           </div>
         </div>
         <div style="padding-left:14px;border-left:2px solid var(--brick);margin-top:14px;">
@@ -1253,7 +1277,7 @@ footer {
 
       <div style="background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:3px;padding:16px 20px;">
         <div style="font-size:19px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Predator-prey design &amp; the integrity escape hatch</div>
-        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#d4b866;">Backed, and it points at the proposed fix.</strong> The "force PvP through as integrity updates" path that the script weighs is already how several contested changes actually shipped: instant drop visibility failed at the polls twice (51-57%) and went in anyway; the Rev Caves multi-to-singles overhaul was an unpolled integrity change. So the binary poll genuinely is a dead end for zero-sum balance - which is the practical case for a ranking-style system that lets positive-sum PvP content compete on priority rather than survival. The "usable against NPCs" pattern (9 of 9 failed) is the clearest single demonstration that the PvM majority will veto anything that lets PvP power leak into PvE, exactly as the cat-and-mouse framing predicts.</div>
+        <div style="font-size:17.5px;color:#e8d8a8;line-height:1.65;text-shadow:1px 1px 0 #000;"><strong style="color:#d4b866;">Backed, and it points at the proposed fix.</strong> The "force PvP through as integrity updates" path that the script weighs is already how several contested changes actually shipped: instant drop visibility failed at the polls twice (51-57%) and went in anyway; the Rev Caves multi-to-singles overhaul was an unpolled integrity change. And not every integrity change is a failed-poll override: the 2016 Dragon Spear stunlock fix (Jagex's own flagship Polling Charter example) shipped as integrity without ever going to a poll, whereas drop visibility and Loot Keys were voted down first. So the binary poll genuinely is a dead end for zero-sum balance - which is the practical case for a ranking-style system that lets positive-sum PvP content compete on priority rather than survival. The "usable against NPCs" pattern (9 of 9 failed) is the clearest single demonstration that the PvM majority will veto anything that lets PvP power leak into PvE, exactly as the cat-and-mouse framing predicts.</div>
       </div>
 
     </div>
@@ -1409,7 +1433,7 @@ footer {
         </tr>
         <tr style="border-bottom:1px solid var(--brick);">
           <td style="padding:12px;vertical-align:top;color:var(--gold-hi);">"Jagex runs the poll then does whatever it wants anyway." <span style="color:var(--muted);">(Jagex-trust deficit, sources 2-5)</span></td>
-          <td style="padding:12px;vertical-align:top;">There's a real signature for this: contested balance polling fell from 25% of the slate to 13% after Oct 2022, and several changes that failed polls (drop visibility, Rev Caves singles) shipped anyway as unpolled integrity updates.</td>
+          <td style="padding:12px;vertical-align:top;">There's a real signature for this: contested balance polling fell from 25% of the slate to 13% after Oct 2022, and several changes that failed polls (drop visibility at 51-57%, Loot Keys at 70-74%) shipped anyway as unpolled integrity updates, with a further Poll 80 batch pulled from the ballot mid-vote.</td>
           <td style="padding:12px;vertical-align:top;color:#d4b866;"><strong>Partly borne out.</strong> Not "ignoring polls" so much as routing the hard stuff around them.</td>
         </tr>
       </tbody>
@@ -3113,9 +3137,32 @@ const POLLS = [
 
 const UNPOLLED = [
   {
+    date: "2016-07-28",
+    dateDisplay: "28 Jul 2016",
+    title: "Dragon Spear stun no longer stacks - unpolled balancing change (also Zamorakian spear & hasta)",
+    body: [
+      {p: "The special attack of the Dragon spear, Zamorakian spear and Zamorakian hasta ('Shove') was changed without a poll, to end a long-standing Wilderness abuse."},
+      {p: "The problem: when multiple players spammed the spec on one target, the stuns stacked and could last for minutes - a 'stunlock'. Wilderness clans used it to lock a victim in place:"},
+      {list: ["One group kept re-applying the spear stun so the target could never act.", "Another group Smited them.", "Because damage was not registered during the stun, all of it landed in a single tick when the stun finally ended - draining prayer and usually killing them.", "The only escape was to x-log."]},
+      {p: "The fix: the spec can no longer be used on a target who is already stunned (stuns no longer stack), and a 1-tick immunity window after each stun lets the victim sneak in an action between stuns."},
+      {p: "This is the flagship example Jagex cites in its Polling Charter for 'making minimal changes to features that are agreed to be too powerful' - an integrity fix that shipped without ever going to a poll."}
+    ],
+    description: "The special attack (Shove) of the Dragon spear, Zamorakian spear and Zamorakian hasta was changed without a poll, to end a long-standing Wilderness abuse. Previously, when multiple players spammed the spec on one target the stuns stacked and could last for minutes - a 'stunlock'. Wilderness clans used it to lock a victim in place while another group Smited them; because damage was not registered during the stun, all of it landed in a single tick when the stun ended, draining prayer and usually killing them, with x-logging the only escape. The fix: the spec can no longer be used on a target who is already stunned, and a 1-tick immunity window after each stun lets the victim act between stuns. Jagex cites this in the Polling Charter as its flagship example of 'making minimal changes to features that are agreed to be too powerful'.",
+    url: "https://secure.runescape.com/m=news/dragon-spear-changes--beta-3?oldschool=1",
+    blogTitle: "Dragon Spear Changes & Beta 3 (official)"
+  },
+  {
     date: "2017-01-01",
     dateDisplay: "c. 2017 (exact date unconfirmed)",
     title: "Wilderness instant item drop visibility (unpolled integrity change)",
+    body: [
+      {p: "Two Wilderness drop-handling changes were made without a poll:"},
+      {list: ["Items manually dropped in the Wilderness are instantly visible to all other players.", "Food and potions dropped in the Wilderness never appear to other players at all (and now despawn after 15 seconds)."]},
+      {p: "This directly addressed pre-death item stashing and team supply-dropping tactics."},
+      {p: "The mechanic had been polled twice and failed both times:"},
+      {list: ["Poll 44 (Jun 2016) - 57.3% yes.", "PvP QoL poll (Feb 2017) - 51.8% yes."]},
+      {p: "Jagex implemented it anyway as a game integrity change. Old School's Polling Charter is the official framework under which such changes ship without a poll."}
+    ],
     description: "Items manually dropped in the Wilderness were made instantly visible to all other players, without a poll. Food and potions dropped in the Wilderness were made to never appear to other players at all (and now despawn after 15 seconds). This directly addressed pre-death item stashing and team supply-dropping tactics. The mechanic had been polled twice and failed both times: Poll 44 (Jun 2016) at 57.3% yes, and the PvP QoL poll (Feb 2017) at 51.8% yes. Jagex implemented it anyway as a game integrity change. Old School's Polling Charter is the official framework under which Jagex ships such changes without a poll, and this one was implemented as exactly that kind of unpolled integrity change.",
     url: "https://osrs.runescape.com/polling-charter",
     blogTitle: "Old School Polling Charter (official)"
@@ -3139,6 +3186,11 @@ const UNPOLLED = [
     date: "2020-01-23",
     dateDisplay: "23 Jan 2020",
     title: "Bounty Hunter closed - unpolled removal",
+    body: [
+      {p: "Bounty Hunter worlds were shut down without a poll, due to widespread boosting abuse - players cooperated for quick kills to farm rewards at an unacceptable rate."},
+      {p: "Jagex stated they intended to reopen it in a modified form."},
+      {p: "All rewards were transferred to Last Man Standing in the interim."}
+    ],
     description: "Bounty Hunter worlds were shut down without a poll due to widespread boosting abuse where players cooperated for quick kills to farm rewards at an unacceptable rate. Jagex stated they intended to reopen it in a modified form. All rewards were transferred to Last Man Standing in the interim.",
     url: "https://secure.runescape.com/m=news/the-future-of-bounty-hunter-and-pvp?oldschool=1",
     blogTitle: "The Future of Bounty Hunter and PvP"
@@ -3160,6 +3212,11 @@ const UNPOLLED = [
     date: "2021-01-13",
     dateDisplay: "13 Jan 2021",
     title: "Bounty Hunter fully removed from the game",
+    body: [
+      {p: "All emblems and reward shops from every iteration of Bounty Hunter (except Deadman worlds) were removed from the live game."},
+      {p: "This followed the January 2020 closure due to boosting."},
+      {p: "BH remained inactive for over two years before its redesign and relaunch in 2023."}
+    ],
     description: "All emblems and reward shops from all iterations of Bounty Hunter (except Deadman worlds) were removed from the live game. This followed the January 2020 closure due to boosting. BH remained inactive for over two years before its redesign and relaunch in 2023.",
     url: "https://secure.runescape.com/m=news/bounty-hunter?oldschool=1",
     blogTitle: "Bounty Hunter (OSRS Wiki - history section)"
@@ -3181,6 +3238,13 @@ const UNPOLLED = [
     date: "2022-03-09",
     dateDisplay: "9 Mar 2022",
     title: "PJ Timer added to the Wilderness (unpolled)",
+    body: [
+      {p: "The full player and NPC PJ Timer was added to all single-way and singles-plus areas of the Wilderness without a poll, framed as a game integrity and balancing change."},
+      {p: "The timer gives a 12-second grace period after PvP combat in which neither participant can be attacked by a third party."},
+      {p: "NPCs also now respect the PJ Timer."},
+      {p: "The timer is inactive on worlds 318 and 319 (Bounty Hunter target worlds)."},
+      {p: "A beta for these changes ran in December 2021."}
+    ],
     description: "The full player and NPC PJ Timer was added to all single-way and singles-plus areas of the Wilderness without a poll, framed as a game integrity and balancing change. The timer gives a 12-second grace period after PvP combat in which neither participant can be attacked by a third party. NPCs also now respect the PJ Timer. The timer is inactive on worlds 318 and 319 (Bounty Hunter target worlds). A beta for these changes ran in December 2021.",
     url: "https://secure.runescape.com/m=news/pj-timer--new-broadcast-settings-?oldschool=1",
     blogTitle: "PJ Timer & New Broadcast Settings"
@@ -3189,6 +3253,13 @@ const UNPOLLED = [
     date: "2022-07-06",
     dateDisplay: "6 Jul 2022",
     title: "PvP Arena / Emir's Arena launched - game mode unpolled",
+    body: [
+      {p: "The PvP Arena (Emir's Arena) launched as a direct replacement for the Duel Arena, which was removed due to persistent Real World Trading and scamming."},
+      {p: "The game mode itself was not polled - only its rewards were polled separately (both the original PvP Arena Rewards poll and PvP Arena Rewards v2 ran before launch)."},
+      {p: "The arena introduced:"},
+      {list: ["Ranked matchmaking.", "Preset loadouts.", "PvP combat separated from the Wilderness entirely, for structured duels."]},
+      {p: "Soft-launched 6 July 2022, fully launched 13 July 2022."}
+    ],
     description: "The PvP Arena (Emir's Arena) was launched as a direct replacement for the Duel Arena, which was removed due to persistent Real World Trading and scamming. The game mode itself was not polled - only its rewards were polled separately (both the original PvP Arena Rewards poll and PvP Arena Rewards v2 ran before launch). The arena introduced ranked matchmaking, preset loadouts, and separated PvP combat from the Wilderness entirely for structured duels. Soft-launched 6 July 2022, fully launched 13 July 2022.",
     url: "https://secure.runescape.com/m=news/the-pvp-arena?oldschool=1",
     blogTitle: "The PvP Arena (launch blog, Feb 2022)"
@@ -3197,6 +3268,11 @@ const UNPOLLED = [
     date: "2023-04-19",
     dateDisplay: "19 Apr 2023",
     title: "Larran's key made tradeable (unpolled anti-scam change)",
+    body: [
+      {p: "Larran's keys were made tradeable without a poll. The Poll 79 blog stated: \"We're not polling this one since its primary intent is to combat scamming.\""},
+      {p: "Previously, players had been 'selling' their keys by accepting GP and then allowing buyers to kill them for a stack of keys - an extra step that left players vulnerable to scammers."},
+      {p: "Making them directly tradeable closed that loophole."}
+    ],
     description: "Larran's keys were made tradeable without a poll. The Poll 79 blog stated: \"We\'re not polling this one since its primary intent is to combat scamming.\" Previously, players had been \'selling\' their keys by accepting GP and then allowing buyers to kill them for a stack of keys - an extra step that left players vulnerable to scammers. Making them directly tradeable closed that loophole.",
     url: "https://secure.runescape.com/m=news/poll-79-point-based-combat-achievements--more?oldschool=1",
     blogTitle: "Poll 79: Point-based Combat Achievements & more!"
@@ -3205,6 +3281,13 @@ const UNPOLLED = [
     date: "2023-05-24",
     dateDisplay: "24 May 2023",
     title: "Bounty Hunter relaunched (unpolled game mode relaunch)",
+    body: [
+      {p: "Bounty Hunter returned as a redesigned minigame at Daimon's Crater in Ferox Enclave, over two years after its removal."},
+      {p: "The core minigame was not polled - only the rewards had been polled in April 2023 (the Bounty Hunter Rewards Poll)."},
+      {p: "The new version features:"},
+      {list: ["Honour PvP with risk-based skull tiers.", "Preset supply crates.", "No Mysterious Emblems."]},
+      {p: "Jagex positioned it as an entry point for new PvP players."}
+    ],
     description: "Bounty Hunter returned as a redesigned minigame at Daimon's Crater in Ferox Enclave, over two years after its removal. The core minigame was not polled - only the rewards had been polled in April 2023 (the Bounty Hunter Rewards Poll). The new version features honour PvP with risk-based skull tiers, preset supply crates, and no Mysterious Emblems. Jagex positioned it as an entry point for new PvP players.",
     url: "https://secure.runescape.com/m=news/bounty-hunter-is-back?oldschool=1",
     blogTitle: "Bounty Hunter is Back!"
@@ -3216,7 +3299,7 @@ const UNPOLLED = [
     description: "After releasing Poll 80 (Wilderness, Tombs of Amascut & More!), Jagex acknowledged it had 'been misguided' in deciding what to poll versus leave unpolled, and reclassified a batch of its Wilderness and PvP changes as unpolled to align with the Polling Charter. Moved to unpolled: removing the 1-tick delay when entering the Singles boss lairs and removing the Medium Wilderness Diary requirement to interact with Callisto, Venenatis and Vet'ion (framed as integrity changes to keep the bosses safer from abuse and improve activity); the Mage Arena 1 cape 'Make-X' option; and a repair-cost rebalance (Dragon Defender 80k to 240k, the proposed Avernic Defender cost 300k to 600k, Ava's Assembler 75k to 240k, Full Void 300k to 640k, Elite Void 400k to 780k), along with the Avernic Defender 'risk value' adjustment. Notably, Jagex explicitly declined one popular request - removing the teleport delay at the Revenant Caves for Wilderness Hard Diary holders - siding against PKers who argued it made escaping too easy.",
     body: [
       {p: "After releasing Poll 80 (Wilderness, Tombs of Amascut & More!), Jagex acknowledged it had 'been misguided' in deciding what to poll versus leave unpolled, and reclassified a batch of its Wilderness and PvP changes as unpolled to align with the Polling Charter. Moved to unpolled:"},
-      {list: ["Removing the 1-tick delay when entering the Singles boss lairs, and removing the Medium Wilderness Diary requirement to interact with Callisto, Venenatis and Vet'ion (framed as integrity changes to keep the bosses safer from abuse and improve activity).", "The Mage Arena 1 cape 'Make-X' option.", "A repair-cost rebalance: Dragon Defender 80k to 240k, the proposed Avernic Defender cost 300k to 600k, Ava's Assembler 75k to 240k, Full Void 300k to 640k, Elite Void 400k to 780k, along with the Avernic Defender 'risk value' adjustment."]},
+      {list: ["Removing the 1-tick delay when entering the Singles boss lairs (an integrity change to keep the bosses safer from abuse).", "Removing the Medium Wilderness Diary requirement to interact with Callisto, Venenatis and Vet'ion (same rationale, to improve activity in these areas).", "The Mage Arena 1 cape 'Make-X' option.", {text: "A repair-cost rebalance, plus the Avernic Defender 'risk value' adjustment:", sub: ["Dragon Defender: 80k to 240k", "Avernic Defender (proposed): 300k to 600k", "Ava's Assembler: 75k to 240k", "Full Void: 300k to 640k", "Elite Void: 400k to 780k"]}]},
       {p: "Notably, Jagex explicitly declined one popular request - removing the teleport delay at the Revenant Caves for Wilderness Hard Diary holders - siding against PKers who argued it made escaping too easy."}
     ],
     url: "https://secure.runescape.com/m=news/poll-80-wilderness-tombs-of-amascut--more?oldschool=1",
@@ -3239,6 +3322,11 @@ const UNPOLLED = [
     date: "2026-05-27",
     dateDisplay: "27 May 2026",
     title: "LMS reward shop locked behind 1 win requirement (unpolled)",
+    body: [
+      {p: "Players must now win at least one game of Last Man Standing before they can purchase any tradeable items from Justine's Stuff for the Last Shopper Standing."},
+      {p: "Players who have not won a game can still purchase untradeable items from the shop."},
+      {p: "This change was implemented without a poll, as an integrity measure targeting reward farming without genuine PvP engagement."}
+    ],
     description: "Players must now win at least one game of Last Man Standing before they can purchase any tradeable items from Justine's Stuff for the Last Shopper Standing. Players who have not won a game can still purchase untradeable items from the shop. This change was implemented without a poll as an integrity measure targeting reward farming without genuine PvP engagement.",
     url: "https://secure.runescape.com/m=news/changes-to-sailing--lms-rewards-eligibility?oldschool=1",
     blogTitle: "Changes to Sailing & LMS Rewards Eligibility"
@@ -3247,6 +3335,12 @@ const UNPOLLED = [
     date: "2026-05-27",
     dateDisplay: "27 May 2026",
     title: "Wilderness PvP death window reduced to 30 seconds (unpolled)",
+    body: [
+      {p: "If a player dies without having been in combat with another player within the last 30 seconds, their death is now treated as a PvM death rather than a PvP death - even if they were attacked by a player earlier."},
+      {p: "This means the PKer no longer receives their loot, and the player's items go to a gravestone or Death instead."},
+      {p: "It is intended to prevent cases where players were attacked, forgot they had been in combat, continued PvMing, then lost all items to a PvP death unexpectedly."},
+      {p: "Applies to all account types."}
+    ],
     description: "If a player dies without having been in combat with another player within the last 30 seconds, their death is now treated as a PvM death rather than a PvP death - even if they were attacked by a player earlier. This means the PKer no longer receives their loot and the player's items go to a gravestone or Death instead. Intended to prevent cases where players were attacked, forgot they had been in combat, continued PvMing, then lost all items to a PvP death unexpectedly. Applies to all account types.",
     url: "https://secure.runescape.com/m=news/changes-to-sailing--lms-rewards-eligibility?oldschool=1",
     blogTitle: "Changes to Sailing & LMS Rewards Eligibility"
@@ -3553,7 +3647,14 @@ function renderUnpolled() {
         if (seg.p) html += '<p class="unpolled-p">' + escHtml(seg.p) + '</p>';
         else if (seg.list) {
           html += '<ol class="unpolled-list">';
-          seg.list.forEach(function(it){ html += '<li>' + escHtml(it) + '</li>'; });
+          seg.list.forEach(function(it){
+            if (typeof it === 'string') { html += '<li>' + escHtml(it) + '</li>'; }
+            else {
+              html += '<li>' + escHtml(it.text);
+              if (it.sub) { html += '<ul class="unpolled-sublist">'; it.sub.forEach(function(x){ html += '<li>' + escHtml(x) + '</li>'; }); html += '</ul>'; }
+              html += '</li>';
+            }
+          });
           html += '</ol>';
         }
       });
@@ -3576,10 +3677,60 @@ function escHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+const RESTRICTED = [
+  {
+    dateDisplay: "22 Apr 2022", title: "PvP Arena Rewards",
+    pollTitle: "Rewards for Beneath Cursed Sands & PvP Arena",
+    url: "https://oldschool.runescape.com/polls/2022/1637",
+    restriction: "Accounts that had participated in PvP (activity-based) - the first restriction of its kind",
+    body: [
+      {p: "The landmark case. The PvP Arena reward questions were restricted to accounts that had actually engaged in PvP - the first time Jagex restricted voting by activity rather than by account type, and by its own account 'the first time we've restricted the majority of questions in a poll.'"},
+      {p: "Eligibility required either:"},
+      {list: ["20 PvP kills across PvP worlds, the Wilderness, or Bounty Hunter, or", "having played a game of Last Man Standing. (The blog first said '1 LMS win'; Jagex later corrected this to mean participation, not a win.)"]},
+      {p: "It was the only restricted poll to draw real backlash - non-PvP players felt they should get a say on armour that would be used to kill them in the Wilderness. Every PvP Arena reward failed anyway, and Jagex noted most would have failed even under a stricter PvP-only count."}
+    ]
+  },
+  {
+    dateDisplay: "6 Jun 2022", title: "PvP Arena Rewards v2",
+    pollTitle: "PvP Arena Rewards v2",
+    url: "https://oldschool.runescape.com/polls/2022/1644",
+    restriction: "Same PvP-participation restrictions as the first PvP Arena poll",
+    body: [
+      {p: "The reworked reward set, re-polled after every reward in the first PvP Arena poll failed. It carried a similar set of voting restrictions."},
+      {p: "All rewards failed again except the Imbue Scrolls and the Blighted Wave/Surge sacks. The Calamity armour and wrapped gloves were later added as minigame-only equipment instead of poll rewards."}
+    ]
+  },
+  {
+    dateDisplay: "2024", title: "Vesta's Longsword re-poll (PvP-worlds usability)",
+    pollTitle: "Vesta's Longsword re-poll (poll 1686)",
+    url: "https://oldschool.runescape.com/polls/2024/1686",
+    restriction: "Restricted to PvP-world players - around 90% of voters were auto-skipped",
+    body: [
+      {p: "A re-poll of whether Vesta's Longsword could be used against other players on PvP worlds (losing all bonuses against NPCs). It was restricted so that the relevant PvP-world players decided it; in the data it appears with roughly 90% of voters auto-skipped, one of the highest skip rates on the whole page."},
+      {p: "Among the eligible voters it reached 74.6% yes, clearing the 70% bar."}
+    ]
+  },
+  {
+    dateDisplay: "Various (pre-2022 onward)", title: "Account-type restricted questions (Ironman / Group Ironman / Ultimate Ironman)",
+    pollTitle: "Mini Poll - Miscellaneous Improvements (UIM example)",
+    url: "https://oldschool.runescape.com/polls/2021/1625",
+    restriction: "Limited to the relevant account community",
+    body: [
+      {p: "Before the PvP Arena, Jagex had already restricted individual questions to specific account communities - Ironman, Group Ironman, and Ultimate Ironman - so those groups could decide changes that affected only them. Jagex says these were received positively, with none of the backlash the PvP restriction later drew."},
+      {p: "Example: the Mini Poll - Miscellaneous Improvements (Jul 2021) ran a UIM-only question about storing items in a Looting Bag inside Ferox Enclave and the Wilderness, with roughly 1,170 eligible voters."}
+    ]
+  }
+];
+
 const SCRAPPED = [
   {
     era: "Jun 2021 - Mar 2022",
     title: "Replacing all Wilderness single-way combat with singles-plus",
+    body: [
+      {p: "The June 2021 Wilderness Changes blog proposed converting every single-way combat area in the Wilderness to singles-plus (where PvP always takes priority over NPC combat), alongside a PJ Timer."},
+      {p: "Following significant community feedback against the blanket change, Jagex opted for a different solution: the PJ Timer alone was added in March 2022, applied to all single-way and singles-plus areas, while the rest of the Wilderness kept its standard single-way rules."},
+      {p: "The proposal to convert all single-way areas was dropped without a poll."}
+    ],
     description: "The June 2021 Wilderness Changes blog proposed converting every single-way combat area in the Wilderness to singles-plus (where PvP always takes priority over NPC combat) alongside a PJ Timer. Following significant community feedback against the blanket change, Jagex opted for a different solution: the PJ Timer alone was added in March 2022, applied to all single-way and singles-plus areas, while the rest of the Wilderness kept its standard single-way rules. The proposal to convert all single-way areas was dropped without a poll.",
     proposalUrl: "https://secure.runescape.com/m=news/wilderness-changes?oldschool=1",
     proposalTitle: "Wilderness Changes (June 2021 blog)",
@@ -3589,6 +3740,11 @@ const SCRAPPED = [
   {
     era: "Feb 2022",
     title: "PvP Arena: Thaw Potion (scrapped reward, never polled)",
+    body: [
+      {p: "The original PvP Arena reward blog (February 2022) proposed a Thaw Potion, created by combining an unfinished dwarf weed potion with a white lily and a flame rose."},
+      {p: "Drinking it would grant 10 seconds of immunity to spells that bind players in place (Snare, Ice spells), usable once every two minutes."},
+      {p: "It was dropped from the proposal before any poll was held, and does not appear in either the Rewards Beta or the PvP Arena Rewards v2 poll."}
+    ],
     description: "The original PvP Arena reward blog (February 2022) proposed a Thaw Potion, created by combining an unfinished dwarf weed potion with a white lily and a flame rose. Drinking it would grant 10 seconds of immunity to spells that bind players in place (Snare, Ice spells), usable once every two minutes. It was dropped from the proposal before any poll was held and does not appear in either the Rewards Beta or the PvP Arena Rewards v2 poll.",
     proposalUrl: "https://secure.runescape.com/m=news/the-pvp-arena?oldschool=1",
     proposalTitle: "Emir's Arena wiki page - Scrapped rewards section"
@@ -3596,6 +3752,12 @@ const SCRAPPED = [
   {
     era: "Feb 2022",
     title: "PvP Arena: Amulet of Souls (scrapped reward, never polled)",
+    body: [
+      {p: "Also proposed in the February 2022 PvP Arena blog: an Amulet of Souls, combining an amulet of fury, an onyx, and an amulet of souls scroll."},
+      {p: "Usable only in the Wilderness, it would be charged with death and soul runes."},
+      {p: "When charged, it would resurrect the wearer with 5 HP if they took a killing blow, curing poison and venom - but only once every 15 minutes."},
+      {p: "Dropped from the proposal before polling."}
+    ],
     description: "Also proposed in the February 2022 PvP Arena blog: an Amulet of Souls combining an amulet of fury, an onyx, and an amulet of souls scroll. Usable only in the Wilderness, it would be charged with death and soul runes. When charged, it would resurrect the wearer with 5 HP if they took a killing blow, curing poison and venom - but only once every 15 minutes. Dropped from the proposal before polling.",
     proposalUrl: "https://secure.runescape.com/m=news/the-pvp-arena?oldschool=1",
     proposalTitle: "Emir's Arena wiki page - Scrapped rewards section"
@@ -3603,6 +3765,11 @@ const SCRAPPED = [
   {
     era: "Feb 2022",
     title: "PvP Arena: Wristbands of the Arena / Humble Chivalry & Piety / Wilderness teleport item (scrapped, never polled)",
+    body: [
+      {p: "Three further PvP Arena reward categories were proposed in the February 2022 launch blog but dropped before any poll:"},
+      {list: ["Wristbands of the Arena - Barrows Gloves equivalent stats at only 20 Defence (PvP-only).", "Humble Chivalry and Humble Piety - lesser prayer variants with a 40 Defence requirement.", "A new left-click teleport item - proposed as an alternative to the Royal Seed Pod, usable up to level 30 Wilderness."]},
+      {p: "All three were cut before the Rewards Beta and never appeared on a poll. Concept art for the Wristbands exists and is referenced on the Emir's Arena wiki page."}
+    ],
     description: "Three further PvP Arena reward categories were proposed in the February 2022 launch blog but dropped before any poll. Wristbands of the Arena would have given Barrows Gloves equivalent stats at only 20 Defence (PvP-only). Humble Chivalry and Humble Piety were lesser prayer variants with a 40 Defence requirement. A new left-click teleport item was proposed as an alternative to the Royal Seed Pod, usable up to level 30 Wilderness. All three were cut before the Rewards Beta and never appeared on a poll. Concept art for the Wristbands exists and is referenced on the Emir's Arena wiki page.",
     proposalUrl: "https://secure.runescape.com/m=news/the-pvp-arena?oldschool=1",
     proposalTitle: "The PvP Arena (launch blog, Feb 2022)"
@@ -3610,6 +3777,13 @@ const SCRAPPED = [
   {
     era: "Oct 2020",
     title: "Roaming Revenants (considered, dropped before polling)",
+    body: [
+      {p: "During the 2020 Revenant Caves crisis, Jagex considered making Revenants roam throughout the wider Wilderness (similar to their original 2007 design) rather than being confined to the caves."},
+      {p: "The Revenant Caves Proposal blog explicitly stated: \"We've decided not to move forward with roaming revenants.\""},
+      {p: "Reasons given:"},
+      {list: ["Roaming revenants would be annoying for PvM players and PKers alike.", "Clans capable of dominating the caves could likely dominate rotating spawn points too."]},
+      {p: "The idea was dropped in favour of the unpolled singles-plus conversion of the caves."}
+    ],
     description: "During the 2020 Revenant Caves crisis, Jagex considered making Revenants roam throughout the wider Wilderness (similar to their original 2007 design) rather than being confined to the caves. The Revenant Caves Proposal blog explicitly stated: 'We've decided not to move forward with roaming revenants.' Reasons given were that roaming revenants would be annoying for PvM players and PKers alike, and that clans capable of dominating the caves could likely dominate rotating spawn points too. The idea was dropped in favour of the unpolled singles-plus conversion of the caves.",
     proposalUrl: "https://secure.runescape.com/m=news/revenant-caves-proposal?oldschool=1",
     proposalTitle: "Revenant Caves Proposal (Oct 2020)"
@@ -3617,6 +3791,13 @@ const SCRAPPED = [
   {
     era: "Dec 2022 - Jun 2023",
     title: "Ruinous Powers (new prayer book - shelved before main game release)",
+    body: [
+      {p: "Originally proposed as a reward for Desert Treasure II, the Ruinous Powers prayer book passed its Greenlight poll with 86.3% support in December 2022."},
+      {p: "After two betas and months of community consultation, Jagex ended the second beta early on 19 June 2023 and shelved the project."},
+      {p: "They stated the prayers had become power creep for its own sake rather than solving new problems, and that the original vision had fallen to the wayside."},
+      {p: "Notably, Jagex explicitly cited PvP as an area where players wanted prayers that 'mix things up significantly' - signalling prayer design space for PvP remains open."},
+      {p: "The Ruinous Powers have since appeared only in temporary game modes (Trailblazer Reloaded League, Deadman: Annihilation)."}
+    ],
     description: "Originally proposed as a reward for Desert Treasure II, the Ruinous Powers prayer book passed its Greenlight poll with 86.3% support in December 2022. After two betas and months of community consultation, Jagex ended the second beta early on 19 June 2023 and shelved the project. They stated the prayers had become power creep for its own sake rather than solving new problems, and that the original vision had fallen to the wayside. Notably, Jagex explicitly cited PvP as an area where players wanted prayers that 'mix things up significantly' - signalling prayer design space for PvP remains open. The Ruinous Powers have since appeared only in temporary game modes (Trailblazer Reloaded League, Deadman: Annihilation).",
     proposalUrl: "https://secure.runescape.com/m=news/the-future-of-the-ruinous-powers?oldschool=1",
     proposalTitle: "The Future of the Ruinous Powers (Jun 2023) - shelving blog",
@@ -3626,6 +3807,12 @@ const SCRAPPED = [
   {
     era: "Mar 2024 - Oct 2024",
     title: "God Alignment Prayers (Rites of Balance / Zaros Alignment - shelved after initial feedback)",
+    body: [
+      {p: "Announced in March 2024 as a reward for While Guthix Sleeps (Guthix Alignment / Rites of Balance) and a follow-on Zaros Alignment tied to Desert Treasure II, the God Alignments were a community-inspired proposal for deity-themed prayer sets alongside the existing prayer book."},
+      {p: "Following rapid negative feedback about complexity and power creep, the Seren Alignments were removed within days."},
+      {p: "By October 2024's Gielinor Gazette, the whole God Alignments project was listed as shelved with no projected release date."},
+      {p: "The Zaros Alignment overlaps directly with the Ruinous Powers design space, making these two shelved prayer projects closely related."}
+    ],
     description: "Announced in March 2024 as a reward for While Guthix Sleeps (Guthix Alignment / Rites of Balance) and a follow-on Zaros Alignment tied to Desert Treasure II, the God Alignments were a community-inspired proposal for deity-themed prayer sets alongside the existing prayer book. Following rapid negative feedback about complexity and power creep, the Seren Alignments were removed within days. By October 2024's Gielinor Gazette, the whole God Alignments project was listed as shelved with no projected release date. The Zaros Alignment overlaps directly with the Ruinous Powers design space, making these two shelved prayer projects closely related.",
     proposalUrl: "https://secure.runescape.com/m=news/god-alignment-prayers---consultation--direction?oldschool=1",
     proposalTitle: "God Alignment Prayers - Consultation & Direction (official blog)",
@@ -3635,6 +3822,13 @@ const SCRAPPED = [
   {
     era: "Oct 2024",
     title: "Scorpia Blighted Overloads (Wilderness boss loot - proposed, never polled)",
+    body: [
+      {p: "In the October 2024 Gielinor Gazette, Jagex floated adding Blighted Overloads to the loot table of Scorpia, the level 53-55 Wilderness boss."},
+      {p: "Blighted Overloads are a stat-boosting combat potion that originated as a Deadman-exclusive item in Deadman: Armageddon (made with Chitin), and the Gazette explicitly framed this as bringing a Deadman 'dry run' into the main game."},
+      {p: "Jagex said the proposal 'would be very welcome' and that they were 'waiting for an appropriate poll to discuss it in greater detail.'"},
+      {p: "No such poll ever followed - the idea was never brought to a vote or shipped, leaving another well-received Wilderness reward stalled at the proposal stage."},
+      {p: "It is a small but telling example of the deprioritization pattern: even an uncontroversial, popular Wilderness reward can quietly lapse when it is not attached to a larger update."}
+    ],
     description: "In the October 2024 Gielinor Gazette, Jagex floated adding Blighted Overloads to the loot table of Scorpia, the level 53-55 Wilderness boss. Blighted Overloads are a stat-boosting combat potion that originated as a Deadman-exclusive item in Deadman: Armageddon (made with Chitin), and the Gazette explicitly framed this as bringing a Deadman 'dry run' into the main game. Jagex said the proposal 'would be very welcome' and that they were 'waiting for an appropriate poll to discuss it in greater detail.' No such poll ever followed - the idea was never brought to a vote or shipped, leaving another well-received Wilderness reward stalled at the proposal stage. It is a small but telling example of the deprioritization pattern: even an uncontroversial, popular Wilderness reward can quietly lapse when it is not attached to a larger update.",
     proposalUrl: "https://secure.runescape.com/m=news/gielinor-gazette---october-2024?oldschool=1",
     proposalTitle: "Gielinor Gazette - October 2024 (Miscellaneous Project Updates)"
@@ -3642,6 +3836,12 @@ const SCRAPPED = [
   {
     era: "Sep 2024 - Nov 2024",
     title: "Wrathmaw (Wilderness World Boss) and Sandmaw - failed poll, then shelved",
+    body: [
+      {p: "Wrathmaw was announced at the Summer Summit 2024 as Old School's first-ever Wilderness World Boss - a tanky, roaming boss on a set timer intended to create scheduled PvP hotspots similar to Deadman's Breaches."},
+      {p: "It failed its Greenlight poll with only 49.1% support (below the 70% threshold)."},
+      {p: "Jagex attempted a redesign in September 2024, also proposing a desert version called Sandmaw."},
+      {p: "On 5 November 2024, Jagex officially shelved both Wrathmaw and Sandmaw, stating they would instead focus on improving existing PvP activities."}
+    ],
     description: "Wrathmaw was announced at the Summer Summit 2024 as Old School's first-ever Wilderness World Boss - a tanky, roaming boss on a set timer intended to create scheduled PvP hotspots similar to Deadman's Breaches. It failed its Greenlight poll with only 49.1% support (below the 70% threshold). Jagex attempted a redesign in September 2024, also proposing a desert version called Sandmaw. On 5 November 2024, Jagex officially shelved both Wrathmaw and Sandmaw, stating they would instead focus on improving existing PvP activities.",
     proposalUrl: "https://secure.runescape.com/m=news/wrathmaw-the-wilderness-world-boss---summer-summit-2024?oldschool=1",
     proposalTitle: "Wrathmaw: the Wilderness World Boss - Summer Summit 2024 (official blog)",
@@ -3649,6 +3849,42 @@ const SCRAPPED = [
     cancellationTitle: "PvP Survey, Wrathmaw, Bounty Hunter Changes & More! (Nov 2024) - shelving announced"
   }
 ];
+
+function renderRestricted() {
+  const container = document.getElementById('restricted-container');
+  if (!container) return;
+  let html = '';
+  RESTRICTED.forEach(function(r){
+    html += '<div class="unpolled-entry" style="border-left-color:#c8903a;">';
+    html += '<div class="unpolled-date">' + escHtml(r.dateDisplay) + '</div>';
+    html += '<div class="unpolled-title">' + escHtml(r.title) + '</div>';
+    html += '<div style="font-size:14px;color:#e0a84a;margin:4px 0 8px;text-shadow:1px 1px 0 #000;"><strong>Who could vote:</strong> ' + escHtml(r.restriction) + '</div>';
+    html += '<div class="unpolled-desc">';
+    if (r.body) {
+      r.body.forEach(function(seg){
+        if (seg.p) html += '<p class="unpolled-p">' + escHtml(seg.p) + '</p>';
+        else if (seg.list) {
+          html += '<ol class="unpolled-list">';
+          seg.list.forEach(function(it){
+            if (typeof it === 'string') { html += '<li>' + escHtml(it) + '</li>'; }
+            else {
+              html += '<li>' + escHtml(it.text);
+              if (it.sub) { html += '<ul class="unpolled-sublist">'; it.sub.forEach(function(x){ html += '<li>' + escHtml(x) + '</li>'; }); html += '</ul>'; }
+              html += '</li>';
+            }
+          });
+          html += '</ol>';
+        }
+      });
+    } else { html += escHtml(r.description || ''); }
+    html += '</div>';
+    if (r.url) {
+      html += '<div style="margin-top:8px;"><a class="unpolled-link" href="' + r.url + '" target="_blank">Official poll: ' + escHtml(r.pollTitle || r.title) + ' &#8594;</a></div>';
+    }
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
 
 function renderScrapped() {
   const container = document.getElementById('scrapped-container');
@@ -3658,7 +3894,25 @@ function renderScrapped() {
     html += '<div class="scrapped-entry">';
     html += '<div class="scrapped-era">' + escHtml(s.era) + '</div>';
     html += '<div class="unpolled-title">' + escHtml(s.title) + '</div>';
-    html += '<div class="unpolled-desc">' + escHtml(s.description) + '</div>';
+    html += '<div class="unpolled-desc">';
+    if (s.body) {
+      s.body.forEach(function(seg){
+        if (seg.p) html += '<p class="unpolled-p">' + escHtml(seg.p) + '</p>';
+        else if (seg.list) {
+          html += '<ol class="unpolled-list">';
+          seg.list.forEach(function(it){
+            if (typeof it === 'string') { html += '<li>' + escHtml(it) + '</li>'; }
+            else {
+              html += '<li>' + escHtml(it.text);
+              if (it.sub) { html += '<ul class="unpolled-sublist">'; it.sub.forEach(function(x){ html += '<li>' + escHtml(x) + '</li>'; }); html += '</ul>'; }
+              html += '</li>';
+            }
+          });
+          html += '</ol>';
+        }
+      });
+    } else { html += escHtml(s.description); }
+    html += '</div>';
     html += '<div style="margin-top:8px;display:flex;gap:16px;flex-wrap:wrap;">';
     html += (s.proposalUrl && s.proposalUrl.indexOf('runescape.wiki') === -1)
       ? '<a class="unpolled-link" href="' + s.proposalUrl + '" target="_blank">Proposal source: ' + escHtml(s.proposalTitle) + ' &#8594;</a>'
@@ -3680,6 +3934,7 @@ populateCategoryStats();
 renderPolls();
 renderUnpolled();
 renderScrapped();
+renderRestricted();
 
 // Section index smooth-scroll (avoids hash navigation inside sandboxed iframes)
 function jumpTo(id){
