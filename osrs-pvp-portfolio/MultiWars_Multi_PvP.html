@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Wars — Team PvP Deathmatch Minigame</title>
+<title>Multi Wars - Team PvP Deathmatch Minigame</title>
 <style>
 
 @font-face {
@@ -105,9 +105,8 @@ body {
   font-family: 'RSUF', serif;
   font-size: 16.5px;
   font-weight: 400;
-  color: var(--text-dim);
+  color: var(--yellow-rs);
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000;
 }
 .hero-tag {
@@ -393,24 +392,11 @@ strong { color: var(--white-rs); }
 .footer {
   background: #181008;
   padding: 16px 24px;
-  text-align: right;
+  text-align: center;
   font-size: 13.0px;
   color: #6a5a3a;
   border-top: 2px solid #5a4a2a;
 }
-
-/* DEV MODE */
-#dev-btn {
-  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
-  background: #2a1a06; border: 2px solid #8a6a1f;
-  color: #ffcc00; font-family: 'RSUF', serif; font-size: 13px;
-  padding: 8px 16px; cursor: pointer;
-  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-}
-#dev-btn:hover { background: #3a2a10; border-color: #ffcc00; }
-#dev-btn.active { background: #1a3a1a; border-color: #00c000; color: #00c000; }
-[contenteditable="true"] { outline: 1px dashed #ffcc00; cursor: text; min-width: 20px; display: inline-block; }
-[contenteditable="true"]:focus { outline: 2px solid #ffcc00; background: rgba(255,204,0,0.05); }
 
 
 /* ============ RESEARCH LAB ADDITIONS ============ */
@@ -559,6 +545,17 @@ strong { color: var(--white-rs); }
 .obj-step.shield { border-color: var(--yellow-rs); }
 .obj-step.anchor { border-color: var(--red-rs); }
 
+.arena-table { width: 100%; border-collapse: collapse; margin: 12px 0 4px; font-size: 14px; }
+.arena-table caption { text-align: left; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 16px; letter-spacing: 0.04em; padding-bottom: 6px; text-shadow: 1px 1px 0 #000; }
+.arena-table th { text-align: left; background: var(--stone-panel); color: var(--text-body); border: 1px solid var(--stone-border); padding: 7px 10px; font-weight: normal; letter-spacing: 0.03em; }
+.arena-table td { border: 1px solid var(--stone-border); padding: 7px 10px; color: var(--text-dim); line-height: 1.45; vertical-align: top; background: var(--stone-mid); }
+.arena-table td.arena-name { color: var(--text-body); white-space: nowrap; }
+.arena-table td.arena-img { width: 180px; padding: 5px; }
+.arena-table td.arena-img img { display: block; width: 100%; height: auto; border: 1px solid var(--stone-border); border-radius: 2px; }
+.steps-list { list-style: none; counter-reset: step; padding: 0; margin: 8px 0 8px 14px; color: var(--text-body); font-size: 15.5px; line-height: 1.5; }
+.steps-list li { counter-increment: step; position: relative; padding-left: 18px; margin-bottom: 6px; }
+.steps-list li:last-child { margin-bottom: 0; }
+.steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
 </style>
 </head>
 <body>
@@ -572,10 +569,9 @@ strong { color: var(--white-rs); }
   <div class="brick-strip offset"></div>
 
   <div class="hero">
-    <span class="hero-icon">&#x2694;&#xFE0F;</span>
+    <img class="hero-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAMAAACnUt2HAAAAAXNSR0IArs4c6QAAABhQTFRFAAAAHyEg/85KkZKSpqamwMDAmZqZpUoAto3rdAAAAAF0Uk5TAEDm2GYAAABrSURBVHjaXc9RCgUxCEPRXLXz9r/jB1YnMP0oycEKlQD5TOWcVTeO1YXqMFZIVttqFbbVrIJT2WZNKsespM2jT2H0Uo8KaJsF882Iftsrkgg0+tz0mhRvIiImsdrhph9ika73EhfZIfQ58AdhvgGtLESuqgAAAABJRU5ErkJggg==" alt="Multicombat" style="width:60px;height:57px;image-rendering:pixelated;margin:0 auto 8px;transform:translateX(-2px);">
     <h1>Multi Wars</h1>
-    <h2>Team PvP Deathmatch Minigame</h2>
-    <span class="hero-tag">Player-Made Design Document &mdash; Not Official &mdash; @Chdata</span>
+    <h2>Team Death Match Safe PvP Minigame</h2>
   </div>
 
   <div class="brick-strip offset"></div>
@@ -583,110 +579,66 @@ strong { color: var(--white-rs); }
 
   <div class="content">
 
-    <!-- OVERVIEW -->
     <div class="section">
-      <div class="section-inner">
-        <p>I had a funny thought for a new PvP minigame. The working title was <em>Wars</em>. Just&hellip; Wars. Okay, that one's a joke &mdash; the real name is <strong>Multi Wars</strong>.</p>
-        <p>The whole pitch: a <strong>Soul Wars-style lobby</strong> drops everyone into two randomly assigned teams, throws them into a <em>multicombat</em> arena, and the only goal is to <strong>fight to the death</strong>. No portals, no avatar to babysit, no objectives to juggle. Two teams, one multi zone, go.</p>
-        <div class="note-box blue">
-          <strong>TL;DR:</strong> Random two-team multi deathmatch out of a Soul Wars lobby. Pick a scoring style, add a reward shop, done. It bottles the thing PKers already say is the most fun in the game &mdash; clan multi in the Wilderness &mdash; minus the item risk.
-        </div>
-      </div>
-    </div>
+      <p>I had a funny thought recently.</p>
 
-    <!-- WHY -->
-    <div class="section">
-      <div class="sec-head">Why It Would Work</div>
-      <div class="sec-sub">The fun already exists. This just packages it.</div>
-      <hr class="sec-divider">
-      <p>Ask around and PKers keep saying the same thing: <em>clan multi in the Wilderness is some of the most fun in the game</em>. Big messy team fights, piling, tanking, target calling. The catch is that it's hard to find, totally unstructured, and comes with real item risk. Multi Wars takes that exact experience and gives it a lobby, two even teams, a scoreline, and a reason to keep queuing.</p>
-      <div class="note-box green">
-        <strong>Low effort, high payoff.</strong> This could be bolted straight onto the existing <strong>Clan Wars</strong> as one more activity &mdash; the arenas, the team-splitting, and the safe-death tech are already built. It might be the cheapest new PvP mode Jagex could ship.
-      </div>
-    </div>
+      <p>New PvP minigame:</p>
 
-    <!-- HOW IT WORKS -->
-    <div class="section">
-      <div class="sec-head">How It Works</div>
-      <div class="sec-sub">Queue in. Team up. Brawl.</div>
-      <hr class="sec-divider">
-      <ul class="rs-list diamond">
-        <li><strong>Soul Wars-style lobby</strong> &mdash; players queue and drop into a game once enough have gathered.</li>
-        <li><strong>Two random teams</strong> &mdash; the lobby splits everyone into two roughly even sides. No pre-mades required, though a party mode could be offered.</li>
-        <li><strong>One multicombat arena</strong> &mdash; the whole map is multi, so stacks, piles, and team combos all work exactly like a Wilderness clan fight.</li>
-        <li><strong>Safe death</strong> &mdash; like Soul Wars and Clan Wars, you keep your gear. The only thing on the line is the scoreline.</li>
+      <p><span style="color:#90ee90;">Wars</span></p>
+
+      <p>Just <span style="color:#90ee90;">Wars</span>.</p>
+
+      <p>Or y'know, we could call it <span style="color:#90ee90;">Multi Wars</span>... or keep the name <span style="color:#ccc;">Clan Wars</span>. It's just an extension of <span style="color:#ccc;">Clan Wars</span>.</p>
+
+      <p>...</p>
+
+      <p>You get a <span style="color:#ccc;">Soul Wars</span> lobby of two randomly assigned teams. <span class="hl-blue">100 players per team for a total of 200 players.</span></p>
+
+      <p>The two teams fight to the death in multi and that's the only goal.</p>
+
+      <p>There is a <span style="color:#ff8a8a;">15 minute timer.</span> At the end it's battle royale style fog that kills everyone.</p>
+
+      <ul style="list-style:none;padding:0;margin:8px 0;display:flex;flex-direction:column;gap:7px;color:var(--text-body);font-size:15.5px;line-height:1.5;">
+        <li><span class="hl-blue">Style 1:</span> Everyone gets 5 lives (arena mode)</li>
+        <li><span class="hl-blue">Style 2:</span> The team with the most kills wins (team death match)</li>
+        <li><span class="hl-blue">Style 3:</span> First team to 100 kills wins (team death match arena)</li>
+        <li><span class="hl-blue">Style 4:</span> Your team gets points equal to the 10% of the combat level of players you kill. Most points wins.</li>
       </ul>
-    </div>
 
-    <!-- SCORING STYLES -->
-    <div class="section">
-      <div class="sec-head">Scoring Styles</div>
-      <div class="sec-sub">Same brawl, three ways to win.</div>
-      <hr class="sec-divider">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;">
-        <div class="mode-box casual">
-          <span class="mode-icon">&#x2764;&#xFE0F;</span>
-          <div class="mode-name">Last Team Standing</div>
-          <p>Everyone gets <strong>5 lives</strong>. Burn through the enemy team's lives before they burn through yours. When one side is out, it's over.</p>
-        </div>
-        <div class="mode-box comp">
-          <span class="mode-icon">&#x1F3AF;</span>
-          <div class="mode-name">Team Deathmatch</div>
-          <p>First team to <strong>100 kills</strong> wins. Respawns are quick &mdash; it's a straight race to the kill count.</p>
-        </div>
-        <div class="mode-box blu">
-          <span class="mode-icon">&#x1F32B;&#xFE0F;</span>
-          <div class="mode-name">Combat-Level TDM</div>
-          <p>Kills are worth <strong>10% of the victim's combat level</strong> in points, so a maxed main is worth more than a low level. Ends in a closing fog.</p>
-        </div>
-      </div>
-      <div class="note-box">
-        <strong>Combat-level scoring rewards punching up.</strong> Weighting points by the target's combat level pushes players to hunt the biggest threats in the lobby rather than padding kills on the weakest one.
-      </div>
-    </div>
+      <p>Give it a <span class="hl-yellow">reward shop</span> so people play it.</p>
 
-    <!-- CLOSING FOG -->
-    <div class="section">
-      <div class="sec-head">The Closing Fog</div>
-      <div class="sec-sub">Battle-royale style. No stalling the finish.</div>
-      <hr class="sec-divider">
-      <div class="section-inner">
-        <p>In Combat-Level TDM, the match ends with a <em>battle-royale-style fog</em> that creeps in from the edges of the arena, shrinking the safe zone until the survivors are forced together. It guarantees a clean, chaotic finish instead of a timer expiring with everyone hugging opposite corners.</p>
-        <div class="note-box red">
-          <strong>Stand in the fog, take damage.</strong> The shrinking ring does what it does everywhere else &mdash; it forces the fight to a head and stops anyone running down the clock.
-        </div>
-      </div>
-    </div>
+      <p>The premise of <span style="color:#90ee90;">Multi Wars</span> is that if players can enjoy the experience in a <span class="hl-green">safe PvP minigame</span>, that could be their gateway to try it out later in a real Wilderness clan scenario.</p>
 
-    <!-- REWARD SHOP -->
-    <div class="section">
-      <div class="sec-head">Reward Shop</div>
-      <div class="sec-sub">Because people need a reason to keep queuing.</div>
+      <p>So many PKers tell me how much fun clan multi in the Wilderness is. <span class="hl-purple">This is guaranteed to be great.</span></p>
+
+      <p>Quite literally, Jagex could just take the <span style="color:#ccc;">Clan Wars</span> <span style="color:#ddb0ff;">Purple Portal</span> and set it up with basic minigame infrastructure.</p>
+
+      <ol class="steps-list">
+        <li>Set it up with a lobby on one world.</li>
+        <li>Give it a standard ruleset (<span style="color:#ff8a8a;">15 minute team death match most kills</span>).</li>
+        <li>Choose a random arena every round.</li>
+        <li><span class="hl-yellow">Reward shop.</span></li>
+        <li>Done.</li>
+      </ol>
+
+      <p><span style="color:#90ee90;">This minigame is pretty much already fully created.</span> It just needs a viable reward shop attached to it and players would enjoy it.</p>
+
+      <p><a href="https://oldschool.runescape.wiki/w/Clan_Wars" target="_blank" rel="noopener" style="color:var(--yellow-rs);">You can visit the wiki page for Clan Wars to see just how much is already created.</a></p>
+
+      <p>There's a lot of unused space in the caves below the <span style="color:#ccc;">Ferox Enclave</span>. That's the perfect space for the lobby.</p>
+
       <hr class="sec-divider">
-      <p>Like Soul Wars' Zeal shop, Multi Wars would pay out a currency for participation and performance, spent in a <strong>reward shop</strong>. It doesn't need to be elaborate &mdash; cosmetics, a little QoL, maybe some PvP-flavoured rewards &mdash; just enough to give the mode legs beyond "it's fun."</p>
-      <div class="note-box">
-        <strong>Fun first, rewards second.</strong> The brawl has to stand on its own as a good time. The shop is the hook that turns a one-off novelty into something with a healthy daily queue.
-      </div>
+
+      <p>Or so that's what I would say, but before Jagex considers converting this into a real PvP minigame, I think Jagex would do better to first improve the Wilderness and our other PvP minigames.</p>
+
+      <p><span style="color:#ff8a8a;">Why make this one if we can't make the other ones good?</span></p>
     </div>
 
   </div><!-- end .content -->
 
-  <div class="footer">Player-Made Design Document &mdash; Not Official &mdash; @Chdata</div>
+  <div class="footer">Player-Made Design Document - Not Official - @Chdata</div>
 
 </div><!-- end .outer -->
-
-<button id="dev-btn" onclick="toggleDev()">Dev Mode</button>
-
-<script>
-var devOn = false;
-function toggleDev() {
-  devOn = !devOn;
-  document.getElementById('dev-btn').classList.toggle('active', devOn);
-  document.getElementById('dev-btn').textContent = devOn ? 'Dev ON' : 'Dev Mode';
-  var targets = document.querySelectorAll('p, li, .sec-head, .sec-sub, .subsec-head, .mode-name, h1, h2');
-  targets.forEach(function(el) { el.contentEditable = devOn ? 'true' : 'false'; });
-}
-</script>
 
 <!-- BACK TO TOP -->
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
