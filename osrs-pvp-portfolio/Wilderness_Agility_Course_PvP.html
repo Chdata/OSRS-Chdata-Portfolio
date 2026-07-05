@@ -652,7 +652,9 @@ model-viewer.mv-course {
         alt="3D mock-up of the reworked Wilderness Agility Course"
         camera-controls
         auto-rotate
-        camera-orbit="12deg 52deg auto"
+        auto-rotate-delay="0"
+        camera-orbit="0.7848rad 1.0035rad 125.315m"
+        field-of-view="13.48deg"
         camera-target="auto"
         rotation-per-second="10deg"
         touch-action="pan-y"
@@ -722,11 +724,14 @@ model-viewer.mv-course {
     if(btn) btn.classList.toggle('is-active', on);
   }
 
-  // Stop spinning as soon as the user actually moves the camera.
-  mv.addEventListener('camera-change', function(e){
-    if(e.detail && e.detail.source === 'user-interaction' && mv.hasAttribute('auto-rotate')){
-      setSpin(false);
-    }
+  // Stop spinning on genuine user input over the viewer (pointer or wheel).
+  // Auto-rotate never fires these, and unlike 'camera-change' there is no
+  // post-drag tail of events, so a fresh resume from the button won't get
+  // cancelled a moment later.
+  ['pointerdown','wheel'].forEach(function(ev){
+    mv.addEventListener(ev, function(){
+      if(mv.hasAttribute('auto-rotate')) setSpin(false);
+    }, {passive:true});
   });
 
   // Button toggles auto-rotate back on (or off again).
