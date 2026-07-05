@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wilderness Agility Course Idea</title>
+<title>Wilderness Agility Course Rework</title>
 <style>
 
 @font-face {
@@ -599,6 +599,18 @@ strong { color: var(--white-rs); }
 .nest-list { list-style: none; padding: 0; margin: 4px 0 4px 22px; display: flex; flex-direction: column; gap: 6px; color: var(--text-dim); font-size: 14.6px; line-height: 1.5; }
 .nest-list li { position: relative; padding-left: 16px; }
 .nest-list li::before { content: '\2013'; position: absolute; left: 0; top: 0; color: var(--yellow-rs); }
+model-viewer.mv-course {
+  width: 100%;
+  height: 460px;
+  margin: 20px auto 4px;
+  background: var(--stone-mid);
+  border: 1px solid var(--stone-border);
+  border-radius: 4px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+  --poster-color: transparent;
+  --progress-bar-color: var(--yellow-rs);
+}
+.mv-hint { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 6px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -613,7 +625,7 @@ strong { color: var(--white-rs); }
 
   <div class="hero">
     <img class="hero-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAMAAACnUt2HAAAAAXNSR0IArs4c6QAAABhQTFRFAAAAHyEg/85KkZKSpqamwMDAmZqZpUoAto3rdAAAAAF0Uk5TAEDm2GYAAABrSURBVHjaXc9RCgUxCEPRXLXz9r/jB1YnMP0oycEKlQD5TOWcVTeO1YXqMFZIVttqFbbVrIJT2WZNKsespM2jT2H0Uo8KaJsF882Iftsrkgg0+tz0mhRvIiImsdrhph9ika73EhfZIfQ58AdhvgGtLESuqgAAAABJRU5ErkJggg==" alt="Multicombat" style="width:60px;height:57px;image-rendering:pixelated;margin:0 auto 8px;transform:translateX(-2px);">
-    <h1>Wilderness Agility Course Idea</h1>
+    <h1>Wilderness Agility Course Rework</h1>
   </div>
 
   <div class="brick-strip offset"></div>
@@ -627,6 +639,21 @@ strong { color: var(--white-rs); }
       <p>So this image is a very rough mock-up I made of a possible alternative version of the Wilderness Agility Course.</p>
 
       <p>Before I explain what this is, I just want to put out there that this is just an idea I had for fun. It's not necessarily something I think NEEDS to happen because I think the Wilderness Agility Course as-is is already pretty much okay. Even with the Wilderness Agility Course masses being a thing.</p>
+
+      <div class="sec-head">Interactive 3D Mock-up</div>
+
+      <model-viewer class="mv-course"
+        src="3d/WildernessAgilityRework2.glb"
+        alt="3D mock-up of the reworked Wilderness Agility Course"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="0"
+        rotation-per-second="10deg"
+        touch-action="pan-y"
+        shadow-intensity="0.7"
+        exposure="1.05"
+        interaction-prompt="none"></model-viewer>
+      <div class="mv-hint">Drag to orbit - scroll to zoom - right-click drag to pan.</div>
 
       <div class="sec-head">The Idea</div>
 
@@ -673,5 +700,6 @@ strong { color: var(--white-rs); }
 <!-- BACK TO TOP -->
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="display:none;position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(180deg,#c89b3c,#8a6a1f);border:1px solid #5a4a2a;border-radius:2px;padding:9px 15px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;color:#1a1208;text-shadow:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);">&#9650; Top</button>
 <script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
 </body>
 </html>
