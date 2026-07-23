@@ -223,6 +223,40 @@ body {
   gap: 14px;
 }
 
+/* ── DOC LINK CARD (script link) ── */
+.doc-link,
+.doc-link:link,
+.doc-link:visited,
+.doc-link:hover,
+.doc-link:active,
+.doc-link:focus {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.doc-link {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 3px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  transition: border-color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+
+.doc-link:hover {
+  border-color: var(--border-hi);
+  border-left-color: var(--gold-hi);
+  background: #221b13;
+}
+
+.doc-link .doc-link-kicker { color: var(--amber); font-size: 15px; letter-spacing: 0.08em; text-shadow: 1px 1px 0 #000; margin-bottom: 4px; }
+.doc-link .doc-link-title  { color: var(--gold-hi); font-size: 21px; text-shadow: 1px 1px 0 #000; margin-bottom: 6px; }
+.doc-link .doc-link-url    { color: var(--dim); font-size: 15.5px; text-shadow: 1px 1px 0 #000; word-break: break-all; }
+.doc-link:hover .doc-link-url { color: var(--gold); }
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -728,14 +762,10 @@ footer {
     This entire set of webpages is pretty much just paraphrasing stuff from my video script.
   </div>
 
-  <a href="https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing"
-     target="_blank" rel="noopener"
-     style="display:block;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:3px;padding:16px 20px;margin-bottom:24px;transition:border-color 0.15s, background 0.15s;"
-     onmouseover="this.style.borderColor='var(--border-hi)';this.style.borderLeftColor='var(--gold-hi)';this.style.background='#221b13';"
-     onmouseout="this.style.borderColor='var(--border)';this.style.borderLeftColor='var(--gold)';this.style.background='var(--card-bg)';">
-    <div style="font-size:15px;color:var(--amber);letter-spacing:0.08em;text-shadow:1px 1px 0 #000;margin-bottom:4px;">READ THE SCRIPT &#9658;</div>
-    <div style="font-size:21px;color:var(--gold-hi);text-shadow:1px 1px 0 #000;margin-bottom:6px;">Chdata's Solutions for OSRS PvP</div>
-    <div style="font-size:15.5px;color:var(--dim);text-shadow:1px 1px 0 #000;word-break:break-all;">https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing</div>
+  <a class="doc-link" href="https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing" target="_blank" rel="noopener">
+    <div class="doc-link-kicker">READ THE SCRIPT &#9658;</div>
+    <div class="doc-link-title">Chdata's Solutions for OSRS PvP</div>
+    <div class="doc-link-url">https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing</div>
   </a>
   <!-- ======================================================= -->
 
