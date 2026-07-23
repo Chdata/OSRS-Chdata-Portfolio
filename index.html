@@ -230,7 +230,7 @@ body {
 .doc-link:hover,
 .doc-link:active,
 .doc-link:focus {
-  color: var(--text);
+  color: var(--dim);
   text-decoration: none;
 }
 
@@ -252,10 +252,44 @@ body {
   background: #221b13;
 }
 
-.doc-link .doc-link-kicker { color: var(--amber); font-size: 15px; letter-spacing: 0.08em; text-shadow: 1px 1px 0 #000; margin-bottom: 4px; }
-.doc-link .doc-link-title  { color: var(--gold-hi); font-size: 21px; text-shadow: 1px 1px 0 #000; margin-bottom: 6px; }
-.doc-link .doc-link-url    { color: var(--dim); font-size: 15.5px; text-shadow: 1px 1px 0 #000; word-break: break-all; }
-.doc-link:hover .doc-link-url { color: var(--gold); }
+/* Colours are pinned across every link state, including :visited, so the card
+   never picks up the browser's default blue/purple hyperlink colouring. */
+.doc-link .doc-link-kicker,
+.doc-link:link .doc-link-kicker,
+.doc-link:visited .doc-link-kicker,
+.doc-link:hover .doc-link-kicker,
+.doc-link:active .doc-link-kicker,
+.doc-link:focus .doc-link-kicker {
+  color: var(--amber);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 4px;
+}
+
+.doc-link .doc-link-title,
+.doc-link:link .doc-link-title,
+.doc-link:visited .doc-link-title,
+.doc-link:hover .doc-link-title,
+.doc-link:active .doc-link-title,
+.doc-link:focus .doc-link-title {
+  color: var(--gold-hi);
+  font-size: 21px;
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 6px;
+}
+
+.doc-link .doc-link-url,
+.doc-link:link .doc-link-url,
+.doc-link:visited .doc-link-url,
+.doc-link:hover .doc-link-url,
+.doc-link:active .doc-link-url,
+.doc-link:focus .doc-link-url {
+  color: var(--dim);
+  font-size: 15.5px;
+  text-shadow: 1px 1px 0 #000;
+  word-break: break-all;
+}
 
 .card {
   background: var(--card-bg);
