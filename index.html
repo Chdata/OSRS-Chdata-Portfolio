@@ -224,16 +224,9 @@ body {
 }
 
 /* ── DOC LINK CARD (script link) ── */
-.doc-link,
-.doc-link:link,
-.doc-link:visited,
-.doc-link:hover,
-.doc-link:active,
-.doc-link:focus {
-  color: var(--dim);
-  text-decoration: none;
-}
-
+/* Deliberately NOT an <a> element. Browsers apply their own :link / :visited
+   colours to real anchors, and some browser settings force those colours over
+   the page's own CSS. Using a div means no link colouring can ever apply. */
 .doc-link {
   display: block;
   background: var(--card-bg);
@@ -244,22 +237,19 @@ body {
   margin-bottom: 24px;
   transition: border-color 0.15s, background 0.15s;
   cursor: pointer;
+  color: var(--dim);
+  text-decoration: none;
 }
 
-.doc-link:hover {
+.doc-link:hover,
+.doc-link:focus-visible {
   border-color: var(--border-hi);
   border-left-color: var(--gold-hi);
   background: #221b13;
+  outline: none;
 }
 
-/* Colours are pinned across every link state, including :visited, so the card
-   never picks up the browser's default blue/purple hyperlink colouring. */
-.doc-link .doc-link-kicker,
-.doc-link:link .doc-link-kicker,
-.doc-link:visited .doc-link-kicker,
-.doc-link:hover .doc-link-kicker,
-.doc-link:active .doc-link-kicker,
-.doc-link:focus .doc-link-kicker {
+.doc-link .doc-link-kicker {
   color: var(--amber);
   font-size: 15px;
   letter-spacing: 0.08em;
@@ -267,24 +257,14 @@ body {
   margin-bottom: 4px;
 }
 
-.doc-link .doc-link-title,
-.doc-link:link .doc-link-title,
-.doc-link:visited .doc-link-title,
-.doc-link:hover .doc-link-title,
-.doc-link:active .doc-link-title,
-.doc-link:focus .doc-link-title {
+.doc-link .doc-link-title {
   color: var(--gold-hi);
   font-size: 21px;
   text-shadow: 1px 1px 0 #000;
   margin-bottom: 6px;
 }
 
-.doc-link .doc-link-url,
-.doc-link:link .doc-link-url,
-.doc-link:visited .doc-link-url,
-.doc-link:hover .doc-link-url,
-.doc-link:active .doc-link-url,
-.doc-link:focus .doc-link-url {
+.doc-link .doc-link-url {
   color: var(--dim);
   font-size: 15.5px;
   text-shadow: 1px 1px 0 #000;
@@ -796,11 +776,24 @@ footer {
     This entire set of webpages is pretty much just paraphrasing stuff from my video script.
   </div>
 
-  <a class="doc-link" href="https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing" target="_blank" rel="noopener">
+  <div class="doc-link" role="link" tabindex="0"
+       data-href="https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing">
     <div class="doc-link-kicker">READ THE SCRIPT &#9658;</div>
     <div class="doc-link-title">Chdata's Solutions for OSRS PvP</div>
     <div class="doc-link-url">https://docs.google.com/document/d/1zWqkrAddDkBImHOLrsZ6Hoy9ShUFaMnZN_4GF59BM7s/edit?usp=sharing</div>
-  </a>
+  </div>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.doc-link[data-href]').forEach(function (el) {
+        function open() { window.open(el.getAttribute('data-href'), '_blank', 'noopener'); }
+        el.addEventListener('click', open);
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+        });
+      });
+    })();
+  </script>
   <!-- ======================================================= -->
 
   <div class="section-title" id="problems">The Core Problems of PvP (Summary)</div>
