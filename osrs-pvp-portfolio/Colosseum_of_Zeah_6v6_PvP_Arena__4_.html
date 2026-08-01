@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -412,6 +414,17 @@ strong { color: var(--white-rs); }
 [contenteditable="true"] { outline: 1px dashed #ffcc00; cursor: text; min-width: 20px; display: inline-block; }
 [contenteditable="true"]:focus { outline: 2px solid #ffcc00; background: rgba(255,204,0,0.05); }
 
+
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

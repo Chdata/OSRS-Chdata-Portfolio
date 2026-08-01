@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -599,6 +601,18 @@ strong { color: var(--white-rs); }
 .nest-list { list-style: none; padding: 0; margin: 4px 0 4px 22px; display: flex; flex-direction: column; gap: 6px; color: var(--text-dim); font-size: 14.6px; line-height: 1.5; }
 .nest-list li { position: relative; padding-left: 16px; }
 .nest-list li::before { content: '\2013'; position: absolute; left: 0; top: 0; color: var(--yellow-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

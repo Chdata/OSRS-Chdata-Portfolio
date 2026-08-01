@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -562,6 +564,19 @@ strong { color: var(--white-rs); }
 .doc-img { display: block; max-width: 100%; height: auto; margin: 14px auto; border: 1px solid var(--stone-border); border-radius: 3px; }
 .qa-q { color: var(--text-body); }
 .qa-q strong { color: var(--yellow-rs); }
+
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

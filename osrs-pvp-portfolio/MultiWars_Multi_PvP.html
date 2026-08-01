@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -556,6 +558,18 @@ strong { color: var(--white-rs); }
 .steps-list li { counter-increment: step; position: relative; padding-left: 18px; margin-bottom: 6px; }
 .steps-list li:last-child { margin-bottom: 0; }
 .steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

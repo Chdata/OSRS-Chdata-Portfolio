@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -598,6 +600,18 @@ strong { color: var(--white-rs); }
   border-color: #ff8a8a;
 }
 .note-box.red strong { color: #ff8a8a; }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

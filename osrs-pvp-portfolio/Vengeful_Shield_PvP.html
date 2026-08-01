@@ -51,6 +51,8 @@ body {
 
 .outer {
   width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--stone-dark);
   position: relative;
 }
@@ -590,6 +592,18 @@ strong { color: var(--white-rs); }
 .ic-left { left: 6px; }
 .ic-right { right: 6px; }
 .ic-counter { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 8px; }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  body { zoom: 1; }
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>

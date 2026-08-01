@@ -44,7 +44,8 @@ body {
   background: var(--bg);
   font-family: 'RSUF', monospace;
   color: var(--white);
-  width: 1140px;
+  width: 100%;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0;
 }
@@ -420,6 +421,15 @@ p:last-child { margin-bottom: 0; }
   color: var(--dim);
   border-top: 3.0px solid var(--border);
   text-shadow: 1px 1px 0 #000;
+}
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  .compare,
+  .three-compare,
+  .benefits,
+  .tiers { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
 }
 </style>
 </head>
