@@ -106,6 +106,27 @@ body {
 }
 .section:last-child { border-bottom: none; }
 
+.quote-card {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: rgba(0,0,0,0.3);
+  padding: 20px 22px;
+  margin: 16px 0;
+}
+.quote-card p {
+  font-size: 17.0px;
+  line-height: 1.6;
+  color: var(--sara);
+  margin: 0 0 10px;
+}
+.quote-card p:last-child { margin-bottom: 0; }
+.quote-card .quote-by {
+  display: block;
+  margin-top: 12px;
+  font-size: 14.5px;
+  font-style: normal;
+  color: var(--dim);
+}
 .credit-link {
   color: var(--sara);
   text-decoration: underline;
@@ -799,6 +820,63 @@ p:last-child { margin-bottom: 0; }
   </div>
 </div>
 
+<!-- EXPLOIT QUESTION -->
+<div class="section">
+  <div class="sec-head">"Wait, can't Blessed Status be exploited?"</div>
+  <hr class="sec-divider">
+
+  <p>A friend of mine pointed out a potential exploit with <span class="hl-sara">Blessed Status</span> and the <span class="hl-orange">25% death fee</span>.</p>
+
+  <div class="quote-card">
+    <span class="quote-by" style="margin:0 0 12px;"><span class="hl-blue">@Outplayd</span> mentioned:</span>
+    <p>You can trade alt/main at Tier 5 Blessed Status to have Tier 5 with less risk because when you die, you save 75% of your value.</p>
+    <p>The exploit would be to do your boss run, get Tier 5 and whatever loot. When you feel like banking, just have your alt kill you, you drop 25% to the alt, and can bank 75%.</p>
+    <p>Now the alt is in the Wilderness risking only 25% of the original 25%.</p>
+  </div>
+
+  <p>I've given some time to think about it extensively for a bit and write out some scenarios.</p>
+
+  <p>This "exploit" <span class="hl-green">isn't actually a problem</span>.</p>
+
+  <p>The reason being: the 25% fee (risk) that goes to your killer (your alt) drops in the form of a <span class="hl-gold">Blessed Key</span>.</p>
+
+  <p>This Blessed Key is <span class="hl-red">always lost on death</span>, to the player who killed you. So losing that Blessed Key loses 100% of what's in the key, rather another 25% of it.</p>
+
+  <p>In other words, the alt would be in the Wilderness risking <span class="hl-red">100%</span> of the original 25%.</p>
+
+  <p>What does this mean exactly?</p>
+
+  <p>It means trading kills between death/alt does not work as a way to reduce your risk without escaping the Wilderness, even if you get to keep your 5 stars between the two accounts.</p>
+
+  <p>I will, however, point out that the "saving 75% of your value" part is <em>the point</em> of Blessed Status. You are risking your 25% split, not the 75%. It is SUPPOSED to be kept even on death.</p>
+
+  <hr class="sec-divider">
+
+  <p>Main banks <span class="hl-green">1.125m (75%)</span> on death. <span class="hl-orange">375k (25%)</span> goes to the killer (via key) + 5 stars transfer.</p>
+
+  <p>On its surface, it would seem like the risk of holding onto 5 stars is reduced by doing this.</p>
+
+  <p>The main keeping 75% is working as intended. That is normal in all scenarios.</p>
+
+  <p>But now the alt has a 375k key and 5 stars. So its risk is 375k. That's the <span class="hl-gold">same amount of risk</span> as the main had to begin with.</p>
+
+  <p>And if you run this through 3-5 trades between alt/main, the Blessed Key is still always lost to the killer on death and you still have to escape the Wilderness with it, so it's fine.</p>
+
+  <hr class="sec-divider">
+
+  <p class="hl-purple">Or for another example:</p>
+
+  <p>Main earns 10m. On death, you can save <span class="hl-green">7.5m</span>, and your Blessed Key is <span class="hl-orange">2.5m</span> risk.</p>
+
+  <p>If you killtrade the Blessed Key to an alt, the alt still has to escape the Wilderness with that 2.5m key risk.</p>
+
+  <p>On the PKer's side, whether the PKer kills the main or the alt, the PKer gets 2.5m.</p>
+
+  <p><span class="hl-green">Perfectly fair!</span></p>
+
+  <p>If you just trade the 10m to the alt via a normal trade, that would no longer be a problem exclusive to Blessed Status :)</p>
+</div>
+
 <!-- BLIGHTED COINS -->
 <div class="section">
   <div class="sec-head">Blighted Coins</div>
@@ -863,7 +941,9 @@ p:last-child { margin-bottom: 0; }
     </div>
   </div>
 
-  <p style="margin-top:18px;">Tiers are earned by accumulating <span class="hl-gold">stars</span> through Wilderness activity. Each method below takes roughly an hour to complete all five stars via that path.</p>
+  <p style="margin-top:18px;">If <span class="hl-red">-25%</span> to <span class="hl-green">+75%</span> is "too good" for Blessed Status, we can always try different numbers, like <span class="hl-red">-50%</span> for Tier 0 and <span class="hl-green">+50%</span> for Tier 4-5.</p>
+
+  <p>Tiers are earned by accumulating <span class="hl-gold">stars</span> through Wilderness activity. Each method below takes roughly an hour to complete all five stars via that path.</p>
 
   <ul class="rules-list">
     <li><span class="hl-gold">Boss kills:</span> Kill a Wilderness boss 1, 2, 4, 8, then 16 times (31 kills total) to earn stars 1-5.</li>
@@ -875,7 +955,20 @@ p:last-child { margin-bottom: 0; }
     <li><span class="hl-green">Forinthry Gates</span> allow Tiered Blessed players to log out or world-hop without losing any tiers, rewarding players who stay in one world rather than hopping constantly.</li>
   </ul>
 
-  <p>If <span class="hl-red">-25%</span> to <span class="hl-green">+75%</span> is "too good" for Blessed Status, we can always try different numbers, like <span class="hl-red">-50%</span> for Tier 0 and <span class="hl-green">+50%</span> for Tier 4-5.</p>
+  <div class="subsec-head">"Wait, can't I exploit gaining stars by killing other players for their stars?"</div>
+
+  <br>
+
+  <ul class="rules-list">
+    <li><span class="hl-orange">PKing:</span> Kill a player to <span class="hl-orange">upgrade to their star count</span>, if they had more stars than you.</li>
+  </ul>
+
+  <p>Note: It <em>upgrades</em> your stars. This is very important wording. It does NOT "steal" stars and "add" them to the number of stars you have, because a level 1 star is not worth the same as a level 5 star.</p>
+
+  <p>This means there is <span class="hl-green">no special benefit</span> to killing someone with less stars than you.</p>
+
+  <p>If there WERE a benefit to doing that, then there would be an exploit where you could have 5 alt accounts kill 1 boss each, and get Tier 5 Blessed Status on one account for <span class="hl-red">5 boss kills</span> instead of the full <span class="hl-gold">31 boss kills</span>.</p>
+
 </div>
 
 <!-- RING OF GREED -->
@@ -894,14 +987,14 @@ p:last-child { margin-bottom: 0; }
   <p>This creates a natural space for an item that takes that philosophy even further. The <span class="hl-gold">Ring of Greed</span>, a concept originally proposed by YouTuber <span style="color:#d8b4ff;">PoisonedPotion</span>, would double your drops within the Wilderness while Skulled.</p>
 
   <div class="note-box">
-    The name "Ring of Greed" is a fitting counterpart to the <span class="hl-gold">Ring of Wealth</span>. Where the Ring of Wealth passively improves your luck, the Ring of Greed would actively double your Wilderness loot, but only at the cost of the full Skulled risk. No safety net, no reduced fee, no tier buffers. The ring itself would be priced somewhere in the <span class="hl-gold">1m-100m</span> range, and is <span class="hl-red">always lost on death</span>.
+    The name "Ring of Greed" is a fitting counterpart to the <span class="hl-gold">Ring of Wealth</span>. Where the Ring of Wealth passively improves your luck, the Ring of Greed would actively double your Wilderness loot, but only at the cost of the full Skulled risk. The ring itself would be priced somewhere in the <span class="hl-gold">1m-100m</span> range, and is <span class="hl-red">always lost on death</span>.
   </div>
 
-  <p>PKers who already enjoy high risk high reward gameplay would find this far more appealing than Blessed Status ever could be. It gives the most committed, confident players a reason to stay in the Wilderness just as much as Blessed Status gives cautious players a reason to enter it. The progression reads naturally:</p>
+  <p>PKers who already enjoy high risk high reward gameplay would find this far more appealing than Blessed Status ever could be. It gives the most committed, confident players a reason to stay in the Wilderness just as much as Blessed Status gives cautious players a reason to enter it.</p>
 
   <ul class="rules-list">
     <li><span class="hl-sara">Blessed Status</span> - Reduced risk, reduced reward ceiling. Good for PvMers, new players, and ironmen.</li>
-    <li><span class="hl-white">Unskulled</span> - Normal risk and reward. The existing baseline.</li>
+    <li><span class="hl-white">Unskulled</span> - Normal risk and reward.</li>
     <li><span class="hl-orange">Skulled + Amulet of Avarice</span> - Full risk. Noted drops and a drop rate bonus at Revenants.</li>
     <li><span class="hl-red">Skulled + Ring of Greed</span> - Full risk. Double drops across the entire Wilderness.</li>
   </ul>
