@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PvP Update Priority Ranking — Old School RuneScape</title>
+<title>PvP Update Priority Ranking - Old School RuneScape</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -217,7 +217,7 @@
   </div>
 </nav>
 
-<div class="dev-banner" id="dev-banner">⚙ Developer Mode Active — You can edit and delete entries</div>
+<div class="dev-banner" id="dev-banner">⚙ Developer Mode Active - You can edit and delete entries</div>
 
 <div class="hero">
   <div class="hero-eyebrow">Community Ranking Poll · Phase 1 of 2 · 2026</div>
@@ -233,7 +233,7 @@
     <div class="how-step"><div class="how-step-num">1.</div><div>Submit your own update idea below. Jagex will review submissions and the most feasible ideas will be added to future ranking rounds.</div></div>
     <div class="how-step"><div class="how-step-num">2.</div><div>Drag or use the arrows to rank all updates from most wanted (#1) to least wanted.</div></div>
     <div class="how-step"><div class="how-step-num">3.</div><div>The update ranked #1 by the most players becomes the community's priority and will be developed next, subject to a standard in-game poll before release.</div></div>
-    <div class="how-step"><div class="how-step-num">4.</div><div>All other updates remain eligible for future ranking polls — nothing is ruled out permanently.</div></div>
+    <div class="how-step"><div class="how-step-num">4.</div><div>All other updates remain eligible for future ranking polls. Nothing is ruled out permanently.</div></div>
   </div>
 
   <div class="deadline-box">
@@ -245,7 +245,7 @@
   <div class="panel">
     <div class="panel-header"><h2>💡 Submit a PvP Update Idea</h2></div>
     <div class="panel-body">
-      <div class="info-box">Have an idea not on the list? Submit it here. <strong>Jagex will review all submissions</strong> — the most popular and feasible ideas will be included in future ranking polls. Your submission will also appear immediately in the ranking list below marked as a community submission.</div>
+      <div class="info-box">Have an idea not on the list? Submit it here. <strong>Jagex will review all submissions</strong>. The most popular and feasible ideas will be included in future ranking polls. Your submission will also appear immediately in the ranking list below marked as a community submission.</div>
       <div class="success-box" id="submit-success">✓ <strong>Your idea has been submitted</strong> and added to the ranking list below. Thank you.</div>
       <div class="submission-form">
         <div class="form-row">
@@ -257,7 +257,7 @@
           <div class="form-field" style="max-width:225px;">
             <label class="form-label" for="idea-size">Estimated Size</label>
             <select class="form-input" id="idea-size">
-              <option value="Community">— Select —</option>
+              <option value="Community">- Select -</option>
               <option value="Massive">Massive</option>
           <option value="Large">Large</option>
               <option value="Medium">Medium</option>
@@ -283,7 +283,7 @@
   <div class="panel">
     <div class="panel-header"><h2>Rank PvP Updates by Priority</h2></div>
     <div class="panel-body">
-      <div class="info-box"><strong>Drag to reorder</strong> or use the ▲▼ buttons. Place the update you want most at <strong>#1</strong>. Use search to find specific updates — your full ranking is preserved while searching.</div>
+      <div class="info-box"><strong>Drag to reorder</strong> or use the ▲▼ buttons. Place the update you want most at <strong>#1</strong>. Use search to find specific updates. Your full ranking is preserved while searching.</div>
       <div class="poll-progress">
         <span class="poll-progress-label">Votes submitted</span>
         <span class="poll-progress-count">34,218 / ~100,000 estimated</span>
@@ -291,10 +291,10 @@
       <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
       <div class="info-box" style="margin-bottom:17.5px;">
         <strong>Update Size Definitions:</strong><br><br>
-        <span style="color:var(--green-rs);">■ Small</span> — Quality of Life updates that realistically only take a week or two to develop.<br>
-        <span style="color:var(--blue-rs);">■ Medium</span> — Updates that might take 1–3 months to develop.<br>
-        <span style="color:#b84a00;">■ Large</span> — Updates that might take 4–6 months to develop.<br>
-        <span style="color:#cc2222;">■ Massive</span> — A raid-sized update that will take 6+ months and significant effort and resources to develop. Similar to the effort put in for Raids and Sailing.
+        <span style="color:var(--green-rs);">■ Small</span> - Quality of Life updates that realistically only take a week or two to develop.<br>
+        <span style="color:var(--blue-rs);">■ Medium</span> - Updates that might take 1-3 months to develop.<br>
+        <span style="color:#b84a00;">■ Large</span> - Updates that might take 4-6 months to develop.<br>
+        <span style="color:#cc2222;">■ Massive</span> - A raid-sized update that will take 6+ months and significant effort and resources to develop. Similar to the effort put in for Raids and Sailing.
       </div>
       <div class="info-box" style="margin-bottom:17.5px;">
         <strong>&quot;No Vote&quot; Options:</strong><br><br>
@@ -328,7 +328,7 @@
         <button class="btn-ghost" onclick="if(confirm('Reset to default order?'))initList()">↺ Reset</button>
       </div>
       <div class="results-panel" id="results-panel">
-        <h3>✓ Ranking Submitted — Current Community Top 10</h3>
+        <h3>✓ Ranking Submitted - Current Community Top 10</h3>
         <p style="font-size:16.2px;color:var(--text-muted);margin-bottom:17.5px;">Your vote has been recorded. Live community standings (top 10):</p>
         <div id="results-list"></div>
       </div>
@@ -405,7 +405,7 @@ const BASE_UPDATES = [
   {id:'clan-wars-team-deathmatch',title:'Clan Wars Team Deathmatch Mode',size:'Medium',desc:'Repurpose the underused Clan Wars Purple Portal arenas for a Soul Wars-style team deathmatch with a reward shop. Could also be structured as a 6v6 PvP Arena using existing arena infrastructure.'},
   {id:'resource-area-rework',title:'Resource Area Rework',size:'Medium',desc:'Rework of the Wilderness Resource Area to make it a more viable and engaging destination. Includes a noting NPC for Tier 5 Blessed Status players and improvements proposed by the community Wilderness Grove project.'},
   // SMALL
-  {id:'autocast-consistency',title:'Autocast Consistency Fix',size:'Small',desc:'Standardise autocast behaviour across all game modes and environments. Currently differs arbitrarily between PvP, minigames, and PvM — the rules seem random and have no coherent design logic.'},
+  {id:'autocast-consistency',title:'Autocast Consistency Fix',size:'Small',desc:'Standardise autocast behaviour across all game modes and environments. Currently differs arbitrarily between PvP, minigames, and PvM. The rules seem random and have no coherent design logic.'},
   {id:'tome-of-fire-review',title:'Tome of Fire PvP Damage Review',size:'Small',desc:'Review and reduce the 50% PvP bonus from Tome of Fire relative to its 10% PvM bonus. One of the most egregious PvP/PvM inconsistencies and long overdue for a review.'},
   {id:'anglerfish-review',title:'Anglerfish Overheal in PvP Review',size:'Small',desc:'Review of whether Anglerfish overhealing in PvP creates problematic combat pacing, following community discussion and a Jagex developer acknowledgement of the concern.'},
   {id:'deathdotting',title:'Deathdotting Removal',size:'Small',desc:'Address the ability to stack on the same tile to hide from opponents during combat, making escape from PvP frustrating and unrewarding for the attacker.'},
@@ -415,7 +415,7 @@ const BASE_UPDATES = [
   {id:'spec-orb-improvements',title:'Special Attack Orb Improvements',size:'Small',desc:'Interface improvements to make the special attack orb more accessible without reliance on F-key muscle memory, lowering the barrier for new PvP players as discussed by Mod Goblin.'},
   {id:'pvp-glossary',title:'PvP Changes Glossary Page',size:'Small',desc:'A dedicated wiki-style in-game or website page tracking all PvP mechanic changes over time, so returning players can quickly catch up on what has changed without reading every game update post.'},
   {id:'pvp-knowledge-base',title:'PvP Skill Progression Guide',size:'Small',desc:'An in-game or community-supported guide covering PvP skill ladder concepts: prayer flicking, gear switching, vengeance, tick eating, safing, and progressing from basic to advanced PvP. Helps close the skill gap for new players.'},
-  {id:'minigame-billboards',title:'PvP Minigame World Billboards',size:'Small',desc:'Billboards near each PvP minigame showing the main active world, player counts, and a quick-hop button to join directly — similar to the billboards already in use at raids.'},
+  {id:'minigame-billboards',title:'PvP Minigame World Billboards',size:'Small',desc:'Billboards near each PvP minigame showing the main active world, player counts, and a quick-hop button to join directly. Similar to the billboards already in use at raids.'},
   {id:'combat-level-req',title:'Combat Level Requirements for PvP Minigames',size:'Small',desc:'Lock Bounty Hunter, LMS, and potentially the PvP Arena behind 60+ combat level. Sets correct expectations that these are not beginner activities. Prevents very new players from being immediately overwhelmed.'},
   {id:'pvp-world-improvements',title:'PvP World Improvements',size:'Small',desc:'Quality of life improvements to PvP Worlds including clearer signposting, better world selection, and addressing the discovery problem of new players not knowing PvP worlds exist.'},
   {id:'blowpipe-review',title:'Blowpipe 2-Tick Attack Speed PvP Review',size:'Small',desc:'Review of Blowpipe 2-tick attack speed in PvP. One of the known PvP/PvM inconsistencies flagged by Mod Goblin as something worth untangling carefully.'},
@@ -592,7 +592,7 @@ function submitIdea() {
   if (!title || !desc) { alert('Please fill in the title and description.'); return; }
   const size = document.getElementById('idea-size').value || 'Community';
   const id = 'community-' + Date.now();
-  const newItem = { id, title, desc, size: size === '— Select —' ? 'Community' : size };
+  const newItem = { id, title, desc, size: size === '- Select -' ? 'Community' : size };
   currentOrder.push(newItem);
   pendingSubmissions.push(newItem);
   // add to DOM

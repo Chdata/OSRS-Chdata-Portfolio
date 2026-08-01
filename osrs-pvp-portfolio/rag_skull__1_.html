@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rag Skull — Wilderness Anti-Rag Mechanic</title>
+<title>Rag Skull - Wilderness Anti-Rag Mechanic</title>
 <style>
 @font-face {
   font-family: 'RSUF';
@@ -80,7 +80,7 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
       <img class="skull-sprite" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAAFFEO9vFqqeUf5eEcAAAADJT4g8AAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMTITAUd0AAAAuGVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABEAAABaAAAAaYcEAAEAAABsAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjEyAAADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlgAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAACDfy8cctDT3wAAALhJREFUKFNtjwESwyAIBAHJ/7/cPcDYNmFGwV1FtWuHdcyK9c5m7h5x3GSzFQvlsbbaaUXcatAkjqw+9jB0MQ33fwPs6c1w1YuBwjU9X1AHfox662Ltl6jL+BSDZUplZDKaSEJGeXpSoCNdBkJYUjAhsso6JUeW1zycRxx3+LxaqFoSs32MslxEb29SE6G/6NnVtE1htemgqs+I11aY1vOH/qlE8+5brtQXV2xHpjhccSPJYTsgdn0AXgkGI1JfZVkAAAAASUVORK5CYII=" alt="Rag Skull">
       <div>
         <div class="title-main">Rag Skull</div>
-        <div class="title-sub">Ragged Status &mdash; Wilderness Anti-Rag Mechanic</div>
+        <div class="title-sub">Ragged Status - Wilderness Anti-Rag Mechanic</div>
       </div>
       <img class="skull-sprite" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAAFFEO9vFqqeUf5eEcAAAADJT4g8AAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMTITAUd0AAAAuGVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABEAAABaAAAAaYcEAAEAAABsAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjEyAAADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlgAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAACDfy8cctDT3wAAALhJREFUKFNtjwESwyAIBAHJ/7/cPcDYNmFGwV1FtWuHdcyK9c5m7h5x3GSzFQvlsbbaaUXcatAkjqw+9jB0MQ33fwPs6c1w1YuBwjU9X1AHfox662Ltl6jL+BSDZUplZDKaSEJGeXpSoCNdBkJYUjAhsso6JUeW1zycRxx3+LxaqFoSs32MslxEb29SE6G/6NnVtE1htemgqs+I11aY1vOH/qlE8+5brtQXV2xHpjhccSPJYTsgdn0AXgkGI1JfZVkAAAAASUVORK5CYII=" alt="">
     </div>
@@ -92,7 +92,7 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
     <div class="sec">
       <div class="sec-hdr">What Is Ragging</div>
       <div class="intro-box">
-        Ragging is repeatedly attacking someone with <b>minimal risk</b> &mdash; often 1-iteming with a powerful spec weapon hoping for a lucky kill, or an entire clan blocking an area for free. It costs the ragger nothing. It wastes everyone else&rsquo;s time and supplies.<br><br>
+        Ragging is repeatedly attacking someone with <b>minimal risk</b>. Often 1-iteming with a powerful spec weapon hoping for a lucky kill, or an entire clan blocking an area for free. It costs the ragger nothing. It wastes everyone else&rsquo;s time and supplies.<br><br>
         Rag Skull addresses this through <b>game mechanics</b>, not manual bans. It enforces a minimum risk on any player who initiates attack in the Wilderness.
       </div>
     </div>
@@ -103,7 +103,7 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
         <div class="row-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAAFFEO9vFqqeUf5eEcAAAADJT4g8AAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMTITAUd0AAAAuGVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABEAAABaAAAAaYcEAAEAAABsAAAAAAAAAPJ2AQDoAwAA8nYBAOgDAABQYWludC5ORVQgNS4xLjEyAAADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlgAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAACDfy8cctDT3wAAALhJREFUKFNtjwESwyAIBAHJ/7/cPcDYNmFGwV1FtWuHdcyK9c5m7h5x3GSzFQvlsbbaaUXcatAkjqw+9jB0MQ33fwPs6c1w1YuBwjU9X1AHfox662Ltl6jL+BSDZUplZDKaSEJGeXpSoCNdBkJYUjAhsso6JUeW1zycRxx3+LxaqFoSs32MslxEb29SE6G/6NnVtE1htemgqs+I11aY1vOH/qlE8+5brtQXV2xHpjhccSPJYTsgdn0AXgkGI1JfZVkAAAAASUVORK5CYII=" alt=""></div>
         <div>
           <div class="row-title">Trigger Condition</div>
-          <div class="row-desc">You enter the Wilderness with <b>less than the minimum risk threshold</b>. Upon initiating attack on another player &mdash; in any situation where you would normally receive a skull &mdash; you receive a <b>Rag Skull</b> instead.</div>
+          <div class="row-desc">You enter the Wilderness with <b>less than the minimum risk threshold</b>. Upon initiating attack on another player, in any situation where you would normally receive a skull, you receive a <b>Rag Skull</b> instead.</div>
         </div>
       </div>
       <div class="row" style="border-left:3px solid #7a3010;">
@@ -117,7 +117,7 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
         <div class="row-icon" style="border-color:#203a08;font-size:18px;color:#6a8a30;">&#x21BA;</div>
         <div>
           <div class="row-title" style="color:#6a8a30;">Automatic Removal</div>
-          <div class="row-desc">Instantly downgraded or removed when you <b>no longer meet the criteria</b> &mdash; pick up a high-value drop that raises your risk, re-enter with more gear, or leave the Wilderness entirely.</div>
+          <div class="row-desc">Instantly downgraded or removed when you <b>no longer meet the criteria</b>. Pick up a high-value drop that raises your risk, re-enter with more gear, or leave the Wilderness entirely.</div>
         </div>
       </div>
       <div class="row" style="border-left:3px solid #10305a;">
@@ -137,45 +137,45 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
           <div class="cmp-head rag">Rag Skulled</div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-cell ok">3-itemers who <b>don&rsquo;t initiate attack</b> &mdash; unskulled, unaffected</div>
+          <div class="cmp-cell ok">3-itemers who <b>don&rsquo;t initiate attack</b> - unskulled, unaffected</div>
           <div class="cmp-cell rag">1-itemers who <b>initiate attack</b> below minimum risk</div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-cell ok">Indiana Jones PvMers &mdash; <b>never skulled, never affected</b></div>
+          <div class="cmp-cell ok">Indiana Jones PvMers - <b>never skulled, never affected</b></div>
           <div class="cmp-cell rag">Clan raggers <b>blocking areas</b> with zero risk</div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-cell ok"><b>Blessed Status</b> players &mdash; exempt, Blessed overrides all overhead status</div>
+          <div class="cmp-cell ok"><b>Blessed Status</b> players - exempt, Blessed overrides all overhead status</div>
           <div class="cmp-cell rag">Anyone spec-weaponing <b>below the risk floor</b></div>
         </div>
         <div class="cmp-row">
-          <div class="cmp-cell ok">PKers <b>already bringing risk</b> &mdash; unaffected by design</div>
+          <div class="cmp-cell ok">PKers <b>already bringing risk</b> - unaffected by design</div>
           <div class="cmp-cell rag" style="font-style:italic;">Anyone unwilling to put <b>skin in the game</b></div>
         </div>
       </div>
     </div>
 
     <div class="sec">
-      <div class="sec-hdr">Risk Threshold &mdash; Two Versions</div>
+      <div class="sec-hdr">Risk Threshold - Two Versions</div>
       <div class="ver-grid">
         <div class="ver-card">
           <div class="ver-lbl">Version 1</div>
           <div class="ver-title">Flat 100k Minimum Risk</div>
           <div class="ver-body">Simple floor. If your potential loot key value (skulled with Protect Item) is below 100k, you are Rag Skulled on attack.</div>
-          <div class="ver-ex"><b>Voidwaker (~40m):</b> Requires 100k risk minimum. A clear threshold &mdash; though 100k may still feel cheap for powerful specs.</div>
+          <div class="ver-ex"><b>Voidwaker (~40m):</b> Requires 100k risk minimum. A clear threshold, though 100k may still feel cheap for powerful specs.</div>
         </div>
         <div class="ver-card pref">
-          <div class="ver-lbl">Version 2 &mdash; Preferred</div>
+          <div class="ver-lbl">Version 2 - Preferred</div>
           <div class="ver-title">Percentage of Weapon Value</div>
           <div class="ver-body">Risk floor scales with how powerful your gear is. Fairer and harder to exploit at any price point.</div>
           <div class="ver-ex">
             <b>At 5%:</b> Voidwaker &rarr; 2m risk. Zaryte Crossbow (~350m) &rarr; 17.5m risk.<br>
-            <b>At 1%:</b> Voidwaker &rarr; 400k. ZCB &rarr; 3.5m. Intuitive &mdash; divide price by 100.
+            <b>At 1%:</b> Voidwaker &rarr; 400k. ZCB &rarr; 3.5m. Intuitive. Divide price by 100.
           </div>
         </div>
       </div>
       <div class="note">
-        Risk is calculated from the <b>estimated loot key value</b> &mdash; simulating the worst case as if you were skulled with Protect Item active. Jagex picks the exact percentage that feels right in practice.
+        Risk is calculated from the <b>estimated loot key value</b>, simulating the worst case as if you were skulled with Protect Item active. Jagex picks the exact percentage that feels right in practice.
       </div>
     </div>
 
@@ -195,7 +195,7 @@ body{zoom:1.5;background:#111008;font-family:'RSUF','Times New Roman',serif;colo
       </div>
     </div>
 
-    <div class="footer">Rag Skull applies only when initiating attack &mdash; unskulled players, defenders, and Blessed Status players are never affected.</div>
+    <div class="footer">Rag Skull applies only when initiating attack. Unskulled players, defenders, and Blessed Status players are never affected.</div>
   </div>
 </div>
 <!-- BACK TO TOP -->
