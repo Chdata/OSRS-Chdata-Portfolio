@@ -16,7 +16,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
     --bg:#0d0800;--stone:#2a2010;--panel:#1e1608;--border:#5a4a2a;
-    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--red:#cc2222;
+    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--green-lt:#7cf07c;--red:#cc2222;--red-lt:#ff6b6b;
     --blue:#80c0ff;--orange:#ff8c00;--purple:#cc88ff;--white:#f0e8d0;--dim:#a89060;
     --team:#44aacc;--tcz:#cc8800;
   }
@@ -31,10 +31,11 @@
   .section:last-child{border-bottom:none;}
   .sec-head{font-size:18px;text-shadow:1px 0 0 #000,-1px 0 0 #000,0 1px 0 #000,0 -1px 0 #000,2px 2px 0 #000,3px 3px 0 #000;text-align:center;margin-bottom:4px;letter-spacing:.04em;}
   .sec-sub{font-size:11px;color:var(--dim);text-align:center;margin-bottom:14px;text-shadow:1px 1px 0 #000;}
+  .scam-head{font-size:15px;color:var(--red-lt);text-align:center;margin:16px 0 8px;letter-spacing:.04em;text-shadow:1px 0 0 #000,-1px 0 0 #000,0 1px 0 #000,0 -1px 0 #000,2px 2px 0 #000;}
   .sec-divider{border:none;border-top:1px dashed var(--border);margin:10px 0 14px;}
   p{font-size:12.5px;line-height:1.65;color:var(--white);text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;margin-bottom:10px;}
   p:last-child{margin-bottom:0;}
-  .hl-gold{color:var(--gold);} .hl-green{color:var(--green);} .hl-red{color:var(--red);}
+  .hl-gold{color:var(--gold);} .hl-green{color:var(--green-lt);} .hl-red{color:var(--red-lt);}
   .hl-blue{color:var(--blue);} .hl-orange{color:var(--orange);} .hl-team{color:var(--team);} .hl-tcz{color:var(--tcz);}
   .summary-box{background:rgba(68,170,204,0.1);border:1px solid var(--team);border-left:4px solid var(--team);border-radius:2px;padding:14px 16px;margin:12px 0;font-size:13px;line-height:1.6;text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;color:var(--white);}
   .summary-box .label{font-size:10px;color:var(--team);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;text-shadow:1px 1px 0 #000;}
@@ -58,10 +59,6 @@
   .col-box ul li{font-size:11px;color:var(--dim);padding:3px 0 3px 14px;position:relative;text-shadow:1px 1px 0 #000;border-bottom:1px solid rgba(90,74,42,.2);}
   .col-box ul li:last-child{border-bottom:none;}
   .col-box ul li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:7px;top:6px;}
-  .team-size-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:12px 0;}
-  .team-slot{border:1px solid var(--border);border-radius:2px;padding:8px 4px;text-align:center;background:rgba(0,0,0,.3);}
-  .team-slot .slot-icon{font-size:16px;display:block;margin-bottom:4px;}
-  .team-slot .slot-label{font-size:9px;color:var(--dim);text-shadow:1px 1px 0 #000;line-height:1.3;}
   .combat-zone-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0;}
   .zone-box{border:1px solid var(--border);border-radius:2px;padding:12px;text-align:center;}
   .zone-box.singles{border-top:3px solid var(--green);}
@@ -90,8 +87,7 @@
 
 <div class="hero">
   <span style="font-size:36px;display:block;margin-bottom:12px;"><img src="../assets/multicombat.png" alt="Wilderness Teams" style="height:36px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
-  <h1>Wilderness Teams</h1>
-  <p class="tagline">An official small-group party system for the Wilderness, with anti-friendly-fire, a recruitment board, and enforced trust between teammates.</p>
+  <h1>Wildy Teams</h1>
   <div class="hero-divider"></div>
 </div>
 
@@ -100,13 +96,9 @@
 
 <!-- WHAT IS IT -->
 <div class="section">
-  <div class="sec-head">What Is It?</div>
-  <div class="sec-sub">The simplest possible summary</div>
+  <div class="sec-head">What Are Wildy Teams?</div>
   <hr class="sec-divider">
-  <div class="summary-box">
-    <span class="label">One sentence</span>
-    Wilderness Teams let up to <span class="hl-team">6 players</span> officially party together in the Wilderness, with <span class="hl-green">anti-friendly-fire</span>, a <span class="hl-gold">recruitment board</span>, and a proximity anchor system that keeps teams honest.
-  </div>
+  <p>Wilderness Teams let up to <span class="hl-team">6 players</span> officially party together in the Wilderness, with <span class="hl-green">anti-friendly-fire</span>, and a <span class="hl-gold">recruitment board</span>.</p>
   <p>The Wilderness has always been built around solo players and large clans. There is almost nothing in between. Wilderness Teams fills that gap, giving small groups of 2 to 6 players a structured way to engage with Wilderness content together without needing to be part of a clan or already knowing the people they're playing with.</p>
   <p>The core principle is <span class="hl-green">enforced trust</span>. The anti-friendly-fire rule means your teammates cannot betray you in combat, removing the single biggest reason players refuse to team with strangers in the Wilderness.</p>
 </div>
@@ -114,34 +106,27 @@
 <!-- TEAM SIZE -->
 <div class="section">
   <div class="sec-head">Team Size: Up to 6 Players</div>
-  <div class="sec-sub">Why 6 specifically?</div>
   <hr class="sec-divider">
-  <div class="team-size-grid">
-    <div class="team-slot"><span class="slot-icon"><img src="../assets/multicombat.png" alt="" style="height:18px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span><div class="slot-label">PKer</div></div>
-    <div class="team-slot"><span class="slot-icon">🧙</span><div class="slot-label">Mager</div></div>
-    <div class="team-slot"><span class="slot-icon">🏹</span><div class="slot-label">Ranger</div></div>
-    <div class="team-slot"><span class="slot-icon">🐉</span><div class="slot-label">PvMer</div></div>
-    <div class="team-slot"><span class="slot-icon">🛡</span><div class="slot-label">Tank</div></div>
-    <div class="team-slot"><span class="slot-icon">❤</span><div class="slot-label">Healer</div></div>
+  <div style="text-align:center;margin:12px 0;">
+    <img src="../assets/Cmb_triangle-1-.webp" alt="Combat triangle" style="max-width:100%;height:auto;image-rendering:pixelated;">
   </div>
   <ul class="rules-list">
     <li><span class="hl-gold">6 corresponds to the combat triangle x2</span> - two of each combat style, which is a natural ceiling for a balanced small group.</li>
     <li>If unlimited, clans would abuse it to prevent friendly fire en-masse, or players could make a "safe Wilderness" by putting everyone on the same world in one mega-team.</li>
-    <li>6 players is roughly the upper limit a solo player can <span class="hl-green">realistically escape from</span>, keeping individual encounter stakes meaningful.</li>
-    <li>It <span class="hl-gold">encourages intelligent team composition</span>. Will you bring 6 PvMers? 6 PKers? A mix? A lunars support with 2 ancients? Every choice matters.</li>
-    <li>The <span class="hl-team">5-player variant</span> (independently proposed by Danil445) is also viable. Wilderness boss drops split between 10 players, making two teams of 5 a clean fit.</li>
+    <li>6 players is roughly the upper limit a solo player can <span class="hl-green">realistically escape from</span> if they know what they are doing and are sufficiently leveled, keeping it risky, but not impossible.</li>
+    <li>It <span class="hl-gold">encourages intelligent team composition</span>. Will you bring 6 PvMers? 6 PKers? A mix? A lunars support with 2 ancients? Maybe someone will find a new meta?</li>
+    <li>The <span class="hl-team">5-player variant</span> (independently proposed by Danil445) is also viable. Wilderness boss drops split between 10 players, making two teams of 5 a clean fit. The recent Deadman: All Stars also featured teams of 5s.</li>
   </ul>
 </div>
 
 <!-- KEY RULES -->
 <div class="section">
   <div class="sec-head">Key Rules</div>
-  <div class="sec-sub">How it actually works</div>
   <hr class="sec-divider">
   <ul class="rules-list">
     <li>Team members <span class="hl-green">cannot attack each other</span>, including multi-target attacks like Ancient Magicks. Full anti-friendly-fire.</li>
     <li>Teams have a <span class="hl-gold">dedicated team chat</span> separate from friends chat and clan chat.</li>
-    <li>A <span class="hl-gold">recruitment board</span> near Edgeville and other popular locations lets players advertise their team, similar to the POH advertisement board. It advertises across all worlds and includes a quick-hop button.</li>
+    <li>A <span class="hl-gold">recruitment board</span> near Edgeville, the Ferox Enclave, and Mage Bank lets players advertise their team, similar to the POH advertisement board. It advertises across all worlds and includes a quick-hop button.</li>
     <li>You can only <span class="hl-red">manually leave or be kicked</span> from a team while in a safe zone, preventing 5 players from luring a 6th and un-teaming mid-Wilderness for a kill.</li>
     <li><span class="hl-team">Proximity Rule:</span> The Team Leader is the "Anchor Player". You are automatically removed from the team if you go farther than <span class="hl-gold">1.5x a render distance</span> from the Anchor. If the Anchor dies, the next player in the list becomes the Anchor.</li>
     <li>At stairs, ladders, dungeon entrances, and teleport levers, the proximity distance is counted from the <span class="hl-gold">point of entry</span>, and ignores vertical elevation.</li>
@@ -155,48 +140,53 @@
 
 <!-- LURING PREVENTION -->
 <div class="section">
-  <div class="sec-head">The Luring Problem - Solved</div>
-  <div class="sec-sub">Why anti-friendly-fire is the critical ingredient</div>
+  <div class="sec-head">How Do Wildy Teams Prevent Luring?</div>
   <hr class="sec-divider">
-  <p>Without anti-friendly-fire, Wilderness Teams would be a luring tool. Here is the scam that would otherwise be possible:</p>
-  <div class="scenario-box">
-    <div class="sc-head">❌ Without Anti-Friendly-Fire</div>
-    A player forms a team of 3 and recruits a wealthy stranger. Separately, 6 of their friends form another team and "organically" encounter the group in the Wilderness. The friends then kill the wealthy stranger while the original team pretends to fight back. The stranger loses their bank. Their teammates walk away clean.
-  </div>
-  <div class="scenario-box" style="border-left:3px solid var(--green);">
-    <div class="sc-head" style="color:var(--green);">✔ With Anti-Friendly-Fire</div>
-    This scam cannot happen because your teammates physically cannot deal damage to you. The anti-friendly-fire rule is what transforms Wilderness Teams from a luring vector into a genuine trust system. Strangers can now team up with confidence.
-  </div>
+  <p>I've identified 2 major potential ways that Wildy Teams could be used to scam and lure players... that is if I didn't already catch them and safeguard against them.</p>
+
+  <div class="scam-head">Scam 1: Teaming Up With Randoms</div>
+  <p><span class="hl-gold">1. Anti-Friendly-Fire</span> prevents the members of your team of perfect strangers from killing each other.</p>
+  <p>Without it, you could team up with randoms, but what is going to stop them from just killing you, or you killing them?</p>
+
+  <div class="scam-head" style="margin-top:28px;">Scam 2: "Confidence Game" Scam</div>
+  <p><span class="hl-gold">2.</span> Let's say you have a group of you and 8 of your friends (9 players).</p>
+  <p>You form a team of 3, between you, a friend, and a wealthy stranger.</p>
+  <p>Your other 6 friends form a second team and "organically" encounter your team of 3 in the Wilderness.</p>
+  <p>The 6 friends then kill the wealthy stranger while your team of 3 pretends to fight back. The wealthy stranger loses their bank. You and your friends walk away with a nice split.</p>
+  <p>The thing that prevents this type of scam is <span class="hl-gold">Blessed Status</span>.</p>
+  <p>If you are not able or willing to trust a team of strangers, you can choose to only join a <span class="hl-green">"Blessed Team"</span>, thus ensuring that it's impossible for them to team up and kill you for your items.</p>
+  <p>They CAN still run this kind of scam for your Blessed death fee, which is just gold, but that's a significantly less worthwhile scam unless you are willing to enter the Wilderness in something like a max set with a team of strangers.</p>
+  <p>Anything further than that cannot really be prevented imo, as likely anything else someone could do to lure or scam you is something that can already be done today and isn't a problem exclusive to Wildy Teams.</p>
+  <p style="color:#ffe066;">But if you can think of any such scams, exploits, or lures, I would love to hear your feedback so we can iterate on the idea more.</p>
 </div>
 
 <!-- BENEFITS -->
 <div class="section">
   <div class="sec-head">Who Does This Help?</div>
-  <div class="sec-sub">Benefits by player type</div>
   <hr class="sec-divider">
   <div class="benefits">
     <div class="benefit-box">
-      <div class="b-head"><span style="font-size:14px;">🧑‍🤝‍🧑</span> The Solo PvMer</div>
+      <div class="b-head"><img src="../assets/Singles_plus.webp" alt="" style="height:20px;width:auto;image-rendering:pixelated;vertical-align:middle;"> Solo PvMers</div>
       <p>Can now team up with complete strangers safely. Being 1 of 6 targets reduces your individual chance of being singled out. You are no longer alone in a hostile environment.</p>
     </div>
     <div class="benefit-box">
-      <div class="b-head"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAADFBMVEUAAADPuZn+/v82LSGrQkZbAAAAAXRSTlMAQObYZgAAAI1JREFUeNplkTEShDAMxCzp/3++IsBBosaZVZH1eB5azE6l6uEKF2wqvOEwgMBpqKg4TJfpa1aoLn0W6KwQqJUKvXcHXABVzZRKYWY+H054qcwoUGkCFAKfCTQVIGtWuObM5aD+r3c9bvYjVaiccd5UfWMWf1mf1S9nTereU7VJ956ANPXkb1cze/+5oh9FxgObyeaCuQAAAABJRU5ErkJggg==" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;"> The PKer</div>
+      <div class="b-head"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAADFBMVEUAAADPuZn+/v82LSGrQkZbAAAAAXRSTlMAQObYZgAAAI1JREFUeNplkTEShDAMxCzp/3++IsBBosaZVZH1eB5azE6l6uEKF2wqvOEwgMBpqKg4TJfpa1aoLn0W6KwQqJUKvXcHXABVzZRKYWY+H054qcwoUGkCFAKfCTQVIGtWuObM5aD+r3c9bvYjVaiccd5UfWMWf1mf1S9nTereU7VJ956ANPXkb1cze/+5oh9FxgObyeaCuQAAAABJRU5ErkJggg==" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;"> PKers</div>
       <p>More players in the Wilderness means more activity. Small PKing teams finally have an official system. There used to be singles teams before the PJ timer change. This brings that back.</p>
     </div>
     <div class="benefit-box">
-      <div class="b-head"><span style="font-size:14px;">🆕</span> The New Player</div>
+      <div class="b-head"><img src="../assets/blessed-tier-0.png" alt="" style="height:20px;width:auto;image-rendering:pixelated;vertical-align:middle;"> New Players</div>
       <p>Can team up with more experienced players who are incentivised to teach them, because a better-performing teammate helps the whole team. Real apprenticeship through actual gameplay.</p>
     </div>
     <div class="benefit-box">
-      <div class="b-head"><span style="font-size:14px;">🏰</span> The Clan</div>
+      <div class="b-head"><img src="../assets/multicombat.png" alt="" style="height:20px;width:auto;image-rendering:pixelated;vertical-align:middle;"> Clans</div>
       <p>Clans can advertise through the recruitment board. Clan members can sub-divide into teams of 6 and benefit from anti-friendly-fire within their sub-teams. A great recruitment pipeline for new members.</p>
     </div>
     <div class="benefit-box">
-      <div class="b-head"><span style="font-size:14px;">👥</span> Friends Groups</div>
+      <div class="b-head"><img src="../assets/Saradomin_banner.webp" alt="" style="height:20px;width:auto;image-rendering:pixelated;vertical-align:middle;"> Friend Groups</div>
       <p>Already have 2-6 friends you want to PK or boss with? This system is perfect for you exactly as described. Anti-friendly-fire just makes it official and reliable.</p>
     </div>
     <div class="benefit-box">
-      <div class="b-head"><span style="font-size:14px;">⚙</span> Jagex</div>
+      <div class="b-head"><img src="../assets/Jagex_moderator_crown.webp" alt="" style="height:10px;width:auto;image-rendering:pixelated;vertical-align:middle;"> Jagex</div>
       <p>Turns toxic clan territory behaviour into legitimate gameplay with rules. Gives Jagex a social infrastructure to build future Wilderness content around. Mostly uses existing systems. Lower dev cost than a new boss or area.</p>
     </div>
   </div>
@@ -204,14 +194,24 @@
 
 <!-- CONCEPTUAL POINT -->
 <div class="section">
-  <div class="sec-head">The Core Design Insight</div>
-  <div class="sec-sub">What Wilderness Teams is actually doing</div>
+  <div class="sec-head">Core Design Insights</div>
   <hr class="sec-divider">
   <p>If you are alone in the Wilderness, you are targeted <span class="hl-red">100% of the time</span> when a PKer finds you. If you have one teammate, that drops to <span class="hl-orange">50%</span>. With 5 teammates it is <span class="hl-green">~17%</span>.</p>
   <p>Wilderness Teams reduces individual risk not by changing the rules of engagement, but by <span class="hl-green">dividing it across more players</span>. The Wilderness becomes less hostile not because it gets safer, but because you are no longer the only target.</p>
-  <p>This same principle applies to any Wilderness content designed to reward cooperative play. If a Wilderness boss rewarded better GP per hour for groups, players would naturally gravitate toward forming impromptu alliances, even with strangers. Wilderness Teams provides the <span class="hl-gold">social infrastructure</span> to make that happen consistently rather than accidentally.</p>
+  <p>This kind of &ldquo;benefit&rdquo; can be done without Wilderness Teams.</p>
+  <p>Any PvM or skilling activity that encourages and benefits players to farm together would definitely be a good design.</p>
+  <p>Like if a boss rewards you with <span class="hl-gold">better gp/h</span> for killing it with more players, that creates the possibility of players emergently and cooperatively farming it together.</p>
+  <p>Most bosses in the game punish you for killing them with a friend because then whoever does more damage gets to steal the drop or if the drop is split based on damage then, someone is going to consistently get less gold over time.</p>
+  <p>Like Royal Titans for example feel this way. I did those with a friend of mines that was maxed, and although we killed them a lot faster than I do solo, my friend was really stealing most of the drop potential.</p>
+  <p>I wasn&rsquo;t really sure if it was really profiting me any better than doing it solo.</p>
+  <p>If we apply this to the Wilderness, it would have to be genuinely better for everyone to where if someone appears out of nowhere and starts helping you kill that boss, you know that it&rsquo;s also earning you more gold no matter what.</p>
+  <p>You won't know if this guy who comes up to you just wants to kill you, or if they will spontaneously team up with you.</p>
+  <p>But the possibility that they might be friendly in the Wilderness would make for a possible <span class="hl-green">positive experience</span> for players to form a sort of temporary impromptu alliance.</p>
+  <p>Then when an actual PKer shows up or even a small team of PKers shows up, they&rsquo;re going to have to choose between 5 or 6 people to target. And maybe your impromptu alliance could fight back and try to save you.</p>
+  <p>But anyway my point is, there is sort of an underlying ingredient here that encouraging <span class="hl-gold">cooperative designs</span> would probably be great for the Wilderness.</p>
+  <p>And Wildy Teams would be the most simple and most universal way to encourage that.</p>
   <div class="note-box green">
-    <span class="hl-green">Goal:</span> PKers should become a reason players get <span class="hl-green">into</span> PvP rather than a reason players stay out of it. Wilderness Teams incentivises PKers to teach new players, because a better teammate directly benefits the PKer they are playing alongside.
+    <span class="hl-green">Goal:</span> PKers could become a reason players get <span class="hl-green">into</span> PvP rather than a reason players stay out of it. Wilderness Teams incentivises PKers to teach new players, because a better teammate directly benefits the PKer they are playing alongside.
   </div>
 </div>
 

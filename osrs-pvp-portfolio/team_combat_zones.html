@@ -14,7 +14,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
     --bg:#0d0800;--stone:#2a2010;--panel:#1e1608;--border:#5a4a2a;
-    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--red:#cc2222;
+    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--red:#cc2222;--red-lt:#ff6b6b;
     --blue:#80c0ff;--orange:#ff8c00;--purple:#cc88ff;--white:#f0e8d0;--dim:#a89060;
     --team:#44aacc;--tcz:#cc8800;--singles:#44aa44;--multi:#cc2222;
   }
@@ -31,7 +31,7 @@
   .sec-divider{border:none;border-top:1px dashed var(--border);margin:10px 0 14px;}
   p{font-size:12.5px;line-height:1.65;color:var(--white);text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;margin-bottom:10px;}
   p:last-child{margin-bottom:0;}
-  .hl-gold{color:var(--gold);} .hl-green{color:var(--green);} .hl-red{color:var(--red);}
+  .hl-gold{color:var(--gold);} .hl-green{color:var(--green);} .hl-red{color:var(--red-lt);}
   .hl-blue{color:var(--blue);} .hl-orange{color:var(--orange);} .hl-team{color:var(--team);} .hl-tcz{color:var(--tcz);}
   .summary-box{background:rgba(204,136,0,.1);border:1px solid var(--tcz);border-left:4px solid var(--tcz);border-radius:2px;padding:14px 16px;margin:12px 0;font-size:13px;line-height:1.6;text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;color:var(--white);}
   .summary-box .label{font-size:10px;color:var(--tcz);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;text-shadow:1px 1px 0 #000;}
@@ -94,26 +94,19 @@
 <!-- THE PROBLEM WITH MULTI -->
 <div class="section">
   <div class="sec-head">The Problem With Multi</div>
-  <div class="sec-sub">Why multi-combat zones are dead content for most players</div>
   <hr class="sec-divider">
   <p>Multi-combat zones are effectively <span class="hl-red">clan-only content</span>. A solo player or a small team entering a multi zone against an organised clan faces a guaranteed loss. It is <span class="hl-red">100% risk with 0% reward</span>. There is no meaningful counter-play when 30+ players can pile you simultaneously.</p>
   <p>PKers have told me that even small teams of experienced players avoid multi zones specifically because they know they will get completely overwhelmed by clans. This means an <span class="hl-red">entire half of the Wilderness map</span> is functionally inaccessible to anyone who is not a large PvP clan.</p>
-  <div class="summary-box">
-    <span class="label">The core design question</span>
-    How do you balance a PvP encounter where anywhere from 1 to 2,000 players could join in at any moment? <span class="hl-tcz">You don't.</span> You change the zone type so the number of combatants is predictable and fair from the start.
-  </div>
+  <p>How do you balance a PvP encounter where anywhere from 1 to 2,000 players could join in at any moment? <span class="hl-tcz">You don't.</span> You change the zone type so the number of combatants is predictable and fair from the start.</p>
 </div>
 
 <!-- WHAT IS A TEAM COMBAT ZONE -->
 <div class="section">
   <div class="sec-head">What Is a Team Combat Zone?</div>
-  <div class="sec-sub">The new zone type explained</div>
   <hr class="sec-divider">
   <p>A Team Combat Zone (TCZ) sits between singles and multi. The core rule is simple:</p>
-  <div class="note-box" style="border-left-color:var(--tcz);background:rgba(204,136,0,.08);font-size:13px;text-align:center;">
-    Any <span class="hl-tcz">one group</span> can be attacked by a maximum of <span class="hl-tcz">6 other players</span> at a time.
-  </div>
-  <p style="margin-top:12px;">Every Wilderness Team counts as one group. Every solo player counts as their own group. The cap of 6 applies regardless of how the opposing players are organised.</p>
+  <p>Any <span class="hl-tcz">one group</span> can be attacked by a maximum of <span class="hl-tcz">6 other players</span> at a time.</p>
+  <p>Every Wilderness Team counts as one group. Every solo player counts as their own group. The cap of 6 applies regardless of how the opposing players are organised.</p>
 
   <table class="zone-table">
     <tr>
@@ -158,7 +151,6 @@
 <!-- HOW THE CAP WORKS -->
 <div class="section">
   <div class="sec-head">How the 6-Player Cap Works</div>
-  <div class="sec-sub">The specific rules that make it fair</div>
   <hr class="sec-divider">
   <ul class="rules-list">
     <li>Every Wilderness Team counts as <span class="hl-gold">one group</span>. Every solo player counts as their own group of one.</li>
@@ -193,24 +185,23 @@
 <!-- THREE ZONES -->
 <div class="section">
   <div class="sec-head">The New Three-Zone System</div>
-  <div class="sec-sub">Singles, Team Combat, and Multi - each with its own purpose</div>
   <hr class="sec-divider">
   <p>The intention is for different content to be designed around each zone type, with appropriate activities matched to each combat format.</p>
   <div class="benefits">
     <div class="benefit-box" style="border-top:3px solid var(--singles);">
-      <div class="b-head" style="color:var(--singles);"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Singles</div>
+      <div class="b-head" style="color:var(--singles);"><img src="../assets/Singles_plus.webp" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Singles</div>
       <p>For solo PvM, solo PKing, and 1v1 content. Unchanged from today. The Wilderness entry zones and most single-way areas remain as they are.</p>
     </div>
     <div class="benefit-box" style="border-top:3px solid var(--team);">
-      <div class="b-head" style="color:var(--team);">👥 Team Combat Zone</div>
+      <div class="b-head" style="color:var(--team);"><img src="../assets/Saradomin_banner.webp" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Team Combat Zone</div>
       <p>For small groups of 2-6. Wilderness bosses, the Rev Caves, and contested mid-Wilderness areas. No more 30v1 clanbangs on PvMers. The content these zones contain becomes viable for non-clan players.</p>
     </div>
     <div class="benefit-box" style="border-top:3px solid var(--multi);">
-      <div class="b-head" style="color:var(--multi);">🏰 Multi</div>
+      <div class="b-head" style="color:var(--multi);"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Multi</div>
       <p>Reserved for content specifically designed for large clan warfare. Deep Wilderness clan areas, the Forinthry Castle zone, and eventually Wilderness Expansion 2.0 territory beyond the Bridge of Fate.</p>
     </div>
     <div class="benefit-box" style="grid-column:1/-1;border-top:3px solid var(--tcz);">
-      <div class="b-head" style="color:var(--tcz);">🧭 Visual Zone Indicators</div>
+      <div class="b-head" style="color:var(--tcz);"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> Visual Zone Indicators</div>
       <p>The dividing lines between zone types must be visually obvious. Changed floor tile colours near every zone boundary. This has been commonly requested for years and becomes essential once a third zone type is added. Fairness requires that players always know exactly which zone they are in.</p>
     </div>
   </div>
@@ -219,15 +210,20 @@
 <!-- PROOF OF CONCEPT -->
 <div class="section">
   <div class="sec-head">Starting Small - A Proof of Concept</div>
-  <div class="sec-sub">We don't need a full restructure to test this</div>
   <hr class="sec-divider">
   <p>A full restructure of multi and singles zones across the entire Wilderness is a significant undertaking, and it is reasonable for Jagex to want evidence it works before committing to that scope.</p>
-  <p>The right approach is to <span class="hl-tcz">trial it in one isolated location first</span>. Choose a single area (one boss arena, one cave, one contested PvM spot), convert it to a Team Combat Zone, and observe what happens to player activity there.</p>
+  <p>The right approach is to <span class="hl-tcz">trial it in one isolated location first</span>. Choose a single area, convert it to a Team Combat Zone, and observe what happens to player activity there.</p>
   <div class="scenario-box" style="border-left:3px solid var(--tcz);">
-    <div class="sc-head" style="color:var(--tcz);">Proposed Trial: Wilderness Boss Arenas</div>
-    The Wilderness boss arenas are a natural candidate. They are currently multi, which means clans can and do crash solo PvMers and small groups farming them. Converting one boss arena to a Team Combat Zone would immediately make that boss accessible to small groups, with measurable before/after activity data.
+    <div class="sc-head" style="color:var(--tcz);">Potential Proposed Trial Locations</div>
+    <p style="font-size:inherit;margin-bottom:8px;">I'm open to ideas for where we might test the concept first. It's important to note that Team Combat Zones on its own will not increase activity, because it also depends on the reward incentive of the area.</p>
+    <p style="font-size:inherit;margin-bottom:8px;">Scorpio comes to mind. It's not a place many people really go to, so it could do with some kind of drop buff, along with testing this out.</p>
+    <p style="font-size:inherit;margin-bottom:8px;">Or a portion of the Rev Caves could be made into Team Combat Zones, in the more dangerous, deeper level areas.</p>
+    <p style="font-size:inherit;margin-bottom:0;">I would avoid Wilderness Bosses for this, because they already see a lot of multi and clan activity.</p>
   </div>
-  <p>If activity increases and feedback is positive, the case for expanding TCZs to other areas of the Wilderness becomes evidence-based rather than theoretical. If it needs adjustment, the change is contained to one area.</p>
+  <p>If activity increases and feedback is positive, that's a good sign to consider expanding Team Combat Zones to more areas of the Wilderness.</p>
+  <p>If it needs adjustment, the change is contained to one area.</p>
+  <p>If it outright just doesn't seem to work, then it's much easier to remove from the game in retrospect when it's isolated to one spot.</p>
+  <p>However, we'd have to be sure that it's the Team Combat Zone we don't like and not a different problem like poor reward incentive of the content in the area or some other kind of design flaw.</p>
   <div class="note-box green">
     <span class="hl-green">Important:</span> The upper-right Wilderness, currently the most actively used area by Wilderness clans, should remain multi for now. TCZs are not about removing clan content. They are about <span class="hl-green">adding content that works without clans</span>.
   </div>
@@ -236,7 +232,6 @@
 <!-- JAGEX BENEFITS -->
 <div class="section">
   <div class="sec-head">Why This Helps Jagex</div>
-  <div class="sec-sub">The developer perspective</div>
   <hr class="sec-divider">
   <ul class="rules-list">
     <li><span class="hl-gold">Solves an unsolvable balancing problem.</span> It is impossible to balance content for both 1 player and 2,000 players simultaneously. Team Combat Zones give Jagex a predictable player count to design around.</li>
