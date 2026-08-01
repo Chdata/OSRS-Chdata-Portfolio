@@ -34,6 +34,7 @@
   --blue:      #80c0ff;
   --orange:    #ffcc8e;
   --purple:    #cc88ff;
+  --purple-lt: #ddb8ff;
   --white:     #f0e8d0;
   --dim:       #a89060;
   --sara:      #d0e1f1;
@@ -105,6 +106,41 @@ body {
 }
 .section:last-child { border-bottom: none; }
 
+.ladder {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  align-items: center;
+  margin: 16px 0;
+}
+.ladder .lad-ic {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 76px;
+  min-height: 32px;
+}
+.ladder .lad-ic img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.ladder .lad-tx {
+  font-size: 18.0px;
+  color: var(--white);
+  padding: 7.5px 0;
+  border-bottom: 1.5px solid rgba(90,74,42,0.25);
+}
+.ladder .lad-tx:last-child { border-bottom: none; }
+.subsec-head {
+  font-size: 20.0px;
+  color: var(--gold);
+  text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000;
+  margin: 34px 0 8px;
+  letter-spacing: 0.04em;
+}
 .sec-head {
   font-size: 27.0px;
   color: var(--green);
@@ -141,6 +177,8 @@ p:last-child { margin-bottom: 0; }
 .hl-blue   { color: var(--blue); }
 .hl-orange { color: var(--orange); }
 .hl-sara   { color: var(--sara); }
+.hl-fullwhite { color: #ffffff; }
+.hl-purple { color: var(--purple-lt); }
 
 /* ── ONE-SENTENCE SUMMARY BOX ── */
 .summary-box {
@@ -298,6 +336,7 @@ p:last-child { margin-bottom: 0; }
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 .rules-list li:last-child { border-bottom: none; }
+.rules-list li .sub-p { display: block; margin-top: 9px; }
 .rules-list li::before {
   content: '';
   position: absolute;
@@ -457,17 +496,248 @@ p:last-child { margin-bottom: 0; }
   <div class="sec-head">The #1 Fix To The Wilderness</div>
   <hr class="sec-divider">
 
-  <p>Blessed Status is <span class="hl-sara">PvM deaths in the Wilderness</span>, except the item reclamation fee is paid to the PKer who killed you, and it costs a minimum risk of <span class="hl-gold">100k</span> to enable.</p>
+  <p><span class="hl-sara">Blessed Status</span> is my main suggestion, and the most important one. It covers almost all of the topics and problems I talk about in regards to Wilderness design.</p>
 
-  <p>
-    <span class="hl-red">Skulling</span> makes you lose everything on death.
-    <span class="hl-sara">Blessed Status</span> lets you keep everything, but you pay a <span class="hl-orange">5% death fee</span> proportional to the gear value you brought into the Wilderness, and a <span class="hl-orange">25% death fee</span> to keep any items you obtain within the Wilderness.
-    It is the <span style="color:#b9f6ca;">opposite of Skulled Status</span>, and has a Saradomin symbol overhead, just as Skulling is a symbol of Zamorak.
-  </p>
+  <p>Out of any suggestion I'm going to tell you today, aside from <span class="hl-gold">PvP Update Ranking Polls</span>, this is the most impactful and important possible Wilderness update we could see.</p>
 
-  <p>
-    Blessed Status is enabled and disabled at NPC monks near Wilderness entry points (Wildy Ditch, Ferox Enclave, Mage Arena). Costs <span class="hl-gold">100k</span> each activation. Leaving the Wilderness temporarily disables it until you re-enter. Dying removes it, requiring it to be activated again.
-  </p>
+  <div class="subsec-head">So what is Blessed Status?</div>
+
+  <p><span class="hl-sara">Blessed Status</span> is extremely simple. It's the <span style="color:#b9f6ca;">opposite of Skulled Status</span>.</p>
+
+  <ul class="rules-list">
+    <li>It's a Wilderness-only overhead status that costs <span class="hl-gold">100k</span> gold to enable.</li>
+    <li>Where <span class="hl-red">Skulling</span> makes you lose everything on death, <span class="hl-sara">Blessed Status</span> lets you keep everything on death for a fee, utilizing <span class="hl-blue">Death's Coffers</span>, pretty much the same way as a PvM death.</li>
+    <li>You pay a <span class="hl-orange">5% fee</span> to keep the items you brought into the Wilderness.<br>You pay a <span class="hl-orange">25% fee</span> to keep any items you obtained after entering the Wilderness.</li>
+    <li>Your death fee gets paid to the player who killed you, if you died to a player. This fee includes your <span class="hl-gold">100k</span> activation fee as a minimum risk.</li>
+    <li><span class="hl-gold">Self-Defense Rule:</span> Additionally, you can only fight in self-defence, as if you have the "Skull Prevention" option always enabled.</li>
+    <li><span class="hl-gold">Loot-Forfeiting Rule:</span> As Blessed Status is more of a "forgiving" status, and it protects the user's items from being lost on death (for a fee), when a Blessed player kills anyone else, that player also does not lose their items on death (for a fee). Even if they were Skulled.</li>
+    <li><span class="hl-gold">Blessed Status</span> is enabled and disabled at NPC monks near Wilderness entry points (Wildy Ditch, Ferox Enclave, Mage Arena).</li>
+    <li>Leaving the Wilderness temporarily <span class="hl-green">toggles it off</span> until you re-enter. Dying <span class="hl-red">removes</span> it, requiring it to be activated again for another <span class="hl-gold">100k</span>.</li>
+  </ul>
+</div>
+
+<!-- HISTORY, ETYMOLOGY & LORE -->
+<div class="section">
+  <div class="sec-head">History, Etymology, &amp; Lore</div>
+  <hr class="sec-divider">
+
+  <p>The original idea for Blessed Status came from <span class="hl-gold">Soffan</span>, formerly an artist at Jagex.</p>
+
+  <p>When I first saw this concept, it really sparked something for me, especially the rules by which it was set up.</p>
+
+  <div style="margin:18px 0;text-align:center;">
+    <img src="../quotes/BlessedStatusCrop.png" alt="Soffan's original Blessed Status concept" style="max-width:100%;height:auto;border:1px solid var(--border);">
+  </div>
+
+  <p>I really think she has come up with the basis of something that could save the Wilderness, and I really believe we can make this a great success story.</p>
+
+  <p>I have since come up with my own version of it more tailored to the exact problems of the Wilderness we see today.</p>
+
+  <p>I also commissioned a RuneLite plugin from user <span class="hl-gold">opaf</span> to visualize what this could look like in-game:</p>
+
+  <div style="margin:18px 0;text-align:center;">
+    <video src="../quotes/BlessedStatus.mp4" controls loop playsinline preload="metadata" style="max-width:100%;height:auto;border:1px solid var(--border);"></video>
+  </div>
+
+  <br>
+
+  <p>For the icon itself, it better be fitting for RuneScape, because all I did was resize the Saradomin Symbol emoticon from the official RuneScape Steam Marketplace to make this.</p>
+
+  <div style="margin:18px 0;text-align:center;">
+    <img src="../quotes/SteamMarket.png" alt="Saradomin Symbol emoticon on the RuneScape Steam Marketplace" style="max-width:100%;height:auto;border:1px solid var(--border);">
+  </div>
+
+  <br>
+
+  <p>The <span class="hl-fullwhite">Skull Status</span> symbol represents <span class="hl-red">Zamorak</span> and an alignment towards evil, so <span class="hl-gold">Blessed Status</span> makes sense as a <span class="hl-sara">Saradomin</span> symbol and represents an alignment towards good.</p>
+
+  <div style="margin:18px 0;text-align:center;">
+    <img src="../quotes/Trivia.png" alt="Skull status trivia" style="max-width:100%;height:auto;border:1px solid var(--border);">
+  </div>
+</div>
+
+<!-- FURTHER EXPLANATION -->
+<div class="section">
+  <div class="sec-head">Further CRITICAL Explanation</div>
+  <hr class="sec-divider">
+
+  <p>There is a lot more I have to tell you about <span class="hl-sara">Blessed Status</span>.</p>
+
+  <p>If I had to describe Blessed Status to someone in one sentence, I would say, "Blessed Status is PvM deaths in the Wilderness but the death fee is paid to the PKer and it costs a minimum risk of <span class="hl-gold">100k</span>."</p>
+
+  <p>However - I would caution anyone from trying to teach what Blessed Status is in just one sentence, because if you tell the OSRS community "Blessed Status is PvM death coffer for Wildy", players are going to make <span class="hl-orange">A LOT</span> of assumptions about what that actually means or why it's important, and therefore will have more resistance to the idea.</p>
+
+  <p>That is why I put in so much work putting a video together to explain why this is what the Wilderness needs.</p>
+
+  <p>I think that simplistic way of describing it would make sense during a time where it's already established in the game, but for the purpose of pitching this as a new idea to Old School RuneScape, that is leaving out a lot of important details.</p>
+
+  <p>If it were already in-game, it would be a lot simpler to just try it and read a short NPC explanation that summarizes it.</p>
+
+  <p>But as a new concept I'm pitching to the developers of the game, they need to know a lot of the specific details about how it would work in <span class="hl-red">extreme detail</span>.</p>
+
+  <p>And for me to explain ALL of the considerations for the mechanics of Blessed Status, you will find that it's actually quite a complex, well thought-out proposal I've come up with.</p>
+
+  <p>I hope you will appreciate that, if I were to explain to you all of the extremely niche mechanics of how <span class="hl-red">Skulled Status</span> works, it would be equally as complex as the inner workings of Blessed Status.</p>
+
+  <p class="hl-purple">For example, we all know that Skulling is applied by initiating attack on another player.</p>
+
+  <ul class="rules-list">
+    <li>But do you know if you can skull on another player who is already skulled? Or does it not count because the other guy already skulled on someone, or initiated attack on someone else? Like that other guy is already an initiator, so can you still skull on him?</li>
+    <li>Do you know how long you have to wait, after someone skulls on you, for you to be able to initiate attack back on them and have it skull you too? Or is that even possible? Or can you just not skull on them even if you wait for hours? And does dying clear whatever flags the possibility of skulling on someone?</li>
+    <li>Do you know off the top of your head if <span class="hl-blue">Skull Prevention</span> will prevent you from Ice Barraging someone who skulled on you, if they have other players around them and you're all in a multi-combat zone?</li>
+    <li>Do you know off the top of your head all of the exceptions to items lost on death from Skulling? Because there are more exceptions than using the Protect Item prayer.</li>
+    <li>Do you know off the top of your head how long the Skull stays over your head before it expires? And do you know if attacking more players refreshes that time? And do you know the exception to the Skull timer where it actually lasts for a different amount of time?</li>
+    <li>Do you know off the top of your head, if you're in multi and two players attack each other and one skulls, can you then skull on the skulled player? Or does it just not work like that? I don't know.</li>
+  </ul>
+
+  <p>I hope you can appreciate that, although <span class="hl-red">Skulling</span> is extremely simple to understand, if you get down to the specifics, it is actually pretty in-depth and complex, requiring a lot of extremely specific rules that you don't really need to think about unless you're the guy who coded the system.</p>
+
+  <p>Similarly, I hope you can appreciate that Blessed Status is kind of a similar deal. There is a very simple way to summarize what it is and what it does.</p>
+
+  <p><span class="hl-orange">HOWEVER</span>, there is a big list of rules and mechanics for how it works.</p>
+
+  <p>And any Jagex developer that may listen to my video or read this page, is going to need to know all of the <span class="hl-gold">RULES</span> of Blessed Status.</p>
+
+  <p>Likewise, you as a player really need to know a lot of the <span class="hl-gold">RULES</span> of Blessed Status to understand what it means and how it would affect your gameplay, so let's go through this together.</p>
+</div>
+
+<!-- KEY RULES -->
+<div class="section">
+  <div class="sec-head">Blessed Status Rules</div>
+  <hr class="sec-divider">
+
+  <div class="subsec-head">How to Obtain Blessed Status</div>
+
+  <ul class="rules-list">
+    <li>Blessed Status is toggled from NPC <span class="hl-sara">"Blessed Monks"</span> located within safe zones of the Wilderness, including the Wildy Ditch, the Mage Arena, the Ferox Enclave. Pretty much anywhere you enter and exit the Wilderness.</li>
+    <li>There could also be a monk at the Edgeville and Ardougne Wilderness teleport levers to the Deserted Keep.</li>
+    <li>You can toggle Blessed Status <span class="hl-red">off</span> ONLY at the NPCs you enable it from.</li>
+    <li>Enabling Blessed Status costs <span class="hl-gold">100k</span> each time.</li>
+    <li>Leaving the Wilderness <span class="hl-green">deactivates</span> Blessed Status temporarily. Re-entering will reactivate it (for free) until you toggle it off from a monk NPC, which will refund the <span class="hl-gold">100k</span> fee.</li>
+    <li>Dying in the Wilderness will count as losing your Blessed Status and you will have to pay <span class="hl-gold">100k</span> to enable it again.</li>
+    <li>All players can and should have easy access to Blessed Status.</li>
+  </ul>
+
+  <div class="subsec-head">Combat Rules of Blessed Status</div>
+
+  <ul class="rules-list">
+    <li>The <span class="hl-gold">"Self-Defence Rule"</span>.
+      <span class="sub-p">Blessed Status locks you into using the <span class="hl-blue">"Skull Prevention"</span> option, meaning you can only PvP in situations that won't skull you. This is extra good because it prevents blessed players from ragging any non-blessed players.</span>
+      <span class="sub-p">This fits thematically because using Blessed Status is like declaring you are somewhat of a pacifist.</span>
+      <span class="sub-p">I'm about to go through a big list of rules, but this "Self-Defence" rule is one of the most important points of Blessed Status because it prevents you from being really cheap against non-Blessed players.</span>
+      <span class="sub-p">It's <span class="hl-orange">extremely important</span> for the fairness of Blessed Status.</span></li>
+    <li>Blessed Status <span class="hl-green">cannot be overridden</span> by a Skull or anything else in any circumstance. It can only be toggled off at the monk NPCs.</li>
+    <li>Likewise, wearing a <span class="hl-red">"Cape of Skulls"</span> or <span class="hl-red">"Amulet of Avarice"</span> cannot skull you with Blessed Status active and Blessed Status will override your Skull if you have one before entering the Wilderness.</li>
+    <li>The <span class="hl-red">"Amulet of Avarice"</span> will not function (or be unequippable) if you have Blessed Status on, meaning you cannot wear the amulet to get noted drops from Revenants.</li>
+    <li>The <span class="hl-red">"Cape of Skulls"</span> similarly would likely be unequippable or just not function while you have Blessed Status on.</li>
+    <li>Attacking a Blessed player <span class="hl-green">will not Skull you</span>, no matter what.</li>
+    <li>Blessed players can only freely attack <span class="hl-sara">other Blessed players</span>.
+      <span class="sub-p">In other words, the "Self-Defence Rule" does not apply to fellow Blessed players.</span>
+      <span class="sub-p">This is working based on the Skull Prevention mechanics.</span>
+      <span class="sub-p">Remember - they cannot initiate an attack against non-blessed players, they can only fight in self-defense in those situations.</span>
+      <span class="sub-p">But because you can't Skull on a Blessed player, that means that Blessed players can freely attack each other.</span>
+      <span class="sub-p">This is a very important intentional design, meant to keep things fair between Blessed and non-Blessed players, and also makes it easier for Blessed players to engage in a fight as long as it's against each other.</span></li>
+    <li>The <span class="hl-gold">"Loot-Forfeiting Rule"</span>.
+      <span class="sub-p">When a Blessed player kills a non-Blessed player, that player will <span class="hl-sara">"die Blessed"</span>.</span>
+      <span class="sub-p">Let me explain that from the dead player's perspective.</span>
+      <span class="sub-p">If you die to a Blessed player, you are sent to the death office instead of dropping your loot. This applies whether you are Blessed, Skulled, High Risk Skulled, or have no special overhead status.</span>
+      <span class="sub-p">In other words, even if you are High Risk Skulled, you will not lose your items dying to a Blessed player because you will "die Blessed".</span>
+      <span class="sub-p">If you "die Blessed", then you will have to pay the <span class="hl-orange">5%+25%</span> fee to get your items back.</span>
+      <span class="sub-p">This is another very big, very important, very intentional rule.</span>
+      <span class="sub-p">Blessed Status is intended to be a sort of a <span class="hl-orange">medium risk, medium reward</span> gameplay mode.</span>
+      <span class="sub-p">Meaning, that you give up on the ability to initiate attack on non-Blessed players (by the Self-Defence Rule), AND you give up the ability to PK anyone else for their items (by the Loot Forfeiting Rule).</span>
+      <span class="sub-p">As a Blessed Player, you forfeit the loot.</span>
+      <span class="sub-p">This is only fair, because a Blessed Player gets to save <span class="hl-green">95%</span> of their value, while a Skulled or Unskulled player normally drops 100% of the items they lose.</span>
+      <span class="sub-p">The huge benefit of keeping your items for a fee, is offset by not being able to get "big ticket" kills off of other players.</span>
+      <span class="sub-p">So if you're Blessed, and you kill someone in a max set, you do not get their max set as a drop and your potential earning from that kill is a whole entire <span class="hl-red">95% less</span>.</span>
+      <span class="sub-p">Let me reiterate that again: You get <span class="hl-red">95% less reward</span> for PvP kills as your exchange for saving <span class="hl-green">95% of the value</span> of your items.</span>
+      <span class="sub-p">In this way, the risk vs reward is balanced and it's not just like a "free way to get kills without risking much" sort of thing.</span></li>
+    <li>If you die AS a Blessed player, you are also sent to the death office instead of dropping your loot.</li>
+    <li>When a Blessed player fights back against a non-Blessed player, the overhead icon of the non-Blessed player could be changed to an icon that indicates that they will <span class="hl-sara">die Blessed</span>.
+      <span class="sub-p">Here are some sample icons I put together from existing OSRS sprites:</span>
+      <span class="sub-p"><span class="hl-fullwhite">Skulled Status Blessed Locks:</span></span>
+      <span class="sub-p" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:6px;">
+        <img src="../assets/SkullLock.png" alt="Skull lock icon" style="height:40px;width:auto;image-rendering:pixelated;">
+        <img src="../assets/RagSkullLock.png" alt="Rag skull lock icon" style="height:40px;width:auto;image-rendering:pixelated;">
+      </span>
+      <span class="sub-p" style="margin-top:20px;"><span class="hl-fullwhite">Neutral Status Blessed Locks:</span></span>
+      <span class="sub-p" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:6px;">
+        <img src="../assets/BlessedLock.png" alt="Blessed lock icon" style="height:40px;width:auto;image-rendering:pixelated;">
+        <img src="../assets/BlessedMiniLock.png" alt="Blessed mini lock icon" style="height:40px;width:auto;image-rendering:pixelated;">
+      </span></li>
+  </ul>
+
+  <div class="subsec-head">Blessed Death Fee Rules</div>
+
+  <ul class="rules-list">
+    <li>The fee for reclaiming items you bring into the Wilderness is <span class="hl-orange">5%</span> the GE price of your items. This is first paid from the <span class="hl-gold">100k</span> you used to enable Blessed Status. Then it is paid from your death coffers and your bank.
+      <span class="sub-p">For example if you have a Voidwaker, which is around 40m, your 5% fee on that is 2m.</span>
+      <span class="sub-p">However, the 2m will first be paid by that initial 100k, so you will only have to cough up another 1.9m.</span>
+      <span class="sub-p">This means your 100k minimum risk acts as sort of like a "discount" or like a "pre-payment" against your death fee if your death fee is higher than 100k.</span></li>
+    <li><span class="hl-gold">Entry-Fee Discounts Rule:</span> Because you already paid a <span class="hl-gold">100k minimum risk</span> to use Blessed Status, you are exempt from the minimum risk required to enter the Rev Caves, Wildy Bosses, Wildy Agility Course, and The Wilderness Resource Area. You can just enter.</li>
+    <li>At <span class="hl-blue">level 10 or lower Wilderness</span>, the 5% fee is only <span class="hl-orange">1%</span>. This is to incentivize Edge PKing.
+      <span class="sub-p">So, a Voidwaker, being around 40m, will cost you 400k to reclaim on death.</span></li>
+    <li>The death fee applies to all items you have on you. The <span class="hl-gold">Protect Item</span> prayer can negate the cost of your most expensive item. So don't get smited.</li>
+    <li>This means that you don't get 3 items for free like a 3-itemer. It's more like if you were skulled and all your items were counted as "lost on death". Just with Blessed Status, you pay the death fee instead.</li>
+    <li>To make things simple, there would be a nice UI element telling you how much your risk is.
+      <span class="sub-p"><span class="hl-dim" style="color:var(--dim);">(video clip here)</span></span></li>
+    <li>If your reclamation fee is less than 100k, the rest of the <span class="hl-gold">100k</span> goes to the player who killed you. In other words, this just works as a 100k minimum risk and discourages ragging as a blessed player because players can always kill you for something.</li>
+    <li>There is a separate fee for items you gain from skilling and PvM <span class="hl-orange">AFTER</span> entering the Wilderness. All of those items will incur a <span class="hl-orange">25% fee</span> to reclaim from your death coffers.</li>
+    <li>The death reclamation fee works like the Death's Office fee, not the gravestone fee. This means the death fee is <span class="hl-red">NOT capped at 500k</span> total in the same way Gravestones are. For Blessed players in the Wilderness this will be 5% of the cost of the item. This increases the risk of using higher value items.</li>
+    <li>There will be a <span class="hl-green">toggle-able warning</span> telling you whether or not you will enter the Wilderness with Blessed Status, and it will tell you how much your death fee would be with the equipment you are entering with.</li>
+    <li>You can also check your Blessed death fee in the "items lost on death" menu.</li>
+  </ul>
+
+  <div class="subsec-head">Blessed Key Rules</div>
+
+  <div style="margin:12px 0;display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
+    <img src="../assets/Loot_key.webp" alt="Loot Key" style="height:58px;width:auto;image-rendering:pixelated;">
+    <img src="../assets/BlessedKey.png" alt="Blessed Key" style="height:54px;width:auto;image-rendering:pixelated;">
+  </div>
+
+  <ul class="rules-list">
+    <li>Players who die blessed, or get killed by a blessed player, will drop a <span class="hl-gold">Blessed Key</span>, which is later redeemed at any bank or redeemed from the blessing toggle NPCs or from the loot chests.</li>
+    <li>Through the Blessed Key, the fee (both the <span class="hl-orange">5%</span> and <span class="hl-orange">25%</span> fees) paid to reclaim your items from death goes to the player who killed you.</li>
+    <li>If you don't die to a player, then the <span class="hl-orange">5% fee</span> and <span class="hl-orange">25% fee</span> is sunk from the game, and if any of the <span class="hl-gold">100k</span> is left over from paying those fees to reclaim your items, you get that back too.</li>
+    <li>The Blessed Key is <span class="hl-red">always lost on death</span>. If a player kills you, it is transferred to that player.
+      <span class="sub-p">Note: This is a <span class="hl-orange">very important rule</span> that prevents certain exploits that could exist without this rule.</span></li>
+    <li>Because the Blessed Key is only GP, getting multiple kills could simply merge the value into the same key.</li>
+    <li>Alternatively, there could be exceptions to the Blessed death fee when redeeming a Blessed Key, such as stackable items dropping 5% of the stack or sacrificed items to cover the fee.</li>
+  </ul>
+
+  <div class="subsec-head">Blessed Multi-Combat Zone Rules</div>
+
+  <ul class="rules-list">
+    <li>The <span class="hl-gold">"Self-Defence Rule"</span> still applies.
+      <span class="sub-p">Blessed players cannot initiate attack in multi-combat fights against a skulled or "no status" player who is already being attacked unless they get attacked by that player.</span>
+      <span class="sub-p">In other words, the "Skull Prevention" or "Self-Defence" rule is upheld in multi.</span></li>
+    <li>The <span class="hl-gold">"Loot Forfeiting Rule"</span> still applies.
+      <span class="sub-p">In multi-combat zones, if <span class="hl-sara">ALL</span> players attacking you are Blessed, you will die Blessed.</span>
+      <span class="sub-p">However, if even one non-Blessed player engages in that fight, and you are not Blessed, then you will not die Blessed.</span>
+      <span class="sub-p">In other words, this means that if 5 Blessed players are attacking one non-Blessed player, and a second non-Blessed player attacks the other non-Blessed player, then ALL of the non-Blessed players will forfeit that loot to the non-Blessed player.</span>
+      <span class="sub-p">This one is a bit complicated, and it is the way it is for some very important reasons I will explain later.</span></li>
+  </ul>
+
+  <div class="subsec-head">The Most Important Rules</div>
+
+  <p>I just want to repeat one more time the most important rules of Blessed Status for you to remember.</p>
+
+  <ul class="rules-list">
+    <li>It has a <span class="hl-gold">100k minimum risk</span>.</li>
+    <li>The <span class="hl-orange">5%</span> versus <span class="hl-orange">25%</span> death fees depending on whether or not you brought items into the Wilderness, or gained items after entering the Wilderness. This fee goes to the player who killed you.</li>
+    <li>Blessed Status <span class="hl-green">cannot be overridden</span> by anything or any other type of overhead. It can only be toggled off at the monk NPCs.</li>
+    <li>The <span class="hl-gold">"Self-Defence Rule"</span> where it acts like the <span class="hl-blue">"Skull Prevention"</span> option between Blessed and non-Blessed players.</li>
+    <li>And the exception case where only Blessed players can freely attack each other, because you cannot gain a Skull by initiating attack against a Blessed Player.</li>
+    <li>The <span class="hl-gold">"Loot Forfeiting Rule"</span> where Blessed players are not able to kill non-Blessed players for their items.
+      <span class="sub-p">Where non-Blessed players dying to Blessed players means you also die Blessed and you do NOT lose any items, being sent to Death's office, paying the blessed death fee instead.</span></li>
+    <li>These are the only rules you really need to remember about Blessed Status as a normal player.
+      <span class="sub-p">All of the rest of that stuff is kinda more for a Jagex developer to understand or anyone who wants to know all of the specific edge cases.</span></li>
+  </ul>
+</div>
+
+<div class="section">
+  <br>
+  <p>Alright. This seems like a lot of rules, but trust me, it's simpler in practice and no more complex than the rules of Skulling are if you were to list all of the mechanics and rules of Skulling.</p>
 </div>
 
 <!-- STATUS COMPARISON -->
@@ -521,34 +791,6 @@ p:last-child { margin-bottom: 0; }
     <div class="tc-cell mid">Risky, but has options for no-iteming</div>
     <div class="tc-cell good">Yes - preferred</div>
     <div class="tc-cell bad">Generally no</div>
-  </div>
-</div>
-
-<!-- KEY RULES -->
-<div class="section">
-  <div class="sec-head">Blessed Status Rules</div>
-  <hr class="sec-divider">
-
-  <ul class="rules-list">
-    <li>Blessed Status is toggled from NPC monks at Wilderness entry points. The Wildy Ditch, Ferox Enclave, and Mage Arena. Costs <span class="hl-gold">100k</span> to enable. You can only toggle it <span class="hl-red">off</span> at those same NPCs, which refunds the 100k.</li>
-    <li>Leaving the Wilderness <span class="hl-green">deactivates</span> Blessed Status. Re-entering reactivates it automatically until you toggle it off.</li>
-    <li>Dying removes Blessed Status. You pay <span class="hl-gold">5% GE value</span> of all items you are carrying as a reclamation fee, paid first from your 100k deposit, then from death coffers and your bank.</li>
-    <li>If your reclamation fee is less than 100k, the remainder of the 100k goes to whoever killed you, making 100k the <span class="hl-gold">minimum risk</span> and preventing fee-free ragging as a Blessed player.</li>
-    <li>Items gained <span class="hl-orange">inside the Wilderness</span> from PvM or skilling after entering incur an additional <span class="hl-orange">25% fee</span> to reclaim.</li>
-    <li>The full fee (5% and 25%) is delivered to whoever killed you via a <span class="hl-gold">Blessed Key</span>, redeemable at any bank, Wilderness loot chest, or the NPC monks. If no player killed you, the fee is sunk from the game.</li>
-    <li>Blessed Status <span class="hl-green">overrides any Skull you carry</span> when entering the Wilderness. Wearing a Cape of Skulls or Amulet of Avarice cannot skull you while Blessed. Even if an edge case in multi allowed an attack that would normally skull you, the Blessed Status cannot be overridden.</li>
-    <li>Blessed players are <span class="hl-red">locked into Skull Prevention</span>. They cannot initiate attacks that would skull them, and cannot join a pile on a skulled or 3-iteming player who is already being attacked unless that player attacks them first.</li>
-    <li>Blessed players <span class="hl-green">can freely fight other Blessed players</span>. Both are sent to Death's Office on death regardless of outcome.</li>
-    <li>Attacking a Blessed player <span class="hl-green">does not skull the attacker</span>.</li>
-    <li>Wearing the <span class="hl-red">Amulet of Avarice</span> is incompatible with Blessed Status. It is unequippable while Blessed, and cannot provide noted drops from Revenants.</li>
-    <li>The <span class="hl-gold">Protect Item</span> prayer negates the fee on your single most expensive item.</li>
-    <li><span class="hl-orange">Higher value gear</span> may incur a scaling percentage fee, discouraging fully maxed BiS setups under Blessed Status without outright blocking them.</li>
-    <li>At <span class="hl-blue">Wilderness level 10 or below</span>, the fee is reduced to 1% to encourage Edgeville activity.</li>
-    <li>A <span class="hl-green">toggleable warning</span> tells you on entry whether you are entering with Blessed Status active, and displays your estimated death fee based on your current equipped gear. You can also check it in the Items Lost on Death menu.</li>
-  </ul>
-
-  <div class="note-box red">
-    <span class="hl-red">No safe zone anywhere.</span> Blessed Status does not make you invincible or immune to attack. You can still be killed. You simply lose a fee rather than your items.
   </div>
 </div>
 
@@ -677,6 +919,118 @@ p:last-child { margin-bottom: 0; }
     </div>
     <span style="font-size:22px;color:var(--sara);margin-left:18px;flex-shrink:0;">&#9658;</span>
   </a>
+</div>
+
+<!-- BEGINNER'S BLESSING -->
+<div class="section">
+  <div class="sec-head">Beginner's Blessing</div>
+  <hr class="sec-divider">
+
+  <p><span class="hl-sara">Blessed Status</span> was designed to offer a playable way to engage with the Wilderness for risk-averse players, designed by a risk-averse player.</p>
+
+  <p>It's meant to alleviate the biggest limiting factor of the growth of the Wilderness by offering a form of <span class="hl-orange">"medium risk, medium reward"</span>.</p>
+
+  <p>However, you may be asking yourself, "wait, doesn't the <span class="hl-gold">100k</span> minimum risk go against the wishes of a risk-averse player?"</p>
+
+  <p>"What if even 100k is too much for someone to risk? Especially for players who are completely new to RuneScape, who might see that as a LOT of gold?"</p>
+
+  <p>"Especially for new players who may be part of an important demographic of potential new players to get interested into PvP?"</p>
+
+  <p>Have I got the solution for you.</p>
+
+  <div class="subsec-head">Introducing the Auto-Blessing / Low Level Blessing / Noob Blessing / Beginner's Blessing</div>
+
+  <div style="margin:12px 0;">
+    <img src="../assets/BeginnerBlessing.png" alt="Beginner's Blessing icon" style="height:50px;width:auto;image-rendering:pixelated;">
+  </div>
+
+  <ul class="rules-list">
+    <li>If your account has <span class="hl-green">no levels above 39</span>, you automatically receive the "Beginner's Blessing" upon entering the Wilderness.</li>
+    <li>You do not lose items below level 40 requirements to equip them. (Anything worse than rune equipment).</li>
+    <li>This applies to runes and ammo in a similar way. It will apply to runes and ammo that require level 39 or lower to use.</li>
+    <li>If you try to enter the Wilderness with items level 40 or higher, you'll be <span class="hl-red">completely locked</span> and prevented from doing so. This includes runes that can only be used for spells that are level 40 or higher. For example, you can't bring in a stack of Wrath runes.</li>
+    <li>You pay a <span class="hl-orange">1% fee</span> at Death's Office to get them back. But there is <span class="hl-green">no 100k minimum risk</span> like with Blessed Status.</li>
+    <li>Yes, paying a fee to keep adamant armor or weaker, is going to be an extremely negligible fee. But remember, this is for <span class="hl-gold">NEW PLAYERS</span>.</li>
+    <li>You also can't gain any drops from monsters that are items of level 40 or higher.
+      <span class="sub-p">Or such items are just extra rare to get when you have the noob blessing. New players will be able to get ahead a little bit, but not too much.</span></li>
+    <li>It prevents that player from skulling just like regular <span class="hl-gold">Blessed Status</span>, and retains the <span class="hl-gold">"Self-Defence Rule"</span> and <span class="hl-gold">"Loot-Forfeiting Rule"</span>.</li>
+  </ul>
+
+  <hr class="sec-divider">
+
+  <p><span class="hl-gold">Beginner's Blessing</span> is designed to help the pain point of a noob going into the Wilderness and losing all their stuff and having a bad first impression of the Wilderness.</p>
+
+  <p>It also serves as an introductory version of <span class="hl-gold">Blessed Status</span>.</p>
+
+  <p>I think that covers the one gap in my idea that I had with Blessed Status, what if someone doesn't even want to risk <span class="hl-gold">100k</span>?</p>
+
+  <p><span class="hl-gold">Beginner's Blessing</span> also signals to PKers that that player has nothing expensive on them, discouraging PKers from killing those players, which is a <span class="hl-green">win-win</span> for both PKers and noobs.</p>
+
+  <p>Or y'know, PKers will kill anyone. But who knows, you might also decide to "adopt-a-noob" too.</p>
+
+  <p><span class="hl-purple">Q:</span> Is it possible to opt-out of <span class="hl-gold">Beginner's Blessing</span> as a low level player?</p>
+
+  <p><span class="hl-sara">A:</span> Possibly. I have some ideas for that.</p>
+
+  <p><span class="hl-purple">Q:</span> Is it possible to opt-in to the <span class="hl-gold">Beginner's Blessing</span> as a high level player?</p>
+
+  <p><span class="hl-sara">A:</span> Yes. Why not? You probably don't have any reason to do so, but you can. It'll just prevent you from getting anything good in the Wilderness for your level.</p>
+
+  <p><span class="hl-purple">Q:</span> What if you manage to kill a player with great level 40 or greater equipment?</p>
+
+  <p><span class="hl-sara">A:</span> They get to keep it. You can't loot it.</p>
+
+  <p>They can't loot yours either.</p>
+
+  <p>The maximum loot you can obtain in one kill is <span class="hl-gold">100k</span>.</p>
+
+  <p>This is the <span class="hl-gold">"Loot-Forfeiting Rule"</span> at play but for Beginner's Blessing.</p>
+</div>
+
+<!-- PROGRESSION LADDER -->
+<div class="section">
+  <div class="sec-head">A Wilderness Progression Ladder</div>
+  <hr class="sec-divider">
+
+  <p>What's the progression ladder of risk with the existence of <span class="hl-sara">Blessed Status</span>?</p>
+
+  <div class="ladder">
+    <span class="lad-ic"><img src="../assets/BeginnerBlessing.png" alt=""></span>
+    <span class="lad-tx">Beginner's Blessing</span>
+
+    <span class="lad-ic"><img src="../assets/blessed-tier-0.png" alt=""></span>
+    <span class="lad-tx">Blessed Status (no tier)</span>
+
+    <span class="lad-ic"><img src="../assets/Artefacts/ForinthryStatuette.png" alt=""></span>
+    <span class="lad-tx">Neutral Status + Forinthry Artefacts</span>
+
+    <span class="lad-ic"></span>
+    <span class="lad-tx">Neutral Status</span>
+
+    <span class="lad-ic"><img src="../assets/blessed-tier-5.png" alt=""></span>
+    <span class="lad-tx">Blessed Status (tier 5)</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Artefacts/ForinthryStatuette.png" alt=""></span>
+    <span class="lad-tx">Skulled Status + Forinthry Artefacts</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""></span>
+    <span class="lad-tx">Skulled Status</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Amulet_of_avarice.webp" alt=""></span>
+    <span class="lad-tx">Skulled Status + Amulet of Avarice</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Ring_of_Greed.png" alt=""></span>
+    <span class="lad-tx">Skulled Status + Ring of Greed</span>
+
+    <span class="lad-ic"><img src="../assets/Skull_(High_Risk_PvP_world)_icon.png" alt=""></span>
+    <span class="lad-tx">High Risk Skull in High Risk Worlds</span>
+  </div>
+
+  <p>This creates an entire range of different levels of risk vs reward from <span class="hl-green">low risk, low reward</span> to <span class="hl-red">very high risk, very high reward</span>.</p>
+
+  <p>And when I say low risk low reward, I have to point this out so the PKers don't rage too much, I mean literally their possible earnings are capped.</p>
+
+  <p>Nowhere in this setup is there an intended <span class="hl-orange">"low risk, high reward"</span> setup.</p>
 </div>
 
 <!-- BENEFITS BY PLAYER TYPE -->
