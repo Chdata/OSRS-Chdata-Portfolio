@@ -35,11 +35,14 @@
     --text-dim:     #a89870;
     --green-rs:     #00c000;
     --green-bright: #80ff00;
+    --green-light:  #a6cfa6;
     --yellow-rs:    #ffcc00;
     --orange-rs:    #ff8c00;
     --red-rs:       #cc2222;
+    --red-light:    #ff8080;
     --blue-rs:      #80c0ff;
     --purple-rs:    #cc88ff;
+    --purple-light: #ddb8ff;
     --white-rs:     #f0e8d0;
     --sara-blue:    #4488cc;
     --guthix-green: #44aa44;
@@ -220,9 +223,9 @@
   strong { color: var(--white-rs); }
   .hl-green { color: var(--green-rs); font-weight: normal; }
   .hl-blue  { color: var(--blue-rs); }
-  .hl-red   { color: var(--red-rs); font-weight: normal; }
+  .hl-red   { color: var(--red-light); font-weight: normal; }
   .hl-yellow { color: var(--yellow-rs); }
-  .hl-purple { color: var(--purple-rs); }
+  .hl-purple { color: var(--purple-light); }
 
   /* ── BULLET LISTS ── */
   .rs-list {
@@ -243,15 +246,21 @@
     content: '';
     position: absolute;
     left: 1px;
-    top: 4px;
+    top: 8px;
     width: 13px;
     height: 13px;
     background: url('../assets/multicombat.png') no-repeat center/contain;
     image-rendering: pixelated;
   }
+  .loop-list {
+    color: var(--text-body);
+    font-size: 15.3px;
+    line-height: 1.6;
+    margin: 10px 0 0;
+    padding-left: 26px;
+  }
+  .loop-list li { padding: 3px 0; }
   .rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 9.4px; top: 6px; background: none; }
-  .rs-list.skull li::before   { content: '💀'; font-size: 10.6px; top: 4px; background: none; }
-  .rs-list.check li::before   { content: '✔'; color: var(--green-rs); font-size: 11.8px; background: none; }
 
   /* ── GOD ALIGNMENT BOXES ── */
   .align-grid {
@@ -277,9 +286,9 @@
     font-weight: normal;
     margin-bottom: 6px;
   }
-  .align-box.sara .god-name { color: var(--sara-blue); }
-  .align-box.guth .god-name { color: var(--guthix-green); }
-  .align-box.zamm .god-name { color: var(--zammy-red); }
+  .align-box.sara .god-name { color: #8ec4f5; }
+  .align-box.guth .god-name { color: #8ada8a; }
+  .align-box.zamm .god-name { color: #ff8f8f; }
   .align-box .god-icon { font-size: 26.0px; display: block; margin-bottom: 6px; }
   .align-box p { font-size: 13.6px; color: var(--text-dim); line-height: 1.5; margin: 0; }
 
@@ -387,13 +396,13 @@
   }
   .map-label {
     position: absolute;
-    background: rgba(200,80,0,0.85);
+    background: #0c0c0c;
     color: #fff;
     font-family: 'RSUF', serif;
     font-size: 11.8px;
     font-weight: normal;
     padding: 3px 8px;
-    border: 1px solid #ff8c00;
+    border: 1px solid #8a8a8a;
     white-space: nowrap;
     pointer-events: none;
   }
@@ -419,8 +428,8 @@
     margin-bottom: 8px;
     text-align: center;
   }
-  .col-box.win h4 { color: var(--green-rs); }
-  .col-box.war h4 { color: var(--red-rs); }
+  .col-box.win h4 { color: var(--red-light); }
+  .col-box.war h4 { color: var(--blue-rs); }
 
   /* ── INLINE ICONS (emoji stand-ins) ── */
   .icon { font-size: 16.5px; vertical-align: middle; margin-right: 4px; }
@@ -511,9 +520,8 @@
 
   <!-- HERO -->
   <div class="hero">
-    <span class="hero-skull">🏰</span>
+    <span class="hero-skull"><img src="../assets/wilderness-skull.png" alt="Wilderness skull" style="height:47px;width:auto;image-rendering:pixelated;"></span>
     <h1 contenteditable="false">Forinthry Castle</h1>
-    <h2 contenteditable="false">Deep Wilderness Clan Sieges</h2>
   </div>
 
   <!-- BOTTOM BRICK AFTER HERO -->
@@ -524,6 +532,8 @@
 
     <!-- INTRO -->
     <div class="section">
+      <div class="sec-head" contenteditable="false">Deep Wilderness Clan Sieges</div>
+      <hr class="sec-divider">
       <div class="section-inner">
         <p contenteditable="false">
           The Forinthry Castle is a <em>clan-controlled stronghold</em> in the deepest part of the Wilderness, beyond the Bridge of Fate from the Wilderness Expansion proposals. It is a place of both <strong>great utility</strong> and <strong>great danger</strong>.
@@ -531,18 +541,16 @@
         <p contenteditable="false">
           A clan that occupies the Forinthry Castle gains access to powerful facilities that make Deep Wilderness&nbsp; content far more convenient. But any clan can attempt to <em>siege and take it</em>.
         </p>
-        <div class="note-box blue" contenteditable="false"></div>
       </div>
     </div>
 
     <!-- MAP -->
     <div class="section">
-      <div class="sec-head" contenteditable="false">Where Is It?</div>
-      <div class="sec-sub" contenteditable="false">Beyond the Bridge of Fate, as part of that old Wilderness Expansion concept.<br></div>
+      <div class="sec-head" contenteditable="false">Location: The Deepest Wilderness</div>
       <hr class="sec-divider">
       <div class="map-wrap">
         <img src="./Forinthry_Castle_Sieges_files/WildyMapExpansionCommunity.png" alt="Wilderness Expansion Map">
-        <div class="map-label" style="top:19%;left:51%;transform:translate(-50%,-50%);">🏰 Forinthry Castle</div>
+        <div class="map-label" style="top:19%;left:51%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:6px;"><img src="../assets/Saradomin_banner.webp" alt="" style="height:22px;width:auto;image-rendering:pixelated;flex-shrink:0;">Forinthry Castle</div>
         <div class="map-caption" contenteditable="false">The Forinthry Castle replaces the Dragon's Lair location in the deep Wilderness expansion map.</div>
       </div>
     </div>
@@ -550,7 +558,6 @@
     <!-- TAKING CONTROL -->
     <div class="section">
       <div class="sec-head" contenteditable="false">Taking Control</div>
-      <div class="sec-sub" contenteditable="false">How does a clan claim the castle?</div>
       <hr class="sec-divider">
       <div class="section-inner">
         <ul class="rs-list diamond">
@@ -566,7 +573,7 @@
     <!-- GOD ALIGNMENTS -->
     <div class="section">
       <div class="sec-head" contenteditable="false">God Alignments</div>
-      <div class="sec-sub" contenteditable="false">The flag your clan flies changes everything.<br>No, it's not the prayer thing.<br></div>
+      <div class="sec-sub" contenteditable="false">No, it's not the prayer thing.</div>
       <hr class="sec-divider">
       <div class="align-grid">
         <div class="align-box sara">
@@ -587,44 +594,44 @@
       </div>
       <div class="note-box" contenteditable="false">
         <strong>Important:</strong> A Saradomin-aligned clan using Blessed Status <em>cannot initiate a siege</em> against a Guthix-aligned (Neutral) nor against a Zamorak-aligned (Skulled) clan. Blessed players can only fight in self-defence against non-Blessed players. Choose your alignment strategically.
+        <br><br>Additionally, any outsiders entering a Blessed Forinthry Castle will count as "initiating attack", thus allowing all of the Blessed Players of the castle fight back in self-defense.
       </div>
     </div>
 
     <!-- FACILITIES -->
     <div class="section">
       <div class="sec-head" contenteditable="false">Castle Facilities</div>
-      <div class="sec-sub" contenteditable="false">Built and repaired by clan members using various skills</div>
       <hr class="sec-divider">
       <p style="margin-bottom:12px;" contenteditable="false">Each facility requires a certain <em>Skill level</em> to repair or upgrade. Facilities may use various skills including Construction, Magic, Smithing, Crafting, Prayer, etc. Any clan member may contribute. Every facility has <em class="hl-red">~100 health</em> and can be destroyed by invaders. Once destroyed, it cannot be repaired for <strong>one hour</strong>.</p>
       <div class="facility-grid">
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">🏦</span> Banks (×2)</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Bank_icon.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Banks (×2)</div>
           <p contenteditable="false">Two separate bank locations within the castle walls. Essential for extended World Boss trips without leaving the Wilderness.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">🙏</span> Prayer Altar</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Skills/Prayer_icon.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Prayer Altar</div>
           <p contenteditable="false">Restore Prayer points without needing to leave the castle or the Wilderness.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">💧</span> Rejuvenation Pool</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Rejuvenation_pool_icon.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Rejuvenation Pool</div>
           <p contenteditable="false">Restores HP, Prayer, and run energy, similar to the pool in a Player-Owned House or the Ferox Enclave.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">🌀</span> Teleport Obelisk</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Obelisk_(Construction)_icon.png" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Teleport Obelisk</div>
           <p contenteditable="false">Connects to all other Wilderness Obelisks. Allows rapid clan movement across the Wilderness.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">✨</span> Wildy Teleport Focus</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Portal_nexus_icon.png" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Wildy Teleport Nexus</div>
           <p contenteditable="false">Grants all clan members free teleports to all normally teleportable Wilderness locations.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">📜</span> Return Teleport Focus</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Marble_lectern_icon.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Forinthry Lectern</div>
           <p contenteditable="false">Enables crafting of <strong>Forinthry Castle Teleport Tablets</strong>. Clan members can use these to teleport directly to the castle, but only while your clan controls it.</p>
         </div>
 
@@ -634,17 +641,17 @@
         </div>
 
         <div class="facility special">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">⚓</span> Respawn Anchor</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Barrelchest_anchor.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Respawn Anchor</div>
           <p contenteditable="false">Allows clan members to temporarily <strong>set their respawn point</strong> to the Forinthry Castle. Ideal for World Boss runs and surviving sieges. May have a 5-minute lockout after PvP deaths.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">🐉</span> Defense Golems</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Rune_dragon_(Construction)_icon.png" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Defense Golems</div>
           <p contenteditable="false">NPC monsters, including Reanimated Rune Dragons, that defend the castle's rooms. Similar to POH dungeon monsters.</p>
         </div>
 
         <div class="facility">
-          <div class="fac-name" contenteditable="false"><span class="fac-icon">🚪</span> Defense Doors</div>
+          <div class="fac-name" contenteditable="false"><span class="fac-icon"><img src="../assets/Skills/Defence_icon.webp" alt="" style="height:16px;width:auto;image-rendering:pixelated;vertical-align:-3px;"></span> Defense Doors</div>
           <p contenteditable="false">Sturdy doors that protect rooms containing key facilities, slowing down invaders and buying defenders time.</p>
         </div>
 
@@ -657,7 +664,6 @@
     <!-- SIEGE & TAKEOVER -->
     <div class="section">
       <div class="sec-head" contenteditable="false">Sieges &amp; Takeover</div>
-      <div class="sec-sub" contenteditable="false">How does an opposing clan claim the castle?</div>
       <hr class="sec-divider">
       <p style="margin-bottom:12px;" contenteditable="false">An opposing clan can invade at any time. The exact conditions for a successful takeover are open to design.<br>Here's some possibilities, but it would really depend on beta testing.<br></p>
       <ol class="option-list">
@@ -669,14 +675,201 @@
       <p style="margin-top:10px;" contenteditable="false">Some combination of the above is likely the right answer, requiring both numbers advantage <em>and</em> sustained pressure to prevent griefing by small roaming groups.</p>
     </div>
 
+    <!-- DEEPEST WILDERNESS PVM -->
+    <div class="section">
+      <div class="sec-head" contenteditable="false">Deepest Wilderness PvM &amp; Forinthry Tokens</div>
+      <hr class="sec-divider">
+      <div class="section-inner">
+        <p contenteditable="false">This suggestion would not be complete without something to actually use the castle for.</p>
+
+        <p contenteditable="false">In order to obtain materials to build your Forinthry Castle's facilities with, you must kill monsters within the <span class="hl-red">Deepest Wilderness</span>.</p>
+
+        <p contenteditable="false">Monsters within that area will drop <span class="hl-purple">"Forinthry Tokens"</span>. You can think of them as being like <span class="hl-purple">"Magic Bricks"</span> which you literally use to build your facilities.</p>
+
+        <p contenteditable="false">There could also be some Deepest Wilderness gathering skills involved here, but let's be honest, we want to be in the Wilderness to kill things, not mine rocks.</p>
+
+        <p contenteditable="false">This creates a full-on <span style="color:var(--green-light);">gameplay loop</span> for that area of the Wilderness.</p>
+
+        <ol class="loop-list">
+          <li contenteditable="false">Your clan claims the Forinthry Castle on a chosen world.</li>
+          <li contenteditable="false">Your clan has to farm monsters for Forinthry Tokens to upgrade the castle.</li>
+          <li contenteditable="false">The castle provides various benefits, making it easier to stake things out in the Deepest Wilderness.</li>
+          <li contenteditable="false">At max level, you have the best benefits for your clan to now tackle the <span class="hl-yellow">Wilderness World Bosses</span>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- WILDERNESS WORLD BOSSES -->
+    <div class="section">
+      <div class="sec-head" contenteditable="false">Wilderness World Bosses</div>
+      <hr class="sec-divider">
+      <div class="section-inner">
+        <p contenteditable="false">Finally, to make the suggestion really really complete, we would need a few bosses for the Deepest Wilderness.</p>
+
+        <p contenteditable="false">This may be a good opportunity for us to give Jagex a second chance at realizing the <span class="hl-yellow">"Wrathmaw"</span> boss design.</p>
+
+        <p contenteditable="false">Yes. I know it was controversial. But literally, they have the skeleton of an already designed boss sitting right there.</p>
+
+        <p contenteditable="false">We all know what we really didn't like about it. The fact that it was an extremely limited boss with a <em class="hl-red">FOMO design</em> where it appears at extremely limited times.</p>
+
+        <p contenteditable="false">I know many also don't like the fact of it coming from the Wilderness.</p>
+
+        <p contenteditable="false">Well, the entire point of every suggestion I'm making is to help improve the Wilderness not just for PKers, but also for PvMers or players who don't so much like the PvP part of it.</p>
+
+        <p contenteditable="false"><span style="color:var(--green-light);">Let's give things a chance, yea?</span></p>
+
+        <p contenteditable="false">Besides, we can do way better than the original Wrathmaw design, everyone.</p>
+
+        <br>
+        <div class="subsec-head" contenteditable="false">Introducing: Deep Wilderness Team Delve Bosses</div>
+
+        <p contenteditable="false">I have 3 major boss ideas for Wilderness World Bosses, all of which roam areas of <span class="hl-red">The Deepest Wilderness</span>, beyond the Bridge of Fate.</p>
+
+        <ol class="loop-list">
+          <li contenteditable="false">The <span class="hl-purple">WildyWyrm</span> (yes it's just Wrathmaw 2.0 but with WAY fairer rules)</li>
+          <li contenteditable="false"><span class="hl-purple">Big Fat Ghost Boss</span></li>
+          <li contenteditable="false"><span class="hl-purple">Underground World Boss</span></li>
+        </ol>
+
+        <br>
+        <div class="subsec-head" contenteditable="false">Could we fix the Wrathmaw proposal?</div>
+
+        <p contenteditable="false">Personally, I think a "Wilderness World Boss" or two fits that "clan content" role perfectly. World boss concepts seem to sit between wanting to be team content or wanting to be clan content.</p>
+
+        <p contenteditable="false">But I know this idea already has a very bad reputation because of the whole thing with Wrathmaw a while back.</p>
+
+        <p contenteditable="false">And also, PvP clans just have a bad reputation in general.</p>
+
+        <p contenteditable="false">And also, if they made a boss "just" for clans, that would be excluding a LOT of the playerbase who isn't in clans, wouldn't it? It would be excluding the small teams, right? Much less solo players. And it would be excluding anyone who doesn't want to step foot in the Wilderness?</p>
+
+        <p contenteditable="false">Well, I think if the Wilderness were made better and more palatable, maybe these perceptions could change over time.</p>
+
+        <p contenteditable="false"><span class="hl-blue">Wildy Teams</span> might encourage the formation of new clans, and maybe more "pleasant" ones.</p>
+
+        <p contenteditable="false"><span class="hl-blue">Blessed Status</span> makes the Wilderness more open to people who are not used to PvP, so maybe even some non-PvP clans could get involved.</p>
+
+        <p contenteditable="false">If the reputation of the Wilderness ever changes, and the reputation of clans, then maybe some day we can justify something like Wrathmaw that day.</p>
+
+        <p contenteditable="false">Maybe the "Sandmaw" approach where a non-Wildy version is offered too, might work out?</p>
+
+        <p contenteditable="false">That said, I do also like to think about how to take a disliked proposal and make it better.</p>
+
+        <p contenteditable="false">Wrathmaw for example, I'm not against the idea of a world boss, or even a world boss in the Wilderness, but I agree with everyone who doesn't like the idea of it being <em class="hl-red">time-gated</em>.</p>
+
+        <p contenteditable="false">If it's just a 20,000 HP boss only suited to be tackled by a ton of players, as I said, it would make it very difficult content to engage in for non-clans.</p>
+
+        <p contenteditable="false">So my thought is this:</p>
+
+        <br>
+        <div class="subsec-head" contenteditable="false">A Teams Open-World Delve Boss version of Wrathmaw</div>
+
+        <p contenteditable="false">The idea is that the boss starts as a mound on the ground - a Wilderness Strykewyrm, or <span class="hl-yellow">WildyWyrm</span>.</p>
+
+        <p contenteditable="false">You can disturb the mound to make the WildyWyrm appear.</p>
+
+        <p contenteditable="false">This enemy is actually just a fairly normal enemy that is <span style="color:var(--green-light);">always available</span> in some area of the deep wilderness.</p>
+
+        <p contenteditable="false">This enemy is suitable enough for a player to kill even if they are <span style="color:var(--green-light);">solo</span>.</p>
+
+        <p contenteditable="false">If you kill the WildyWyrm, you'll be able to loot the corpse... but an even bigger WildyWyrm will come by and eat its head.</p>
+
+        <p contenteditable="false">The <span class="hl-yellow">Bigger WildyWyrm</span> will have more health, possibly some more mechanics, and be generally stronger - like a delve boss.</p>
+
+        <p contenteditable="false">You can probably still solo it.</p>
+
+        <p contenteditable="false">If you kill the Bigger WildyWyrm, an <span class="hl-yellow">Even Bigger WildyWyrm</span> will appear to eat its corpse.</p>
+
+        <p contenteditable="false">Now you would definitely benefit from having a friend or a small team of <span class="hl-blue">5-6</span> to fight it.</p>
+
+        <p contenteditable="false">If you kill the Even Bigger WildyWyrm, an <span class="hl-yellow">Engorged WildyWyrm</span> will spawn.</p>
+
+        <p contenteditable="false">If you kill this one, then <span class="hl-red">Wrathmaw</span> will appear to eat the Engorged WildyWyrm's corpse, and you get the full Wrathmaw fight.</p>
+
+        <p contenteditable="false">At this point, maybe a team of <span class="hl-blue">5-6</span> could take it on, but you really want to fight it with a <span class="hl-yellow">clan</span>.</p>
+
+        <p contenteditable="false">This way, smaller teams or clans have a version of the boss they can fight without requiring a huge amount of players, and they can fight up until they point they are unable to beat the next version of the boss. It <span style="color:var(--green-light);">scales up naturally</span>.</p>
+
+        <p contenteditable="false">With <span style="color:var(--green-light);">no time gating</span>, now the boss can be "summoned" at any point in time whenever there's a group of players who want to tackle it, or whenever someone or some Jagex devs want to host a mass event.</p>
+
+        <br>
+        <div class="subsec-head" contenteditable="false">Big Fat Ghost Boss</div>
+
+        <p contenteditable="false">I've had similar concept for a world boss in my head since more than a good decade ago. I actually came up with this for Blade and Soul, but it might fit well in RuneScape.</p>
+
+        <p contenteditable="false">It's another <span style="color:var(--green-light);">Teams Open-World Delve Boss</span>.</p>
+
+        <p contenteditable="false">To summon the <span class="hl-purple">Big Fat Ghost Boss</span>, there is an area called the <span class="hl-purple">"Valley of Souls"</span> in <span class="hl-red">The Deepest Wilderness</span>.</p>
+
+        <p contenteditable="false">If players walk around here, ghosts start spawning in numbers matching the number of players nearby.</p>
+
+        <p contenteditable="false">If you kill all the ghosts, they will merge together to form the <span class="hl-yellow">Big Fat Ghost Boss</span>, who is stronger if there were more ghosts killed to create him.</p>
+
+        <p contenteditable="false">It's kind of similar to the spawn conditions of <span class="hl-yellow">Maledictus</span>, however, it can be done <span style="color:var(--green-light);">on-demand at any time</span>, unlike Maledictus.</p>
+
+        <p contenteditable="false">These ghosts were all old Zarosian followers from before the time Zamorak took over, so the Big Fat Ghost Boss naturally will use <span class="hl-purple">Shadow</span> and <span class="hl-blue">Ice</span> magic.</p>
+
+        <p contenteditable="false">He will also clumsily punch you, or call ghostly hands from the ground and use Soul Split.</p>
+
+        <p contenteditable="false">If you kill him, you get a drop, but then he will reform again into a <span class="hl-red">Bigger Badder Fat Ghost Boss</span>, who has more health and mechanics than the last one.</p>
+
+        <p contenteditable="false">You get the idea. It builds up to becoming like a world boss.</p>
+
+        <p contenteditable="false">Also, if the boss gets to a point where the team or clan fighting it cannot kill it, the boss will randomly roam anywhere in its area, and only despawns after an hour or so.</p>
+
+        <p contenteditable="false">This means that some clans might also be able to hop around worlds to finish off leftover kills, if they want.</p>
+
+        <p contenteditable="false">Do I have ideas for what it drops? Yes, but the focus is more on the design of the boss and Wilderness mechanics.</p>
+
+        <br>
+        <div class="subsec-head" contenteditable="false">Underground World Boss</div>
+
+        <p contenteditable="false">I once read a Reddit suggestion for something like the L4D2 Witch as a boss that runs towards PKers and chases them down with very powerful melee attacks. And I mean <em class="hl-red">insanely lethal</em> melee attacks.</p>
+
+        <p contenteditable="false">I think it'd be cool if there were a big open underground cave with something like this guarding a big door to a treasure chest, or something.</p>
+
+        <p contenteditable="false">The boss itself is meant to be very powerful and difficult to kill, but not impossible. Maybe the big door it guards leads to a deeper layer of the cave, with another more powerful version of this boss... like a delve!</p>
+
+        <p contenteditable="false">Or perhaps the goal isn't necessarily to kill it, and rather to get past it... and loot a <span class="hl-yellow">Forinthry Vault</span>!</p>
+
+        <p contenteditable="false">And the Forinthry Vault is guarded by 2 monsters... animated sets of <span class="hl-purple">Torva Armor</span>.</p>
+
+        <p contenteditable="false">I just think the idea of a boss that runs at people is funny.</p>
+
+        <p contenteditable="false">The <span class="hl-purple">Wilderness Nightmare</span>?</p>
+      </div>
+    </div>
+
+    <!-- FORINTHRY CASKETS -->
+    <div class="section">
+      <div class="sec-head" contenteditable="false">Forinthry Caskets</div>
+      <hr class="sec-divider">
+      <div class="section-inner">
+        <div style="margin:4px 0 14px;text-align:center;">
+          <img src="../assets/ForinthryCasket.png" alt="Forinthry Casket" style="height:56px;width:auto;image-rendering:pixelated;">
+        </div>
+
+        <p contenteditable="false">Wilderness World Bosses are bound to probably have some really good drops. It'd suck if you just got PKed for them as soon as you got it, having dodged whatever PKers were after you during the fight.</p>
+
+        <p contenteditable="false">In which case, you might receive a <span class="hl-yellow">"Forinthry Casket"</span> as a drop. The special thing about this is that it is <span style="color:var(--green-light);">always protected on death</span> and does not override your 1-3-4 protected items, acting as like a 5th protected item.</p>
+
+        <p contenteditable="false">Or a 6th protected item if you have a <span class="hl-purple">Forinthry Artefact</span>.</p>
+
+        <p contenteditable="false">However if you have 2 or more, the extra ones are <span class="hl-red">not protected</span>.</p>
+
+        <p contenteditable="false">That way, even if you die after obtaining the drop from the Wilderness World Boss, at least you get to keep what you got for all that effort.</p>
+
+        <p contenteditable="false">The Forinthry Casket will hold the drop from the Wilderness World Boss.</p>
+      </div>
+    </div>
+
     <!-- WHY BOTHER -->
     <div class="section">
       <div class="sec-head" contenteditable="false">Why Would a Clan Want This?</div>
       <hr class="sec-divider">
       <div class="two-col">
         <div class="col-box win">
-          <h4 contenteditable="false"><img src="../assets/multicombat.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> For PvP Clans</h4>
-          <ul class="rs-list skull">
+          <h4 contenteditable="false"><img src="../assets/wilderness-skull.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> For PvP Clans <img src="../assets/wilderness-skull.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"></h4>
+          <ul class="rs-list">
             <li contenteditable="false">Zamorak alignment signals readiness for war, and pretty much locks out Blessed Players</li>
             <li contenteditable="false">Respawn Anchor keeps clan members fighting without running back</li>
             <li contenteditable="false">Return Teleport Tablets for rapid reinforcement</li>
@@ -685,13 +878,13 @@
           </ul>
         </div>
         <div class="col-box war">
-          <h4 contenteditable="false">🐉 For PvM Clans</h4>
-          <ul class="rs-list check">
+          <h4 contenteditable="false"><img src="../assets/blessed-tier-0.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"> For PvM Clans <img src="../assets/blessed-tier-0.png" alt="" style="height:1.05em;width:auto;vertical-align:-0.18em;image-rendering:pixelated;"></h4>
+          <ul class="rs-list">
             <li contenteditable="false">Saradomin alignment = free Blessed Status for all members</li>
             <li contenteditable="false">Combat Amplifier gives +25% damage on World Bosses nearby</li>
             <li contenteditable="false">Banks and Rejuvenation Pool eliminate the need to leave the Wilderness between kills</li>
             <li contenteditable="false">Respawn Anchor means deaths to bosses don't end the trip</li>
-            <li contenteditable="false">Wildy Teleport Focus saves supplies on getting there</li>
+            <li contenteditable="false">Wildy Teleport Nexus saves supplies on getting there</li>
           </ul>
         </div>
       </div>
