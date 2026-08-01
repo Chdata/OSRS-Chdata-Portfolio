@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introducing PvP Update "Ranking Polls"</title>
+
+<style>
+/* ===================================================================
+   SITE CHROME - values taken from Jagex's oldschool-128.css.
+   Image paths point at ../resources/ so nothing is hotlinked from
+   runescape.com. Drop these files in there, keeping the names:
+       bg2.jpg                  (vine and stone column edges)
+       backdrop_745.gif         (parchment body)
+       backdrop_765_top.gif     (scroll top cap)
+       backdrop_765_bottom.gif  (scroll bottom cap)
+   If this page moves to the repo root, change ../resources/ to resources/.
+   =================================================================== */
+html, body { height: 100%; }
+
+body {
+    background: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+p { line-height: 150%; }
+
+/* Outer column. The vine strips are part of this background image. */
+.contents {
+    padding: 60px 0;   /* black gap above and below the scroll */
+}
+
+.page-wrap {
+    background: url('../resources/bg2.jpg') repeat-y center top;
+    margin: 0 auto;
+    overflow-y: hidden;
+    padding: 0 50px;
+    width: 815px;
+}
+
+/* The scroll: repeating parchment with a cap pinned at each end. */
+.content {
+    background: url('../resources/backdrop_745.gif') repeat-y top center;
+    padding: 50px 75px;
+    position: relative;
+}
+.content:before, .content:after {
+    background: url('../resources/backdrop_765_top.gif') no-repeat center top;
+    content: '';
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: -11px;
+    width: 100%;
+}
+.content:after {
+    background: url('../resources/backdrop_765_bottom.gif') no-repeat center bottom;
+    bottom: -11px;
+    top: auto;
+}
+
+/* Article header */
+.news-article-header {
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+.news-article-header__title {
+    color: black;
+    font-size: 23px;
+    margin-bottom: 16px;
+}
+.news-article-header__date {
+    color: black;
+    display: block;
+    font-size: 13px;
+}
+
+/* Article body */
+.news-article-content {
+    color: black;
+    font-size: 13px;
+    line-height: 15px;
+}
+.news-article-content ul { list-style: disc; margin: 13px 0 26px 13px; }
+.news-article-content a {
+    color: #7B4F17;
+    font-weight: bold;
+    text-decoration: none;
+}
+.news-article-content a:hover { text-decoration: underline; }
+
+/* Small screens. Not from Jagex's source: the real site is fixed width. */
+@media (max-width: 940px) {
+    .page-wrap { width: auto; max-width: 100%; padding: 0 12px; background: none; }
+    .content { padding: 30px 16px; }
+}
+</style>
+
+<!-- ===================================================================
+     ARTICLE CSS - copied from the news post source.
+     =================================================================== -->
+<style>
+/*TEXT*/
+    p, ul, ol { font-size: 14px; }
+    .news-article-content > p::after { content: ""; display: block; height: 0.8em; }
+
+/*LINE BREAK*/
+    #divider {
+      background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='9' viewBox='0 0 420 9'><defs><linearGradient id='l' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='%234a3a22' stop-opacity='0'/><stop offset='.5' stop-color='%234a3a22' stop-opacity='.6'/><stop offset='1' stop-color='%234a3a22' stop-opacity='0'/></linearGradient></defs><rect x='0' y='4' width='420' height='1' fill='url(%23l)'/><path d='M210 1 L214.5 4.5 L210 8 L205.5 4.5 Z' fill='%234a3a22' opacity='.75'/></svg>") no-repeat center;
+      height: 9px;
+      margin: 30px auto;
+    }
+
+/*HEADING*/
+    h1 {
+        font-size: 24px;
+        color: #FFFFFF;
+        text-shadow: 1px 1px #121212;
+        text-align: center;
+        padding: 20px;
+    }
+
+/*TITLE*/
+    h3 {
+        font-size: 20px;
+        color: #000000;
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        text-shadow: 1px 1px 1px #9e9595;
+    }
+
+/*SUBTITLE*/
+    h4 {
+        font-size: 16px;
+        color: #000000;
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+/* The one h1 in this post reads as black, not the white section style. */
+    .news-article-content h1 {
+        color: #000000;
+        text-shadow: 1px 1px 1px #9e9595;
+    }
+</style>
+
+<!-- ===================================================================
+     POLL CSS - copied verbatim from the news post source, except where
+     marked. Colours confirmed against the screenshot pixel-for-pixel.
+     =================================================================== -->
+<style>
+  :root {
+    /* Self-contained SVG traces of Jagex's PNGs, matched to the screenshot.
+       The originals live on their CDN and are dropped in here instead, since
+       external requests fail in sandboxed previews and offline copies:
+         Up-Arrow.png / Down-Arrow.png  .../2025-09-23/
+         Border-3.png                   .../2025-00-00/                    */
+    --up-arrow:   url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 28'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23e2b878'/><stop offset='.28' stop-color='%23c9a069'/><stop offset='.72' stop-color='%23b1894f'/><stop offset='1' stop-color='%23a37c41'/></linearGradient><clipPath id='c'><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z'/></clipPath></defs><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z' fill='url(%23g)' stroke='%23000' stroke-width='1.7' stroke-linejoin='round'/><g clip-path='url(%23c)'><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z' fill='none' stroke='%23e9cd9a' stroke-width='2.2' opacity='.5'/></g></svg>");
+    --down-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 28'><g transform='rotate(180 13 14)'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23e2b878'/><stop offset='.28' stop-color='%23c9a069'/><stop offset='.72' stop-color='%23b1894f'/><stop offset='1' stop-color='%23a37c41'/></linearGradient><clipPath id='c'><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z'/></clipPath></defs><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z' fill='url(%23g)' stroke='%23000' stroke-width='1.7' stroke-linejoin='round'/><g clip-path='url(%23c)'><path d='M13 1L25 13v6h-7v8H8v-8H1v-6z' fill='none' stroke='%23e9cd9a' stroke-width='2.2' opacity='.5'/></g></g></svg>");
+    --poll-border: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' shape-rendering='crispEdges'><rect x='0.5' y='0.5' width='17' height='17' fill='none' stroke='%230e0e0c'/><rect x='1.5' y='1.5' width='15' height='15' fill='none' stroke='%231c1c19'/><rect x='2.5' y='2.5' width='13' height='13' fill='none' stroke='%23232320'/><rect x='3.5' y='3.5' width='11' height='11' fill='none' stroke='%232e2e2b'/><rect x='4.5' y='4.5' width='9' height='9' fill='none' stroke='%233c3c39'/><rect x='5.5' y='5.5' width='7' height='7' fill='none' stroke='%2352534f'/></svg>");
+  }
+
+  .rankContainer {
+    background: #494034;
+    width: 650px;
+    border-image: var(--poll-border) 6 / 6px 6px 6px 6px / 6px 6px 6px 6px
+    round;
+    padding: 8px;
+    margin: 24px auto;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: small;
+    vertical-align: middle;
+    color: #ffffff;
+    text-shadow: 1px 1px #121212;
+  }
+
+  .rankContainer p { margin: 0 0 .6em; }  /* the news page's own paragraph rhythm */
+
+  /* Bulleted notes under the question. Not from Jagex's source. */
+  .pollNotes {
+    margin: 0 0 1em;
+    padding-left: 2.4em;
+    list-style: disc;
+    line-height: 1.45;
+  }
+  .pollNotes li { margin-bottom: 2px; }
+
+  /* Matches the grey Jagex uses for the Skip option in their single-choice box. */
+  .voteTag { color: #acabab; }
+
+  /* Dev time estimate, on its own line under the title. Not from Jagex's source. */
+  .estTime { display: block; color: #acabab; }
+
+  /* Proposal links. Not from Jagex's source. */
+  .rankContent .sep { color: #9c8f7c; padding: 0 4px; }
+  /* Scoped to .rankItem so it outranks the article's own link rule
+     (.news-article-content a), which the poll box otherwise inherits. */
+  .rankItem .proposalLink {
+    color: #e0c8b1;
+    font-weight: normal;
+    text-decoration: none;
+    text-underline-offset: 2px;
+  }
+  .rankItem .proposalLink:hover,
+  .rankItem .proposalLink:focus-visible {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  .rankItem .proposalLink:focus-visible { outline: 2px solid #ff9424; outline-offset: 2px; }
+
+  /* Drag handle and rank marker. Only the top row carries a number.
+     Not from Jagex's source. */
+  .rowLead {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .grip { display: flex; color: #7d7263; transition: color 120ms ease; }
+  .grip svg { display: block; }
+  .rankItem:hover .grip,
+  .rankItem.dragging .grip { color: #b8aa94; }
+  .rankNum {
+    width: 18px;
+    text-align: center;
+    font-weight: bold;
+    color: #FF981F;
+  }
+  /* The bottom three slots are marked regardless of which rows sit there. */
+  .rankNum.slotMark { color: #acabab; font-weight: normal; }
+
+  /* Example result box. Not part of the in-game poll. */
+  .resultBox .resultLine {
+    font-size: 14px;
+    padding: 6px;
+    background-color: #4e4334;
+    line-height: 1.4;
+  }
+  .resultName { color: #FF981F; font-weight: bold; }
+  .resultNote { display: block; margin-top: 1.4em; color: #ffffff; }
+
+  .rankList {
+    list-style: none; padding: 0; margin: 0;
+    text-shadow: 1px 1px #121212;
+  }
+
+  /* The live page indents the list by roughly 1em. That comes from the news
+     article's list styling rather than the poll CSS, so it is set explicitly
+     here to match the screenshot. Set to 0 for the widget in isolation. */
+  .rankList { padding-left: 13px; }
+
+  .rankItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 6px;
+    color: #ff9424;
+    text-shadow: 1px 1px #121212;
+    will-change: transform; /* helps during FLIP */
+  }
+
+  /* Alternate by current visual position */
+  .rankItem:nth-child(odd)  { background-color: #4e4334; }
+  .rankItem:nth-child(even) { background-color: #554a3c; }
+
+  .rankContent { flex: 1 1 auto; line-height: 1.3; }
+
+  /* Click and drag to reorder. Not from Jagex's source. */
+  .rankItem {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: transform 120ms ease;
+  }
+  .rankItem.dragging {
+    cursor: grabbing;
+    position: relative;
+    z-index: 2;
+    transition: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+  }
+  .rankItem a, .rankItem button { cursor: pointer; }
+
+  /* Divider between the draggable part of the row and the arrow controls.
+     Nothing right of this line starts a drag. Not from Jagex's source. */
+  .rankControls {
+    align-self: stretch;
+    align-items: center;
+    margin: -6px -6px -6px 0;      /* cancel the row padding on three sides */
+    padding: 0 6px 0 10px;         /* and put the right inset back visually */
+    border-left: 1px solid #6d6151;
+    cursor: default;
+  }
+  .rankControls { display: inline-flex; gap: 6px; }
+
+  /* Arrow buttons (image-only) */
+  .moveBtn {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 140ms ease, opacity 140ms ease, filter 140ms ease;
+  }
+
+  .moveBtn:hover  { transform: scale(1.06); filter: brightness(1.1); }
+  .moveBtn:active { transform: scale(0.97); filter: brightness(0.95); }
+  .moveBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .moveBtn:focus-visible { outline: 2px solid #ff9424; outline-offset: 2px; }
+
+  .upBtn   { background-image: var(--up-arrow); }
+  .downBtn { background-image: var(--down-arrow); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .moveBtn { transition: none; }
+    .rankItem { transition: none !important; }
+  }
+</style>
+
+<style>
+/* Additions, not in Jagex's source. Delete this block for a byte-exact copy. */
+@media (max-width: 720px) {
+  .rankContainer { width: auto; max-width: calc(100% - 48px); }
+}
+</style>
+</head>
+<body class="news">
+
+<div class="page-wrap">
+<div class="contents">
+    <main class="main">
+        <div class="content">
+
+            <div class="news-article-header">
+                <div class="news-article-header__titles">
+                    <h2 class="news-article-header__title">Introducing PvP Update "Ranking Polls"</h2>
+                    <time class="news-article-header__date" datetime="2026-07-25">25 July 2026</time>
+                </div>
+            </div>
+
+            <div class="news-article-content">
+
+<div id="divider"></div>
+
+<p>Polls have always been the backbone of Old School RuneScape, giving you the final say on what content makes it into the game and making sure it stays true to the spirit of Old School.</p>
+
+<p>Except for when it comes to PvP updates! It has really ruined the PvP scene in Oldschool Runescape completely!</p>
+
+<p>If you've seen Chdata's video or heard his <a href="https://docs.google.com/document/d/1Ls4EYgzT47LkuNJbr8pgzjG8NQhVuDJqOfvOI3ghUKw/edit?usp=sharing" target="_blank" rel="noopener">PvP Poll Deep Dive</a>, he explains why most zero-sum PvP balance changes are projected to almost unanimously fail all polls.</p>
+
+<p>And in practice, they actually have had an extremely spotty history in our polling system.</p>
+
+<p>With this style of polling, we can now determine what kind of PvP update the playerbase would most like to see, and prioritize developing the #1 most requested PvP update.</p>
+
+<p>This allows us to have some degree of confidence in the desirability of a particular proposed PvP update, meaning we shouldn't have to go years without meaningful PvP updates anymore.</p>
+
+<h1>Example Poll #1</h1>
+
+<!-- RANKED LIST QUESTION BOX - poll 1 -->
+<div class="rankContainer" role="region" aria-label="Rank items">
+    <p><span style="color:#FF981F;font-weight:bold;">PvP Update Ranking Poll:</span> What should we focus on first for the future of PvP?</p>
+    <ul class="pollNotes">
+        <li>The top choice takes priority.</li>
+        <li>The lower choice will still be considered for the future.</li>
+    </ul>
+    <ul class="rankList">
+        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Focus on revitalizing the Wilderness</div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up" disabled></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Focus on revitalizing existing safe PvP minigames</div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0" data-role="novote">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Skip Vote <span class="voteTag">(No Vote)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0" data-role="novote">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">I'd prefer dev time be spent on non-PvP content instead <span class="voteTag">(No Vote)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down" disabled></button>
+                </div>
+        </li>
+    </ul>
+</div>
+
+<h1>Example Poll #2</h1>
+
+<!-- RANKED LIST QUESTION BOX - poll 2 -->
+<div class="rankContainer" role="region" aria-label="Rank items">
+    <p><span style="color:#FF981F;font-weight:bold;">PvP Update Ranking Poll:</span> Rank these potential PvP updates.</p>
+    <ul class="pollNotes">
+        <li>The top update takes priority and will appear in the next greenlight poll.</li>
+        <li>The lowest ranks show disinterest.</li>
+        <li>Updates that do not make rank #1 can still be considered in a future ranking poll.</li>
+        <li>If any of the "No Vote" options make it to rank #1, they will be skipped for the next highest ranking PvP update.</li>
+        <li>Est. # months: This is an estimate of how much dev time the proposal might take to produce.</li>
+        <li>These estimates are guesses, not guarantees.</li>
+    </ul>
+    <ul class="rankList" id="rankList" data-result="resultLine">
+        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Blessed Status <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/blessed_status%20(1).html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 3 months</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up" disabled></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Wilderness Teams <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/wildy_teams.html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 2 months</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Team Combat Zones <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/team_combat_zones.html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 5 months</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Rag Skull <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/rag_skull__1_.html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 2 weeks</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Soul Wars Rework <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/FixSoulWars_PvP.html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 1 month</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Castle Wars Rework <span class="sep">&middot;</span> <a class="proposalLink" href="https://chdata.github.io/OSRS-Chdata-Portfolio/osrs-pvp-portfolio/FixCastleWars_PvP.html" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 1 month</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Mod Manked's Rev Caves Rework <span class="sep">&middot;</span> <a class="proposalLink" href="https://secure.runescape.com/m=news/game-jam-vii?oldschool=1#WILDY" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 4 months</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Wilderness-Only Clue Scrolls + Optional Wildy Steps <span class="sep">&middot;</span> <a class="proposalLink" href="https://www.reddit.com/r/2007scape/comments/wrpu1h/wildernessonly_clue_scrolls_revised_poll_in/" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 2-6 months</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Ironman Loot Keys to Bonds-Only Coffer <span class="sep">&middot;</span> <a class="proposalLink" href="https://www.reddit.com/r/2007scape/comments/1sd2ryk/give_the_troubled_pvp_scene_a_kick_by_allowing/" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 1 year (engine work)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Removal of Trouver Parchments <span class="sep">&middot;</span> <a class="proposalLink" href="https://www.reddit.com/r/2007scape/comments/1uyshvn/the_trouver_parchment_system_still_sucks/oy4gpdi/?context=3" target="_blank" rel="noopener">View Proposal</a> <span class="estTime">Est. 1 month</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0" data-role="novote">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">Skip Vote <span class="voteTag">(No Vote)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0" data-role="novote">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">I'd prefer dev time be spent on non-PvP content instead <span class="voteTag">(No Vote)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down"></button>
+                </div>
+        </li><!--
+-->        <li class="rankItem" tabindex="0" data-role="opinion">
+            <span class="rowLead" aria-hidden="true"><span class="grip"><svg width="8" height="14" viewBox="0 0 8 14"><g fill="currentColor"><rect x="0" y="0" width="2" height="2"/><rect x="6" y="0" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="6" y="4" width="2" height="2"/><rect x="0" y="8" width="2" height="2"/><rect x="6" y="8" width="2" height="2"/><rect x="0" y="12" width="2" height="2"/><rect x="6" y="12" width="2" height="2"/></g></svg></span><span class="rankNum"></span></span>
+            <div class="rankContent">None of these ideas are good for PvP <span class="voteTag">(Opinion)</span></div>
+                <div class="rankControls">
+                    <button class="moveBtn upBtn" aria-label="Move up" title="Move up"></button>
+                    <button class="moveBtn downBtn" aria-label="Move down" title="Move down" disabled></button>
+                </div>
+        </li>
+    </ul>
+</div>
+
+<!-- EXAMPLE RESULT BOX - illustration only, not part of the in-game poll -->
+<div class="rankContainer resultBox" role="region" aria-label="Example result">
+    <p><span style="color:#FF981F;font-weight:bold;">Example Result:</span> If your #1 ranked PvP update wins, this could be the next poll:</p>
+    <div class="resultLine" id="resultLine" aria-live="polite"></div>
+</div>
+
+            </div><!-- /news-article-content -->
+        </div><!-- /content -->
+    </main>
+</div>
+</div><!-- /page-wrap -->
+
+<script>
+/* Jagex's reorder logic, generalised to run on every .rankList on the page
+   rather than a single hard-coded id. Everything inside initRankList is
+   their original code with `list` scoped per poll. */
+document.querySelectorAll('.rankList').forEach(initRankList);
+
+function initRankList(list) {
+
+  // FLIP all rows: snapshot -> move -> invert -> animate
+  function flipReorder(doDomChange, {duration = 320, easing = 'cubic-bezier(.34,1.56,.64,1)'} = {}) {
+    const items = Array.from(list.children);
+
+    // 1) First: snapshot current positions
+    const firstRects = new Map();
+    items.forEach(el => firstRects.set(el, el.getBoundingClientRect()));
+
+    // 2) DOM change
+    doDomChange();
+
+    // 3) Last: read new positions & invert
+    const moving = new Set(); // track which items actually moved
+    items.forEach(el => {
+      const first = firstRects.get(el);
+      const last = el.getBoundingClientRect();
+      const dx = first.left - last.left;
+      const dy = first.top  - last.top;
+
+      if (dx || dy) {
+        moving.add(el);
+        el.style.transition = 'none';
+        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      }
+    });
+
+    // 4) Play
+    // Force reflow once for all
+    void list.offsetWidth;
+
+    moving.forEach(el => {
+      el.style.transition = `transform ${duration}ms ${easing}`;
+      el.style.transform = 'translate(0,0)';
+      el.addEventListener('transitionend', function tidy(e) {
+        if (e.propertyName === 'transform') {
+          el.style.transition = '';
+          el.style.transform = '';
+          el.removeEventListener('transitionend', tidy);
+        }
+      });
+    });
+  }
+
+  function moveUp(item) {
+    const prev = item.previousElementSibling;
+    if (!prev) return;
+    flipReorder(() => list.insertBefore(item, prev));
+  }
+
+  function moveDown(item) {
+    const next = item.nextElementSibling;
+    if (!next) return;
+    flipReorder(() => list.insertBefore(next, item));
+  }
+
+  // Click arrows
+  list.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const item = btn.closest('.rankItem');
+    if (!item) return;
+
+    btn.classList.contains('upBtn')   && moveUp(item);
+    btn.classList.contains('downBtn') && moveDown(item);
+
+    updateDisabledStates();
+  });
+
+  // Keyboard reordering
+  list.addEventListener('keydown', (e) => {
+    if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    const item = e.target.closest('.rankItem');
+    if (!item) return;
+    e.preventDefault();
+
+    e.key === 'ArrowUp' ? moveUp(item) : moveDown(item);
+    item.focus();
+    updateDisabledStates();
+  });
+
+  // A poll only has a result box if it names one.
+  const resultLine = list.dataset.result
+    ? document.getElementById(list.dataset.result)
+    : null;
+
+  // How many slots at the bottom carry the skip marker: one per neutral
+  // option in this poll, so the marked band matches the list it belongs to.
+  const neutralCount = list.querySelectorAll('.rankItem[data-role]').length;
+
+  // The plain text label of a row, without its link or vote tag.
+  function labelOf(li) {
+    return li.querySelector('.rankContent').childNodes[0].textContent.trim();
+  }
+
+  function updateDisabledStates() {
+    const items = Array.from(list.querySelectorAll('.rankItem'));
+
+    items.forEach((li, idx) => {
+      const up = li.querySelector('.upBtn');
+      const down = li.querySelector('.downBtn');
+      if (up)   up.disabled   = (idx === 0);
+      if (down) down.disabled = (idx === items.length - 1);
+
+      // #1 marks the top slot, the circled slash marks the bottom slots.
+      // Both are tied to the position, not to the row sitting in it.
+      const num = li.querySelector('.rankNum');
+      const bottom = idx >= items.length - neutralCount;
+      num.textContent = idx === 0 ? '#1' : (bottom ? '\u2298' : '');
+      num.classList.toggle('slotMark', bottom);
+    });
+
+    updateResult(items);
+  }
+
+  // Reads the #1 row only. A No Vote at the top means no poll is shown.
+  function updateResult(items) {
+    if (!resultLine) return;
+    const top = items[0];
+    const role = top.dataset.role;
+
+    let html;
+    if (role === 'novote') {
+      html = 'You chose to skip this vote.';
+    } else if (role === 'opinion') {
+      html = 'You ranked <span class="resultName">' + labelOf(top) + '</span> first.'
+           + '<span class="resultNote">No update will be polled if this wins the '
+           + 'ranking poll.</span>';
+    } else {
+      html = 'Greenlight poll: <span class="resultName">' + labelOf(top) + '</span>'
+           + '<span class="resultNote">We will run a greenlight poll featuring this '
+           + 'proposal and develop the idea further based on community feedback and '
+           + 'beta testing. These are not the final designs.</span>';
+    }
+    resultLine.innerHTML = html;
+  }
+
+  /* ---- click and drag to reorder ------------------------------------
+     Not from Jagex's source. Pointer based, so it works with mouse, pen
+     and touch. Clicks on the arrows or the proposal links are ignored so
+     they keep behaving normally.                                        */
+  let drag = null;
+
+  list.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (e.target.closest('button, a, .rankControls')) return;
+
+    const row = e.target.closest('.rankItem');
+    if (!row) return;
+
+    // Belt and braces: nothing at or right of the divider starts a drag,
+    // whatever element happens to be under the pointer.
+    const controls = row.querySelector('.rankControls');
+    if (controls && e.clientX >= controls.getBoundingClientRect().left) return;
+
+    const items = Array.from(list.querySelectorAll('.rankItem'));
+    const idx = items.indexOf(row);
+    drag = { row, items, from: idx, to: idx, startY: e.clientY, step: row.offsetHeight };
+
+    row.setPointerCapture(e.pointerId);
+    row.classList.add('dragging');
+  });
+
+  list.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    e.preventDefault();
+
+    const dy = e.clientY - drag.startY;
+    const max = drag.items.length - 1;
+    drag.to = Math.max(0, Math.min(max, drag.from + Math.round(dy / drag.step)));
+
+    drag.row.style.transform = 'translateY(' + dy + 'px)';
+
+    drag.items.forEach((r, i) => {
+      if (r === drag.row) return;
+      let shift = 0;
+      if (drag.from < drag.to && i > drag.from && i <= drag.to)      shift = -drag.step;
+      else if (drag.from > drag.to && i < drag.from && i >= drag.to) shift =  drag.step;
+      r.style.transform = shift ? 'translateY(' + shift + 'px)' : '';
+    });
+  });
+
+  function endDrag() {
+    if (!drag) return;
+    const { row, items, to } = drag;
+
+    items.forEach(r => { r.style.transform = ''; });
+    row.classList.remove('dragging');
+
+    const rest = items.filter(r => r !== row);
+    rest.splice(to, 0, row);
+    rest.forEach(r => list.appendChild(r));
+
+    drag = null;
+    updateDisabledStates();
+  }
+
+  list.addEventListener('pointerup', endDrag);
+  list.addEventListener('pointercancel', endDrag);
+
+  updateDisabledStates();
+}
+</script>
+</body>
+</html>
