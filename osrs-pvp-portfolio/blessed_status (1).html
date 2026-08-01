@@ -27,8 +27,8 @@
   --stone:     #2a2010;
   --panel:     #1e1608;
   --border:    #5a4a2a;
-  --gold:      #c89b3c;
-  --gold-lt:   #e8c96a;
+  --gold:      #ffd75e;
+  --gold-lt:   #ffe9a0;
   --green:     #a6cfa6;
   --red:       #ffb7b7;
   --blue:      #80c0ff;
@@ -74,7 +74,7 @@ body {
 }
 .hero h1 {
   font-size: 42.0px;
-  color: var(--gold);
+  color: #c89b3c;
   text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000;
   margin-bottom: 9.0px;
   letter-spacing: 0.04em;
@@ -447,16 +447,16 @@ p:last-child { margin-bottom: 0; }
   <div class="sec-head">The #1 Fix To The Wilderness</div>
   <hr class="sec-divider">
 
-  <p>Blessed Status is <span class="hl-sara">PvM deaths in the Wilderness</span>, except the item reclamation fee is paid to the PKer who killed you, and it costs a minimum risk of <span style="color:#ffe066;">100k</span> to enable.</p>
+  <p>Blessed Status is <span class="hl-sara">PvM deaths in the Wilderness</span>, except the item reclamation fee is paid to the PKer who killed you, and it costs a minimum risk of <span class="hl-gold">100k</span> to enable.</p>
 
   <p>
-    <span class="hl-gold">Skulling</span> makes you lose everything on death.
+    <span class="hl-red">Skulling</span> makes you lose everything on death.
     <span class="hl-sara">Blessed Status</span> lets you keep everything, but you pay a <span class="hl-orange">5% death fee</span> proportional to the gear value you brought into the Wilderness, and a <span class="hl-orange">25% death fee</span> to keep any items you obtain within the Wilderness.
-    It is the <span class="hl-green">opposite of Skulled Status</span>, and has a Saradomin symbol overhead, just as Skulling is a symbol of Zamorak.
+    It is the <span style="color:#b9f6ca;">opposite of Skulled Status</span>, and has a Saradomin symbol overhead, just as Skulling is a symbol of Zamorak.
   </p>
 
   <p>
-    Blessed Status is enabled and disabled at NPC monks near Wilderness entry points (Wildy Ditch, Ferox Enclave, Mage Arena). Costs 100k each activation. Leaving the Wilderness temporarily disables it until you re-enter. Dying removes it, requiring it to be activated again.
+    Blessed Status is enabled and disabled at NPC monks near Wilderness entry points (Wildy Ditch, Ferox Enclave, Mage Arena). Costs <span class="hl-gold">100k</span> each activation. Leaving the Wilderness temporarily disables it until you re-enter. Dying removes it, requiring it to be activated again.
   </p>
 </div>
 
@@ -467,7 +467,7 @@ p:last-child { margin-bottom: 0; }
 
   <div class="three-compare">
     <div class="tc-header tc-empty"></div>
-    <div class="tc-header tc-normal">No Status<br><span style="font-size: 13.5px;color:var(--dim);">(default)</span></div>
+    <div class="tc-header tc-normal">Neutral Status<br><span style="font-size: 13.5px;color:#e0d5b8;">(default)</span></div>
     <div class="tc-header tc-blessed">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCA1LjEuMTGKCBbOAAAAuGVYSWZJSSoACAAAAAUAGgEFAAEAAABKAAAAGwEFAAEAAABSAAAAKAEDAAEAAAACAAAAMQECABEAAABaAAAAaYcEAAEAAABsAAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjExAAADAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAWgBAABAAAAlgAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAAAGNdRzso9yOwAAAsZJREFUSEu9lV1IFFEUx/+zMzs76ppWm61ZGvnRsEUlqGiRsvZQQdFbD0ER0pNGRWBP9VZEEFEgREVJH68RhQ+i9CCCBZISaD2YZa1GZa6uX/vhzt7OHcdl1dydCew3zN4zd86c/znn3pmFVYrzs5hhrg5coL/rNrMqZDNG03iqjhuWeSyLzE0MGZZ5TIvwFnV2PAOjwyqWKsnOVOhX020r62JKhAc8eeIwWVEwLYS66sD8DZOYruRigxeCPRsT/fWorMnU58xWk1KEB6re64FgE/GzrQqx2TFUlqfDu33K8EhNUpGFTK81FsPfdQaS4gKLiLBvvYtab+Ein2QIxhgn8aEXzbXIcfxGdKwfguhALDQNZds+yGsPQE7PhZxTgRtXm/DwwWPdf+BbYFk8TnxyIfgh7xZcPuumEgWwIAmMj8ImSdDCfqwpuwSbmEdeUdjsLjrXQ1QKIQbuUE96UFLWzUPoJArqBhd4dGsX1HyJMpZoliRkByKDfWTawGKzcJaep1ZN0X0nBd4E0VGAyORbBL8/oesCPZQsi3AWZaPx3Hu8bB2KCy2rRHUHUXdUwe7SEmxWVUxOhCj7NFAkGhUIkoKI/x1di+QtwrVxA0ZGwmht6Ybv8xeoRWlo7wE6+2QeTheKi3CWLuKpmjAOH6mAukNFZI5cGUPY9wYxhUHJtKOldQwdHT7k5cjIypJwr426kMCySpaSKHilYQ8O7i+A9msAsegMXHlTOH1hGJ4iBU87F2/Qvy3+iiKJcMHemx74yVsLjWKGTaP5+SRe9doNj5V3Fsf0G5/hzMDcj3FowTDau0Jwr+NrMh88mQDHtMix64OIavTtEhg+DQdx/7XpR82J8Ew/fvWjZGc6orMaytXFC5wK8+kQ9U3jiGkMH3zzn/tUbfon+AYINOfq//FLt3syLFXCcbrpxSRWpYoFrFTwHwH+AN3f9Efi8wZtAAAAAElFTkSuQmCC" alt="blessed">
       Blessed Status
@@ -516,7 +516,7 @@ p:last-child { margin-bottom: 0; }
 
 <!-- KEY RULES -->
 <div class="section">
-  <div class="sec-head">Key Rules</div>
+  <div class="sec-head">Blessed Status Rules</div>
   <hr class="sec-divider">
 
   <ul class="rules-list">
@@ -554,7 +554,7 @@ p:last-child { margin-bottom: 0; }
 
   <ul class="rules-list">
     <li>Blighted Coins are <span class="hl-red">untradeable</span> and can only be used to pay Blessed Status Wilderness death coffer fees.</li>
-    <li>They are worth <span class="hl-gold">1:1 with normal coins</span> for reclamation purposes. 100k in Blighted Coins covers a 100k fee.</li>
+    <li>They are worth <span class="hl-gold">1:1 with normal coins</span> for reclamation purposes. <span class="hl-gold">100k</span> in Blighted Coins covers a <span class="hl-gold">100k</span> fee.</li>
     <li>Jagex can add Blighted Coins to Wilderness drop tables as a way to <span class="hl-green">add value to drops</span> without injecting raw GP into the main game economy.</li>
     <li>They directly fund players getting back into the Wilderness after a death. <span class="hl-green">A natural incentive loop</span> that keeps Blessed players re-engaging with Wilderness content.</li>
   </ul>
@@ -612,11 +612,13 @@ p:last-child { margin-bottom: 0; }
     <li><span class="hl-gold">Boss kills:</span> Kill a Wilderness boss 1, 2, 4, 8, then 16 times (31 kills total) to earn stars 1-5.</li>
     <li><span class="hl-gold">Looting:</span> Accumulate 100k, 200k, 300k, 400k, and 500k in GP value from monsters or chests (1.5m total) to earn stars 1-5. A single drop worth <span class="hl-gold">1.5m or more</span> from any Wilderness monster instantly jumps you to all 5 stars.</li>
     <li><span class="hl-gold">Agility:</span> Complete 15, 30, 60, 90, then 120 laps of the Wilderness Agility Course (315 laps total) to earn stars 1-5.</li>
-    <li><span class="hl-orange">PKing:</span> Kill a player to steal <span class="hl-orange">all</span> of their stars.</li>
+    <li><span class="hl-orange">PKing:</span> Kill a player to <span class="hl-orange">upgrade to their star count</span>, if they had more stars than you.</li>
     <li><span class="hl-red">Logout or world-hop:</span> Lose 1 star.</li>
     <li><span class="hl-red">Die or leave the Wilderness entirely:</span> Your tier resets to 0. Entering a safe zone such as the Mage Bank or Ferox Enclave also resets to 0.</li>
     <li><span class="hl-green">Forinthry Gates</span> allow Tiered Blessed players to log out or world-hop without losing any tiers, rewarding players who stay in one world rather than hopping constantly.</li>
   </ul>
+
+  <p>If <span class="hl-red">-25%</span> to <span class="hl-green">+75%</span> is "too good" for Blessed Status, we can always try different numbers, like <span class="hl-red">-50%</span> for Tier 0 and <span class="hl-green">+50%</span> for Tier 4-5.</p>
 </div>
 
 <!-- RING OF GREED -->
@@ -624,11 +626,15 @@ p:last-child { margin-bottom: 0; }
   <div class="sec-head">Ring of Greed</div>
   <hr class="sec-divider">
 
+  <div style="text-align:center;margin:12px 0 24px;">
+    <img src="../assets/Ring_of_Greed.png" alt="Ring of Greed" style="width:60px;height:auto;image-rendering:pixelated;">
+  </div>
+
   <p>If Blessed Status were implemented, it would naturally follow that <span class="hl-red">Skulling should still be the better money-making method</span>. Blessed Status starts at -25% loot and caps out at +75% loot. Skulled players, by contrast, keep the full risk-reward ratio the Wilderness already provides, and that gap is intentional.</p>
 
   <p>We already see this pattern with the <span class="hl-gold">Amulet of Avarice</span>, which gives Revenant noted drops and a drop rate bonus, but only while Skulled. Blessed Status players explicitly cannot equip the Amulet of Avarice. The asymmetry is by design: reduced risk means reduced ceiling.</p>
 
-  <p>This creates a natural space for an item that takes that philosophy even further. The <span class="hl-gold">Ring of Greed</span>, a concept originally proposed by YouTuber PoisonedPotion, would double your drops within the Wilderness while Skulled.</p>
+  <p>This creates a natural space for an item that takes that philosophy even further. The <span class="hl-gold">Ring of Greed</span>, a concept originally proposed by YouTuber <span style="color:#d8b4ff;">PoisonedPotion</span>, would double your drops within the Wilderness while Skulled.</p>
 
   <div class="note-box">
     The name "Ring of Greed" is a fitting counterpart to the <span class="hl-gold">Ring of Wealth</span>. Where the Ring of Wealth passively improves your luck, the Ring of Greed would actively double your Wilderness loot, but only at the cost of the full Skulled risk. No safety net, no reduced fee, no tier buffers. The ring itself would be priced somewhere in the <span class="hl-gold">1m-100m</span> range, and is <span class="hl-red">always lost on death</span>.
@@ -651,7 +657,7 @@ p:last-child { margin-bottom: 0; }
 
   <p>Blessed Status addresses the risk problem for players who want a safety net. But the same core problem (risk not feeling worth the reward, and players worldhopping constantly) also applies to unskulled and skulled PvMers who prefer not to use Blessed Status. Forinthry Gates and Forinthry Artefacts are a separate extended proposal that addresses that player bracket.</p>
 
-  <p>The short version: Forinthry Gates are 6 or so locations scattered through the Wilderness where you can convert accumulated loot into protectable Forinthry Artefacts, essentially insuring the GP you've earned in the Wilderness without having to leave it. They also let Tiered Blessed players log out or worldhop without losing their tiers.</p>
+  <p>The short version: Forinthry Gates are 6 or so locations scattered through the Wilderness where you can convert accumulated loot into protectable Forinthry Artefacts, essentially insuring the GP you've earned in the Wilderness without having to leave it. Forinthry Artefacts act as a sort of "5th protected item". They also let Tiered Blessed players log out or worldhop without losing their tiers.</p>
 
   <a href="forinthry_gates.html" style="display:flex;align-items:center;justify-content:space-between;margin:18px 0 0;background:linear-gradient(180deg,rgba(68,136,204,0.1),rgba(68,136,204,0.05));border:1px solid var(--sara);border-left:6px solid var(--sara);border-radius:3px;padding:22px 24px;text-decoration:none;transition:background 0.15s,border-color 0.15s;" onmouseover="this.style.background='rgba(68,136,204,0.18)'" onmouseout="this.style.background='linear-gradient(180deg,rgba(68,136,204,0.1),rgba(68,136,204,0.05))'">
     <div>

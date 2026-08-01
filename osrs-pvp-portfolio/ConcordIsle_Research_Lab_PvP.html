@@ -25,12 +25,14 @@ strong, b { font-weight: normal; }
   --stone-light:  #4e3e28;
   --stone-border: #5a4a30;
   --text-body:    #d8c89a;
-  --text-dim:     #a89870;
+  --text-dim:     #c8b88c;
   --green-rs:     #00c000;
   --green-bright: #80ff00;
+  --green-soft:   #a6cfa6;
   --yellow-rs:    #ffcc00;
   --orange-rs:    #ff8c00;
   --red-rs:       #cc2222;
+  --red-light:    #ff8080;
   --blue-rs:      #80c0ff;
   --purple-rs:    #cc88ff;
   --white-rs:     #f0e8d0;
@@ -95,7 +97,7 @@ body {
   font-family: 'RSUF', serif;
   font-size: 37.8px;
   font-weight: normal;
-  color: var(--yellow-rs);
+  color: var(--green-soft);
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 3px 3px 0 #000;
   letter-spacing: 0.06em;
   line-height: 1.15;
@@ -143,7 +145,7 @@ body {
   font-family: 'RSUF', serif;
   font-size: 26.0px;
   font-weight: normal;
-  color: var(--green-bright);
+  color: var(--green-soft);
   text-align: center;
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000;
   margin-bottom: 4px;
@@ -184,8 +186,16 @@ p:last-child { margin-bottom: 0; }
 em { color: var(--orange-rs); font-style: normal; }
 strong { color: var(--white-rs); }
 .hl-green { color: var(--green-rs); }
+.hl-green-soft { color: var(--green-soft); }
+
+/* unreadable name of the hidden instigator */
+.garbled {
+  letter-spacing: 0.14em;
+  opacity: 0.85;
+  filter: blur(0.6px);
+}
 .hl-blue  { color: var(--blue-rs); }
-.hl-red   { color: var(--red-rs); }
+.hl-red   { color: var(--red-light); }
 .hl-yellow { color: var(--yellow-rs); }
 .hl-purple { color: var(--purple-rs); }
 
@@ -369,11 +379,11 @@ strong { color: var(--white-rs); }
   border-radius: 1px;
 }
 .note-box.green { border-left-color: var(--green-rs); background: rgba(0,192,0,0.06); }
-.note-box.red   { border-left-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.note-box.red   { border-left-color: var(--red-light); background: rgba(255,128,128,0.06); }
 .note-box.blue  { border-left-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
 .note-box strong { color: var(--yellow-rs); }
 .note-box.green strong { color: var(--green-rs); }
-.note-box.red strong   { color: var(--red-rs); }
+.note-box.red strong   { color: var(--red-light); }
 .note-box.blue strong  { color: var(--blue-rs); }
 
 .rs-hr { border: none; border-top: 1px dashed #5a4a2a; margin: 14px 0; }
@@ -417,9 +427,11 @@ strong { color: var(--white-rs); }
 
 /* Team split boxes (reuse mode-box, add blu/red) */
 .mode-box.blu { border-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
-.mode-box.red { border-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.mode-box.red { border-color: var(--red-light); background: rgba(255,128,128,0.06); }
 .mode-box.blu .mode-name { color: var(--blue-rs); }
-.mode-box.red .mode-name { color: var(--red-rs); }
+.mode-box.red .mode-name { color: var(--red-light); }
+.mode-box.purple { border-color: var(--purple-rs); background: rgba(204,136,255,0.06); }
+.mode-box.purple .mode-name { color: var(--purple-rs); }
 
 /* Phase timeline */
 .phase-grid {
@@ -458,7 +470,7 @@ strong { color: var(--white-rs); }
 }
 .phase-box.p1 .phase-title { color: var(--green-rs); }
 .phase-box.p2 .phase-title { color: var(--yellow-rs); }
-.phase-box.p3 .phase-title { color: var(--red-rs); }
+.phase-box.p3 .phase-title { color: var(--red-light); }
 .phase-box p { font-size: 13.2px; color: var(--text-dim); line-height: 1.5; margin: 0; }
 
 /* Blueprint arsenal cards */
@@ -475,7 +487,7 @@ strong { color: var(--white-rs); }
   padding: 11px 13px;
   border-radius: 1px;
 }
-.bp-card.offense { border-left-color: var(--red-rs); }
+.bp-card.offense { border-left-color: var(--red-light); }
 .bp-card.defense { border-left-color: var(--blue-rs); }
 .bp-card.utility { border-left-color: var(--green-rs); }
 .bp-card.trap    { border-left-color: var(--purple-rs); }
@@ -505,7 +517,7 @@ strong { color: var(--white-rs); }
   white-space: nowrap;
   flex-shrink: 0;
 }
-.bp-card.offense .bp-tag { color: var(--red-rs); }
+.bp-card.offense .bp-tag { color: var(--red-light); }
 .bp-card.defense .bp-tag { color: var(--blue-rs); }
 .bp-card.utility .bp-tag { color: var(--green-rs); }
 .bp-card.trap    .bp-tag { color: var(--purple-rs); }
@@ -563,7 +575,7 @@ strong { color: var(--white-rs); }
 .reward-list li { padding: 2px 0; }
 .reward-list strong { color: var(--white-rs); }
 .bp-card ul { margin: 6px 0 0; padding-left: 18px; }
-.bp-card ul li { margin: 2px 0; }
+.bp-card ul li { margin: 2px 0; font-size: 13.0px; color: var(--text-dim); line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -577,10 +589,8 @@ strong { color: var(--white-rs); }
   <div class="brick-strip offset"></div>
 
   <div class="hero">
-    <span class="hero-icon">&#x2697;&#xFE0F;</span>
+    <span class="hero-icon"><img src="../assets/Combat_potion(4).webp" alt="Combat potion" style="height:47px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
     <h1>Concord Isle</h1>
-    <h2>Experimental PvP Research Minigame</h2>
-    <span class="hero-tag">Player-Made Design Document - Not Official - @Chdata</span>
   </div>
 
   <div class="brick-strip offset"></div>
@@ -592,21 +602,20 @@ strong { color: var(--white-rs); }
     <div class="section">
       <div class="section-inner">
         <p>
-          Concord Isle is a <em>chaotic, sandbox-style team PvP minigame</em> built around one idea: give players a pile of <strong>ridiculous experimental weapons</strong> and two bases to fight over, and see what happens. It is the <strong>Wilderness compartmentalised</strong> - the same risk-and-raid tension, sealed inside a single island with a hard win condition and a testing ground for mechanics that would be far too silly to ship into the live game.
+          <span class="hl-green-soft">Concord Isle</span> is a <em>chaotic, sandbox-style team PvP minigame</em> built around one idea: give players a pile of <strong>ridiculous experimental weapons</strong> and two bases to fight over, and see what happens. It is the <strong>Wilderness compartmentalised</strong> - the same risk-and-raid tension, sealed inside a single island with a hard win condition and a testing ground for mechanics that would be far too silly to ship into the live game.
         </p>
         <p>
           More than that, it is a <em>home for the most creative, and controversial, concepts from players in the Old School RuneScape community</em> - a place to actually try the ideas the subreddit dreams up but the main game could never risk.
         </p>
-        <div class="note-box blue">
+        <p>
           <strong>TL;DR:</strong> Two teams. Raid the enemy lab, steal blueprints, craft absurd gear (bear traps, teleporting daggers, smoke bombs, floor buff sigils), then break into their base and destroy their <span class="hl-red">Respawn Anchor</span>. Once it is down, they stop respawning - wipe them to win.
-        </div>
+        </p>
       </div>
     </div>
 
     <!-- THE STORY -->
     <div class="section">
-      <div class="sec-head">The Premise</div>
-      <div class="sec-sub">A partnership that went very wrong.</div>
+      <div class="sec-head">A partnership that went very wrong.</div>
       <hr class="sec-divider">
       <div class="section-inner">
         <p>
@@ -624,31 +633,26 @@ strong { color: var(--white-rs); }
     <!-- THE TEAMS -->
     <div class="section">
       <div class="sec-head">The Two Labs</div>
-      <div class="sec-sub">Pick a side. Steal from the other.</div>
       <hr class="sec-divider">
       <div class="mode-grid">
         <div class="mode-box blu">
-          <span class="mode-icon">&#x1F52E;</span>
+          <span class="mode-icon"><img src="../assets/Arceuus_spellbook.png" alt="Arceuus spellbook" style="height:28px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <div class="mode-name">Kourend &amp; Varlamore</div>
           <p>A joint research pact between the two western kingdoms, holding the western lab. Their blueprints tend toward exotic, alchemical, and downright arcane prototypes.</p>
         </div>
         <div class="mode-box red">
-          <span class="mode-icon">&#x26A1;</span>
+          <span class="mode-icon"><img src="../assets/jagexappletviewer.png" alt="Mainland Guild" style="height:28px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <div class="mode-name">Mainland Guild</div>
           <p>The mainland's battle-wizards, holding the eastern lab. Their designs lean toward enchanted contraptions - runic traps, snares, and raw force-magic.</p>
         </div>
-      </div>
-      <div class="note-box green">
-        <strong>RED vs BLU, on purpose.</strong> A clean two-team colour split keeps a chaotic mode readable at a glance - a lesson borrowed straight from arena shooters. You always know instantly who is friend and who is target.
       </div>
     </div>
 
     <!-- COMBATANTS -->
     <div class="section">
       <div class="sec-head">Combatants of Concord Isle</div>
-      <div class="sec-sub">How a research pact turned into everyone's war.</div>
       <hr class="sec-divider">
-      <p>Concord Isle didn't start as a battlefield. It began as a <em>research pact</em> between two arcane academies - Kourend's <strong>Arceuus</strong> and Misthalin's <strong>Order of Wizards</strong>. But combat tech is a prize that never stays quiet. As word spread, faction after faction muscled in to claim a share - militant orders, mercenaries, zealots, whole kingdoms - groups that could never share a table. The rivalries were almost <em>too</em> convenient. Now the Concord is a memory, and the island is a proxy war nobody fully controls.</p>
+      <p><span class="hl-green-soft">Concord Isle</span> didn't start as a battlefield. It began as a <em>research pact</em> between two arcane academies - Kourend's <strong>Arceuus</strong> and Misthalin's <strong>Order of Wizards</strong>. But combat tech is a prize that never stays quiet. As word spread, faction after faction muscled in to claim a share - militant orders, mercenaries, zealots, whole kingdoms - groups that could never share a table. The rivalries were almost <em>too</em> convenient. Now the Concord is a memory, and the island is a proxy war nobody fully controls.</p>
 
       <div class="subsec-head">The Western Kingdoms (BLU)</div>
       <div class="bp-grid">
@@ -741,21 +745,18 @@ strong { color: var(--white-rs); }
       <div class="subsec-head">The Hidden Hand</div>
       <div class="bp-grid">
         <div class="bp-card trap pick">
-          <div class="bp-head"><span class="bp-name">???, the Unseen</span><span class="bp-tag">Wildcard</span></div>
-          <p>A <span class="hl-purple">Mahjarrat</span> who has walked among mortals for an age, hidden behind the face of a humble broker of knowledge. It was <em>his</em> whisper that first sat Arceuus and the Order of Wizards at the same table - and his hand that drew in every rival after, each one certain to turn on the others. The combat research was never meant to be shared. It was meant to be <span class="hl-purple">harvested</span> - by him. Somewhere in the ranks stands a presence far more powerful than anyone realises.</p>
-          <div class="bp-meta"><b>Hidden instigator</b> &middot; a lore hook for a future reveal</div>
+          <div class="bp-head"><span class="bp-name"><span class="garbled">&#x2E2E;&#x0334;&#x0353;&#x00BF;&#x0336;&#x0301;&#x003F;&#x0335;&#x032E;&#x2E2E;&#x0337;&#x030D;&#x003F;&#x0338;&#x0323;&#x00BF;&#x0334;&#x0357;</span>, the Unseen</span><span class="bp-tag">Wildcard</span></div>
+          <p>An unknown instigator. He seemed to be working closely with everyone behind the scenes, recruiting more and more groups into the project. He is known as a humble broker of knowledge. It was <span class="hl-purple">his</span> whisper that first sat Arceuus and the Order of Wizards at the same table - and his hand that drew in every rival after. Was the combat research really meant to be shared? Or was it meant to be <span class="hl-purple">harvested</span>... by him. He is definitely more than he seems to be.</p>
         </div>
       </div>
 
-      <div class="note-box">
-        <strong>The gods aren't the enemy - the factions are.</strong> Saradomin's knights, Zamorak's, Guthix's druids, Kourend's Houses, Varlamore's gladiators: none of them trust each other, and all of them want what the labs built. That mutual distrust is the fuel. The factions themselves are canon; the Concord, and the Mahjarrat pulling its strings, are original additions - a story the reveal could pay off later.
-      </div>
+      <br>
+      <p>Saradomin's knights, Zamorak's, Guthix's druids, Kourend's Houses, Varlamore's Gladiators. After seeing the profits of <span class="hl-green-soft">Concord Isle</span>, each of them wanted to seize what the labs have built. Not a single one of them truly trusts each other on this island.</p>
     </div>
 
     <!-- OBJECTIVE + PHASES -->
     <div class="section">
-      <div class="sec-head">The Objective</div>
-      <div class="sec-sub">Kill the enemy team - permanently.</div>
+      <div class="sec-head">Gameplay Objective</div>
       <hr class="sec-divider">
       <p>The end goal is simple: <strong>destroy the enemy's Respawn Anchor</strong>, the magic machine keeping their team alive. But you cannot walk up and smash it. You have to earn your way in, one phase at a time.</p>
 
@@ -776,22 +777,17 @@ strong { color: var(--white-rs); }
           <p>With the Anchor destroyed, the enemy can no longer respawn. Hunt down every last survivor. Last team standing wins the match.</p>
         </div>
       </div>
-
-      <div class="note-box">
-        <strong>Why phases?</strong> A raw deathmatch never ends - both sides just respawn forever. Gating the kill behind objectives gives the match a shape: a build-up, a siege, and a decisive finish. It is the Wilderness fight arc, but with a guaranteed conclusion.
-      </div>
     </div>
 
     <!-- PHASE 1: BLUEPRINTS -->
     <div class="section">
       <div class="sec-head">Phase 1 - Blueprints &amp; the Arsenal</div>
-      <div class="sec-sub">Steal the designs. Build the nonsense.</div>
       <hr class="sec-divider">
       <p>Blueprints spawn in the enemy lab. Grab one, run it home, and your <em>whole team</em> unlocks whatever it describes - a weapon, a shield, a trap, or a spell. This is the heart of the mode: a deliberately overloaded arsenal of experimental tech that would never survive a real balance pass. Crucially, many blueprints are <em>gated behind real stat and quest requirements</em>, so your account build still matters even inside the sandbox. Several entries below are community concepts, credited on the card.</p>
 
-      <div class="note-box green">
-        <strong>You commit to one at a time.</strong> This list is deliberately enormous - but no one ever fights with all of it. Blueprints are stolen one by one, under fire, so in practice you make do with <em>whatever you managed to grab</em>: a single crazy weapon, maybe two, not a loadout of twenty. That's the whole trick to keeping it from being overwhelming. The giant menu isn't something to master; it's a pool to gamble from, and what you pull out is what you're committing to for the fight.
-      </div>
+      <p>
+        <strong class="hl-green-soft">You commit to one at a time.</strong> This list is deliberately enormous - but no one ever fights with all of it. Blueprints are stolen one by one, under fire, so in practice you make do with <em>whatever you managed to grab</em>: a single crazy weapon, maybe two, not a loadout of twenty. That's the whole trick to keeping it from being overwhelming. The giant menu isn't something to master; it's a pool to gamble from, and what you pull out is what you're committing to for the fight.
+      </p>
 
       <div class="subsec-head">Weapons &amp; Shields</div>
       <div class="bp-grid">
@@ -857,10 +853,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
-      <div class="note-box blue">
-        <strong>One shield per style.</strong> The three reactive shields map onto the combat triangle - <span class="hl-green">Vine</span> answers melee, <span class="hl-blue">Abyssal</span> answers magic, <span class="hl-purple">Smoke</span> answers ranged. Each only reacts to its own damage type, so the shield you carry quietly telegraphs which style you fear most. <span class="bp-credit">Reactive shields and the escape gadgets below are adapted from the r/2007scape escape-items thread, credited in full at the bottom.</span>
-      </div>
-
+      <br>
       <div class="subsec-head">Traps &amp; Deployables</div>
       <div class="bp-grid">
         <div class="bp-card trap">
@@ -905,6 +898,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Escape Tools &amp; Gadgets</div>
       <div class="bp-grid">
         <div class="bp-card utility">
@@ -924,6 +918,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Spells &amp; Consumables</div>
       <div class="note-box">
         <strong>Cast from tablets.</strong> Every spell here is used via a <em>Spell Tablet</em> (like a Teleport Tablet) - carry the tablet and crack it to cast, no spellbook swap or runes needed. The Antifreeze Potion is the exception: it's drunk, not cast.
@@ -959,7 +954,7 @@ strong { color: var(--white-rs); }
         </div>
         <div class="bp-card utility pick">
           <div class="bp-head"><span class="bp-name">Share Ailment</span><span class="bp-tag">Utility</span></div>
-          <p><span class="bp-star">&#9733; Chdata's #1 genuine pitch.</span> An Arceuus spell that duplicates <em>every debuff currently on you</em> onto your opponent. Casts like Vengeance but <em>without</em> waiting to be hit: click it and it lands instantly on your target in combat. It copies:</p>
+          <p><span class="bp-star">&#9733; Genuine New Spell Idea:</span> An Arceuus spell that duplicates <em>every debuff currently on you</em> onto your opponent. Casts like Vengeance but <em>without</em> waiting to be hit: click it and it lands instantly on your target in combat. It copies:</p>
           <ul>
             <li>Poison, Venom, Burning, Corruption</li>
             <li>Magical freezes - your <span class="hl-yellow">remaining freeze timer</span> is duplicated onto them</li>
@@ -975,40 +970,35 @@ strong { color: var(--white-rs); }
       </div>
 
       <div class="note-box red">
-        <strong>The ZGS is the exception.</strong> A freeze from the <span class="hl-red">Zamorak Godsword</span> special attack shrugs off almost everything - no Antifreeze Potion will touch it. The <em>one</em> item that clears it is the Zamorak battlestaff's <span class="hl-red">Combust</span> spec: fire against ice. Teleports also still move you (Short Range Teleport, the Abyssal Shield's forced jump) even while ZGS-frozen. Otherwise it's the hardest lock in the mode.
-      </div>
-
-      <div class="note-box blue">
-        <strong>Colour = what it does.</strong> <span class="hl-red">Offense</span>, <span class="hl-blue">Defense</span>, <span class="hl-green">Utility</span>, and <span class="hl-purple">Trap</span> tags let you read a chaotic loadout at a glance. And because most items sit behind stat or quest requirements, a maxed build genuinely unlocks more of the arsenal than a fresh one.
+        <strong>The ZGS has some exceptions.</strong> The Antifreeze Potion will not unfreeze you from its effect. A freeze from the <span class="hl-red">Zamorak Godsword</span> special attack will stick through most counters, except if it is cleared by the Zamorak Battlestaff's <span class="hl-red">Combust</span> spec. Teleports also still move you (Short Range Teleport, the Abyssal Shield's forced jump) even while ZGS-frozen.
       </div>
 
       <div class="note-box green">
-        <strong>One of these is serious.</strong> <span class="hl-green">Share Ailment</span> is the one mechanic Chdata would actually pitch for live-game PvP. It does <em>not</em> copy normally-lowered stats - you can't sip a Saradomin brew and hand over the drain. Its real job is countering freezes: as the <em>mouse</em> you turn a DD attempt back on the hunter, and as the <em>cat</em> you stop a target freezing you and logging out. You learn it by meeting <strong>Xeric</strong> and casting Boost Potion Share on him.
+        <strong><span class="hl-green">Share Ailment</span></strong> is the one mechanic Chdata would actually pitch for live-game PvP. It does <em>not</em> copy normally-lowered stats - you can't sip a Saradomin brew and hand over the drain. Its real job is countering freezes: for example in the Wilderness, in a <em>defensive position</em> you turn a DD attempt back on the hunter, and as the <em>hunter</em> you stop a target freezing you and logging out. You learn it by meeting <strong>Xeric</strong> and casting Boost Potion Share on him.
       </div>
     </div>
 
     <!-- PHASE 2: BREAKING THE ANCHOR -->
     <div class="section">
       <div class="sec-head">Phase 2 - Cracking the Anchor</div>
-      <div class="sec-sub">Three orbs, one shield, one machine.</div>
       <hr class="sec-divider">
       <p>The Respawn Anchor cannot be attacked directly at first. It is protected in three stacked layers, and each has to be peeled away in order.</p>
 
       <div class="obj-track">
         <div class="obj-step orbs">
-          <span class="obj-ic">&#x1F535;</span>
+          <span class="obj-ic"><img src="../assets/Orb.webp" alt="Anchor Orb" style="height:24px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <span class="obj-lb">3 Anchor Orbs</span>
           <span class="obj-sub">steal &amp; destroy at your base</span>
         </div>
         <span class="obj-arrow">&#10142;</span>
         <div class="obj-step shield">
-          <span class="obj-ic">&#x1F6E1;&#xFE0F;</span>
+          <span class="obj-ic"><img src="../assets/Falador_shield_3.webp" alt="Anchor Shield" style="height:24px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <span class="obj-lb">Anchor Shield</span>
           <span class="obj-sub">now vulnerable - break it</span>
         </div>
         <span class="obj-arrow">&#10142;</span>
         <div class="obj-step anchor">
-          <span class="obj-ic">&#x2693;</span>
+          <span class="obj-ic"><img src="../assets/Barrelchest_anchor.webp" alt="Respawn Anchor" style="height:24px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <span class="obj-lb">Respawn Anchor</span>
           <span class="obj-sub">destroy to end respawns</span>
         </div>
@@ -1020,29 +1010,24 @@ strong { color: var(--white-rs); }
         <li><strong>Then the Anchor itself.</strong> Shield down, the Respawn Anchor is finally exposed. Destroy it and the enemy's respawns switch off for good.</li>
       </ul>
 
-      <div class="note-box red">
-        <strong>Symmetry matters.</strong> Both bases have the same layout, so no team starts with a structural advantage. It is a race and a siege at the same time - you can turtle on defence, push hard on offence, or split the difference.
-      </div>
+      <p>
+        <strong class="hl-red">Symmetry matters.</strong> Both bases have the same layout, so no team starts with a structural advantage. It is a race and a siege at the same time - you can turtle on defence, push hard on offence, or split the difference.
+      </p>
     </div>
 
     <!-- PHASE 3: THE WIPE -->
     <div class="section">
-      <div class="sec-head">Phase 3 - The Wipe</div>
-      <div class="sec-sub">No respawns. No mercy.</div>
+      <div class="sec-head">Phase 3 - Team Wipe</div>
       <hr class="sec-divider">
       <div class="section-inner">
         <p>The instant the Anchor falls, the enemy team is <strong>on their last lives</strong>. Everyone still standing has to be hunted down, and every kill is now permanent for the round. The team that loses its Anchor is on the back foot - but a well-armed, well-positioned squad can still turn a last stand into a comeback.</p>
         <p>The match ends when <em>one team is fully wiped</em>. Winners keep the isle. Losers head back to the lobby to re-arm and queue again.</p>
-        <div class="note-box green">
-          <strong>The finish is the payoff.</strong> Every blueprint stolen and every orb destroyed builds toward this moment. Phase 3 is short and violent by design - a clean, readable end instead of an endless respawn grind.
-        </div>
       </div>
     </div>
 
     <!-- GUARDIAN STATUES -->
     <div class="section">
       <div class="sec-head">Guardian Statues</div>
-      <div class="sec-sub">The island's old gods, waiting to be woken.</div>
       <hr class="sec-divider">
       <p>Dotted around Concord Isle stand dormant <strong>god-statues</strong> - two honouring the mainland's gods, two the sun-and-moon faith of the western kingdoms. Bring the right consecrated symbol, place it on a matching statue, and it wakes for <em>your</em> team until the enemy topples the offering or claims the statue themselves. They are neutral map objectives worth fighting over.</p>
 
@@ -1081,24 +1066,24 @@ strong { color: var(--white-rs); }
     <!-- THE GODTHIEF -->
     <div class="section">
       <div class="sec-head">The Godthief</div>
-      <div class="sec-sub">Reave a god's power, and pray with it.</div>
       <hr class="sec-divider">
-      <p>The <strong>Godthief</strong> is a stolen relic worn in your <em>shield slot</em> - a plundered prayerbook you equip and activate to <em>switch your prayers over to a liturgy that was never yours</em>.</p>
-      <p>Because Concord Isle exists to trial ideas too strong for the live game, it hands you <span class="hl-yellow">exclusive access to two completely separate prayerbooks</span> you'll find nowhere else - and you commit to one for the fight. The catch is built in: carrying it means <span class="hl-red">giving up your shield slot</span>, so a stolen prayerbook always costs you defence.</p>
+      <p>The <strong>Godthief</strong> is a stolen relic worn in your <em>shield slot</em> - a plundered prayerbook you equip and activate to <em>switch your prayers</em>.</p>
+      <p>Because <span class="hl-green-soft">Concord Isle</span> exists to trial ideas too strong for the live game, it hands you <span class="hl-yellow">exclusive access to two completely separate prayerbooks</span> you'll find nowhere else - and you commit to one for the fight. The catch is built in: carrying it means <span class="hl-red">giving up your shield slot</span>, so a stolen prayerbook always costs you defence.</p>
 
       <div class="mode-grid">
-        <div class="mode-box comp">
-          <span class="mode-icon">&#x1F441;&#xFE0F;</span>
+        <div class="mode-box purple">
+          <span class="mode-icon"><img src="../assets/Zaros_symbol.webp" alt="Zaros symbol" style="height:56px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <div class="mode-name">Ancient Curses</div>
-          <p>The forbidden Zarosian curses - Soul Split's leech, the Deflect prayers, Turmoil-style boosts. Raw, familiar power for anyone who knows the old books.</p>
+          <p>The forbidden Zarosian curses - Soul Split's life leech, the Deflect prayers, Turmoil-style boosts. Raw, familiar power for anyone who knows the old books.</p>
         </div>
         <div class="mode-box blu">
-          <span class="mode-icon">&#x1F312;</span>
+          <span class="mode-icon"><img src="../assets/120px-Ralos_symbol.webp" alt="Ralos symbol" style="height:56px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
           <div class="mode-name">Losanium Rites</div>
           <p>A freshly reaved prayerbook built on Ralos and Ranul, Varlamore's sun and moon. Its signature is the <span class="hl-blue">Eclipse</span> trio.</p>
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">The Eclipse Prayers</div>
       <p>Unlike normal protection prayers, each Eclipse is an <em>activated</em> ability: click it to trigger a brief window of <span class="hl-yellow">total cover</span>, then wait out the cooldown. The moon crosses the sun, harm passes over you, and the moment ends.</p>
       <div class="bp-grid">
@@ -1119,6 +1104,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Sun &amp; Moon Rites</div>
       <div class="bp-grid">
         <div class="bp-card sun">
@@ -1164,7 +1150,6 @@ strong { color: var(--white-rs); }
     <!-- IMPORTED & CUSTOM GEAR -->
     <div class="section">
       <div class="sec-head">Imported &amp; Custom Gear</div>
-      <div class="sec-sub">The labs don't only invent - they reverse-engineer.</div>
       <hr class="sec-divider">
       <p>Beyond the experimental blueprints, the two labs can reproduce real Gielinor gear and a few purpose-built minigame items. Some are earned in general play; others are stocked in the reward shop.</p>
 
@@ -1207,6 +1192,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Reverse-Engineered Gear</div>
       <div class="bp-grid">
         <div class="bp-card offense">
@@ -1241,6 +1227,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Daemonheim Toys</div>
       <p>The weirder end of the Dungeoneering shelf - the rare Daemonheim gear that carried real passive effects, plus a classic reward ring.</p>
       <div class="bp-grid">
@@ -1280,6 +1267,7 @@ strong { color: var(--white-rs); }
         <strong>Why import old gear?</strong> Half the fun of a sandbox is dusting off weapons the live game left behind. Chaotics, Primal, and Leagues one-offs never coexist in normal PvP - here they can, purely to see what happens.
       </div>
 
+      <br>
       <div class="subsec-head">Leagues Echoes - Demonic Pacts</div>
       <p>Straight from the <em>Demonic Pacts League</em>: each of these is <strong>echo equipment</strong>, dropped by a souped-up "echo" version of a classic boss. Balanced around Leagues-tier power, they make perfect fodder for a seasonal pool - effects far too loud for the live game, exactly where this island wants them.</p>
       <div class="bp-grid">
@@ -1335,6 +1323,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Leagues Echoes - Raging Echoes</div>
       <p>And from the earlier <em>Raging Echoes League</em>, three more echo drops worth dragging in:</p>
       <div class="bp-grid">
@@ -1365,6 +1354,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
+      <br>
       <div class="subsec-head">Leagues Gameplay Items</div>
       <p>Not echo drops, but signature <em>Leagues</em> gameplay items - the utility toys that make a sandbox sing:</p>
       <div class="bp-grid">
@@ -1389,9 +1379,8 @@ strong { color: var(--white-rs); }
     <!-- SEASONAL SETS -->
     <div class="section">
       <div class="sec-head">Seasonal Sets</div>
-      <div class="sec-sub">The item pool rotates. The chaos stays fresh.</div>
       <hr class="sec-divider">
-      <p>Like the seasons of the 6v6 PvP Arena, Concord Isle would run on <strong>seasonal rulesets</strong>. A permanent base pool of items and blueprints is always in play, and each new season swaps in a themed pool on top - keeping the meta from going stale and giving a low-risk way to trial whole <em>categories</em> of tech at once.</p>
+      <p>Like the seasons of the 6v6 PvP Arena, <span class="hl-green-soft">Concord Isle</span> would run on <strong>seasonal rulesets</strong>. A permanent base pool of items and blueprints is always in play, and each new season swaps in a themed pool on top - keeping the meta from going stale and giving a low-risk way to trial whole <em>categories</em> of tech at once.</p>
 
       <ol class="reward-list">
         <li><strong>The Base Set</strong> - the core experimental arsenal (traps, reactive shields, escape gadgets, the Godthief prayerbooks). The permanent foundation every themed season builds on.</li>
@@ -1402,17 +1391,17 @@ strong { color: var(--white-rs); }
         <li><strong>Whatever's Next</strong> - a Raging Echoes season, a Barrows season, a God Wars season: any themed pool worth testing in a sealed arena.</li>
       </ol>
 
-      <div class="note-box blue">
-        <strong>Why seasons.</strong> A rotating pool means Concord Isle never settles into one solved loadout, and it lets Jagex float a whole theme's worth of experimental items for a few months, watch what happens, and retire what doesn't land - all without ever touching the live game.
-      </div>
+      <br>
+      <p>
+        <strong class="hl-blue">Why seasons.</strong> A rotating pool means Concord Isle never settles into one solved loadout, and it lets Jagex float a whole theme's worth of experimental items for a few months, watch what happens, and retire what doesn't land - all without ever touching the live game.
+      </p>
     </div>
 
     <!-- REWARD SHOP -->
     <div class="section">
       <div class="sec-head">Reward Shop</div>
-      <div class="sec-sub">Play well, earn the good toys.</div>
       <hr class="sec-divider">
-      <p>Like the Fortis Colosseum, Concord Isle runs a reward shop where performance buys access. One item lives here and nowhere else - the rest are detailed up in the equipment sections.</p>
+      <p>Here is stuff you might buy from the <span class="hl-green-soft">Concord Isle</span> reward shop!</p>
 
       <div class="bp-grid">
         <div class="bp-card offense">
@@ -1422,7 +1411,7 @@ strong { color: var(--white-rs); }
         </div>
       </div>
 
-      <p>The rest of the shelves - all detailed elsewhere on the page:</p>
+      <p>The other items are detailed elsewhere on the page!</p>
       <ol class="reward-list">
         <li><strong>Centurion armour</strong></li>
         <li><strong>Menaphite dagger</strong></li>
@@ -1433,17 +1422,17 @@ strong { color: var(--white-rs); }
         <li><strong>Granite mace</strong></li>
       </ol>
 
-      <div class="note-box">
-        <strong>Anti-bot measures.</strong> Every reward is gated behind progress that a bot can't easily farm - a minimum <span class="hl-yellow">quest-point total</span> or specific <span class="hl-yellow">quest completions</span> per item. You have to be a real, established account to cash out, which keeps the shop from becoming a gold-farm target.
-      </div>
+      <p>
+        <strong class="hl-yellow">Anti-bot measures.</strong> Every reward is gated behind progress that a bot can't easily farm - a minimum <span class="hl-yellow">quest-point total</span> or specific <span class="hl-yellow">quest completions</span> per item. You have to be a real, established account to cash out, which keeps the shop from becoming a gold-farm target.
+      </p>
     </div>
 
     <!-- SERIOUS SUGGESTIONS -->
     <div class="section">
-      <div class="sec-head">Serious Suggestions</div>
-      <div class="sec-sub">Strip away the chaos - a few of these could ship for real.</div>
+      <div class="sec-head">Serious Item &amp; Spell Suggestions</div>
       <hr class="sec-divider">
-      <p>Most of Concord Isle is deliberate nonsense. But a handful of ideas here are ones Chdata would <em>genuinely</em> pitch for live OSRS PvP, minigame or not. What they share: each has clear, exploitable counterplay, so it adds depth without power-creeping the game.</p>
+      <p>Most of <span class="hl-green-soft">Concord Isle</span> is deliberate nonsense. But a handful of these ideas are legitimate ones I'd like to see added to the main game.</p>
+      <p>Half of the point of <span class="hl-green-soft">Concord Isle</span> is to test these ideas, after all.</p>
 
       <ol class="reward-list">
         <li><strong>Share Ailment</strong></li>
@@ -1457,47 +1446,39 @@ strong { color: var(--white-rs); }
         <li><strong>Bladebreaker</strong></li>
         <li><strong>Skullsplitter</strong></li>
       </ol>
-
-      <div class="note-box green">
-        <strong>Counterplay first.</strong> The through-line is a built-in, obvious weakness. That is what separates a healthy addition from power creep - and it's the bar any of these would need to clear before being considered for a real poll.
-      </div>
     </div>
 
     <!-- DESIGN INTENT -->
     <div class="section">
-      <div class="sec-head">Why Build This</div>
-      <div class="sec-sub">A sandbox that protects the main game.</div>
+      <div class="sec-head">Why This Minigame?</div>
       <hr class="sec-divider">
       <ul class="rs-list check">
-        <li><strong>Compartmentalised Wilderness.</strong> All the raid-and-risk drama of the Wild, sealed inside one island with a defined win condition and a clean reset. New players can taste PvP tension without a 3-item skull loss on the line.</li>
-        <li><strong>A testing ground for wild ideas.</strong> Mechanics that could never pass a poll for the live game - teleport-strike specs, reactive shields, floor buffs - get a safe place to exist. If a blueprint proves genuinely fun and fair here, that is real evidence it might work elsewhere.</li>
-        <li><strong>Objective-driven, not deathmatch.</strong> The phase structure gives every match a beginning, middle, and end, so fights actually resolve instead of running forever.</li>
-        <li><strong>Team-scale PvP that is watchable.</strong> Coordinated blueprint plays, orb escorts, and shield sieges are far more streamable than solo clips - and far more forgiving for players who are not top-tier duelists.</li>
+        <li><strong>It's a Mini-Wilderness.</strong> <span class="hl-green-soft">Concord Isle</span> is actually designed to be a "predator-prey" form of minigame, similar to Fist of Guthix or Castle Wars. You have to break into an enemy base and escape with a valuable item.</li>
+        <li><strong>It's a testing ground for wild ideas.</strong> As you can tell, a lot of the items from this minigame are too crazy for the main game. However, a few of them are actually designed in a serious way, so this minigame could be a safe form of "live beta testing".</li>
+        <li><strong>It's different from any minigame idea you've ever heard of.</strong> Tell me what it reminds you of lol.</li>
+        <li><strong>It's team-scale PvP that is watchable.</strong> Jagex could stream and host events for this minigame. There will definitely be interesting... "strategy" involved in breaking into the enemy's base and escaping with their blueprints.</li>
+        <li><strong>Fun first, balance second.</strong> This is not meant to be a perfectly tuned competitive mode at launch. Expect some overpowered blueprints, some dominant strategies, and some gloriously stupid moments. <span class="hl-green-soft">Concord Isle</span> is the ultimate fuckaround and findout lab.</li>
       </ul>
-      <div class="note-box">
-        <strong>Fun first, balance second.</strong> This is not meant to be a perfectly tuned competitive mode at launch. Expect some overpowered blueprints, some dominant strategies, and some gloriously stupid moments. That is the whole point - it is the fuckaround lab, and the chaos <em>is</em> the feature.
-      </div>
     </div>
 
     <!-- CREDITS -->
     <div class="section">
       <div class="sec-head">Credits &amp; Concept Sources</div>
-      <div class="sec-sub">Standing on the shoulders of the subreddit.</div>
       <hr class="sec-divider">
       <div class="section-inner">
-        <p>Concord Isle is a magpie's nest of community ideas. Several blueprints are adapted from other players' proposals - credit where it is due:</p>
+        <p><span class="hl-green-soft">Concord Isle</span> is a compilation of community ideas. Several blueprints are adapted from other players' proposals:</p>
         <ul class="rs-list diamond">
           <li><strong>Dwarven Caltrops</strong> and <strong>Zamorak battlestaff</strong> - concepts by <span class="hl-blue">@Daniel</span>.</li>
           <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/1iil16l/funny_wilderness_escape_items_proposal/" target="_blank" rel="noopener">Funny Wilderness escape items proposal</a> - r/2007scape, by <span class="hl-blue">u/Beaverzzz</span>. Source for the Smoke Bomb, the reactive shields (Vine, Abyssal, Smoke), the Iron and Magic Spades, the Elemental Secateurs, and the Guardian Statues.</li>
           <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/le0m0y/rifts_of_guthix_making_the_wilderness_a_hub_for/" target="_blank" rel="noopener">Rifts of Guthix: making the Wilderness a hub</a> - r/2007scape, by <span class="hl-blue">@Daniel</span>. Source for the Tireless boots, Acolyte robes, and Amulet of burning glory.</li>
-          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/bq5fmi/suggestion_granite_mace_a_new_beginnertier_spec/" target="_blank" rel="noopener">Granite mace: a new beginner-tier spec</a> - r/2007scape.</li>
-          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/tinsd2/a_couple_reward_ideas_for_the_pvp_arena/" target="_blank" rel="noopener">A couple reward ideas for the PvP arena</a> - r/2007scape. Source for the Centurion armour, Menaphite dagger (art by <span class="hl-blue">u/theatlantis_rs</span>), and Bladebreaker.</li>
-          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/x8nevo/skullsplitter_a_new_pvp_weapon_to_discourage/" target="_blank" rel="noopener">Skullsplitter: a new PvP weapon</a> - r/2007scape. Source for the Skullsplitter greataxe.</li>
+          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/bq5fmi/suggestion_granite_mace_a_new_beginnertier_spec/" target="_blank" rel="noopener">Granite mace: a new beginner-tier spec</a> - r/2007scape, by <span class="hl-blue">@Daniel</span>.</li>
+          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/tinsd2/a_couple_reward_ideas_for_the_pvp_arena/" target="_blank" rel="noopener">A couple reward ideas for the PvP arena</a> - r/2007scape, by <span class="hl-blue">@Daniel</span>. Source for the Centurion armour, Menaphite dagger (art by <span class="hl-blue">u/theatlantis_rs</span>), and Bladebreaker.</li>
+          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/x8nevo/skullsplitter_a_new_pvp_weapon_to_discourage/" target="_blank" rel="noopener">Skullsplitter: a new PvP weapon</a> - r/2007scape, by <span class="hl-blue">@Daniel</span>. Source for the Skullsplitter greataxe.</li>
           <li><a class="credit-link" href="https://runescape.wiki/w/Annihilation_(Crucible)" target="_blank" rel="noopener">Annihilation (Crucible)</a> - RuneScape Wiki. Basis for the Seismic Maul's targetless shockwave spec.</li>
           <li><a class="credit-link" href="https://oldschool.runescape.wiki/w/Demonic_Pacts_League/Echo_bosses_and_echo_equipment" target="_blank" rel="noopener">Demonic Pacts League - echo bosses and echo equipment</a> - OSRS Wiki. Source for the Leagues echo equipment (Infernal tecpatl, Fang of the hound, Shadowflame quadrant, Devil's element, Nature's recurve, V's helm, King's barrage, Lithic sceptre, Drygore blowpipe, Crystal blessing).</li>
           <li><a class="credit-link" href="https://oldschool.runescape.wiki/w/Raging_Echoes_League/Echo_bosses_and_echo_equipment" target="_blank" rel="noopener">Raging Echoes League - echo bosses and echo equipment</a> - OSRS Wiki. Source for the Thunder khopesh, Thousand-dragon ward, Sunlight spear, <a class="credit-link" href="https://oldschool.runescape.wiki/w/The_dogsword" target="_blank" rel="noopener">The dogsword</a>, and <a class="credit-link" href="https://oldschool.runescape.wiki/w/Sunlit_bracers" target="_blank" rel="noopener">Sunlit bracers</a>.</li>
           <li>Leagues gameplay items - OSRS Wiki. Source for the <a class="credit-link" href="https://oldschool.runescape.wiki/w/Arcane_grimoire" target="_blank" rel="noopener">Arcane grimoire</a>, <a class="credit-link" href="https://oldschool.runescape.wiki/w/Sage%27s_axe" target="_blank" rel="noopener">Sage's axe</a>, <a class="credit-link" href="https://oldschool.runescape.wiki/w/Flask_of_fervour_(item)" target="_blank" rel="noopener">Flask of fervour</a>, and <a class="credit-link" href="https://oldschool.runescape.wiki/w/Sage%27s_greaves" target="_blank" rel="noopener">Sage's greaves</a>.</li>
-          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/10i2xk4/a_simple_idea_for_a_halberdlike_weapon/" target="_blank" rel="noopener">A simple idea for a halberd-like weapon</a> - r/2007scape. Groundwork for the halberd-style range and pull design behind Wyvern Bill.</li>
+          <li><a class="credit-link" href="https://www.reddit.com/r/2007scape/comments/10i2xk4/a_simple_idea_for_a_halberdlike_weapon/" target="_blank" rel="noopener">A simple idea for a halberd-like weapon</a> - r/2007scape, by <span class="hl-blue">u/WonderGM</span>. Groundwork for the halberd-style range and pull design behind Wyvern Bill.</li>
         </ul>
       </div>
     </div>
