@@ -364,14 +364,13 @@ p:last-child { margin-bottom: 0; }
 .rules-list li:last-child { border-bottom: none; }
 .rules-list li .sub-p { display: block; margin-top: 9px; }
 .rules-list li::before {
-  content: '';
+  content: '\2022';
   position: absolute;
-  left: 1px;
-  top: 10px;
-  width: 15px;
-  height: 15px;
-  background: url('../assets/multicombat.png') no-repeat center/contain;
-  image-rendering: pixelated;
+  left: 4px;
+  top: 7.5px;
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 /* ── BENEFITS GRID ── */
@@ -526,7 +525,7 @@ p:last-child { margin-bottom: 0; }
 
   <p>Out of any suggestion I'm going to tell you today, aside from <span class="hl-gold">PvP Update Ranking Polls</span>, this is the most impactful and important possible Wilderness update we could see.</p>
 
-  <div class="subsec-head">So what is Blessed Status?</div>
+  <div class="subsec-head" style="font-size:24px;">So what is Blessed Status?</div>
 
   <p><span class="hl-sara">Blessed Status</span> is extremely simple. It's the <span style="color:#b9f6ca;">opposite of Skulled Status</span>.</p>
 

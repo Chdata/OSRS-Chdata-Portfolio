@@ -243,14 +243,11 @@
   }
   .rs-list li:last-child { border-bottom: none; }
   .rs-list li::before {
-    content: '';
+    content: '\2022';
     position: absolute;
-    left: 1px;
-    top: 8px;
-    width: 13px;
-    height: 13px;
-    background: url('../assets/multicombat.png') no-repeat center/contain;
-    image-rendering: pixelated;
+    left: 4px;
+    top: 3px;
+    color: #f0e8d0;
   }
   .loop-list {
     color: var(--text-body);
