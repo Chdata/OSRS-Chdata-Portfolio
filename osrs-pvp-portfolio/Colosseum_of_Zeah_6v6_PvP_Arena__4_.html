@@ -192,6 +192,11 @@ strong { color: var(--white-rs); }
 .hl-yellow { color: var(--yellow-rs); }
 .hl-purple { color: var(--purple-rs); }
 
+/* Valiance Factor / Dueling Points section - uniform body text size (headings excluded) */
+#vf-dp p,
+#vf-dp .rs-list li,
+#vf-dp .note-box { font-size: 15.9px; }
+
 .rs-list { list-style: none; padding: 0; margin: 0; }
 .rs-list li {
   font-size: 15.3px;
@@ -399,6 +404,8 @@ strong { color: var(--white-rs); }
 .shop-table td.shop-item .qty { color: #bcac82; }
 .shop-table td.shop-vf { text-align: right; white-space: nowrap; color: var(--text-body); }
 .shop-table td.shop-vf .vf-alt { display: block; font-size: 11.8px; color: var(--text-dim); white-space: normal; }
+.shop-table td.shop-vf .vf-wins { display: block; font-size: 13.6px; color: var(--text-body); white-space: nowrap; }
+.shop-table td.shop-dp { text-align: right; white-space: nowrap; color: var(--blue-rs); }
 .shop-table td.shop-ge { text-align: right; white-space: nowrap; color: var(--yellow-rs); }
 .shop-table td.shop-ge .ge-unit { display: block; font-size: 11.8px; color: var(--text-body); }
 .shop-table td.shop-gppervf { text-align: right; white-space: nowrap; color: #90ee90; }
@@ -554,7 +561,7 @@ strong { color: var(--white-rs); }
       <p style="margin-top:10px;">This opens the minigame to <em>PKing account builds</em> (zerkers, pure pkers, void builds), not just mains. An unbracketed free-for-all mode may also be offered for players who want it.</p>
 
       <div class="subsec-head">ELO Tiers</div>
-      <p>Your team's ELO rating starts at <em>1000</em>. Every win earns rating; every loss costs it. Rating earned scales with opponent strength. Stomping a lower-rated team gains less than beating one at your level.</p>
+      <p>Your personal ELO rating starts at <em>1000</em>. Your team displays an average ELO. Rating earned scales with opponent strength. Stomping a lower-rated team gains less than beating one at your level.</p>
 
       <div class="rank-row">
         <div class="rank-chip bronze"><span class="rank-name">Bronze</span><span class="rank-pts">1000+</span></div>
@@ -577,7 +584,8 @@ strong { color: var(--white-rs); }
         <ul class="rs-list diamond">
           <li><strong>Colosseum Bandages</strong> - restores HP and run energy, but does not cure poison or venom. Encourages Lunar Magic utility spells.</li>
           <li><strong>Colosseum Potions</strong> - likely a prayer pot or two. Makes Share Potion spells via Lunars worth using.</li>
-          <li><strong>Free Catalytic Runes</strong> - supplied to all players. Removes the barrier to casting Lunar group spells (Cure Poison, Heal Other, Group Vengeance) that are otherwise never brought to PvP.</li>
+          <li><strong>Free Elemental &amp; Catalytic Runes</strong> - supplied to all players. Removes the barrier to casting Lunar group spells (Cure Poison, Heal Other, Group Vengeance) that are otherwise never brought to PvP.</li>
+          <li>Ranged ammo is refunded for free.</li>
         </ul>
         <div class="subsec-head" style="margin-top:14px;">Lunar Magic Inside the Colosseum</div>
         <p>Because catalytic runes are free, players will actually <em>use Lunar spells</em> they normally never bother with. Group Vengeance, Heal Other, Cure Venom. These spells finally have a context where bringing the runes makes sense.</p>
@@ -588,17 +596,50 @@ strong { color: var(--white-rs); }
     </div>
 
     <!-- REWARDS INTRO -->
-    <div class="section">
-      <div class="sec-head">Valiance Factor &amp; Rewards</div>
+    <div class="section" id="vf-dp">
+      <div class="sec-head">Valiance Factor, Dueling Points, &amp; Rewards</div>
       <hr class="sec-divider">
-      <p><em>Valiance Factor (VF)</em> is the minigame currency. Higher-rated players earn more VF per win. The shop is split into tiers locked behind your ELO rank. Lower-tier shops stay accessible even if your rating drops later. You never lose access to what you've already unlocked.</p>
-      <p>Most consumable rewards (runes, ammo) aren't intended to be good gp/h. You're meant to spend VF on the unique rewards. The filler items exist to make the shop feel complete and to give you somewhere to spend overflow points.</p>
+      <p>This minigame features two main currencies based on whether you win or lose.</p>
+      <p>Wins: <span class="hl-green">Valiance Factor</span></p>
+      <p>Loss: <span class="hl-blue">Dueling Points</span> (or "Learning Points")</p>
+      <ul class="rs-list diamond">
+        <li>No points are given to players who forfeit.</li>
+        <li>No points are given in non-dedicated worlds.</li>
+      </ul>
+      <ul class="rs-list diamond">
+        <li><span class="hl-green">Valiance Factor</span> can buy tradeable rewards, or be exchanged for <span class="hl-blue">2 Dueling Points</span> each.</li>
+        <li><span class="hl-blue">Dueling Points</span> can buy untradeable rewards.</li>
+      </ul>
+      <p>Every untradeable reward requires at least <span class="hl-green">1 Valiance Factor</span> in addition to <span class="hl-blue">Dueling Points</span>. So you have to win at some point.</p>
+      <p>This system makes winning sometimes a requirement to obtain anything.</p>
+
+      <div class="subsec-head" style="margin-top:14px;">Reward Currency by ELO Rank</div>
+      <p>You earn more reward currency when fighting in higher ELO ranks. It works like this:</p>
+      <ul class="rs-list diamond">
+        <li><strong>500 ELO or less</strong> - No reward currency obtained, you are fighting to get your rank back up.</li>
+        <li><strong>501-1999</strong> <span style="color:#cd7f32;">Bronze</span> - Wins = <span class="hl-green">10 VF</span>, Loss = <span class="hl-blue">0-10 DP</span></li>
+        <li><strong>2000-2999</strong> <span style="color:#c0c0c0;">Silver</span> - Wins = <span class="hl-green">25 VF</span>, Loss = <span class="hl-blue">0-25 DP</span></li>
+        <li><strong>3000-3999</strong> <span style="color:#ffd700;">Gold</span> - Wins = <span class="hl-green">50 VF</span>, Loss = <span class="hl-blue">0-50 DP</span></li>
+        <li><strong>4000-4999</strong> <span style="color:#80d8ff;">Platinum</span> - Wins = <span class="hl-green">100 VF</span>, Loss = <span class="hl-blue">0-100 DP</span></li>
+        <li><strong>5000+</strong> <span style="color:var(--purple-rs);">Diamond</span> - Wins = <span class="hl-green">250 VF</span>, Loss = <span class="hl-blue">0-250 DP</span></li>
+      </ul>
+      <p>On a loss, the amount of <span class="hl-blue">Dueling Points</span> you get scales with your contribution.</p>
+      <p>Contribution is your damage dealt, plus some points for some other actions:</p>
+      <ul class="rs-list diamond">
+        <li>Special Attacks used on enemy, such as the Dragon Scimitar or Dragon Spear specs.</li>
+        <li>Lunar Spells used on teammates.</li>
+        <li>Bandages used on teammates.</li>
+      </ul>
+
+      <p style="margin-top:14px;">6v6 fights are usually 2.5 to 5 minutes long, so that's around 15 matches per hour.</p>
+
+      <p>The rewards are split between 6 shops based on your ELO ranking. Any shop you unlock stays permanently unlocked, even if your rating drops later. You never lose access to what you've already unlocked.</p>
       <div class="note-box blue bare">
-        <strong>Reward structure philosophy:</strong> Untradeable rewards (armour, gloves, robes) are concentrated in the lower tiers and unranked shop - they're gated by rating, not by being sellable. Tradeable rewards with real monetary value (runes, ammo, charging dust) are pushed into higher-ranked shops, making them harder for bots to reach. A bot that can't win matches can't earn money here.
+        <strong>Reward structure philosophy:</strong> Untradeable rewards (armour, gloves, robes) are placed in the lower tiers and unranked shop.
       </div>
-      <div class="note-box bare">
-        <strong>Pricing note:</strong> VF costs aren't specified here - Jagex would design those. Item costs could be static, or tied to G.E. prices and fluctuate dynamically. Dynamic pricing makes more sense: it lets the rewards affect the economy rather than being wrecked by it.
-      </div>
+      <p>Most consumable rewards (runes, ammo) aren't intended to be good gp/h. You're meant to spend points on the unique rewards. The filler items exist to make the shop feel complete and to give you somewhere to spend extra points.</p>
+      <p>Tradeable rewards with real monetary value (runes, ammo, charging dust) are pushed into higher-ranked shops, making them harder for bots to reach. A bot that can't win matches can't earn money here.</p>
+      <p>The two highest ranked shops, Platinum and Diamond, only offer rewards that are either monetary or convenience, meaning you don't have to reach super high rank to get the unique rewards.</p>
     </div>
 
     <!-- UNRANKED SHOP -->
@@ -616,15 +657,15 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="unranked-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(1).webp" alt="Colosseum cape"></td><td class="shop-item">Colosseum cape</td><td class="shop-vf">Free<span class="vf-alt">1 win</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/multicombat.png" alt="Minigame Hybrid Armour"></td><td class="shop-item">Minigame Hybrid Armour piece</td><td class="shop-vf">Free<span class="vf-alt">randomly rewarded upon winning</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Colosseum Gloves</td><td class="shop-vf">1,000 VF<span class="vf-alt">or 500 VF + 500k gp</span><span class="vf-alt">or 1m gp</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Catalytic Robes</td><td class="shop-vf">1,500 VF<span class="vf-alt">or 750 VF + 250k gp</span><span class="vf-alt">or 500k gp</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Elemental Robes</td><td class="shop-vf">750 VF<span class="vf-alt">or 375 VF + 50k gp</span><span class="vf-alt">or 100k gp</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Achievement_gallery_icon.png" alt="Seasonal History Display"></td><td class="shop-item">Seasonal History Display (POH)</td><td class="shop-vf">1,250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(1).webp" alt="Colosseum cape"></td><td class="shop-item">Colosseum cape</td><td class="shop-vf">Free<span class="vf-wins">1 win</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/multicombat.png" alt="Minigame Hybrid Armour"></td><td class="shop-item">Minigame Hybrid Armour piece</td><td class="shop-vf">Free<span class="vf-alt">randomly rewarded upon winning</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Colosseum Gloves</td><td class="shop-vf">1,000 VF<span class="vf-alt">or 500 VF + 500k gp</span><span class="vf-alt">or 1m gp</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Catalytic Robes</td><td class="shop-vf">1,500 VF<span class="vf-alt">or 750 VF + 250k gp</span><span class="vf-alt">or 500k gp</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Recharge.png" alt="Recharge"></td><td class="shop-item">Recharge Elemental Robes</td><td class="shop-vf">750 VF<span class="vf-alt">or 375 VF + 50k gp</span><span class="vf-alt">or 100k gp</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Achievement_gallery_icon.png" alt="Seasonal History Display"></td><td class="shop-item">Seasonal History Display (POH)</td><td class="shop-vf">1,250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
           </tbody>
         </table>
       </div>
@@ -639,20 +680,20 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="bronze-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(10).webp" alt="Colosseum cape (Bronze)"></td><td class="shop-item">Colosseum cape (Bronze)</td><td class="shop-vf">Free<span class="vf-alt">10 wins</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr data-ge="13391" data-qty="25" data-vf="10"><td class="shop-icon"><img src="../assets/items/Lizardman_fang.png" alt=""></td><td class="shop-item">Lizardman fang <span class="qty">x25</span></td><td class="shop-vf">10</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="808" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_dart.png" alt=""></td><td class="shop-item">Steel dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="865" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_knife.png" alt=""></td><td class="shop-item">Steel knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="802" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_thrownaxe.png" alt=""></td><td class="shop-item">Steel thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="556" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Air_rune.png" alt=""></td><td class="shop-item">Air rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="555" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Water_rune.png" alt=""></td><td class="shop-item">Water rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="557" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Earth_rune.png" alt=""></td><td class="shop-item">Earth rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="554" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Fire_rune.png" alt=""></td><td class="shop-item">Fire rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="558" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mind_rune.png" alt=""></td><td class="shop-item">Mind rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="559" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Body_rune.png" alt=""></td><td class="shop-item">Body rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(10).webp" alt="Colosseum cape (Bronze)"></td><td class="shop-item">Colosseum cape (Bronze)</td><td class="shop-vf">Free<span class="vf-wins">10 wins</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr data-ge="13391" data-qty="25" data-vf="10"><td class="shop-icon"><img src="../assets/items/Lizardman_fang.png" alt=""></td><td class="shop-item">Lizardman fang <span class="qty">x25</span></td><td class="shop-vf">10</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="808" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_dart.png" alt=""></td><td class="shop-item">Steel dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="865" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_knife.png" alt=""></td><td class="shop-item">Steel knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="802" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Steel_thrownaxe.png" alt=""></td><td class="shop-item">Steel thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="556" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Air_rune.png" alt=""></td><td class="shop-item">Air rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="555" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Water_rune.png" alt=""></td><td class="shop-item">Water rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="557" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Earth_rune.png" alt=""></td><td class="shop-item">Earth rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="554" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Fire_rune.png" alt=""></td><td class="shop-item">Fire rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="558" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mind_rune.png" alt=""></td><td class="shop-item">Mind rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="559" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Body_rune.png" alt=""></td><td class="shop-item">Body rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
           </tbody>
         </table>
       </div>
@@ -669,23 +710,23 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="silver-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(50).webp" alt="Colosseum cape (Silver)"></td><td class="shop-item">Colosseum cape (Silver)</td><td class="shop-vf">Free<span class="vf-alt">25 wins</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeHood.webp" alt="Elemental Robe Hood"></td><td class="shop-item">Elemental Robe Hood</td><td class="shop-vf">125</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeTop.webp" alt="Elemental Robe Top"></td><td class="shop-item">Elemental Robe Top</td><td class="shop-vf">375</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeBottom.webp" alt="Elemental Robe Bottom"></td><td class="shop-item">Elemental Robe Bottom</td><td class="shop-vf">250</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Lovakengj%20Teleport%20Scroll.webp" alt="Lovakengj Teleport Scroll"></td><td class="shop-item">Lovakengj Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Shayzien%20Teleport%20Scroll.webp" alt="Shayzien Teleport Scroll"></td><td class="shop-item">Shayzien Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Hosidious%20Teleport%20Scroll.webp" alt="Hosidious Teleport Scroll"></td><td class="shop-item">Hosidious Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Arceuus%20Teleport%20Scroll.webp" alt="Arceuus Teleport Scroll"></td><td class="shop-item">Arceuus Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Piscarilius%20Teleport%20Scroll.webp" alt="Piscarilius Teleport Scroll"></td><td class="shop-item">Piscarilius Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr data-ge="809" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_dart.png" alt=""></td><td class="shop-item">Mithril dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="866" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_knife.png" alt=""></td><td class="shop-item">Mithril knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="803" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_thrownaxe.png" alt=""></td><td class="shop-item">Mithril thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="564" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Cosmic_rune.png" alt=""></td><td class="shop-item">Cosmic rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="562" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Chaos_rune.png" alt=""></td><td class="shop-item">Chaos rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(50).webp" alt="Colosseum cape (Silver)"></td><td class="shop-item">Colosseum cape (Silver)</td><td class="shop-vf">Free<span class="vf-wins">25 wins</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeHood.webp" alt="Elemental Robe Hood"></td><td class="shop-item">Elemental Robe Hood</td><td class="shop-vf">125</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeTop.webp" alt="Elemental Robe Top"></td><td class="shop-item">Elemental Robe Top</td><td class="shop-vf">375</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalRobeBottom.webp" alt="Elemental Robe Bottom"></td><td class="shop-item">Elemental Robe Bottom</td><td class="shop-vf">250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Lovakengj%20Teleport%20Scroll.webp" alt="Lovakengj Teleport Scroll"></td><td class="shop-item">Lovakengj Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Shayzien%20Teleport%20Scroll.webp" alt="Shayzien Teleport Scroll"></td><td class="shop-item">Shayzien Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Hosidious%20Teleport%20Scroll.webp" alt="Hosidious Teleport Scroll"></td><td class="shop-item">Hosidious Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Arceuus%20Teleport%20Scroll.webp" alt="Arceuus Teleport Scroll"></td><td class="shop-item">Arceuus Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Piscarilius%20Teleport%20Scroll.webp" alt="Piscarilius Teleport Scroll"></td><td class="shop-item">Piscarilius Teleport Scroll <span class="qty">x1 / x10 / x25</span></td><td class="shop-vf">10 / 100 / 250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr data-ge="809" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_dart.png" alt=""></td><td class="shop-item">Mithril dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="866" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_knife.png" alt=""></td><td class="shop-item">Mithril knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="803" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Mithril_thrownaxe.png" alt=""></td><td class="shop-item">Mithril thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="564" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Cosmic_rune.png" alt=""></td><td class="shop-item">Cosmic rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="562" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Chaos_rune.png" alt=""></td><td class="shop-item">Chaos rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
           </tbody>
         </table>
       </div>
@@ -709,25 +750,25 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="gold-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(100).webp" alt="Colosseum cape (Gold)"></td><td class="shop-item">Colosseum cape (Gold)</td><td class="shop-vf">Free<span class="vf-alt">100 wins</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/FeintGloves.png" alt="Feint Gloves"></td><td class="shop-item">Feint Gloves (melee)</td><td class="shop-vf">1,000</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/SleightGloves.png" alt="Sleight Gloves"></td><td class="shop-item">Sleight Gloves (ranged)</td><td class="shop-vf">1,000</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/MeisterGloves.png" alt="Meister Gloves"></td><td class="shop-item">Meister Gloves (magic)</td><td class="shop-vf">1,000</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Token.png" alt="Glove Enchantment Token"></td><td class="shop-item">Glove Enchantment Token</td><td class="shop-vf">1,000</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeHood.png" alt="Catalytic Robe Hood"></td><td class="shop-item">Catalytic Robe Hood</td><td class="shop-vf">250</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeTop.png" alt="Catalytic Robe Top"></td><td class="shop-item">Catalytic Robe Top</td><td class="shop-vf">750</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeBottom.png" alt="Catalytic Robe Bottom"></td><td class="shop-item">Catalytic Robe Bottom</td><td class="shop-vf">500</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Dreadnip.png" alt="Dreadnip"></td><td class="shop-item">Dreadnip <span class="qty">x25</span></td><td class="shop-vf">250</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalDust.png" alt="Bag of Elemental Charging Dust"></td><td class="shop-item">Bag of Elemental Charging Dust</td><td class="shop-vf">675</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr data-ge="810" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_dart.png" alt=""></td><td class="shop-item">Adamant dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="867" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_knife.png" alt=""></td><td class="shop-item">Adamant knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="804" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_thrownaxe.png" alt=""></td><td class="shop-item">Adamant thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="561" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Nature_rune.png" alt=""></td><td class="shop-item">Nature rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="563" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Law_rune.png" alt=""></td><td class="shop-item">Law rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="560" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Death_rune.png" alt=""></td><td class="shop-item">Death rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(100).webp" alt="Colosseum cape (Gold)"></td><td class="shop-item">Colosseum cape (Gold)</td><td class="shop-vf">Free<span class="vf-wins">100 wins</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/FeintGloves.png" alt="Feint Gloves"></td><td class="shop-item">Feint Gloves (melee)</td><td class="shop-vf">1,000</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/SleightGloves.png" alt="Sleight Gloves"></td><td class="shop-item">Sleight Gloves (ranged)</td><td class="shop-vf">1,000</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/MeisterGloves.png" alt="Meister Gloves"></td><td class="shop-item">Meister Gloves (magic)</td><td class="shop-vf">1,000</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Token.png" alt="Glove Enchantment Token"></td><td class="shop-item">Glove Enchantment Token</td><td class="shop-vf">1,000</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeHood.png" alt="Catalytic Robe Hood"></td><td class="shop-item">Catalytic Robe Hood</td><td class="shop-vf">250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeTop.png" alt="Catalytic Robe Top"></td><td class="shop-item">Catalytic Robe Top</td><td class="shop-vf">750</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticRobeBottom.png" alt="Catalytic Robe Bottom"></td><td class="shop-item">Catalytic Robe Bottom</td><td class="shop-vf">500</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Dreadnip.png" alt="Dreadnip"></td><td class="shop-item">Dreadnip <span class="qty">x25</span></td><td class="shop-vf">250</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalDust.png" alt="Bag of Elemental Charging Dust"></td><td class="shop-item">Bag of Elemental Charging Dust</td><td class="shop-vf">675</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr data-ge="810" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_dart.png" alt=""></td><td class="shop-item">Adamant dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="867" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_knife.png" alt=""></td><td class="shop-item">Adamant knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="804" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Adamant_thrownaxe.png" alt=""></td><td class="shop-item">Adamant thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="561" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Nature_rune.png" alt=""></td><td class="shop-item">Nature rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="563" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Law_rune.png" alt=""></td><td class="shop-item">Law rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="560" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Death_rune.png" alt=""></td><td class="shop-item">Death rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
           </tbody>
         </table>
       </div>
@@ -746,18 +787,18 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="platinum-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(500).webp" alt="Colosseum cape (Platinum)"></td><td class="shop-item">Colosseum cape (Platinum)</td><td class="shop-vf">Free<span class="vf-alt">1,000 wins</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/GloveDust.png" alt="Bag of Glove Charging Dust"></td><td class="shop-item">Bag of Glove Charging Dust</td><td class="shop-vf">900</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalDust.png" alt="Bag of Elemental Supercharging Dust"></td><td class="shop-item">Bag of Elemental Supercharging Dust</td><td class="shop-vf">675</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticDust.png" alt="Bag of Catalytic Charging Dust"></td><td class="shop-item">Bag of Catalytic Charging Dust</td><td class="shop-vf">1,350</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr data-ge="811" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_dart.png" alt=""></td><td class="shop-item">Rune dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="868" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_knife.png" alt=""></td><td class="shop-item">Rune knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="805" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_thrownaxe.png" alt=""></td><td class="shop-item">Rune thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="565" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Blood_rune.png" alt=""></td><td class="shop-item">Blood rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="566" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Soul_rune.png" alt=""></td><td class="shop-item">Soul rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(500).webp" alt="Colosseum cape (Platinum)"></td><td class="shop-item">Colosseum cape (Platinum)</td><td class="shop-vf">Free<span class="vf-wins">1,000 wins</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/GloveDust.png" alt="Bag of Glove Charging Dust"></td><td class="shop-item">Bag of Glove Charging Dust</td><td class="shop-vf">900</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/ElementalDust.png" alt="Bag of Elemental Supercharging Dust"></td><td class="shop-item">Bag of Elemental Supercharging Dust</td><td class="shop-vf">675</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticDust.png" alt="Bag of Catalytic Charging Dust"></td><td class="shop-item">Bag of Catalytic Charging Dust</td><td class="shop-vf">1,350</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr data-ge="811" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_dart.png" alt=""></td><td class="shop-item">Rune dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="868" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_knife.png" alt=""></td><td class="shop-item">Rune knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="805" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Rune_thrownaxe.png" alt=""></td><td class="shop-item">Rune thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="565" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Blood_rune.png" alt=""></td><td class="shop-item">Blood rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="566" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Soul_rune.png" alt=""></td><td class="shop-item">Soul rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
           </tbody>
         </table>
       </div>
@@ -777,22 +818,22 @@ strong { color: var(--white-rs); }
       <div class="shop-table-wrap">
         <table class="shop-table" id="diamond-shop">
           <thead>
-            <tr><th colspan="2">Item</th><th>VF Cost</th><th>GE Price</th><th>GP per VF</th></tr>
+            <tr><th colspan="2">Item</th><th>VF Cost</th><th>DP Cost</th><th>GE Price</th><th>GP per VF</th></tr>
           </thead>
           <tbody>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(1000).webp" alt="Colosseum cape (Diamond)"></td><td class="shop-item">Colosseum cape (Diamond)</td><td class="shop-vf">Free<span class="vf-alt">5,000 wins</span></td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/GloveDust.png" alt="Bag of Glove Supercharging Dust"></td><td class="shop-item">Bag of Glove Supercharging Dust</td><td class="shop-vf">900</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticDust.png" alt="Bag of Catalytic Supercharging Dust"></td><td class="shop-item">Bag of Catalytic Supercharging Dust</td><td class="shop-vf">1,350</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
-            <tr data-ge="11230" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_dart.png" alt=""></td><td class="shop-item">Dragon dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="22804" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_knife.png" alt=""></td><td class="shop-item">Dragon knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="20849" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_thrownaxe.png" alt=""></td><td class="shop-item">Dragon thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr data-ge="21880" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Wrath_rune.png" alt=""></td><td class="shop-item">Wrath rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
-            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Life_rune.webp" alt="Life rune"></td><td class="shop-item">Life rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Victor's_cape_(1000).webp" alt="Colosseum cape (Diamond)"></td><td class="shop-item">Colosseum cape (Diamond)</td><td class="shop-vf">Free<span class="vf-wins">5,000 wins</span></td><td class="shop-dp">0</td><td class="shop-ge not-sold">Not sold</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/GloveDust.png" alt="Bag of Glove Supercharging Dust"></td><td class="shop-item">Bag of Glove Supercharging Dust</td><td class="shop-vf">900</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/CatalyticDust.png" alt="Bag of Catalytic Supercharging Dust"></td><td class="shop-item">Bag of Catalytic Supercharging Dust</td><td class="shop-vf">1,350</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
+            <tr data-ge="11230" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_dart.png" alt=""></td><td class="shop-item">Dragon dart <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="22804" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_knife.png" alt=""></td><td class="shop-item">Dragon knife <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="20849" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Dragon_thrownaxe.png" alt=""></td><td class="shop-item">Dragon thrownaxe <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr data-ge="21880" data-qty="100" data-vf="100"><td class="shop-icon"><img src="../assets/items/Wrath_rune.png" alt=""></td><td class="shop-item">Wrath rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge ge-pending">&hellip;</td><td class="shop-gppervf ge-pending">&hellip;</td></tr>
+            <tr class="concept"><td class="shop-icon"><img src="../assets/PvPArena/Life_rune.webp" alt="Life rune"></td><td class="shop-item">Life rune <span class="qty">x100</span></td><td class="shop-vf">100</td><td class="shop-dp">0</td><td class="shop-ge not-sold">Tradeable</td><td class="shop-gppervf">-</td></tr>
           </tbody>
         </table>
       </div>
       <p class="shop-note">Blue rows are concept items that do not exist in game, so they have no GE price.</p>
-      <div class="note-box">
+      <div class="note-box bare">
         <strong>All ranged rewards are thrown weapons.</strong> This is intentional. Thrown weapons tie directly to the Sleight Gloves reward. Most rewards across all tiers are combat-focused because this is a PvP minigame.
       </div>
     </div>
@@ -803,9 +844,6 @@ strong { color: var(--white-rs); }
       <hr class="sec-divider">
       <p>The <em>top-ranked team</em> at season end wins a shared <strong>GP prize pool</strong>. Each of the six players receives <em class="hl-yellow">32m gp</em>, for a total payout of <strong>192m gp</strong> distributed across the roster.</p>
       <p>Over a one-month season this averages to roughly <em>1m gp per day</em> per player on the winning team. Meaningful recognition of sustained excellence without being large enough to distort the economy. Three-month seasons would scale accordingly.</p>
-      <div class="note-box green">
-        <strong>Why this works:</strong> It's a one-time per-season payout going to exactly one team of six. Not a farmable income stream. It gives top-level competitive play something tangible to fight for beyond cosmetics and prestige.
-      </div>
     </div>
 
     <!-- SEASON MODIFIERS -->
@@ -860,10 +898,10 @@ strong { color: var(--white-rs); }
         <li><strong>No empty-world boosting</strong> - limited to 1-2 dedicated worlds only. Can't queue a match if there are no real opponents.</li>
         <li><strong>ELO decay on boosted wins</strong> - repeatedly beating the same team at tanking rating gains little. The system self-corrects.</li>
         <li><strong>VF scales with rating</strong> - players below 500 rating cannot gain Valiance Factor. High-value rewards require high ranking.</li>
-        <li><strong>Bots need real stats and real gear</strong> - unlike LMS, which hands everyone free maxed stats and gear, the Colosseum uses your actual account. A bot host would need to build and equip six real accounts with combat stats and valuable gear, all of which are at risk of being lost in matches. That's a meaningful barrier compared to content where the game hands you everything.</li>
+        <li><strong>Bots need real stats and real gear</strong> - unlike LMS, which hands everyone free maxed stats and gear, the Colosseum uses your actual account. A bot host would need to build and equip six real accounts with combat stats and valuable gear, all of which are at risk of being lost if they get banned.</li>
         <li><strong>Colosseum Gloves start at 25% charge</strong> - even if bought, they require ongoing VF investment to maintain. Not a one-time grind.</li>
-        <li><strong>Prize pool requires winning the season</strong> - the GP reward goes to exactly one team. There is no second-place farming; you either win the season or you don't. Bots can't win a season ladder.</li>
-        <li><strong>Quest point requirements per shop tier</strong> - each reward shop tier could require a minimum quest point total to access, scaling from 0 QP for the unranked shop up to around 300 QP for the Platinum shop, with appropriate thresholds for Bronze, Silver, and Gold in between. Quest points are one of the hardest account metrics for bot farms to fake at scale, since quests require varied gameplay that resists automation. A bot farm building six accounts to 300 QP each is a significant investment that raises the cost of entry substantially.</li>
+        <li><strong>Prize pool requires winning the season</strong> - the GP reward goes to exactly one team. There's no way a bot team is going to win an entire season.</li>
+        <li><strong>Quest point requirements per shop tier</strong> - each reward shop tier could require a minimum quest point total to access, scaling from 0 QP for the unranked shop up to around 300 QP for the Platinum shop, with appropriate thresholds for Bronze, Silver, and Gold in between. While normal players beat quests once and continue on with normal play for the rest of their lifetime, bots would be stuck spending a long time re-farming quests before being able to obtain anything on a new account.</li>
       </ul>
     </div>
 
@@ -874,7 +912,7 @@ strong { color: var(--white-rs); }
       <div class="section-inner">
         <p>A spectator mode is a natural fit, low dev priority compared to core gameplay, but it gives the format streaming potential. 6v6 team fights with mixed combat styles, coordinated specs, and Lunar support plays are inherently <em>more watchable</em> than solo PKing clips.</p>
         <p>At the top of the Diamond bracket, players can no longer rely purely on gear advantage. Teams of equally-geared players have to <em>actually strategise</em>. Which combination of styles, which player to focus, when to pop Group Vengeance. That's when interesting metas emerge and the format starts generating clips worth watching.</p>
-        <div class="note-box">
+        <div class="note-box bare">
           <strong>Note:</strong> This will not be a perfectly balanced competitive game at launch. Expect some dominant strategies, some overpowered specs, and some weird bracket interactions. That is acceptable. Fun first. Balance second.
         </div>
       </div>
