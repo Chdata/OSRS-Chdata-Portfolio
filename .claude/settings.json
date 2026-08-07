@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p backups)",
+      "Bash(cp \"osrs-pvp-portfolio/Colosseum_of_Zeah_6v6_PvP_Arena__4_.html\" \"backups/Colosseum_of_Zeah_6v6_PvP_Arena__4__BACKUP.html\")",
+      "Bash(mv pvp_supporting_data.html backups/pvp_supporting_data.html)"
+    ]
+  }
+}
