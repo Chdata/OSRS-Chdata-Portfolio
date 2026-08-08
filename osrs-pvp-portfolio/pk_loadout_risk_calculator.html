@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK Loadout &amp; Death Risk Calculator - Chdata's OSRS PvP Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void:#14110d;
+    --bg-panel:#221d17;
+    --bg-panel-raised:#2b241c;
+    --bg-slot:#332b21;
+    --border-stone:#4a3f30;
+    --border-stone-light:#5f5140;
+    --border-gold:#a9812f;
+    --text-primary:#ece4d3;
+    --text-muted:#a89a83;
+    --accent-gold:#d4af37;
+    --red:#ff8a8a;
+    --green:#90ee90;
+    --blue:#80c0ff;
+    --purple:#ddb0ff;
+    --grey:#cccccc;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, #26201a 0%, transparent 55%),
+      radial-gradient(circle at 85% 100%, #201a14 0%, transparent 55%),
+      var(--bg-void);
+    color:var(--text-primary);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    padding:28px 16px 80px;
+  }
+  h1,h2,h3{ font-family:'Cinzel',serif; margin:0 0 6px; letter-spacing:.02em;}
+  .wrap{ max-width:1180px; margin:0 auto; }
+  header.page{ text-align:center; margin-bottom:26px;}
+  header.page h1{ font-size:clamp(22px,4vw,34px); color:var(--accent-gold); text-shadow:0 2px 0 #000;}
+  header.page p{ color:var(--text-muted); max-width:640px; margin:6px auto 0; font-size:14px;}
+
+  .panel{
+    background:var(--bg-panel);
+    border:1px solid var(--border-stone);
+    border-radius:6px;
+    box-shadow:0 2px 0 rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    padding:18px 20px;
+    margin-bottom:18px;
+  }
+  .panel h2{ font-size:17px; color:var(--accent-gold); border-bottom:1px solid var(--border-stone); padding-bottom:8px; margin-bottom:14px;}
+  .row{ display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+
+  /* --- controls --- */
+  select, button{
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-primary);
+    background:var(--bg-slot);
+    border:1px solid var(--border-stone-light);
+    border-radius:4px;
+    padding:9px 14px;
+    cursor:pointer;
+  }
+  select:hover, button:hover{ border-color:var(--border-gold); }
+  select:focus, button:focus-visible{ outline:2px solid var(--accent-gold); outline-offset:1px;}
+  .field{ display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em;}
+
+  /* single-select option lists (radios styled as checkboxes) */
+  .optlist{ display:flex; flex-direction:column; gap:5px; margin-top:2px;}
+  .opt{
+    display:flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:600; color:var(--text-muted);
+    text-transform:none; letter-spacing:0;
+    background:var(--bg-slot);
+    border:1px solid var(--border-stone-light);
+    border-radius:4px;
+    padding:7px 12px;
+    cursor:pointer;
+    /* no text selection - a stray drag would otherwise highlight the label instead of
+       registering as a click on the option */
+    user-select:none; -webkit-user-select:none;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .opt:hover{ border-color:var(--border-gold); }
+  .opt input{
+    appearance:none; -webkit-appearance:none; margin:0; flex:none;
+    width:14px; height:14px; position:relative; cursor:pointer;
+    background:#0f0f0f;
+    border:1px solid var(--border-stone-light);
+    border-radius:3px;
+  }
+  .opt input:focus-visible{ outline:2px solid var(--accent-gold); outline-offset:1px;}
+  .opt.sel{ background:#2c3624; border-color:var(--accent-gold); color:var(--text-primary);}
+  .opt.sel input{ background:var(--accent-gold); border-color:var(--accent-gold);}
+  /* presets run down two columns; each box still hugs its own label */
+  .optlist-wide{
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-rows:repeat(var(--preset-rows, 5), auto);
+    justify-content:start; align-items:start;
+    column-gap:22px; row-gap:5px;
+  }
+  @media (max-width:700px){ .optlist-wide{ grid-auto-flow:row; grid-template-rows:none; } }
+  .opt-row{ display:flex; align-items:center; gap:10px; }
+  .opt-row .opt{ flex:0 0 auto; }
+  .opt-src{
+    flex:none; font-size:11.5px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.05em;
+    color:var(--text-muted); text-decoration:underline;
+  }
+  .opt-src:hover{ color:var(--accent-gold); }
+  .opt.sel input::after{
+    content:''; position:absolute; left:4px; top:1px;
+    width:3px; height:7px;
+    border:solid #14140f; border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+
+  .protect-btn{ display:flex; align-items:center; gap:9px; padding:8px 16px 8px 10px; transition:background .15s, border-color .15s;}
+  .protect-btn img{ width:26px; height:26px; image-rendering:pixelated; filter:grayscale(1) brightness(.7); transition:filter .15s;}
+  .protect-btn.on{ background:#2c3a24; border-color:var(--green);}
+  .protect-btn.on img{ filter:none; }
+  .protect-btn .state{ color:var(--text-muted); font-weight:700;}
+  .protect-btn.on .state{ color:var(--green); }
+  .protect-btn:disabled{ opacity:.4; cursor:not-allowed; }
+  .lootbag-btn.on{ background:#2c3a24; border-color:var(--green);}
+  .lootbag-btn .state{ white-space:nowrap; }
+
+  .copy-note{ font-size:11.5px; color:var(--text-muted); margin-top:8px; line-height:1.5;}
+  .copy-note b{ color:var(--grey); }
+
+  /* --- layout: doll + inventory --- */
+  .loadout-grid{ display:grid; grid-template-columns: 300px 1fr 1fr; gap:20px; }
+  @media (max-width:980px){ .loadout-grid{ grid-template-columns:1fr; } }
+
+  .slot{
+    width:52px; height:52px;
+    background:var(--bg-slot);
+    border:1px solid var(--border-stone-light);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .slot img{ max-width:38px; max-height:38px; image-rendering:pixelated; }
+  .slot.empty::after{ content:""; }
+  .slot .qty{
+    position:absolute; bottom:1px; right:3px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; color:#ffe066; text-shadow:1px 1px 0 #000;
+    font-weight:700;
+  }
+  .slot .price-tag{
+    position:absolute; bottom:-16px; left:50%; transform:translateX(-50%);
+    font-size:9px; color:var(--text-muted); white-space:nowrap;
+  }
+  .slot.icon-missing{ background:repeating-linear-gradient(45deg, var(--bg-slot), var(--bg-slot) 4px, #3a2f24 4px, #3a2f24 8px); }
+  .slot .icon-missing-label{
+    font-family:'Inter',sans-serif; font-size:8.5px; line-height:1.15; font-weight:700;
+    color:var(--text-muted); text-align:center; padding:3px; overflow:hidden;
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical;
+  }
+  .slot.price-missing{ box-shadow: inset 0 0 0 1px var(--red); }
+  /* noted items render as a bank note with the item drawn small on top of it.
+     Both selectors are needed: `.inv .slot img` further down sets a larger cap and
+     would otherwise win on source order against a plain `.slot img.note-overlay`. */
+  .slot img.note-overlay,
+  .inv .slot img.note-overlay{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    max-width:22px; max-height:22px;
+  }
+
+  .doll{
+    display:grid;
+    grid-template-columns:repeat(3, 52px);
+    grid-template-rows:repeat(5, 52px);
+    gap:6px;
+    justify-content:center;
+    padding:14px 10px 26px;
+    background:var(--bg-panel-raised);
+    border:1px solid var(--border-stone);
+    border-radius:6px;
+  }
+  .doll .cell{ grid-column: var(--c); grid-row: var(--r); }
+
+  /* charges held inside an equipped item (e.g. revenant ether in a sceptre) */
+  .charge-line{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+  .charge-row{ display:flex; align-items:center; gap:10px; justify-content:center; }
+  .charge-text{ font-size:12px; color:var(--text-primary); line-height:1.4;}
+  .charge-sub{ font-size:11px; color:var(--text-muted);}
+
+  .inv{
+    display:grid;
+    grid-template-columns:repeat(4, 58px);
+    grid-auto-rows:58px;
+    gap:6px;
+    justify-content:center;
+    align-content:start;
+    padding:14px;
+    background:var(--bg-panel-raised);
+    border:1px solid var(--border-stone);
+    border-radius:6px;
+  }
+  .inv .slot{ width:58px; height:58px;}
+  .inv .slot img{ max-width:42px; max-height:42px;}
+
+  .colhead{ text-align:center; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;}
+  .colsub{ text-align:center; font-size:11.5px; color:var(--text-muted); margin-bottom:8px;}
+
+  /* --- totals --- */
+  .totals{ display:flex; gap:26px; flex-wrap:wrap; margin-top:34px; }
+  .stat{ min-width:150px;}
+  .stat .label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted);}
+  .stat .value{ font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--accent-gold);}
+  /* each loadout column is a flex column so the three value totals push to the same
+     baseline at the bottom of the grid row, regardless of how tall each box is */
+  .lcol{ display:flex; flex-direction:column; }
+  .col-total{ text-align:center; margin-top:auto; padding-top:12px; }
+
+  /* bare scenario/value list under the grand total - the full table below carries the
+     kept-item counts, notes and breakdowns */
+  /* title and the two column headers share one row, so nothing sits between the title
+     and the first box */
+  .quick-risk-headrow{
+    display:flex; align-items:flex-end; gap:10px;
+    max-width:840px; margin-top:22px; margin-bottom:4px;
+  }
+  .quick-risk-head{
+    flex:1; min-width:0;
+    font-size:14px; font-weight:700; color:var(--accent-gold);
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+  .quick-risk{ display:flex; flex-direction:column; gap:5px; margin-top:0; max-width:840px;}
+  /* the box, plus a share-of-total figure sitting outside it to the right */
+  .quick-risk .qr-line{ display:flex; align-items:center; gap:10px; }
+  .quick-risk .qr-line .qr-row{ flex:1; min-width:0; }
+  .quick-risk .qr-pct{
+    flex:none; width:120px; text-align:right;
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;
+    color:var(--text-muted);
+  }
+  .qr-col-head{
+    flex:none; width:120px; text-align:right; white-space:nowrap;
+    font-size:12px; font-weight:700; line-height:1.25;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted);
+  }
+  .quick-risk .qr-row{
+    display:flex; justify-content:space-between; align-items:baseline; gap:18px;
+    padding:6px 11px;
+    background:var(--bg-slot);
+    border:1px solid var(--border-stone);
+    border-radius:4px;
+  }
+  .quick-risk .qr-name{ font-size:13.5px; color:var(--text-muted);}
+  .quick-risk .qr-hl{ color:var(--accent-gold); font-weight:700;}
+  .quick-risk-note{ margin-top:10px; max-width:560px; font-size:14.5px; color:var(--text-muted); line-height:1.55;}
+  /* summary list on the left, a second copy of the two toggles that change it on the right */
+  .quick-risk-wrap{ display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap; }
+  .quick-risk-main{ flex:1 1 460px; min-width:0; }
+  .quick-risk-controls{ display:flex; flex-direction:column; gap:16px; margin-top:8px; }
+  .quick-risk .qr-value{ font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; white-space:nowrap;}
+  .totals .stat .label{ font-size:14px; letter-spacing:.08em;}
+  .totals .stat .value{ font-size:30px;}
+
+  .status-line{ font-size:12.5px; color:var(--text-muted); margin-top:10px;}
+  .status-line.err{ color:var(--red); }
+
+  /* --- risk table --- */
+  table.risk{ width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.risk th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--text-muted); padding:8px 10px; border-bottom:1px solid var(--border-stone);
+  }
+  table.risk td{ padding:10px; border-bottom:1px solid var(--border-stone); vertical-align:top;}
+  table.risk tr.concept td:first-child{ box-shadow: inset 3px 0 0 var(--purple); }
+  table.risk .scenario-name{ font-weight:700; }
+  table.risk .note{ color:var(--text-muted); font-size:12px; margin-top:3px;}
+  table.risk .amount{ font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .bar-track{ width:100%; height:6px; background:var(--bg-slot); border-radius:3px; margin-top:6px; overflow:hidden;}
+  .bar-fill{ height:100%; border-radius:3px; }
+
+  .badge-warn{
+    display:inline-block; margin-top:6px; font-size:11.5px; color:var(--red);
+    background:rgba(255,138,138,.08); border:1px solid rgba(255,138,138,.3);
+    padding:4px 8px; border-radius:4px;
+  }
+
+  details.item-breakdown{ margin-top:10px; }
+  details.item-breakdown summary{
+    cursor:pointer; font-size:12px; color:var(--accent-gold); font-weight:600;
+    user-select:none; padding:4px 0;
+  }
+  details.item-breakdown summary:hover{ text-decoration:underline; }
+  table.breakdown-table{
+    width:100%; border-collapse:collapse; margin-top:6px; font-size:12px;
+    background:var(--bg-panel-raised); border:1px solid var(--border-stone); border-radius:4px; overflow:hidden;
+  }
+  table.breakdown-table th{
+    text-align:left; padding:6px 8px; font-size:10px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--text-muted); border-bottom:1px solid var(--border-stone);
+  }
+  table.breakdown-table td{ padding:6px 8px; border-bottom:1px solid var(--border-stone); color:var(--text-primary); }
+  table.breakdown-table tr:last-child td{ border-bottom:none; }
+  table.breakdown-table td.amount{ font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+
+  footer.page{ text-align:center; color:var(--text-muted); font-size:12px; margin-top:30px;}
+  a{ color:var(--accent-gold); }
+</style>
+</head>
+<body>
+<!-- BACK TO BLESSED STATUS -->
+<div style="background:#0a0804;border-bottom:2px solid #5a4a2a;padding:6px 12px;">
+  <a href="blessed_status (1).html" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,#3a2e1a,#241c0e);border:1px solid #7a6a4a;border-radius:3px;padding:5px 12px;font-family:'RSUF','Cinzel','Lato',monospace;font-size:13px;color:#f0d890;text-decoration:none;text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;letter-spacing:.03em;">&#8249; Back to Blessed Status Page</a>
+</div>
+
+<div class="wrap">
+
+  <header class="page">
+    <h1>PK Loadout &amp; Death Risk Calculator</h1>
+    <p>This page offers risk comparisons of various ways of dying in the game, including my <span style="color:var(--purple)">Blessed Status</span> and <span style="color:var(--purple)">Beginner's Blessing</span> concepts for the Wilderness.</p>
+  </header>
+
+  <div class="panel">
+    <div class="row" style="justify-content:space-between; align-items:flex-start;">
+      <div class="row" style="align-items:flex-start;">
+        <div class="field">
+          Blessed Status zone
+          <div class="optlist" id="blessedZoneOptions">
+            <label class="opt"><input type="radio" name="blessedZone" value="deep" checked>Deep wildy (5% fee)</label>
+            <label class="opt"><input type="radio" name="blessedZone" value="shallow">&le; level 10 wildy (1% fee)</label>
+          </div>
+        </div>
+        <div class="field">
+          Blessed Status Protect
+          <div class="optlist" id="blessedProtectOptions">
+            <label class="opt"><input type="radio" name="blessedProtect" value="none" checked>Protects no items +1</label>
+            <label class="opt"><input type="radio" name="blessedProtect" value="top3">Protects 3 items +1</label>
+          </div>
+        </div>
+        <div class="field">
+          Account type
+          <div class="optlist" id="ironmanOptions">
+            <label class="opt"><input type="radio" name="accountType" value="main" checked>Main</label>
+            <label class="opt"><input type="radio" name="accountType" value="ironman">Ironman</label>
+          </div>
+        </div>
+        <div class="field">
+          Looting Bag
+          <div class="optlist" id="lootingBagOptions">
+            <label class="opt"><input type="radio" name="lootingBag" value="yes">Carrying</label>
+            <label class="opt"><input type="radio" name="lootingBag" value="no" checked>Not carrying</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="field" style="margin-bottom:4px;">Protect Item Prayer</label>
+        <button id="protectBtn" class="protect-btn" type="button">
+          <img class="protect-icon" src="" alt="">
+          <span class="state">OFF</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:18px;">
+      Preset Inventory
+      <div class="optlist optlist-wide" id="presetOptions"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Loadout</h2>
+    <div class="loadout-grid">
+      <div class="lcol">
+        <div class="colhead">Equipment</div>
+        <div class="colsub">(Items brought into the Wilderness)</div>
+        <div class="doll" id="doll"></div>
+        <div class="charge-line" id="chargeLine" style="display:none;"></div>
+        <div class="stat col-total"><div class="label">Equipment value</div><div class="value" id="totEquip">--</div></div>
+      </div>
+      <div class="lcol">
+        <div class="colhead">Inventory</div>
+        <div class="colsub">(Items brought into the Wilderness)</div>
+        <div class="inv" id="inv"></div>
+        <div class="status-line" id="inventoryOverflowNote" style="display:none; color:var(--red);"></div>
+        <div class="stat col-total"><div class="label">Inventory value</div><div class="value" id="totInv">--</div></div>
+      </div>
+      <div class="lcol">
+        <div class="colhead">Looting Bag</div>
+        <div class="colsub" style="color:var(--purple);">(Items obtained after entering the Wilderness)</div>
+        <div class="inv" id="lootbag"></div>
+        <div class="status-line" id="lootbagOverflowNote" style="display:none; color:var(--red);"></div>
+        <div class="status-line" id="lootbagDisabledNote" style="visibility:hidden; color:var(--red); text-align:center;">Not carrying a looting bag - toggled off.</div>
+        <div class="stat col-total"><div class="label">Looting bag value</div><div class="value" id="totLootbag">--</div></div>
+      </div>
+    </div>
+
+    <div class="totals">
+      <div class="stat"><div class="label">Grand total</div><div class="value" id="totAll">--</div></div>
+    </div>
+    <div class="quick-risk-headrow">
+      <span class="quick-risk-head">Value Risked on Death</span>
+      <span class="qr-col-head">%age of Total</span>
+      <span class="qr-col-head">%age vs PvM</span>
+    </div>
+    <div class="quick-risk-wrap">
+      <div class="quick-risk-main">
+        <div class="quick-risk" id="quickRisk"></div>
+        <div class="quick-risk-note">Note: Untradeable items are not fully implemented into this calculation because there are so many different rules for untradeable items.</div>
+      </div>
+      <div class="quick-risk-controls">
+        <div>
+          <label class="field" style="margin-bottom:4px;">Protect Item Prayer</label>
+          <button id="protectBtn2" class="protect-btn" type="button">
+            <img class="protect-icon" src="" alt="">
+            <span class="state">OFF</span>
+          </button>
+        </div>
+        <div>
+          <label class="field" style="margin-bottom:4px;">Looting Bag</label>
+          <button id="lootbagBtn2" class="protect-btn lootbag-btn" type="button">
+            <img class="lootbag-icon" src="" alt="">
+            <span class="state">Not carrying</span>
+          </button>
+        </div>
+        <div class="field">
+          Blessed Status Protect
+          <div class="optlist" id="blessedProtectOptions2">
+            <label class="opt"><input type="radio" name="blessedProtectB" value="none" checked>Protects no items +1</label>
+            <label class="opt"><input type="radio" name="blessedProtectB" value="top3">Protects 3 items +1</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="status-line" id="priceStatus">Loading live prices from prices.runescape.wiki&hellip;</div>
+  </div>
+
+  <div class="panel">
+    <h2>Full Death Risk Comparison</h2>
+    <table class="risk">
+      <thead>
+        <tr>
+          <th style="width:26%">Scenario</th>
+          <th style="width:12%">Items kept</th>
+          <th style="width:18%">Fee / loss</th>
+          <th style="width:44%">Notes</th>
+        </tr>
+      </thead>
+      <tbody id="riskBody"></tbody>
+    </table>
+  </div>
+
+  <footer class="page">
+    Item icons and price data courtesy of the <a href="https://oldschool.runescape.wiki" target="_blank" rel="noopener">Old School RuneScape Wiki</a> and its RuneLite-powered Real-time Prices API.
+  </footer>
+</div>
+
+<script>
+/* ---------------------------------------------------------------
+   DATA
+--------------------------------------------------------------- */
+const SLOT_LAYOUT = [
+  {key:'head',   c:'2', r:'1'},
+  // Second ammo slot, sitting above the normal one. Only exists while a Dizana's quiver
+  // is equipped or carried, so it renders blank for every other loadout.
+  {key:'ammo2',  c:'3', r:'1'},
+  {key:'cape',   c:'1', r:'2'},
+  {key:'neck',   c:'2', r:'2'},
+  {key:'ammo',   c:'3', r:'2'},
+  {key:'weapon', c:'1', r:'3'},
+  {key:'body',   c:'2', r:'3'},
+  {key:'shield', c:'3', r:'3'},
+  {key:'legs',   c:'2', r:'4'},
+  {key:'hands',  c:'1', r:'5'},
+  {key:'feet',   c:'2', r:'5'},
+  {key:'ring',   c:'3', r:'5'},
+];
+
+const PRESETS = {
+  noob: {
+    label: "Noob",
+    equipment: {
+      head:"Adamant full helm", cape:"Black cape", neck:"Amulet of strength",
+      weapon:"Adamant longsword", body:"Mithril platebody",
+      shield:"Adamant kiteshield", legs:"Adamant platelegs", hands:"Leather gloves",
+      feet:"Leather boots"
+    },
+    inventory: [
+      {name:"Lobster", qty:10},
+      {name:"Attack potion(4)", qty:2},
+      {name:"Strength potion(4)", qty:2},
+      {name:"Defence potion(4)", qty:1},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Adamant platebody", qty:1}
+    ]
+  },
+  budget: {
+    label: "Confused PKer",
+    equipment: {
+      head:"Helm of neitiznot", cape:"Obsidian cape", neck:"Amulet of glory",
+      ammo:"Ancient blessing", weapon:"Abyssal whip", body:"Black d'hide body",
+      shield:"Rune kiteshield", legs:"Black d'hide chaps", hands:"Barrows gloves",
+      feet:"Dragon boots", ring:"Ring of recoil"
+    },
+    inventory: [
+      {name:"Blighted anglerfish", qty:8},
+      {name:"Prayer potion(4)", qty:4},
+      {name:"Super combat potion(4)", qty:2},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Blighted karambwan", qty:4},
+      {name:"Saradomin brew(4)", qty:2},
+      {name:"Blighted super restore(4)", qty:4},
+      {name:"Granite maul", qty:1},
+      {name:"Dragon dagger(p++)", qty:1},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  oldedge: {
+    label: "Old Edge PKer",
+    source: "https://youtu.be/nDEGEk0P2i4",
+    defaultBlessedZone: 'shallow',
+    equipment: {
+      head:"Helm of neitiznot", cape:"Obsidian cape", neck:"Amulet of glory",
+      weapon:"Abyssal whip", body:"Rune platebody", shield:"Dragon defender",
+      legs:"Rune platelegs", hands:"Barrows gloves", feet:"Dragon boots",
+      ring:"Ring of recoil"
+    },
+    inventory: [
+      {name:"Korasi's sword", qty:1},
+      {name:"Varrock teleport (tablet)", qty:5},
+      {name:"Death rune", qty:6},
+      {name:"Earth rune", qty:30},
+      {name:"Astral rune", qty:12},
+      {name:"Super attack(4)", qty:1},
+      {name:"Super strength(4)", qty:1},
+      {name:"Super defence(4)", qty:1},
+      {name:"Magic potion(4)", qty:1},
+      {name:"Prayer potion(4)", qty:3},
+      // "the rest sharks" - fills the remaining 16 of 28 squares
+      {name:"Shark", qty:16}
+    ],
+    lootingBag: []
+  },
+  rangetank: {
+    label: "Range Tank PKer",
+    source: "https://youtu.be/82ezGF70OhM?si=i_1-TmJYLMd1IMBc",
+    equipment: {
+      head:"Void mage helm", cape:"Imbued zamorak cape", neck:"Occult necklace",
+      ammo2:"Seeking dragon arrow", ammo:"Diamond dragon bolts (e)",
+      weapon:"Toxic staff of the dead", body:"Elite void top",
+      shield:"Tome of fire", legs:"Elite void robe", hands:"Void knight gloves",
+      feet:"Aranea boots", ring:"Lightbearer"
+    },
+    // Stacked ammo quantities, kept alongside the slot names above.
+    equipmentQty: { ammo:50, ammo2:40 },
+    inventory: [
+      {name:"Saradomin brew(4)", qty:8},
+      {name:"Sanfew serum(4)", qty:4},
+      {name:"Marlin", qty:2},
+      {name:"Royal seed pod", qty:1},
+      {name:"Twisted buckler", qty:1},
+      {name:"Void ranger helm", qty:1},
+      {name:"Dizana's quiver", qty:1},
+      {name:"Amulet of fury", qty:1},
+      {name:"Amulet of glory", qty:1},
+      {name:"Dragon crossbow", qty:1},
+      {name:"Dark bow", qty:1},
+      {name:"Volatile nightmare staff", qty:1},
+      {name:"Rune pouch", qty:1, contents:[
+        {name:"Smoke rune", qty:3000},
+        {name:"Blood rune", qty:400},
+        {name:"Wrath rune", qty:300}
+      ]},
+      {name:"Blighted teleport spell sack", qty:100},
+      {name:"Blighted entangle sack", qty:200},
+      {name:"Adamant seeds", qty:45}
+    ],
+    lootingBag: []
+  },
+  artio: {
+    label: "Artio AFK PvM",
+    source: "https://youtu.be/7Mo4OE7Yn-Y",
+    defaultLootingBag: true,
+    equipment: {
+      head:"Bloodbark helm", cape:"Imbued zamorak cape", neck:"Occult necklace",
+      ammo:"Rada's blessing 4", weapon:"Accursed sceptre", body:"Bloodbark body",
+      shield:"Elidinis' ward (f)", legs:"Bloodbark legs", hands:"Tormented bracelet",
+      feet:"Bloodbark boots", ring:"Ring of wealth"
+    },
+    // Charges held inside a piece of equipment rather than in a slot of their own.
+    // They still cost real GP and are destroyed outright on death - see CHARGE_NOTE.
+    charges: [
+      {name:"Revenant ether", qty:1400, inside:"Accursed sceptre"}
+    ],
+    inventory: [
+      {name:"Saradomin brew(4)", qty:10},
+      {name:"Blighted super restore(4)", qty:6},
+      {name:"Blighted anglerfish", qty:3},
+      {name:"Blighted karambwan", qty:3},
+      {name:"Blood rune", qty:1600},
+      {name:"Death rune", qty:1600},
+      {name:"Water rune", qty:1000},
+      {name:"Soul rune", qty:400},
+      {name:"Royal seed pod", qty:1},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  artioanti: {
+    label: "Artio Anti-PKer",
+    source: "https://youtu.be/19GC0rVhDMs",
+    defaultLootingBag: true,
+    equipment: {
+      head:"Helm of neitiznot", cape:"Imbued zamorak cape", neck:"Amulet of glory",
+      ammo:"Diamond dragon bolts (e)", weapon:"Zaryte crossbow", body:"Black d'hide body",
+      shield:"Crystal shield", legs:"Black d'hide chaps", hands:"Barrows gloves",
+      feet:"Climbing boots", ring:"Ring of dueling(8)"
+    },
+    equipmentQty: { ammo:80 },
+    inventory: [
+      {name:"Elysian spirit shield", qty:1},
+      {name:"Voidwaker", qty:1},
+      {name:"Accursed sceptre", qty:1},
+      {name:"Bloodbark body", qty:1},
+      {name:"Bloodbark legs", qty:1},
+      {name:"Magic cape", qty:1},
+      {name:"Saradomin brew(4)", qty:5},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Blighted anglerfish", qty:3},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Anti-venom+(4)", qty:1},
+      {name:"Blighted teleport spell sack", qty:40},
+      {name:"Blighted entangle sack", qty:420},
+      {name:"Blighted ancient ice sack", qty:200},
+      {name:"Adamant seeds", qty:45},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  artioanti2: {
+    label: "Artio Anti-PKer v2",
+    source: "https://youtu.be/19GC0rVhDMs",
+    defaultLootingBag: true,
+    equipment: {
+      head:"Helm of neitiznot", cape:"Imbued zamorak cape", neck:"Amulet of glory",
+      ammo:"Diamond dragon bolts (e)", weapon:"Zaryte crossbow", body:"Black d'hide body",
+      shield:"Crystal shield", legs:"Black d'hide chaps", hands:"Barrows gloves",
+      feet:"Climbing boots", ring:"Ring of dueling(8)"
+    },
+    equipmentQty: { ammo:80 },
+    inventory: [
+      {name:"Elidinis' ward (f)", qty:1},
+      {name:"Voidwaker", qty:1},
+      {name:"Accursed sceptre", qty:1},
+      {name:"Avernic defender", qty:1},
+      {name:"Ahrim's robetop", qty:1},
+      {name:"Ahrim's robeskirt", qty:1},
+      {name:"Magic cape", qty:1},
+      {name:"Saradomin brew(4)", qty:5},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Blighted anglerfish", qty:3},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Anti-venom+(4)", qty:1},
+      {name:"Blighted teleport spell sack", qty:40},
+      {name:"Blighted entangle sack", qty:420},
+      {name:"Blighted ancient ice sack", qty:200},
+      {name:"Adamant seeds", qty:45},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  artiopker: {
+    label: "Artio PKer",
+    source: "https://youtu.be/19GC0rVhDMs",
+    equipment: {
+      head:"Serpentine helm", cape:"Infernal cape", neck:"Amulet of fury",
+      ammo:"Diamond dragon bolts (e)", weapon:"Toxic staff of the dead",
+      body:"Ahrim's robetop", shield:"Malediction ward", legs:"Ahrim's robeskirt",
+      feet:"Aranea boots", ring:"Berserker ring"
+    },
+    equipmentQty: { ammo:90 },
+    charges: [
+      {name:"Zulrah's scales", qty:6000, inside:"Serpentine helm"}
+    ],
+    inventory: [
+      {name:"Voidwaker", qty:1},
+      {name:"Armadyl godsword", qty:1},
+      {name:"Dragon crossbow", qty:1},
+      {name:"Karil's leathertop", qty:1},
+      {name:"Karil's leatherskirt", qty:1},
+      {name:"Saradomin brew(4)", qty:4},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Marlin", qty:2},
+      {name:"Halibut", qty:2},
+      {name:"Blighted anglerfish", qty:2},
+      {name:"Royal seed pod", qty:1},
+      {name:"Wrath rune", qty:250},
+      {name:"Air rune", qty:2500},
+      {name:"Fire rune", qty:2500},
+      {name:"Blighted entangle sack", qty:100},
+      {name:"Blighted teleport spell sack", qty:100},
+      {name:"Teleport to house (tablet)", qty:7}
+    ],
+    lootingBag: []
+  },
+  clantanker: {
+    label: "Old PvM Clan Tanker",
+    source: "https://youtu.be/YqymrNZecLo",
+    defaultLootingBag: true,
+    equipment: {
+      head:"Verac's helm", cape:"Obsidian cape", neck:"Amulet of glory",
+      ammo:"Dragon javelin", weapon:"Verac's flail", body:"Verac's brassard",
+      legs:"Verac's plateskirt", hands:"Rune gloves",
+      feet:"Climbing boots", ring:"Ring of dueling(8)"
+    },
+    equipmentQty: { ammo:50 },
+    inventory: [
+      {name:"Dragon claws", qty:1},
+      {name:"Heavy ballista", qty:1},
+      {name:"Rune knife", qty:60},
+      {name:"Black d'hide body", qty:1},
+      {name:"Games necklace(8)", qty:1},
+      {name:"Saradomin brew(4)", qty:4},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Anti-venom+(4)", qty:1},
+      {name:"Looting bag", qty:1},
+      // "the rest is blighted anglerfish" - fills the remaining 11 of 28 squares
+      {name:"Blighted anglerfish", qty:11}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  maxedtanker: {
+    label: "Maxed PKer Clan Tanker",
+    source: "https://youtu.be/juy3sLgyAb8",
+    equipment: {
+      head:"Serpentine helm", cape:"Imbued zamorak cape", neck:"Occult necklace",
+      weapon:"Kodai wand", body:"Ancestral robe top", shield:"Elysian spirit shield",
+      legs:"Ancestral robe bottom", feet:"Eternal boots"
+    },
+    inventory: [
+      {name:"Armadyl chestplate", qty:1},
+      {name:"Armadyl chainskirt", qty:1},
+      {name:"Dharok's platelegs", qty:1},
+      {name:"Necklace of anguish", qty:1},
+      {name:"Amulet of fury", qty:1},
+      {name:"Dragon claws", qty:1},
+      {name:"Armadyl crossbow", qty:1},
+      {name:"Royal seed pod", qty:1},
+      // Runes for 200 Ice Barrages - 6 water, 4 death, 2 blood per cast
+      // (https://oldschool.runescape.wiki/w/Ice_Barrage)
+      {name:"Rune pouch", qty:1, contents:[
+        {name:"Water rune", qty:1200},
+        {name:"Death rune", qty:800},
+        {name:"Blood rune", qty:400}
+      ]},
+      {name:"Sanfew serum(4)", qty:4},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Blighted super restore(4)", qty:1},
+      // "the rest are saradomin potions" - fills the remaining 11 of 28 squares
+      {name:"Saradomin brew(4)", qty:11}
+    ],
+    lootingBag: []
+  },
+  wildyaltar: {
+    label: "Low-Risk Wildy Altar Skiller",
+    source: "https://youtu.be/SWM4dJI58Rg",
+    equipment: {
+      neck:"Burning amulet(5)",
+      body:"Saradomin d'hide body", legs:"Saradomin chaps"
+    },
+    inventory: [
+      {name:"Dragon bones", qty:28}
+    ],
+    lootingBag: []
+  },
+  chaosele: {
+    label: "Low-Risk Chaos Elemental Hunter",
+    source: "https://youtu.be/30m_r50J188",
+    equipment: {
+      cape:"Ava's accumulator", ammo:"Broad bolts", weapon:"Dragon crossbow",
+      body:"Black d'hide body", legs:"Black d'hide chaps"
+    },
+    equipmentQty: { ammo:200 },
+    inventory: [
+      {name:"Wilderness sword 4", qty:1},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Super combat potion(4)", qty:1},
+      // "rest is summer pie" - fills the remaining 22 of 28 squares
+      {name:"Summer pie", qty:22}
+    ],
+    lootingBag: []
+  },
+  maxsaeldor: {
+    label: "Max Saeldor PvP",
+    source: "https://www.youtube.com/shorts/D4Fk1snv4w4",
+    equipment: {
+      head:"Oathplate helm", cape:"Infernal cape", neck:"Amulet of torture",
+      ammo:"Rada's blessing 4", weapon:"Blade of saeldor", body:"Oathplate chest",
+      shield:"Avernic defender", legs:"Oathplate legs", hands:"Ferocious gloves",
+      feet:"Primordial boots", ring:"Ring of recoil"
+    },
+    inventory: [
+      {name:"Dragon dagger(p++)", qty:1},
+      {name:"Armadyl godsword", qty:1},
+      {name:"Granite maul (ornate handle)", qty:1},
+      {name:"Ring of recoil", qty:1},
+      {name:"Saradomin brew(4)", qty:2},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Surge potion(4)", qty:1},
+      {name:"Blighted anglerfish", qty:9},
+      {name:"Blighted karambwan", qty:4},
+      {name:"Summer pie", qty:2},
+      {name:"Blighted vengeance sack", qty:175},
+      {name:"Teleport to house (tablet)", qty:6}
+    ],
+    lootingBag: []
+  },
+  maxmeleevenge: {
+    label: "Max Melee Venge PKer",
+    source: "https://www.youtube.com/shorts/lR5d48ZAqfE",
+    equipment: {
+      head:"Torva full helm", cape:"Infernal cape", neck:"Amulet of rancour",
+      ammo:"Rada's blessing 4", weapon:"Abyssal tentacle", body:"Torva platebody",
+      shield:"Avernic defender", legs:"Torva platelegs", hands:"Ferocious gloves",
+      feet:"Avernic treads", ring:"Ultor ring"
+    },
+    // Only the granite maul was specified - the rest of this inventory is a guess at a
+    // standard max melee venge setup and is not taken from the source video.
+    inventory: [
+      {name:"Granite maul (ornate handle)", qty:1},
+      // Runes for 100 Vengeance casts - 10 earth, 4 astral, 2 death per cast
+      // (https://oldschool.runescape.wiki/w/Vengeance)
+      {name:"Rune pouch", qty:1, contents:[
+        {name:"Earth rune",  qty:1000},
+        {name:"Astral rune", qty:400},
+        {name:"Death rune",  qty:200}
+      ]},
+      {name:"Saradomin brew(4)", qty:6},
+      {name:"Blighted super restore(4)", qty:4},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Blighted karambwan", qty:4},
+      {name:"Blighted anglerfish", qty:11}
+    ],
+    lootingBag: []
+  },
+  maxnhbrid: {
+    label: "Max NH Brid PKer",
+    source: "https://www.youtube.com/shorts/RFGA59fHtDc",
+    equipment: {
+      head:"Torva full helm", cape:"Infernal cape", neck:"Occult necklace",
+      ammo:"Rada's blessing 4", weapon:"Toxic staff of the dead",
+      body:"Virtus robe top", shield:"Elidinis' ward (f)", legs:"Virtus robe bottom",
+      hands:"Barrows gloves", feet:"Avernic treads", ring:"Ultor ring"
+    },
+    inventory: [
+      {name:"Crystal body", qty:1},
+      {name:"Crystal legs", qty:1},
+      {name:"Bow of faerdhinen", qty:1},
+      {name:"Dragonfire shield", qty:1},
+      {name:"Granite maul (ornate handle)", qty:1},
+      {name:"Voidwaker", qty:1},
+      {name:"Armadyl godsword", qty:1},
+      {name:"Noxious halberd", qty:1},
+      {name:"Lightbearer", qty:1},
+      {name:"Royal seed pod", qty:1},
+      // Runes for 100 Ice Barrages - 6 water, 4 death, 2 blood per cast
+      {name:"Rune pouch", qty:1, contents:[
+        {name:"Water rune", qty:600},
+        {name:"Death rune", qty:400},
+        {name:"Blood rune", qty:200}
+      ]},
+      {name:"Saradomin brew(4)", qty:8},
+      {name:"Sanfew serum(4)", qty:3},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Marlin", qty:1},
+      {name:"Halibut", qty:1}
+    ],
+    lootingBag: []
+  },
+  duelarena: {
+    label: "Duel Arena PvP",
+    source: "https://youtu.be/fgCbLa_SCBU",
+    equipment: {
+      head:"Fighter hat", cape:"Fire cape", neck:"Amulet of fury",
+      ammo:"Ancient blessing", weapon:"Ghrazi rapier",
+      body:"Bandos chestplate", shield:"Dragonfire shield", legs:"Bandos tassets",
+      hands:"Barrows gloves", feet:"Dragon boots", ring:"Lightbearer"
+    },
+    inventory: [
+      {name:"Dragon claws", qty:1},
+      {name:"Voidwaker", qty:1},
+      {name:"Super attack(4)", qty:1},
+      {name:"Super strength(4)", qty:1},
+      {name:"Super defence(4)", qty:1},
+      // 300 Vengeance casts - 10 earth, 4 astral, 2 death each
+      // (https://oldschool.runescape.wiki/w/Vengeance)
+      {name:"Earth rune", qty:3000},
+      {name:"Astral rune", qty:1200},
+      {name:"Death rune", qty:600}
+    ],
+    lootingBag: []
+  },
+  mine: {
+    label: "Loadout I would use",
+    equipment: {
+      head:"Helm of neitiznot", cape:"Ava's accumulator", neck:"Amulet of glory",
+      ammo:"Dragonstone dragon bolts (e)", weapon:"Abyssal whip",
+      body:"Black d'hide body", shield:"Blessed spirit shield", legs:"Black d'hide chaps",
+      hands:"Barrows gloves", feet:"Aranea boots", ring:"Ring of recoil"
+    },
+    equipmentQty: { ammo:50 },
+    inventory: [
+      {name:"Voidwaker", qty:1},
+      {name:"Accursed sceptre", qty:1},
+      {name:"Rune crossbow", qty:1},
+      {name:"Bloodbark body", qty:1},
+      {name:"Bloodbark legs", qty:1},
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Stamina potion(4)", qty:1},
+      {name:"Blighted ancient ice sack", qty:100},
+      // "fill the rest with common wilderness food and potions" - a guess at the usual
+      // mix, filling the remaining 19 of 28 squares.
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Saradomin brew(4)", qty:2},
+      {name:"Blighted karambwan", qty:4},
+      {name:"Blighted anglerfish", qty:9},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Rune platebody", qty:100, noted:true}
+    ]
+  },
+  wildyagility: {
+    label: "Low-Risk Wildy Agility Skiller",
+    defaultLootingBag: true,
+    equipment: {
+      cape:"Ava's accumulator", ammo:"Broad bolts", weapon:"Rune crossbow",
+      body:"Black d'hide body", legs:"Black d'hide chaps"
+    },
+    equipmentQty: { ammo:50 },
+    inventory: [
+      {name:"Coins", qty:150000},
+      {name:"Wilderness sword 4", qty:1},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Blighted manta ray", qty:8},
+      {name:"Blighted anglerfish", qty:1},
+      {name:"Blighted karambwan", qty:11},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Blighted anglerfish", qty:481, noted:true},
+      {name:"Blighted karambwan", qty:310, noted:true},
+      {name:"Blighted manta ray", qty:408, noted:true},
+      {name:"Blighted super restore(4)", qty:141, noted:true},
+      {name:"Blighted super restore(4)", qty:4},
+      {name:"Rune med helm", qty:13, noted:true},
+      {name:"Rune platebody", qty:10, noted:true},
+      {name:"Rune chainbody", qty:34, noted:true},
+      {name:"Adamant full helm", qty:7, noted:true},
+      {name:"Adamant platelegs", qty:8, noted:true},
+      {name:"Adamant kiteshield", qty:28, noted:true},
+      {name:"Mithril plateskirt", qty:9, noted:true},
+      {name:"Mithril chainbody", qty:3, noted:true},
+      {name:"Mithril platelegs", qty:5, noted:true},
+      {name:"Burning amulet(5)", qty:1}
+    ]
+  },
+  wildyagility2: {
+    label: "Mass Wildy Agility Skiller",
+    defaultLootingBag: true,
+    equipment: {
+      head:"Helm of neitiznot", cape:"Ava's accumulator", neck:"Amulet of glory",
+      ammo:"Dragonstone bolts (e)", weapon:"Rune crossbow",
+      body:"Black d'hide body", shield:"Granite shield", legs:"Black d'hide chaps",
+      hands:"Rune gloves", feet:"Climbing boots"
+    },
+    equipmentQty: { ammo:100 },
+    inventory: [
+      {name:"Coins", qty:150000},
+      {name:"Dragon dagger(p++)", qty:1},
+      {name:"Phoenix necklace", qty:1},
+      {name:"Wilderness sword 4", qty:1},
+      {name:"Blighted super restore(4)", qty:3},
+      {name:"Blighted manta ray", qty:8},
+      {name:"Blighted anglerfish", qty:1},
+      {name:"Blighted karambwan", qty:11},
+      {name:"Looting bag", qty:1}
+    ],
+    lootingBag: [
+      {name:"Blighted anglerfish", qty:481, noted:true},
+      {name:"Blighted karambwan", qty:310, noted:true},
+      {name:"Blighted manta ray", qty:408, noted:true},
+      {name:"Blighted super restore(4)", qty:141, noted:true},
+      {name:"Blighted super restore(4)", qty:4},
+      {name:"Rune med helm", qty:13, noted:true},
+      {name:"Rune platebody", qty:10, noted:true},
+      {name:"Rune chainbody", qty:34, noted:true},
+      {name:"Adamant full helm", qty:7, noted:true},
+      {name:"Adamant platelegs", qty:8, noted:true},
+      {name:"Adamant kiteshield", qty:28, noted:true},
+      {name:"Mithril plateskirt", qty:9, noted:true},
+      {name:"Mithril chainbody", qty:3, noted:true},
+      {name:"Mithril platelegs", qty:5, noted:true},
+      {name:"Burning amulet(5)", qty:1}
+    ]
+  }
+};
+
+// Items with no GE price (untradeable) -> manual override value
+const UNTRADEABLE = {
+  "Barrows gloves": 0,
+  "Ferocious gloves": 0,
+  "Infernal cape": 0,
+  "Royal seed pod": 0,
+  "Looting bag": 0,
+  // Charged/imbued/assembled forms - the tradeable versions are separate items
+  // (Ava's accumulator + vorkath's head, Blade of saeldor (inactive), Avernic
+  // defender hilt, uncharged Ring of suffering), so these carry no GE price of
+  // their own and must not be flagged as a missing price lookup.
+  "Imbued zamorak cape": 0,
+  "Rada's blessing 4": 0,
+  "Surge potion(4)": 0,   // Varlamore potion, no GE listing
+  // Pest Control gear and the Colosseum quiver - no GE listing, no tradeable form
+  "Void mage helm": 0,
+  "Void ranger helm": 0,
+  "Void knight gloves": 0,
+  "Elite void top": 0,
+  "Elite void robe": 0,
+  "Dizana's quiver": 0,
+  "Magic cape": 0,        // skillcape, untradeable
+  // Not an OSRS item, so no GE listing - counted at a flat 200,000 gp on death per Chdata.
+  "Korasi's sword": 200000,
+  // Culinaromancer's chest gloves - untradeable, counted at their shop cost.
+  "Rune gloves": 6500,
+  "Dragon defender": 0,   // Warriors' Guild, untradeable
+  "Ava's assembler": 0,
+  "Blade of saeldor": 0,
+  "Avernic defender": 0,
+  "Ring of suffering (i)": 0
+};
+
+// Items that genuinely stack into a single inventory slot regardless of quantity
+// (coins, runes, ammunition like arrows/bolts, and a handful of other special-cased
+// items). Everything NOT in this set - which is every item in both current presets -
+// takes one inventory slot PER unit: food (sharks, karambwan, anglerfish, wine of
+// zamorak) and dose-based potions are all unstackable in a normal inventory, even
+// though the potion's own dose count (the "(4)" in its name) is baked into that one
+// item. Add an item name here (or set `stackable:true` on a specific inventory entry
+// in PRESETS) if you add something that actually stacks, like "Coins" or an ammo type.
+const STACKABLE_ITEMS = new Set([
+  "Coins", "Cannonball",
+  "Blood rune", "Death rune", "Water rune", "Soul rune",
+  "Revenant ether",
+  "Blighted vengeance sack", "Teleport to house (tablet)",
+  "Blighted teleport spell sack", "Blighted entangle sack", "Adamant seeds",
+  "Smoke rune", "Wrath rune", "Air rune", "Fire rune",
+  "Diamond dragon bolts (e)", "Seeking dragon arrow",
+  "Blighted ancient ice sack", "Zulrah's scales",
+  "Dragon javelin", "Rune knife", "Earth rune", "Astral rune",
+  "Varrock teleport (tablet)", "Broad bolts",
+  "Dragonstone dragon bolts (e)", "Dragonstone bolts (e)"
+]);
+
+function isStackable(name, entry){
+  // Noted items are always stackable in OSRS, regardless of the base item.
+  return STACKABLE_ITEMS.has(name) || (entry && (entry.stackable === true || entry.noted === true));
+}
+
+// Protect Item icon: self-hosted in /assets/, same as the other local icons.
+const PROTECT_ITEM_ICON = "../assets/Protect_Item.webp";
+
+// Item icons are self-hosted in /assets/ManyItems/, saved down from the wiki under each
+// item's exact name. Anything added to a preset needs its icon dropped in there too, or
+// attachIcon() falls back to rendering the item's name as text.
+function iconUrl(name){
+  return "../assets/ManyItems/" + encodeURIComponent(name) + ".png";
+}
+
+// Base image drawn under a noted item's own icon.
+const BANK_NOTE_ICON = "../assets/ManyItems/Bank_note.webp";
+
+// Real "Item Retrieval Service" list (players call these deathbanks) - source:
+// https://oldschool.runescape.wiki/w/Item_Retrieval_Service ("Regular services" table)
+// Every boss/activity in the game that has an on-site instant item reclaimer.
+// Fee is a flat cost per the NPC/chest, NOT a percentage of item value, except where noted.
+const DEATHBANKS = [
+  { name:"Alchemical Hydra",     point:"Orrvor quo Maten",            fee:100000 },
+  { name:"Grotesque Guardians",  point:"Magical Chest",               fee:50000 },
+  { name:"Hallowed Sepulchre",   point:"Mysterious Stranger",         fee:25000 },
+  { name:"Hespori",              point:"Arno",                        fee:25000 },
+  { name:"The Mimic",            point:"Strange casket",              fee:90000 },
+  { name:"Nex",                  point:"Chest",                       fee:100000 },
+  { name:"The Nightmare",        point:"Shura",                       fee:60000 },
+  { name:"Phosani's Nightmare",  point:"Sister Senga",                fee:60000 },
+  { name:"Theatre of Blood - Team Wipe",  point:"Chest",               fee:100000 },
+  { name:"Volcanic Mine",        point:"Petrified Pete",              fee:null,   variant:"volcanic" },
+  { name:"Vorkath",              point:"Torfinn",                     fee:100000 },
+  { name:"Zulrah",               point:"Priestess Zul-Gwenwynig",     fee:100000, variant:"zulrah" }
+];
+
+// Real "Discounted deaths" list - source: https://oldschool.runescape.wiki/w/Items_Kept_on_Death#Discounted_deaths
+// These are NOT deathbanks - there's no on-site reclaim chest. They use the standard
+// Death's Office fee (5% on items worth 100k+), just charged at 25% of that rate
+// (i.e. effectively 1.25%) until a success/attempt threshold is hit, then full rate applies.
+const DISCOUNTED_ACTIVITIES = [
+  { name:"Desert Treasure II bosses", thresholdLabel:"5 successful kills", detail:"Whisperer, Vardorvis, Duke Sucellus, The Leviathan" },
+  { name:"Doom of Mokhaiotl",         thresholdLabel:"20 total attempts across all floors" },
+  { name:"Fortis Colosseum",          thresholdLabel:"100 waves successfully cleared" },
+  { name:"Yama",                      thresholdLabel:"10 successful kills" }
+];
+
+/* ---------------------------------------------------------------
+   STATE
+--------------------------------------------------------------- */
+let priceCtx = null;       // {nameToId, latest}
+let currentPreset = 'budget';
+let protectItem = true;
+let deathbankChoice = 'Vorkath';
+let zulrah50kc = true;   // Priestess only charges after 50 Zulrah KC (free for UIM regardless)
+let discountedActivityChoice = 'Desert Treasure II bosses';
+let discountThresholdMet = false; // whether the kill/attempt/wave threshold has been passed
+let ironman = false; // 50% discount on Gravestone & Death's Office (and Discounted Office) reclaim fees
+let lootingBagEnabled = false; // toggles whether the looting bag (and its contents) exists at all
+let blessedZone = 'deep'; // 'deep' = 5% fee, 'shallow' = 1% fee at or below level 10 Wilderness
+// How much Blessed Status shields from the death fee:
+//   'none' - mirrors Skulling: nothing is protected except the single Protect Item slot.
+//   'top3' - mirrors Neutral Status: your 3 most valuable items (4 with Protect Item)
+//            pay no fee at all.
+let blessedProtect = 'none';
+
+/* ---------------------------------------------------------------
+   PRICE FETCHING
+--------------------------------------------------------------- */
+async function loadPrices(){
+  const statusEl = document.getElementById('priceStatus');
+  try{
+    const [mapRes, latestRes] = await Promise.all([
+      fetch('https://prices.runescape.wiki/api/v1/osrs/mapping'),
+      fetch('https://prices.runescape.wiki/api/v1/osrs/latest')
+    ]);
+    if(!mapRes.ok || !latestRes.ok) throw new Error('bad response');
+    const mapping = await mapRes.json();
+    const latestJson = await latestRes.json();
+    const nameToId = {};
+    mapping.forEach(m => { nameToId[m.name.toLowerCase()] = m.id; });
+    priceCtx = { nameToId, latest: latestJson.data || {} };
+    // Nothing to say on success - the loading line just goes away.
+    statusEl.classList.remove('err');
+    statusEl.textContent = '';
+    statusEl.style.display = 'none';
+  }catch(err){
+    priceCtx = null;
+    statusEl.style.display = '';
+    statusEl.classList.add('err');
+    statusEl.textContent = 'Could not reach the live price API (network/CORS). Showing item list without prices.';
+  }
+  render();
+}
+
+// Items whose charged form has no GE listing of its own, so the tradeable uncharged
+// version carries the price. The item keeps its own name and icon everywhere else.
+const PRICE_ALIAS = {
+  "Accursed sceptre": "Accursed sceptre (u)",
+  // Charged forms with no GE listing - the empty/uncharged item carries the price.
+  "Tome of fire": "Tome of fire (empty)",
+  "Toxic staff of the dead": "Toxic staff (uncharged)",
+  "Serpentine helm": "Serpentine helm (uncharged)",
+  "Bow of faerdhinen": "Bow of faerdhinen (inactive)",
+  // The pouch itself only trades as a note.
+  "Rune pouch": "Rune pouch note"
+};
+
+// Untradeable upgrades that the wiki prices as a "total cost" - the sum of the
+// materials consumed to make one. Priced live from those components rather than
+// hardcoding a snapshot, so it tracks the GE the same way the wiki page does.
+// Elidinis' ward (f): https://oldschool.runescape.wiki/w/Elidinis%27_ward_(f) (Creation)
+const COMPONENT_COST = {
+  "Elidinis' ward (f)": [
+    { name:"Elidinis' ward", qty:1 },
+    { name:"Arcane sigil",   qty:1 },
+    { name:"Soul rune",      qty:10000 }
+  ],
+  // Blade of saeldor: enhanced crystal weapon seed + 100 crystal shards.
+  // https://oldschool.runescape.wiki/w/Blade_of_saeldor (Creation)
+  // Crystal shards have no GE listing, so they're valued the way the wiki values them -
+  // off an enhanced crystal teleport seed, which yields 150 shards.
+  "Blade of saeldor": [
+    { name:"Enhanced crystal weapon seed",   qty:1 },
+    { name:"Enhanced crystal teleport seed", qty:100/150 }
+  ],
+  // The clamped maul isn't a GE item of its own, so it's the maul plus the clamp.
+  "Granite maul (ornate handle)": [
+    { name:"Granite maul",  qty:1 },
+    { name:"Granite clamp", qty:1 }
+  ],
+  // The tentacle has no GE listing - it's a whip with a kraken tentacle attached.
+  "Abyssal tentacle": [
+    { name:"Abyssal whip",     qty:1 },
+    { name:"Kraken tentacle",  qty:1 }
+  ],
+  // https://oldschool.runescape.wiki/w/Ferocious_gloves (Creation) - one hydra leather.
+  "Ferocious gloves": [
+    { name:"Hydra leather", qty:1 }
+  ],
+  // Crystal weapon seed + 40 crystal shards, shards valued as above.
+  // https://oldschool.runescape.wiki/w/Crystal_shield (Creation)
+  "Crystal shield": [
+    { name:"Crystal weapon seed",            qty:1 },
+    { name:"Enhanced crystal teleport seed", qty:40/150 }
+  ],
+  // Crystal armour: https://oldschool.runescape.wiki/w/Crystal_body / Crystal_legs
+  "Crystal body": [
+    { name:"Crystal armour seed",            qty:3 },
+    { name:"Enhanced crystal teleport seed", qty:150/150 }
+  ],
+  "Crystal legs": [
+    { name:"Crystal armour seed",            qty:2 },
+    { name:"Enhanced crystal teleport seed", qty:100/150 }
+  ],
+  // Nightmare staff + volatile orb; the finished staff has no GE listing of its own.
+  "Volatile nightmare staff": [
+    { name:"Nightmare staff", qty:1 },
+    { name:"Volatile orb",    qty:1 }
+  ]
+};
+
+// An inventory entry can declare `contents` (see the rune pouches in PRESETS): the slot
+// is then worth the container plus everything inside it, which is how a loaded pouch
+// actually costs - one square, several runes' worth of value. Contents are per-preset
+// because the same pouch is filled differently in each loadout.
+function contentsValue(entry){
+  if(!entry.contents) return 0;
+  return entry.contents.reduce((a, part) => {
+    const p = getPrice(part.name);
+    return a + (p === null ? 0 : p * part.qty);
+  }, 0);
+}
+
+// Straight GE lookup for one exact item name - no aliases, recipes or contents.
+function gePrice(name){
+  const id = priceCtx.nameToId[name.toLowerCase()];
+  if(id === undefined) return null;
+  const p = priceCtx.latest[id];
+  if(!p) return null;
+  const vals = [];
+  if(typeof p.high === 'number') vals.push(p.high);
+  if(typeof p.low === 'number') vals.push(p.low);
+  if(!vals.length) return null;
+  return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+}
+
+// Items with a fixed, known per-unit value that the GE doesn't list. Unlike UNTRADEABLE
+// these stay ordinary tradeable items, so they're ranked and taxed like anything else.
+const FIXED_PRICE = {
+  "Coins": 1
+};
+
+function getPrice(name){
+  if(!priceCtx) return null;
+  if(Object.prototype.hasOwnProperty.call(FIXED_PRICE, name)) return FIXED_PRICE[name];
+
+  // A creation recipe wins over the untradeable 0-value override: an item can be
+  // untradeable (no GE listing, own death rules) and still have a real build cost.
+  const recipe = COMPONENT_COST[name];
+  if(recipe){
+    let sum = 0;
+    for(const part of recipe){
+      const p = getPrice(part.name);
+      if(p === null) return null;   // one missing component makes the total meaningless
+      sum += p * part.qty;
+    }
+    return Math.round(sum);
+  }
+
+  if(Object.prototype.hasOwnProperty.call(UNTRADEABLE, name)) return UNTRADEABLE[name];
+
+  return gePrice(PRICE_ALIAS[name] || name);
+}
+
+function fmtGp(n){
+  if(n === null || n === undefined || isNaN(n)) return '--';
+  return n.toLocaleString('en-US') + ' gp';
+}
+
+/* ---------------------------------------------------------------
+   RENDER: doll + inventory
+--------------------------------------------------------------- */
+function buildItemList(preset){
+  // Returns a flat list of {name, unitPrice, qty, value, untradeable, priceMissing, kind, stackable}.
+  // Untradeable items get their manual UNTRADEABLE override (usually 0, that's expected).
+  // Anything else that fails to resolve a price (bad name match, API miss, etc.) is
+  // counted as 0 gp rather than breaking the whole total, but flagged as priceMissing
+  // so it's visible in the UI instead of silently wrong.
+  //
+  // Inventory entries: a genuinely stackable item (STACKABLE_ITEMS, e.g. coins/ammo)
+  // becomes ONE item worth unitPrice*qty, matching how it actually occupies one slot
+  // and is valued as a whole stack for the "keep top 3/4" death mechanic. Everything
+  // else expands into `qty` separate individual items, each worth just unitPrice,
+  // one per inventory slot - because that's how unstackable food/potions actually
+  // work, and each one is ranked on its own individual value for death mechanics,
+  // not the value of the whole pile.
+  const items = [];
+  Object.entries(preset.equipment).forEach(([slot, name]) => {
+    const untradeable = Object.prototype.hasOwnProperty.call(UNTRADEABLE, name);
+    const price = getPrice(name);
+    const priceMissing = !untradeable && price === null;
+    const unitPrice = price === null ? (untradeable ? UNTRADEABLE[name] : 0) : price;
+    // Ammo slots hold a stack, so a slot can carry a quantity (preset.equipmentQty).
+    const qty = (preset.equipmentQty && preset.equipmentQty[slot]) || 1;
+    items.push({
+      name, slot, kind:'equipment', qty,
+      unitPrice, value: unitPrice * qty,
+      untradeable, priceMissing, stackable: qty > 1
+    });
+  });
+
+  // Charges live inside an equipped item rather than in a slot or an inventory square,
+  // so they get their own kind and are always treated as one stack.
+  (preset.charges || []).forEach(entry => {
+    const price = getPrice(entry.name);
+    const unitPrice = price === null ? 0 : price;
+    items.push({
+      name: entry.name, kind:'charge', qty: entry.qty, inside: entry.inside,
+      unitPrice, value: unitPrice * entry.qty,
+      untradeable:false, priceMissing: price === null, stackable:true
+    });
+  });
+
+  function processEntries(entries, kind){
+    entries.forEach(entry => {
+      const untradeable = Object.prototype.hasOwnProperty.call(UNTRADEABLE, entry.name);
+      const price = getPrice(entry.name);
+      const priceMissing = !untradeable && price === null;
+      // A container carries its contents' value in the same slot.
+      const unitPrice = (price === null ? (untradeable ? UNTRADEABLE[entry.name] : 0) : price)
+        + contentsValue(entry);
+      const stackable = isStackable(entry.name, entry);
+      if(stackable){
+        items.push({
+          name: entry.name, kind, qty: entry.qty,
+          unitPrice, value: unitPrice * entry.qty,
+          untradeable, priceMissing, stackable:true, noted: !!entry.noted
+        });
+      }else{
+        for(let i=0; i<entry.qty; i++){
+          items.push({
+            name: entry.name, kind, qty:1,
+            unitPrice, value: unitPrice,
+            untradeable, priceMissing, stackable:false, noted: !!entry.noted
+          });
+        }
+      }
+    });
+  }
+
+  const inventoryEntries = lootingBagEnabled
+    ? preset.inventory
+    : preset.inventory.filter(e => e.name !== 'Looting bag');
+  processEntries(inventoryEntries, 'inventory');
+  processEntries(lootingBagEnabled ? (preset.lootingBag || []) : [], 'lootbag');
+  return items;
+}
+
+function iconTooltip(item){
+  const notedTag = item.noted ? ' (noted)' : '';
+  if(item.priceMissing) return item.name + notedTag + ' - no price data found (counted as 0 gp)';
+  if(item.untradeable) return item.name + notedTag + ' (untradeable)';
+  return item.name + notedTag + ' - ' + fmtGp(item.value);
+}
+
+function attachIcon(container, item){
+  // Noted items get the bank note as the slot's base image, with the item's own icon
+  // laid over it at a smaller size - same way the game draws a note.
+  let noteBase = null;
+  if(item.noted){
+    noteBase = document.createElement('img');
+    noteBase.src = BANK_NOTE_ICON;
+    noteBase.alt = '';
+    noteBase.title = iconTooltip(item);
+    container.appendChild(noteBase);
+  }
+
+  const img = document.createElement('img');
+  img.src = iconUrl(item.name);
+  img.alt = item.name;
+  img.title = iconTooltip(item);
+  if(item.noted) img.className = 'note-overlay';
+  img.onerror = () => {
+    img.onerror = null;
+    img.remove();
+    if(noteBase) noteBase.remove();
+    container.classList.add('icon-missing');
+    const fallback = document.createElement('span');
+    fallback.className = 'icon-missing-label';
+    fallback.textContent = item.name;
+    container.appendChild(fallback);
+  };
+  container.appendChild(img);
+  if(item.priceMissing) container.classList.add('price-missing');
+}
+
+function renderDoll(preset, items){
+  const doll = document.getElementById('doll');
+  doll.innerHTML = '';
+  const bySlot = {};
+  items.filter(i=>i.kind==='equipment').forEach(i=> bySlot[i.slot]=i);
+
+  // The second ammo slot only exists while a Dizana's quiver is on you - equipped or
+  // sitting in the inventory. Without one it isn't drawn at all, not even as an empty box.
+  const hasQuiver = items.some(i => i.name.startsWith("Dizana's quiver") &&
+    (i.kind === 'equipment' || i.kind === 'inventory'));
+
+  SLOT_LAYOUT.filter(s => s.key !== 'ammo2' || hasQuiver).forEach(({key,c,r}) => {
+    const div = document.createElement('div');
+    div.className = 'slot cell';
+    div.style.setProperty('--c', c);
+    div.style.setProperty('--r', r);
+    const item = bySlot[key];
+    if(item){
+      attachIcon(div, item);
+      // Ammo slots hold a stack, so show the count the same way inventory slots do.
+      if(item.qty > 1){
+        const qty = document.createElement('span');
+        qty.className = 'qty';
+        qty.textContent = item.qty;
+        div.appendChild(qty);
+      }
+    }else{
+      div.classList.add('empty');
+    }
+    doll.appendChild(div);
+  });
+
+  // Charges aren't a wearable slot, so they get their own strip under the doll.
+  const chargeEl = document.getElementById('chargeLine');
+  const charges = items.filter(i=>i.kind==='charge');
+  chargeEl.innerHTML = '';
+  chargeEl.style.display = charges.length ? '' : 'none';
+  charges.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'charge-row';
+    const box = document.createElement('div');
+    box.className = 'slot';
+    attachIcon(box, c);
+    const qty = document.createElement('span');
+    qty.className = 'qty';
+    qty.textContent = c.qty;
+    box.appendChild(qty);
+    const text = document.createElement('div');
+    text.className = 'charge-text';
+    text.innerHTML = `${c.qty.toLocaleString('en-US')} &times; ${c.name}<br>` +
+      `<span class="charge-sub">loaded in ${c.inside} &middot; ${fmtGp(c.value)} &middot; always lost on death</span>`;
+    row.appendChild(box);
+    row.appendChild(text);
+    chargeEl.appendChild(row);
+  });
+}
+
+function renderItemGrid(items, kind, gridElId, overflowElId, labelNoun){
+  const grid = document.getElementById(gridElId);
+  grid.innerHTML = '';
+  const gridItems = items.filter(i=>i.kind===kind);
+  const TOTAL_SLOTS = 28;
+  for(let i=0; i<TOTAL_SLOTS; i++){
+    const div = document.createElement('div');
+    div.className = 'slot';
+    const item = gridItems[i];
+    if(item){
+      attachIcon(div, item);
+      if(item.stackable && item.qty > 1){
+        const qty = document.createElement('span');
+        qty.className='qty';
+        qty.textContent = item.qty;
+        div.appendChild(qty);
+      }
+    }else{
+      div.classList.add('empty');
+    }
+    grid.appendChild(div);
+  }
+
+  const overflowEl = document.getElementById(overflowElId);
+  if(gridItems.length > TOTAL_SLOTS){
+    overflowEl.style.display = '';
+    overflowEl.textContent = `This preset has ${gridItems.length} individual ${labelNoun} items (unstackable items each take their own slot), which is ${gridItems.length - TOTAL_SLOTS} more than the 28 slots available. Only the first 28 are shown above, but all of them are still included in the totals and risk table below.`;
+  }else{
+    overflowEl.style.display = 'none';
+    overflowEl.textContent = '';
+  }
+}
+
+function renderTotals(items){
+  // Charges are counted as part of the equipment total - they're carried inside a worn
+  // item, not in an inventory slot.
+  const eq = items.filter(i=>i.kind==='equipment' || i.kind==='charge');
+  const inv = items.filter(i=>i.kind==='inventory');
+  const bag = items.filter(i=>i.kind==='lootbag');
+  const sum = arr => arr.reduce((a,i)=>a+i.value,0);
+  const eqTotal = sum(eq);
+  const invTotal = sum(inv);
+  const bagTotal = sum(bag);
+  document.getElementById('totEquip').textContent = fmtGp(eqTotal);
+  document.getElementById('totInv').textContent = fmtGp(invTotal);
+  document.getElementById('totLootbag').textContent = fmtGp(bagTotal);
+  document.getElementById('totAll').textContent = fmtGp(eqTotal+invTotal+bagTotal);
+
+}
+
+/* ---------------------------------------------------------------
+   RISK CALCULATIONS
+--------------------------------------------------------------- */
+// Level requirements for equipped items, used only to check Beginner's Blessing
+// eligibility (which requires every equipped item to be under level 40). Items not
+// listed here are assumed to have no relevant level requirement (0).
+const EQUIPMENT_LEVEL_REQ = {
+  "Abyssal whip": 70,
+  "Rune kiteshield": 40,
+  "Dragon boots": 40,
+  "Barrows gloves": 40,
+  "Serpentine helm": 75,
+  "Helm of neitiznot": 55,
+  "Torva full helm": 78,
+  "Torva platebody": 78,
+  "Torva platelegs": 78,
+  "Avernic defender": 70,
+  "Blade of saeldor": 75,
+  "Primordial boots": 75,
+  "Ring of suffering (i)": 75,
+  "Black d'hide body": 40,
+  "Black d'hide chaps": 40,
+  "Occult necklace": 70,
+  "Accursed sceptre": 70,
+  "Bloodbark helm": 60,
+  "Bloodbark body": 60,
+  "Bloodbark legs": 60,
+  "Bloodbark boots": 60,
+  "Adamant full helm": 30,
+  "Adamant longsword": 30,
+  "Adamant kiteshield": 30,
+  "Adamant platelegs": 30,
+  "Mithril platebody": 20
+};
+
+// Real per-item death behaviour for the untradeable items used in these presets, since
+// untradeable items don't just "count as 0 gp" - each has its own documented rule
+// rather than being ranked in the normal top-3/4-by-value pool.
+// Sources: https://oldschool.runescape.wiki/w/Items_Kept_on_Death (Mechanics table,
+// Breakable items table, Wilderness section).
+// Items in the wiki's "Items that are never kept" list - these are categorically
+// unsavable "regardless of whether the item is the most valuable item, or if Protect
+// Item prayer is used" (direct wiki wording). That means no death-prevention method
+// can save them, including homebrew ones like Blessed Status - they're just always
+// lost, full stop, in every single scenario.
+const ALWAYS_LOST_ITEMS = new Set(["Looting bag"]);
+
+// Charges stored inside a piece of equipment (Revenant ether in an Accursed sceptre,
+// etc). They have a real GE price and are consumed/destroyed outright on any death -
+// there is no gravestone, no reclaim fee, and no death-prevention method recovers them,
+// so their full value is added as a straight loss to every scenario below.
+const CHARGE_NOTE = "<br><b>Charges:</b> the ether loaded into your weapon is destroyed on death with no way to reclaim it, so its full GE value is added to every scenario here as a flat loss on top of any fee.";
+
+const UNTRADEABLE_BEHAVIOR = {
+  "Barrows gloves": {
+    pvm: "Not one of the specific items always auto-kept, and not breakable/degradable, so it follows the plain untradeable-item rule: goes to your gravestone unbroken, free to reclaim (no GE value).",
+    wildy: "No tradeable form and no coin-conversion value, so above level 20 Wilderness it's simply permanently lost if unprotected - not handed to a killer, just gone."
+  },
+  "Ferocious gloves": {
+    pvm: "Same general untradeable-item rule as Barrows gloves: gravestoned unbroken, free to reclaim.",
+    wildy: "No tradeable form or coin value, so it's permanently lost above level 20 Wilderness if unprotected, rather than being given to a killer."
+  },
+  "Infernal cape": {
+    pvm: "A breakable item, but PvM deaths don't break it: goes to your gravestone unbroken, free to reclaim.",
+    wildy: "Breakable: below level 20 Wilderness it survives broken and costs 225,000 to repair at Perdu (your killer receives that 225,000 in a PvP death). Above level 20 Wilderness it's converted straight into 225,000 coins, which go to your killer in a PvP death."
+  },
+  "Royal seed pod": {
+    pvm: "Plain untradeable-item rule: gravestoned unbroken, free to reclaim. Even if somehow lost, it's a free re-buy from King Narnode Shareen at the Grand Tree for 2 coins.",
+    wildy: "No tradeable form or coin value, so it's permanently lost above level 20 Wilderness if unprotected - though since it's freely replaceable for 2 coins from King Narnode, that's a trivial loss in practice, just an inconvenience mid-trip."
+  },
+  "Looting bag": {
+    pvm: "In the wiki's 'items that are never kept' list - disappears completely on any unsafe death, regardless of value or Protect Item. It doesn't even go to the gravestone.",
+    wildy: "Same rule everywhere: always disappears completely, at any Wilderness depth and regardless of skull status. Its contents are separately handled as always-unprotected items (see the looting bag section above)."
+  }
+};
+
+function untradeableNote(items, context){
+  const present = items.filter(i => i.untradeable && UNTRADEABLE_BEHAVIOR[i.name]);
+  if(!present.length) return '';
+  const lines = present.map(i => `<b>${i.name}:</b> ${UNTRADEABLE_BEHAVIOR[i.name][context]}`);
+  return `<div class="note" style="margin-top:6px; padding-top:6px; border-top:1px dashed var(--border-stone);">${lines.join('<br>')}</div>`;
+}
+
+function calcRisk(items){
+  const total = items.reduce((a,i)=>a+i.value,0);
+  // Untradeable items are excluded from the value-ranked "keep top 3/4" pool - they
+  // follow their own documented rules (see UNTRADEABLE_BEHAVIOR) rather than competing
+  // by GE value, which they don't meaningfully have.
+  //
+  // Looting bag contents are ALSO excluded from that pool, for a real reason: the bag
+  // itself is never one of your kept items, and its contents are always treated as
+  // unprotected regardless of value (https://oldschool.runescape.wiki/w/Items_Kept_on_Death
+  // - "Looting bag, and its contents are treated as unprotected items"). They're folded
+  // into whatever "lost" bucket each scenario computes. For Blessed Status specifically,
+  // they represent "items obtained after entering the Wilderness" at a different rate.
+  const untradeableItems = items.filter(i => i.untradeable && i.kind !== 'charge');
+  // Charges are pulled out of the ranked pool entirely: they can never be kept, never
+  // reach a gravestone, and never qualify for a reclaim fee, so ranking them against
+  // real items would be wrong. Their value is applied to every scenario at the end.
+  const chargeItems = items.filter(i => i.kind === 'charge');
+  const chargeLoss = chargeItems.reduce((a,i)=>a+i.value,0);
+  const sortedDesc = items.filter(i => !i.untradeable && i.kind !== 'lootbag' && i.kind !== 'charge').sort((a,b)=>b.value-a.value);
+  const lootbagSorted = items.filter(i => !i.untradeable && i.kind === 'lootbag').sort((a,b)=>b.value-a.value);
+
+  function keepTopN(n){
+    const kept = sortedDesc.slice(0, n);
+    const keptValue = kept.reduce((a,i)=>a+i.value,0);
+    const nonLootbagTotal = sortedDesc.reduce((a,i)=>a+i.value,0);
+    const lootbagTotal = lootbagSorted.reduce((a,i)=>a+i.value,0);
+    return { keptCount: kept.length, keptValue, lostValue: (nonLootbagTotal - keptValue) + lootbagTotal };
+  }
+
+  const blessedRate = blessedZone === 'shallow' ? 0.01 : 0.05;
+
+  const gravestoneItemFee = (value) => {
+    if(value >= 10000000) return 100000;
+    if(value >= 1000000) return 10000;
+    if(value >= 100000) return 1000;
+    return 0;
+  };
+  // Bracket/threshold checks use PER-UNIT value, not a stack's total value - a stack
+  // of 100 items worth 38,534 each is 100 individual sub-100k items, not one 3.85m
+  // item. Amulet of glory (6) is the one documented exception to this (its own
+  // dedicated 10% per-amulet fee when 10+ are stored); everything else is individual.
+  const feeGravestoneTiered = (lostItems) => Math.min(lostItems.reduce((a,i)=>a + gravestoneItemFee(i.unitPrice) * i.qty, 0), 500000);
+  const feeDeathsOffice = (lostSet) => lostSet.reduce((a,i)=> a + (i.unitPrice>=100000 ? Math.round(i.value*0.05) : 0), 0);
+
+  // Builds a per-item ranked table for the "Show item breakdown" dropdown on every
+  // scenario row. sortedDesc order is preserved (most valuable first), untradeable
+  // items are appended at the end with their own documented behaviour instead of a
+  // GE-value-based fee, since that's how they actually work.
+  function describeItem(item, kept, mode, opts){
+    let status, cost;
+    if(kept){
+      status = 'Kept'; cost = 0;
+    } else if(mode === 'gravestone'){
+      cost = Math.round(gravestoneItemFee(item.unitPrice) * item.qty * (opts.ironman ? 0.5 : 1));
+      status = cost > 0 ? 'Gravestoned - tiered fee applies' : 'Gravestoned - free';
+    } else if(mode === 'office'){
+      const pct = 5 * (opts.ironman ? 0.5 : 1);
+      cost = item.unitPrice>=100000 ? Math.round(item.value*(pct/100)) : 0;
+      status = cost > 0 ? `Death's Office - ${pct}% fee` : "Death's Office - free";
+    } else if(mode === 'discounted'){
+      const pct = opts.rate * 100 * (opts.ironman ? 0.5 : 1);
+      cost = item.unitPrice>=100000 ? Math.round(item.value*(pct/100)) : 0;
+      status = cost > 0 ? `Discounted Office - ${pct}% fee` : 'Discounted Office - free';
+    } else if(mode === 'deathbank'){
+      cost = null;
+      status = 'In retrieval chest (shared flat fee, see above)';
+    } else if(mode === 'keep-all'){
+      cost = 0;
+      status = 'Kept (fee applies to total, see above)';
+    } else if(mode === 'full-loss-pvp'){
+      cost = item.value;
+      status = 'Lost to killer';
+    } else if(mode === 'full-loss-pvm'){
+      cost = item.value;
+      status = 'Lost';
+    } else {
+      cost = 0; status = 'Kept';
+    }
+    return { name: item.kind==='lootbag' ? item.name + ' (looting bag)' : item.name, value:item.value, status, cost };
+  }
+
+  function buildBreakdown(keptCount, mode, opts={}){
+    const rows = sortedDesc.map((item, idx) => describeItem(item, idx < keptCount, mode, opts));
+    // Looting bag contents are never kept - they're always in the unprotected/lost
+    // bucket, processed with the same scenario formula as everything else here.
+    lootbagSorted.forEach(item => rows.push(describeItem(item, false, mode, opts)));
+    untradeableItems.forEach(item => {
+      if(ALWAYS_LOST_ITEMS.has(item.name)){
+        rows.push({ name:item.name, value:0, status:'Always lost - not saved by Protect Item or any recovery method, in any scenario', cost:0 });
+        return;
+      }
+      if(mode === 'keep-all'){
+        rows.push({ name:item.name, value:0, status:'Kept (fee applies to total, see above)', cost:0 });
+        return;
+      }
+      const behavior = UNTRADEABLE_BEHAVIOR[item.name];
+      const context = (mode==='full-loss-pvp' || mode==='full-loss-pvm') ? 'wildy' : 'pvm';
+      const text = behavior ? behavior[context] : (context==='wildy' ? 'Lost (no GE value)' : 'Gravestoned (no GE value)');
+      rows.push({ name:item.name, value:0, status:text, cost:0 });
+    });
+    return rows;
+  }
+
+  const scenarios = [];
+
+  // 1. PvM Death: Gravestone
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
+    scenarios.push({
+      id:'gravestone', name:'PvM Death: Gravestone', concept:false,
+      keptLabel:`${k.keptCount} items`, fee,
+      note:`Everything not in your top-3 (or 4 w/ Protect Item) goes to a gravestone for 15 minutes. Reclaim fee is flat per item by value bracket, capped at 500,000 total:<br>` +
+        `&bull; Under 100k: free<br>` +
+        `&bull; 100k - 1m: 1,000 per item<br>` +
+        `&bull; 1m - 10m: 10,000 per item<br>` +
+        `&bull; 10m+: 100,000 per item<br>` +
+        `Brackets are per-unit, not per-stack: a stack of 100 items each worth 38,534 is 100 separate sub-100k items (free), not one 3.85m item - unlike Amulet of glory (6), which has its own documented per-amulet exception fee.<br>` +
+        `${ironman ? 'Ironman 50% discount applied.' : '(Ironmen get a 50% discount - toggle it on above.)'} Food/potions are deleted, not gravestoned.<br>` +
+        `<b>Chambers of Xeric</b> and <b>Tombs of Amascut</b> (on a full team wipe with a limited-attempt invocation exhausted) both use this same gravestone pricing - neither has a bespoke formula of its own. CoX has no dedicated retrieval chest at all, and the wiki describes ToA's fee as "the same as dying under normal circumstances," capped at 500,000 either way.` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'gravestone', {ironman})
+    });
+  }
+
+  // 2. PvM Death: Death's Office
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const fee = Math.round(feeDeathsOffice(lostItems) * (ironman ? 0.5 : 1));
+    scenarios.push({
+      id:'deaths-office', name:"PvM Death: Death's Office", concept:false,
+      keptLabel:`${k.keptCount} items`, fee,
+      note:`Missed the 15-minute gravestone window. 5% fee on each unkept item worth 100k+, free under 100k.<br>${ironman ? 'Ironman 50% discount applied (2.5% effective).' : '(Ironmen get a 50% discount - toggle it on above.)'}` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'office', {ironman})
+    });
+  }
+
+  // 3. PvM Death: Discounted Death's Office (DT2 bosses / Doom of Mokhaiotl / Fortis Colosseum / Yama)
+  // Not a deathbank - standard Death's Office fee structure, just discounted 75% until a
+  // per-activity threshold, per https://oldschool.runescape.wiki/w/Items_Kept_on_Death#Discounted_deaths
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const activity = DISCOUNTED_ACTIVITIES.find(a => a.name === discountedActivityChoice) || DISCOUNTED_ACTIVITIES[0];
+    const rate = discountThresholdMet ? 0.05 : 0.0125; // 5% standard, or 25% of that while discounted
+    const fee = Math.round(lostItems.reduce((a,i)=> a + (i.unitPrice>=100000 ? Math.round(i.value*rate) : 0), 0) * (ironman ? 0.5 : 1));
+    scenarios.push({
+      id:'discounted-office', name:"PvM Death: Discounted Death's Office", concept:false,
+      keptLabel:`${k.keptCount} items`, fee,
+      isDiscountedRow:true, discountedActivity:activity,
+      note:`${activity.name}${activity.detail ? ' ('+activity.detail+')' : ''}<br>` +
+        `Still the standard Death's Office rule (5% fee on unkept items worth 100k+), but charged at 25% of that rate (1.25%) until <b>${activity.thresholdLabel}</b>, after which the full rate applies.<br>` +
+        `This is a temporary discount, not a dedicated deathbank chest.${ironman ? '<br>Ironman 50% discount applied on top.' : ''}` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'discounted', {ironman, rate})
+    });
+  }
+
+  // 4. PvM Death: Deathbanks (bosses) - real "Item Retrieval Service" data,
+  // https://oldschool.runescape.wiki/w/Item_Retrieval_Service. Dying at one of these
+  // bosses keeps your top-3/4 items same as any PvM death, but everything else goes
+  // straight into an on-site chest/NPC instead of a gravestone, for a flat fee (not
+  // a percentage of value) that varies per boss.
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    const boss = DEATHBANKS.find(b => b.name === deathbankChoice) || DEATHBANKS[0];
+
+    let fee = boss.fee;
+    let extraNote = '';
+    if(boss.variant === 'zulrah'){
+      fee = zulrah50kc ? 100000 : 0;
+      extraNote = zulrah50kc
+        ? " You've selected 50+ Zulrah KC, so Priestess Zul-Gwenwynig charges her standard fee."
+        : " Free under 50 Zulrah KC (and always free for Ultimate Ironmen), so no charge here.";
+    } else if(boss.variant === 'volcanic'){
+      fee = null;
+      extraNote = " Paid in 150 Numulite, an untradeable currency with no GE price, not GP.";
+    }
+
+    scenarios.push({
+      id:'deathbanks', name:'PvM Death: Deathbanks (bosses)', concept:false,
+      keptLabel:`${k.keptCount} items`, fee,
+      isDeathbankRow:true, deathbankBoss: boss,
+      note:`Deathbank at <b>${boss.name}</b> (${boss.point}).<br>` +
+        `${extraNote.trim()}<br>` +
+        `This is a flat activity fee to retrieve everything outside your top-3/4, not a percentage of item value like Death's Office.<br>` +
+        `Full official list: <a href="https://oldschool.runescape.wiki/w/Item_Retrieval_Service" target="_blank" rel="noopener">Item Retrieval Service</a>.` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'deathbank')
+    });
+  }
+
+  // 5. PvM Wilderness Death: Neutral
+  // CORRECTED: below level 20 this is just a normal death (gravestone, tiered fee).
+  // Above level 20 you still get a gravestone for tradeables - only unprotected
+  // untradeables get converted to a coin fraction instead. Full loss only happens if
+  // you're killed by another PLAYER, or specifically inside the Revenant Caves (which
+  // treats any death there, even to a monster, as a PvP-style loss). See
+  // https://oldschool.runescape.wiki/w/Items_Kept_on_Death#Player_versus_Monster_death_inside_the_Wilderness
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
+    scenarios.push({
+      id:'pvm-wildy-neutral', name:'PvM Wilderness Death: Neutral Status', concept:false,
+      keptLabel:`${k.keptCount} items`, fee,
+      note:`Unskulled death to a monster in the Wilderness is mechanically a normal death: you still get a gravestone and pay the same tiered fee as anywhere else (see Gravestone row).<br>` +
+        `Above level 20 Wilderness, unprotected untradeables get converted to a coin fraction instead of being graved directly, but tradeables are unaffected.<br>` +
+        `Exception: dying inside the <b>Revenant Caves</b> without player damage is treated as a full PvP-style loss instead - see the PvP Wilderness rows.` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'gravestone', {ironman})
+    });
+  }
+
+  // 6. PvM Wilderness Death: Skulled
+  // CORRECTED: skull status only reduces how many items you keep (0, or 1 with Protect
+  // Item) - it does not by itself cause full loss. If a MONSTER kills you, the rest
+  // still goes to a gravestone with the normal tiered fee, same as the Neutral row.
+  {
+    const n = protectItem ? 1 : 0;
+    const k = keepTopN(n);
+    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
+    scenarios.push({
+      id:'pvm-wildy-skull', name:'PvM Wilderness Death: Skulled', concept:false,
+      keptLabel:`${k.keptCount} item${k.keptCount===1?'':'s'}`, fee,
+      note:`Skulled (voluntary or by attacking) but still killed by a monster, not a player. Skull only cuts your kept-item count to 0 (or 1 w/ Protect Item) - the rest still goes to a gravestone with the normal tiered fee, same math as the Gravestone row.<br>` +
+        `Exception: the <b>Revenant Caves</b> treat any death there as a full PvP-style loss regardless of skull status.` + untradeableNote(untradeableItems, 'pvm'),
+      breakdown: buildBreakdown(n, 'gravestone', {ironman})
+    });
+  }
+
+  // 7. PvP Wilderness Death: Beginner's Blessing (concept)
+  {
+    const anyTooHighLevel = Object.entries(PRESETS[currentPreset].equipment)
+      .some(([slot, name]) => (EQUIPMENT_LEVEL_REQ[name] || 0) >= 40);
+    if(anyTooHighLevel){
+      scenarios.push({
+        id:'beginners-blessing', name:"PvP Wilderness Death: Beginner's Blessing", concept:true,
+        keptLabel:'N/A', feeText:'Prevents Entry to Wilderness',
+        note:"Chdata design concept. Requires every equipped item to be under level 40 (and no combat level above 39) - this loadout carries at least one item at or above that requirement, so you'd be blocked from entering the Wilderness at all rather than paying a fee.<br><br>" +
+          "On PvM deaths, this system uses Gravestones instead."
+      });
+    } else {
+      const fee = Math.round(total * 0.01);
+      scenarios.push({
+        id:'beginners-blessing', name:"PvP Wilderness Death: Beginner's Blessing", concept:true,
+        keptLabel:'All items', fee,
+        note:"Chdata design concept. 1% Death's Office-style fee, no 100k minimum. This loadout qualifies (every equipped item is under level 40).<br><br>" +
+          "On PvM deaths, this system uses Gravestones instead.",
+        breakdown: buildBreakdown(sortedDesc.length, 'keep-all')
+      });
+    }
+  }
+
+  // 8. PvP Wilderness Death: Blessed Status (concept)
+  // Corrected mechanic per Chdata: everything counts as lost unless Protect Item is
+  // active, which saves exactly ONE item (the single most valuable one) from incurring
+  // any fee at all. Everything else pays a fee based on when you got it:
+  //   - Items brought into the Wilderness (equipment + normal inventory): 5%, or 1% at
+  //     or below level 10 Wilderness.
+  //   - Items obtained after entering the Wilderness (looting bag contents): 25%, no
+  //     shallow-wildy discount.
+  // Total fee floors at 100,000 (the activation cost), paid to the killer via a
+  // Blessed Key.
+  {
+    const combined = [...sortedDesc.map(i=>({...i, bucket:'broughtin'})), ...lootbagSorted.map(i=>({...i, bucket:'lootbag'}))]
+      .sort((a,b)=>b.value-a.value);
+    // 'top3' mirrors Neutral Status: the 3 most valuable items (4 with Protect Item) are
+    // shielded outright, whole stacks included, exactly like items you'd keep on a
+    // normal Wilderness death. Only brought-in items qualify - looting bag contents are
+    // never kept in any scenario.
+    const topProtected = new Set();
+    if(blessedProtect === 'top3'){
+      combined.filter(i => i.bucket === 'broughtin')
+        .slice(0, protectItem ? 4 : 3)
+        .forEach(i => topProtected.add(i));
+    }
+
+    // Protect Item saves exactly one physical item, so it has to compare per-unit
+    // value, not a stack's total value - otherwise a big noted stack (worth more in
+    // total than any single equipped item) would incorrectly "win" the protection.
+    // In 'top3' mode the Protect Item slot is already folded into the 4-item count above,
+    // so there's no separate single-item saver.
+    const protectedItem = (protectItem && blessedProtect === 'none')
+      ? combined.reduce((best, item) => (item.unitPrice > (best ? best.unitPrice : -1) ? item : best), null)
+      : null;
+
+    // Protect Item only ever shields ONE physical item, even if the most valuable
+    // "item" on the list is actually a stack (e.g. 100 noted rune platebodies sitting
+    // in one inventory slot). It saves one unit's worth, not the whole stack's value -
+    // the remaining units in that stack still pay the normal fee rate.
+    function feeableValue(item){
+      if(topProtected.has(item)) return 0;
+      if(protectedItem && item === protectedItem){
+        return Math.max(0, item.value - item.unitPrice);
+      }
+      return item.value;
+    }
+
+    let broughtInFeeRaw = 0, lootbagFee = 0;
+    combined.forEach(item => {
+      const rate = item.bucket==='broughtin' ? blessedRate : 0.25;
+      const cost = Math.round(feeableValue(item) * rate);
+      if(item.bucket === 'broughtin') broughtInFeeRaw += cost;
+      else lootbagFee += cost;
+    });
+    // Three separate buckets, per Chdata:
+    //  - Minimum risk: a flat 100,000 (the activation cost), always present.
+    //  - 5%/1% brought-in fee: only the portion ABOVE the 100k minimum shows here,
+    //    since the minimum risk already covers up to 100k of it. If the raw 5% fee is
+    //    under 100k, this bucket shows 0 and the note says how much of it the minimum
+    //    risk absorbed instead.
+    //  - 25% looting bag fee: uncapped, no minimum, shown in full.
+    // The 100,000 minimum risk is a shared pool, not a per-bucket floor: it covers the
+    // 5%/1% fee first, and if there's any minimum-risk capacity left over after that,
+    // it spills over to cover part of the 25% looting-bag fee too. Example: a 75,000
+    // brought-in fee uses 75,000 of the 100,000 minimum, leaving 25,000 of capacity to
+    // absorb the first 25,000 of the looting-bag fee - so a 500,000 looting-bag fee
+    // would display as 475,000 (the remaining, uncovered part).
+    const MINIMUM_RISK = 100000;
+    const coveredByMin5 = Math.min(broughtInFeeRaw, MINIMUM_RISK);
+    const remainingMinCapacity = MINIMUM_RISK - coveredByMin5;
+    const coveredByMin25 = Math.min(lootbagFee, remainingMinCapacity);
+    const broughtInDisplay = broughtInFeeRaw - coveredByMin5;
+    const lootbagDisplay = lootbagFee - coveredByMin25;
+    const fee = MINIMUM_RISK + broughtInDisplay + lootbagDisplay;
+
+    const blessedBreakdown = combined.map(item => {
+      const label = item.bucket==='lootbag' ? item.name + ' (looting bag)' : item.name;
+      const rate = item.bucket==='broughtin' ? blessedRate : 0.25;
+      const rateLabel = item.bucket==='broughtin' ? `${rate*100}% fee (brought into Wilderness)` : '25% fee (obtained after entering Wilderness)';
+      const isProtectedStack = protectedItem && item === protectedItem;
+
+      if(topProtected.has(item)){
+        return { name:label, value:item.value, status:'Kept - among your protected top items, no fee', cost:0 };
+      }
+      if(!isProtectedStack){
+        return { name:label, value:item.value, status:`Lost, but reclaimable - ${rateLabel}`, cost: Math.round(item.value*rate) };
+      }
+      if(item.qty > 1){
+        // A protected stack: 1 unit is fully saved, the rest of the stack still pays.
+        const remainder = feeableValue(item);
+        const cost = Math.round(remainder * rate);
+        return {
+          name: label, value: item.value,
+          status: `Protect Item saves 1 unit (worth ${fmtGp(item.unitPrice)}) - the other ${item.qty - 1} still pay ${rateLabel}`,
+          cost
+        };
+      }
+      return { name:label, value:item.value, status:'Kept - Protect Item negates its fee', cost:0 };
+    });
+    // Untradeable items carried in equipment/inventory (not the looting bag) count as
+    // "brought into the Wilderness" for Blessed Status - they just contribute 0 gp to
+    // that bucket's fee since they have no GE value. Items in ALWAYS_LOST_ITEMS are a
+    // separate case: they're categorically unsavable by any method (per the wiki's own
+    // "regardless of ... Protect Item" wording), so Blessed Status can't keep them
+    // either - they're just always lost, not part of the fee/kept accounting at all.
+    untradeableItems.forEach(item => {
+      if(ALWAYS_LOST_ITEMS.has(item.name)){
+        blessedBreakdown.push({ name:item.name, value:0, status:'Always lost - not saved by Blessed Status or any other method', cost:0 });
+        return;
+      }
+      blessedBreakdown.push({ name:item.name, value:0, status:`Lost, but reclaimable - ${blessedRate*100}% fee (brought into Wilderness, 0 gp base so no real cost)`, cost:0 });
+    });
+
+    scenarios.push({
+      id:'blessed-status', name:'PvP Wilderness Death: Blessed Status', concept:true,
+      keptLabel: blessedProtect === 'top3'
+        ? `${protectItem ? 4 : 3} items (rest reclaimable for a fee)`
+        : (protectItem ? '1 item (rest reclaimable for a fee)' : 'All reclaimable for a fee'),
+      fee,
+      feeLines: [
+        { label:'Total', amount: fee, isTotal: true },
+        { label:'Minimum risk', amount: MINIMUM_RISK },
+        { label:`${blessedRate*100}% fee (brought in)`, amount: broughtInDisplay, note: coveredByMin5 > 0 ? `${fmtGp(coveredByMin5)} covered by minimum risk` : null },
+        { label:'25% fee (looting bag)', amount: lootbagDisplay, note: coveredByMin25 > 0 ? `${fmtGp(coveredByMin25)} covered by minimum risk` : null }
+      ],
+      note:(blessedProtect === 'top3'
+          ? `Chdata design concept, mirroring Neutral Status: your <b>${protectItem ? 4 : 3}</b> most valuable brought-in items pay no fee at all, whole stacks included. Everything below them counts as lost but reclaimable.<br>`
+          : `Chdata design concept. All items count as lost unless Protect Item is active, which saves exactly 1 item (your most valuable) from incurring any fee - if that item is actually a stack (e.g. noted platebodies), only 1 unit out of the stack is saved, not the whole stack's value.<br>`) +
+        `Everything else pays a fee based on when you got it: <b>${blessedRate*100}%</b> on items brought into the Wilderness (equipment + normal inventory), or <b>25%</b> on items obtained after entering (looting bag contents).<br>` +
+        `The 100,000 minimum risk is a shared pool: it covers the brought-in fee first, and any leftover capacity spills over to cover part of the looting-bag fee too (see the Fee/Loss column for the breakdown).<br>` +
+        `Paid to your killer via a Blessed Key.<br><br>` +
+        `On PvM deaths, this system uses Gravestones instead.`,
+      breakdown: blessedBreakdown
+    });
+  }
+
+  // 9. PvP Wilderness Death: Neutral
+  {
+    const n = protectItem ? 4 : 3;
+    const k = keepTopN(n);
+    scenarios.push({
+      id:'pvp-wildy-neutral', name:'PvP Wilderness Death: Neutral Status', concept:false,
+      keptLabel:`${k.keptCount} items`, fee:k.lostValue,
+      note:'Unskulled, but killed by another player. No gravestone - everything outside your top-3 (or 4 w/ Protect Item) drops for the killer, visible only to them for 1 minute, then to everyone for the next 59.' + untradeableNote(untradeableItems, 'wildy'),
+      breakdown: buildBreakdown(n, 'full-loss-pvp')
+    });
+  }
+
+  // 10. PvP Wilderness Death: Skulled
+  {
+    const n = protectItem ? 1 : 0;
+    const k = keepTopN(n);
+    scenarios.push({
+      id:'pvp-wildy-skull', name:'PvP Wilderness Death: Skulled', concept:false,
+      keptLabel:`${k.keptCount} item${k.keptCount===1?'':'s'}`, fee:k.lostValue,
+      note:'Skulled and killed by another player. Same 0/1-item rule as PvM skulled death, but the loot goes straight to your killer.' + untradeableNote(untradeableItems, 'wildy'),
+      breakdown: buildBreakdown(n, 'full-loss-pvp')
+    });
+  }
+
+  // 11. High-Risk World Death: High-Risk Skull
+  {
+    scenarios.push({
+      id:'high-risk', name:'PvP High-Risk World Death: High-Risk Skull', concept:false,
+      keptLabel:'0 items', fee:total,
+      note:'High-Risk Worlds: Protect Item cannot even be activated. Every single item is lost on death, including items normally always kept.' + untradeableNote(untradeableItems, 'wildy'),
+      forceNoProtect:true,
+      breakdown: buildBreakdown(0, 'full-loss-pvm')
+    });
+  }
+
+  // Charges are destroyed on every kind of death, so once each scenario has computed
+  // its own fee we add their full value on top as a flat, unavoidable loss. This runs
+  // last so it lands on every row - including Beginner's Blessing (keeps everything,
+  // but the ether still burns) and Blessed Status (no fee, it's simply gone).
+  if(chargeLoss > 0){
+    scenarios.forEach(s => {
+      if(typeof s.fee === 'number'){
+        s.fee += chargeLoss;
+        if(s.feeLines){
+          s.feeLines.push({ label:'Charges destroyed', amount: chargeLoss });
+          const totalLine = s.feeLines.find(l => l.isTotal);
+          if(totalLine) totalLine.amount = s.fee;
+        }
+      }
+      if(s.breakdown){
+        chargeItems.forEach(c => s.breakdown.push({
+          name: `${c.name} (${c.qty.toLocaleString('en-US')}, in ${c.inside})`,
+          value: c.value,
+          status: 'Destroyed on death - no gravestone, no reclaim fee, not saved by Protect Item or Blessed Status',
+          cost: c.value
+        }));
+      }
+      s.note += CHARGE_NOTE;
+    });
+  }
+
+  return { total, scenarios };
+}
+
+function riskColor(fee, total){
+  if(total<=0) return 'var(--grey)';
+  const pct = fee/total;
+  if(pct < 0.05) return 'var(--green)';
+  if(pct < 0.4) return 'var(--blue)';
+  return 'var(--red)';
+}
+
+// The short list that sits under the Grand total: scenario name and its number, nothing
+// else. Order is fixed here rather than following scenario order in calcRisk().
+const QUICK_RISK_IDS = [
+  'gravestone',
+  'deaths-office',
+  'blessed-status',
+  'pvp-wildy-neutral',
+  'pvp-wildy-skull',
+  'high-risk'
+];
+
+// Formats a ratio as a whole percent, keeping tiny-but-nonzero values visible.
+function pctLabel(part, whole){
+  if(!(whole > 0) || part === null || part === undefined) return '--';
+  const pct = part / whole * 100;
+  if(pct > 0 && pct < 1) return '<1%';
+  return Math.round(pct) + '%';
+}
+
+function renderQuickRisk(result){
+  const box = document.getElementById('quickRisk');
+  box.innerHTML = '';
+  if(!result) return;
+  const { total, scenarios } = result;
+
+  // Everything is also expressed relative to a normal PvM death, so Death's Office is
+  // the 100% baseline for the second column.
+  const officeRow = scenarios.find(x => x.id === 'deaths-office');
+  const officeFee = officeRow && typeof officeRow.fee === 'number' ? officeRow.fee : 0;
+
+  QUICK_RISK_IDS.forEach(id => {
+    const s = scenarios.find(x => x.id === id);
+    if(!s) return;
+    const hasFee = s.fee !== null && s.fee !== undefined;
+    // Blessed Status is the concept this page is arguing for, so its name is picked out
+    // in gold in the summary list.
+    const name = s.id === 'blessed-status'
+      ? s.name.replace('Blessed Status', '<span class="qr-hl">Blessed Status</span>')
+      : s.name;
+    // Share of the loadout's grand total, and the same cost measured against a normal
+    // PvM (Death's Office) death.
+    const pctText = hasFee ? pctLabel(s.fee, total) : '--';
+    const vsPvmText = hasFee ? pctLabel(s.fee, officeFee) : '--';
+    const line = document.createElement('div');
+    line.className = 'qr-line';
+    line.innerHTML =
+      `<div class="qr-row">` +
+        `<span class="qr-name">${name}</span>` +
+        `<span class="qr-value" style="color:${hasFee ? riskColor(s.fee, total) : 'var(--text-muted)'}">` +
+        `${hasFee ? fmtGp(s.fee) : (s.feeText || 'Varies')}</span>` +
+      `</div>` +
+      `<span class="qr-pct">${pctText}</span>` +
+      `<span class="qr-pct">${vsPvmText}</span>`;
+    box.appendChild(line);
+  });
+}
+
+function renderRiskTable(items){
+  const body = document.getElementById('riskBody');
+  body.innerHTML = '';
+  const result = calcRisk(items);
+  renderQuickRisk(result);
+  if(!result){
+    body.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted)">Waiting on live prices to finish loading before risk can be calculated&hellip;</td></tr>';
+    return;
+  }
+  const { total, scenarios } = result;
+  scenarios.forEach(s => {
+    const tr = document.createElement('tr');
+    if(s.concept) tr.classList.add('concept');
+    const hasFee = s.fee !== null && s.fee !== undefined;
+    const color = hasFee ? riskColor(s.fee, total) : 'var(--text-muted)';
+    const barWidth = hasFee && total ? Math.min(100, s.fee/total*100) : 0;
+
+    const picker = s.isDeathbankRow ? `
+      <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <select data-role="deathbank-boss" style="padding:5px 8px; font-size:12.5px;">
+          ${DEATHBANKS.map(b => `<option value="${b.name}" ${b.name===deathbankChoice?'selected':''}>${b.name}</option>`).join('')}
+        </select>
+        ${s.deathbankBoss.variant === 'zulrah' ? `
+          <label style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" data-role="zulrah-kc" ${zulrah50kc?'checked':''}> 50+ Zulrah KC
+          </label>` : ''}
+      </div>` : (s.isDiscountedRow ? `
+      <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <select data-role="discount-activity" style="padding:5px 8px; font-size:12.5px;">
+          ${DISCOUNTED_ACTIVITIES.map(a => `<option value="${a.name}" ${a.name===discountedActivityChoice?'selected':''}>${a.name}</option>`).join('')}
+        </select>
+        <label style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:5px;">
+          <input type="checkbox" data-role="discount-threshold" ${discountThresholdMet?'checked':''}> Threshold already met (full 5% rate)
+        </label>
+      </div>` : '');
+
+    tr.innerHTML = `
+      <td>
+        <span class="scenario-name">${s.name}</span>
+      </td>
+      <td>${s.keptLabel}${s.forceNoProtect && protectItem ? '<div class="note">Protect Item has no effect here</div>' : ''}</td>
+      <td class="amount" style="color:${color}">${
+        s.feeLines
+          ? s.feeLines.map((l, idx) => `<div style="margin-bottom:3px; ${l.isTotal ? 'font-size:15px;' : ''} ${idx===1 ? 'margin-top:8px; padding-top:6px; border-top:1px dashed var(--border-stone);' : ''}">${l.label}: <b>${fmtGp(l.amount)}</b>${l.note ? `<div class="note" style="margin:0; font-size:10.5px;">${l.note}</div>` : ''}</div>`).join('')
+          : (s.feeText ? s.feeText : (hasFee ? fmtGp(s.fee) : 'Varies'))
+      }</td>
+      <td>
+        <div class="note">${s.note}</div>
+        ${s.warn ? `<div class="badge-warn">${s.warn}</div>` : ''}
+        <div class="bar-track"><div class="bar-fill" style="width:${barWidth}%; background:${color}"></div></div>
+        ${picker}
+        ${s.breakdown ? `
+        <details class="item-breakdown">
+          <summary>Show item breakdown (${s.breakdown.length} item${s.breakdown.length===1?'':'s'}, most valuable first)</summary>
+          <table class="breakdown-table">
+            <thead><tr><th>Item</th><th>Value</th><th>Fate</th></tr></thead>
+            <tbody>
+              ${s.breakdown.map(row => `
+                <tr>
+                  <td>${row.name}</td>
+                  <td class="amount">${fmtGp(row.value)}</td>
+                  <td>${row.status}${row.cost !== null && row.cost > 0 ? ` <span class="amount" style="color:var(--red)">(${fmtGp(row.cost)})</span>` : ''}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </details>` : ''}
+      </td>
+    `;
+    body.appendChild(tr);
+
+    if(s.isDeathbankRow){
+      const sel = tr.querySelector('[data-role="deathbank-boss"]');
+      if(sel) sel.addEventListener('change', () => { deathbankChoice = sel.value; render(); });
+      const zulrahCb = tr.querySelector('[data-role="zulrah-kc"]');
+      if(zulrahCb) zulrahCb.addEventListener('change', () => { zulrah50kc = zulrahCb.checked; render(); });
+    }
+    if(s.isDiscountedRow){
+      const sel = tr.querySelector('[data-role="discount-activity"]');
+      if(sel) sel.addEventListener('change', () => { discountedActivityChoice = sel.value; render(); });
+      const cb = tr.querySelector('[data-role="discount-threshold"]');
+      if(cb) cb.addEventListener('change', () => { discountThresholdMet = cb.checked; render(); });
+    }
+  });
+}
+
+/* ---------------------------------------------------------------
+   MAIN RENDER
+--------------------------------------------------------------- */
+function render(){
+  const preset = PRESETS[currentPreset];
+  const items = buildItemList(preset);
+  renderDoll(preset, items);
+  renderItemGrid(items, 'inventory', 'inv', 'inventoryOverflowNote', 'inventory');
+  renderItemGrid(items, 'lootbag', 'lootbag', 'lootbagOverflowNote', 'looting bag');
+  // visibility rather than display: the line keeps its space either way, so toggling the
+  // looting bag doesn't shift everything below it.
+  document.getElementById('lootbagDisabledNote').style.visibility = lootingBagEnabled ? 'hidden' : 'visible';
+  renderTotals(items);
+  renderRiskTable(items);
+}
+
+/* ---------------------------------------------------------------
+   INIT / EVENTS
+--------------------------------------------------------------- */
+// Wires up one single-select option list. Lists sharing a groupKey are duplicates of
+// the same control shown in more than one place, so picking a value in either one
+// updates the checked radio and .sel highlight in all of them. The radio `name`
+// attributes must still differ per copy, or the browser would treat them as one radio
+// group and uncheck the other copy instead of mirroring it.
+const OPTION_GROUPS = {};
+
+function wireOptionList(containerId, groupKey, onPick){
+  const box = document.getElementById(containerId);
+  if(!box) return;
+  const group = (OPTION_GROUPS[groupKey] = OPTION_GROUPS[groupKey] || []);
+  group.push(box);
+
+  box.addEventListener('change', e => {
+    setOptionGroup(groupKey, e.target.value);
+    onPick(e.target.value);
+    render();
+  });
+
+  const checked = box.querySelector('input:checked');
+  if(checked) setOptionGroup(groupKey, checked.value);
+}
+
+// Lets a toggle button drive an option list that lives elsewhere on the page.
+function setOptionGroup(groupKey, value){
+  (OPTION_GROUPS[groupKey] || []).forEach(b => b.querySelectorAll('.opt').forEach(opt => {
+    const input = opt.querySelector('input');
+    input.checked = (input.value === value);
+    opt.classList.toggle('sel', input.checked);
+  }));
+}
+
+// Same idea for the Protect Item button: every copy shows and toggles one state.
+const protectButtons = [];
+
+function syncProtectButtons(){
+  protectButtons.forEach(btn => {
+    btn.classList.toggle('on', protectItem);
+    btn.querySelector('.state').textContent = protectItem ? 'ON' : 'OFF';
+  });
+}
+
+function wireProtectButton(btnId){
+  const btn = document.getElementById(btnId);
+  if(!btn) return;
+  btn.querySelector('.protect-icon').src = PROTECT_ITEM_ICON;
+  protectButtons.push(btn);
+  btn.addEventListener('click', () => {
+    protectItem = !protectItem;
+    syncProtectButtons();
+    render();
+  });
+}
+
+// Looting bag toggle button - mirrors the radio list in the settings panel.
+const lootbagButtons = [];
+
+function syncLootbagButtons(){
+  lootbagButtons.forEach(btn => {
+    btn.classList.toggle('on', lootingBagEnabled);
+    btn.querySelector('.state').textContent = lootingBagEnabled ? 'Carrying' : 'Not carrying';
+  });
+}
+
+function wireLootbagButton(btnId){
+  const btn = document.getElementById(btnId);
+  if(!btn) return;
+  btn.querySelector('.lootbag-icon').src = iconUrl('Looting bag');
+  lootbagButtons.push(btn);
+  btn.addEventListener('click', () => {
+    lootingBagEnabled = !lootingBagEnabled;
+    setOptionGroup('lootingBag', lootingBagEnabled ? 'yes' : 'no');
+    syncLootbagButtons();
+    render();
+  });
+}
+
+function init(){
+  const presetOptions = document.getElementById('presetOptions');
+  // Split the presets down four columns, so the list grows sideways rather than into
+  // one very tall stack as more loadouts are added.
+  presetOptions.style.setProperty('--preset-rows', Math.ceil(Object.keys(PRESETS).length / 4));
+  Object.entries(PRESETS).forEach(([key, p]) => {
+    const opt = document.createElement('label');
+    opt.className = 'opt';
+    const radio = document.createElement('input');
+    radio.type = 'radio'; radio.name = 'preset'; radio.value = key;
+    radio.checked = (key === currentPreset);
+    opt.appendChild(radio);
+    opt.appendChild(document.createTextNode(p.label));
+    // A preset with a source gets the link OUTSIDE the option box, sitting beside it,
+    // so clicking the link can never be mistaken for selecting the preset.
+    if(p.source){
+      const row = document.createElement('div');
+      row.className = 'opt-row';
+      const link = document.createElement('a');
+      link.className = 'opt-src';
+      link.href = p.source;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'source';
+      row.appendChild(opt);
+      row.appendChild(link);
+      presetOptions.appendChild(row);
+    }else{
+      presetOptions.appendChild(opt);
+    }
+  });
+
+  // Switching preset also applies that loadout's own looting bag default, so a preset
+  // built around carrying one selects itself with the bag already on.
+  wireOptionList('presetOptions', 'preset', v => {
+    currentPreset = v;
+    lootingBagEnabled = !!PRESETS[v].defaultLootingBag;
+    setOptionGroup('lootingBag', lootingBagEnabled ? 'yes' : 'no');
+    syncLootbagButtons();
+    blessedZone = PRESETS[v].defaultBlessedZone || 'deep';
+    setOptionGroup('blessedZone', blessedZone);
+  });
+  wireOptionList('blessedZoneOptions', 'blessedZone', v => { blessedZone = v; });
+  wireOptionList('blessedProtectOptions',  'blessedProtect', v => { blessedProtect = v; });
+  wireOptionList('blessedProtectOptions2', 'blessedProtect', v => { blessedProtect = v; });
+  wireOptionList('ironmanOptions',     'ironman',     v => { ironman = (v === 'ironman'); });
+  wireOptionList('lootingBagOptions',  'lootingBag',  v => {
+    lootingBagEnabled = (v === 'yes');
+    syncLootbagButtons();
+  });
+
+  wireProtectButton('protectBtn');
+  wireProtectButton('protectBtn2');
+  syncProtectButtons();
+
+  wireLootbagButton('lootbagBtn2');
+  syncLootbagButtons();
+
+  loadPrices();
+}
+
+init();
+</script>
+</body>
+</html>
