@@ -1,6 +1,10 @@
 # Full-length source videos used only to cut clips from.
 # The trimmed clips that the site actually embeds ARE committed.
-quotes/545-PoisonedPotionBIGESTProblem.mp4
+quotes/sources/
+
+# Clips cut but not yet embedded anywhere - remove these once the pages use them.
+quotes/Extile-HowToEscape_Clip.mp4
+quotes/Abyss-TankingFullTB_Clip.mp4
 
 # Work in progress / archived section drafts - not ready to publish yet.
 backups/
