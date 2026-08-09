@@ -382,6 +382,12 @@ strong { color: var(--white-rs); }
 .note-box.green strong { color: var(--green-rs); }
 .note-box.red strong   { color: var(--red-rs); }
 .note-box.blue strong  { color: var(--blue-rs); }
+/* strips the frame, keeps the text colours - must follow the colour variants above */
+.note-box.bare {
+  border: none;
+  background: none;
+  padding: 0;
+}
 
 .rs-hr { border: none; border-top: 1px dashed #5a4a2a; margin: 14px 0; }
 
@@ -634,7 +640,7 @@ strong { color: var(--white-rs); }
 
       <p>Following the trend of suggestions to make Wilderness content more <span style="color:#80c0ff;">"optional"</span> and feel less like players are <span style="color:#80c0ff;">"coerced"</span> to engage with the Wilderness, here is my suggestion for how to change the <span style="color:#ccc;">Voidwaker</span>.</p>
 
-      <div class="note-box green"><strong>Don't change the Voidwaker at all.</strong></div>
+      <div class="note-box green bare"><strong>Don't change the Voidwaker at all.</strong></div>
 
       <div class="sec-head">Make a new weapon: Korasi's Sword</div>
 

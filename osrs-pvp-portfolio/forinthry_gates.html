@@ -29,6 +29,7 @@
   --border:    #5a4a2a;
   --gold:      #c89b3c;
   --gold-lt:   #e8c96a;
+  --gold-rich: #ffd24a;
   --green:     #a6cfa6;
   --red:       #ffb7b7;
   --blue:      #80c0ff;
@@ -106,7 +107,7 @@ body {
 .section:last-child { border-bottom: none; }
 
 .sec-head {
-  font-size: 27.0px;
+  font-size: 33.75px;
   color: var(--green);
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000;
   text-align: center;
@@ -135,7 +136,7 @@ p {
 }
 p:last-child { margin-bottom: 0; }
 
-.hl-gold   { color: var(--gold); }
+.hl-gold   { color: var(--gold-rich); }
 .hl-green  { color: var(--green); }
 .hl-red    { color: var(--red); }
 .hl-blue   { color: var(--blue); }
@@ -339,6 +340,36 @@ p:last-child { margin-bottom: 0; }
   margin: 0;
 }
 
+/* ── PROGRESSION LADDER ── */
+.ladder {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  align-items: center;
+  margin: 16px 0;
+}
+.ladder .lad-ic {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 76px;
+  min-height: 32px;
+}
+.ladder .lad-ic img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.ladder .lad-tx {
+  font-size: 18.0px;
+  color: var(--white);
+  padding: 7.5px 0;
+  border-bottom: 1.5px solid rgba(90,74,42,0.25);
+}
+.ladder .lad-tx:last-child { border-bottom: none; }
+
 /* ── NOTE BOX ── */
 .note-box {
   border: 1px solid var(--border);
@@ -354,6 +385,12 @@ p:last-child { margin-bottom: 0; }
 }
 .note-box.green { border-left-color: var(--green); background: rgba(0,192,0,0.06); }
 .note-box.red   { border-left-color: var(--red); background: rgba(204,34,34,0.06); }
+/* strips the frame, keeps the text colours - must follow .green/.red to win the cascade */
+.note-box.bare {
+  border: none;
+  background: none;
+  padding: 0;
+}
 
 /* ── TIERED BLESSED ── */
 .tiers {
@@ -447,7 +484,6 @@ p:last-child { margin-bottom: 0; }
     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAXCAYAAADUUxW8AAAB1ElEQVR42o2TTWsTURiFn/sxH0kmiY2tpgYSDVVBaQQRl4J0peKmy+LGlT/Fv+DOv+CuG/+AG6FRFARTaa2K0AhWkjRfr4vJmEySmfrCLO7ce857zj33hdRSkrar04D3b26mEug05pNel6f3thIJbFLXnOdx1D4m72cS7IjSad5+dzp8bR8vABvVK4ASDUpqaxcSCb4tgFM9h5KT7IRd58BR95zn8THYjEEOzt9ZqkxFsh8MAwD2Bx3W6w0AvreaAKzXGxQOW+z6XQAyjkvzYD+8bdc6MAyBy+rPlw8UjM9Wb2KnB83ZqGaBUceo3EkoZePxY3TKi18tQJSKLmKnWKUvY4YidGXExvW7/8D9z++o2wzXvBz+xVUevd2dBU+z3i5UGAuMEPoypmx8KtajZnye/dybnBW1ENVOsRqTa1DktCGvDO3xIAZcmrOvTGydUdMjz1dvxCJbOhhZPSXIzpGdMb/h9zhfkYfBJXlZvi2z/1Oep6jIkyG0VioUFvbOGEl4dXLEShBwdaMEnxJ0LpN+q3YZx1ocY3GMwTWW1+/3mO+s5oFPilUCbSlqS6AsK9pyThuyjsv24Zv0qAYijEQ4lfEkOk0uk8VbK/2f7OQ04rL/Am5gk+iRY5luAAAAAElFTkSuQmCC" alt="Forinthry Emblem" width="60" height="92" style="image-rendering:pixelated;">
   </div>
   <h1>Forinthry Gates &amp; Artefacts</h1>
-  <p class="tagline">A supplementary proposal that builds on Blessed Status. Consolidate your PvM earnings in the Wilderness without leaving it.</p>
   <div class="hero-divider"></div>
 </div>
 
@@ -456,10 +492,7 @@ p:last-child { margin-bottom: 0; }
 
 <!-- PRECEDES NOTE -->
 <div class="section">
-  <div class="note-box" style="border-left-color:var(--sara);background:rgba(68,136,204,0.07);">
-    <span style="color:var(--sara);font-size:15px;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:9px;">Supplementary Proposal</span>
-    This page describes an extended idea that accompanies Blessed Status. Blessed Status precedes and is independent from this proposal. Forinthry Gates and Artefacts are not required for Blessed Status to work, but they extend the same risk-vs-reward philosophy to non-Blessed players. It is recommended to read the Blessed Status page first.
-  </div>
+  <p>This page describes an extended idea that accompanies Blessed Status. Blessed Status precedes and is independent from this proposal. Forinthry Gates and Artefacts are not required for Blessed Status to work, but they extend the same risk-vs-reward philosophy to non-Blessed players. It is recommended to read the Blessed Status page first.</p>
 
   <p style="font-size:27px;color:var(--red);text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000,2px 2px 0 #000;margin:18px 0 12px;text-align:center;">Read the Blessed Status page first!</p>
 
@@ -467,7 +500,7 @@ p:last-child { margin-bottom: 0; }
     <div>
       <div style="font-size:13px;color:var(--sara);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px;text-shadow:1px 1px 0 #000;">Core Proposal - Read First</div>
       <div style="font-size:22px;color:var(--gold-lt);text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000,2px 2px 0 #000;margin-bottom:6px;">Blessed Status</div>
-      <div style="font-size:16px;color:var(--dim);text-shadow:1px 1px 0 #000;line-height:1.5;">An opt-in overhead status for the Wilderness. Spend 100k GP to keep your items on death, with a 5% fee paid to the PKer who kills you. The proposal that precedes this one.</div>
+      <div style="font-size:19px;color:var(--white);text-shadow:1px 1px 0 #000;line-height:1.5;">An opt-in overhead status for the Wilderness. Spend 100k GP to keep your items on death, with a 5% fee paid to the PKer who kills you. The proposal that precedes this one.</div>
     </div>
     <span style="font-size:22px;color:var(--sara);margin-left:18px;flex-shrink:0;">&#9658;</span>
   </a>
@@ -476,7 +509,6 @@ p:last-child { margin-bottom: 0; }
 <!-- FORINTHRY GATES & ARTEFACTS -->
 <div class="section">
   <div class="sec-head">Forinthry Gates &amp; Forinthry Artefacts</div>
-  <div class="sec-sub">An extended system for non-Blessed players - consolidate your risk without leaving the Wilderness</div>
   <hr class="sec-divider">
 
   <p>The ideas in the Blessed Status proposal focus heavily on Blessed Status players. But the same core problem (<span class="hl-gold">risk not feeling worth the reward</span>, and players worldhopping constantly instead of staying engaged) also affects unskulled and skulled players doing PvM. Forinthry Gates address that without touching Blessed Status at all.</p>
@@ -485,14 +517,14 @@ p:last-child { margin-bottom: 0; }
 
   <figure style="margin:18px auto;text-align:center;max-width:260px;">
     <img src="subassets/ForinthryGate.png" alt="A Forinthry Gate - a tall green stone obelisk with a glowing crystal set into it, standing on a small stone base" style="max-width:240px;width:100%;height:auto;border:1px solid var(--border);border-radius:4px;" loading="lazy">
-    <figcaption style="margin-top:8px;font-size:14px;color:var(--dim);">What a Forinthry Gate looks like - a stone obelisk you interact with out in the Wilderness.</figcaption>
+    <figcaption style="margin-top:8px;font-size:19px;color:var(--white);">A Forinthry Gate.</figcaption>
   </figure>
 
-  <div class="note-box">
+  <div class="note-box bare">
     <span class="hl-green">You cannot obtain Forinthry Artefacts while using Blessed Status.</span> Forinthry Artefacts are explicitly a tool for unskulled and skulled players, continuing the pattern that higher risk options reward players proportionally more.
   </div>
 
-  <div class="sec-head" style="font-size:24px;margin-top:21px;">How Forinthry Gates Work</div>
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">How Forinthry Gates Work</div>
   <hr class="sec-divider">
 
   <ul class="rules-list">
@@ -504,10 +536,10 @@ p:last-child { margin-bottom: 0; }
 
   <p>The result is that players are <span class="hl-green">encouraged to make a decision</span> each time they want to bank or escape: do you run for the edge of the Wilderness, or do you push further in to reach a Forinthry Gate and lock in your loot? It promotes sustained, organic gameplay rather than immediately worldhopping the moment anything happens.</p>
 
-  <div class="sec-head" style="font-size:24px;margin-top:21px;">Suggested Gate Locations</div>
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">Suggested Gate Locations</div>
   <hr class="sec-divider">
 
-  <p>A rough map of where the Forinthry Gates could be scattered across the Wilderness. The marker colour tells you which kind of gate it is:</p>
+  <p>Here is a rough map of where the Forinthry Gates could be placed.</p>
 
   <ul class="rules-list" style="margin-top:10px;">
     <li><span style="display:inline-block;width:13px;height:13px;background:#ffffff;border:1px solid #888;transform:rotate(45deg);margin-right:8px;vertical-align:middle;"></span><span class="hl-white">White diamonds</span> - Forinthry Gates with a <span class="hl-red">safe-zone barrier</span> (like Ferox Enclave). You cannot enter while teleblocked.</li>
@@ -516,26 +548,20 @@ p:last-child { margin-bottom: 0; }
 
   <figure style="margin:20px 0;text-align:center;">
     <img src="subassets/WildyMapForinthryGates.png" alt="Wilderness map showing suggested Forinthry Gate locations - white diamonds for gates with a safe barrier, orange diamonds for gates with no barrier" style="max-width:100%;height:auto;border:1px solid var(--border, #6a5a30);border-radius:4px;" loading="lazy">
-    <figcaption style="margin-top:8px;font-size:14px;color:var(--dim);">Suggested Forinthry Gate placements. White diamonds have a safe barrier; orange diamonds do not. Original gate concept and placement by Danil445.</figcaption>
   </figure>
 
-  <div class="sec-head" style="font-size:24px;margin-top:46px;">Forinthry Artefacts</div>
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">Forinthry Artefacts</div>
   <hr class="sec-divider">
 
-  <div class="note-box green">
-    <span class="hl-green">The one rule that matters:</span> your most expensive Forinthry Artefact is <span class="hl-gold">always kept on death</span>. A 5th protected item that sits on top of the items you'd normally keep and doesn't interfere with them. Everything else on this page is detail built on top of that single idea.
-  </div>
-
-  <p>In three plain points:</p>
   <ul class="rules-list" style="margin-top:10px;">
-    <li><span class="hl-gold">What it is:</span> your most expensive Forinthry Artefact is always protected on death, as an extra item that doesn't eat into your normal protected slots.</li>
-    <li><span class="hl-gold">How you get one:</span> turn loot you earned in the Wilderness into one at a Forinthry Gate, or convert an Ancient Artefact you found in the Wilderness.</li>
-    <li><span class="hl-gold">Why you'd bother:</span> it bundles your scattered Wilderness earnings into a single item you can protect, so getting caught doesn't wipe your whole trip.</li>
+    <li>Your most expensive Forinthry Artefact is <span class="hl-gold">always kept on death</span> and acts as a <span class="hl-green">5th protected item</span> regardless of the other items you keep on death.</li>
+    <li><span class="hl-gold">How you get one:</span> loot earned in the Wilderness can be exchanged into one at a Forinthry Gate, or you can convert an Ancient Artefact into a Forinthry Artefact.</li>
+    <li><span class="hl-gold">Why you'd bother:</span> it bundles your scattered Wilderness earnings into a single item you can protect, reducing how much you lose if you get caught and die.</li>
   </ul>
 
   <div style="display:flex;gap:16px;flex-wrap:wrap;margin:22px 0;">
     <div style="flex:1;min-width:250px;background:rgba(255,120,120,0.06);border:1px solid #7a3030;border-radius:6px;padding:14px 16px;">
-      <div style="font-size:15px;letter-spacing:0.05em;color:var(--red);text-transform:uppercase;margin-bottom:10px;text-align:center;">Death WITHOUT an artefact</div>
+      <div style="font-size:19px;letter-spacing:0.05em;color:var(--red);text-transform:uppercase;margin-bottom:10px;text-align:center;">Death WITHOUT an artefact</div>
       <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width:100%;height:auto;display:block;">
   <g transform="translate(160,30)"><circle cx="0" cy="0" r="15" fill="#3a2a1a" stroke="#7a3030" stroke-width="1.5"/><circle cx="-5.7" cy="-1.7999999999999998" r="3.15" fill="#ffb7b7"/><circle cx="5.7" cy="-1.7999999999999998" r="3.15" fill="#ffb7b7"/><path d="M -4.2 7.5 L 0 4.2 L 4.2 7.5" fill="none" stroke="#ffb7b7" stroke-width="1.5"/></g>
   <g opacity="0.78"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAYCAYAAAACqyaBAAADJklEQVR42rVWy27TQBQ9tseO1RRB+oKGFrFkyQI+gxVI3bRfgMSiQl3BElYVq7Ljj0Ci6gIJiUdLq9AqDW4c16+Ze83Cj9px0qQVXGmkaCa+55y5r9Ew0bQE17JEm+h5EujDx4+uBb378dNEMtpVQFnSVMC6adT+u7f7uUZAGwZe21iH03Nw3OlcS7FuGiPJep6LH9++Vwjowx9HUQTRMHGn3YZScc25UvHIlQMLISpE8mXbds2XGN4wTbP4vXLvPo5+7U+tOAcWQkApVZw1Go3R3wxv3Gy1Lg4NHcsrK1haXq44U0oVKwWzIISAYRh1dUJgcHaGXreL1uJCpXpqyh+4N/FlgSFjiZPO72K/vboKojSGJ1k+CCEghAXdNCrAZaKu48B1XURSwumeVmJeA+8HHu4GJgATtLSIgTfAoN8HABiGASLC7Xa7prAMbhgGer0eXMeBzIisNucz8JHZriXPNzcRxRGUlJjvMChhMDMA4OfMAEQEFUkQK8RxDCIqllIKLClLwIuQ+L6PSErMG03M2Db29r8W6ivKmS9K43iRkTCjeRiAEkbLB5iAIzsCERXgZdCyzbGNmBVszGDmho2j8A+8OB6lXEtebG0hDAMopSBjCVIKUqYAzAxiRtu1EcQhvOAcfuTj2PRHNh7dNDA7AIgJJ+wW6gFU4i4mlVAOTEQ4aLiQeowgCeCzX2kq5foGgIaV7tucqo2yvGktLsDpniZAoumAlrx8/QrMaXw5V0qqSkIRmLhIKCEEbp2LLOPrGvpNQr9JEMKqneUlJ3J1SQZOGcA4y8vNsiwEcwSjtDdcZuNmQX71Ate0PMvjIKq03mESZTIjOlyivXvztjr8mKcikDsOQx+e5yIMQ4RhiIHnIQhDuG6abE4W77G9XdP1sVdcvlbUrjlVK5WCjOMiq8dZOdv1fNDvbG9DH0GgAsoK/9L0epvUixKbxvJsNoWAaVlolKbiFcAT7cPO+1oIaEoSl1nDNOF0T2uDZewzam1jHVJKSKUqPb3cWqMoqvXzcuxnm00c7h9c5Q1XJfHk2dOx4JcNlPTJdPkrVpt8af/v6fwXaNFMUj28BBAAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAYCAYAAAACqyaBAAADJklEQVR42rVWy27TQBQ9tseO1RRB+oKGFrFkyQI+gxVI3bRfgMSiQl3BElYVq7Ljj0Ci6gIJiUdLq9AqDW4c16+Ze83Cj9px0qQVXGmkaCa+55y5r9Ew0bQE17JEm+h5EujDx4+uBb378dNEMtpVQFnSVMC6adT+u7f7uUZAGwZe21iH03Nw3OlcS7FuGiPJep6LH9++Vwjowx9HUQTRMHGn3YZScc25UvHIlQMLISpE8mXbds2XGN4wTbP4vXLvPo5+7U+tOAcWQkApVZw1Go3R3wxv3Gy1Lg4NHcsrK1haXq44U0oVKwWzIISAYRh1dUJgcHaGXreL1uJCpXpqyh+4N/FlgSFjiZPO72K/vboKojSGJ1k+CCEghAXdNCrAZaKu48B1XURSwumeVmJeA+8HHu4GJgATtLSIgTfAoN8HABiGASLC7Xa7prAMbhgGer0eXMeBzIisNucz8JHZriXPNzcRxRGUlJjvMChhMDMA4OfMAEQEFUkQK8RxDCIqllIKLClLwIuQ+L6PSErMG03M2Db29r8W6ivKmS9K43iRkTCjeRiAEkbLB5iAIzsCERXgZdCyzbGNmBVszGDmho2j8A+8OB6lXEtebG0hDAMopSBjCVIKUqYAzAxiRtu1EcQhvOAcfuTj2PRHNh7dNDA7AIgJJ+wW6gFU4i4mlVAOTEQ4aLiQeowgCeCzX2kq5foGgIaV7tucqo2yvGktLsDpniZAoumAlrx8/QrMaXw5V0qqSkIRmLhIKCEEbp2LLOPrGvpNQr9JEMKqneUlJ3J1SQZOGcA4y8vNsiwEcwSjtDdcZuNmQX71Ate0PMvjIKq03mESZTIjOlyivXvztjr8mKcikDsOQx+e5yIMQ4RhiIHnIQhDuG6abE4W77G9XdP1sVdcvlbUrjlVK5WCjOMiq8dZOdv1fNDvbG9DH0GgAsoK/9L0epvUixKbxvJsNoWAaVlolKbiFcAT7cPO+1oIaEoSl1nDNOF0T2uDZewzam1jHVJKSKUqPb3cWqMoqvXzcuxnm00c7h9c5Q1XJfHk2dOx4JcNlPTJdPkrVpt8af/v6fwXaNFMUj28BBAAAAAASUVORK5CYII=" x="70" y="92" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAAD7UlEQVR42q2Xz2scZRjHPzPvzO7M/ki2STRJiUWhepBSUJoiGmtbBKEgPXntxasHQbz5B/RS6F/gzUtvehAU8SJ4COjBY0EQsyYpiWhNsjsz74/x8O7uzOz8SFJ94GWZ2fd9n1/f5/s843AucdLyu9ThGcQ5j9IvH66U3t79+LBGeZWRmaHef1H60f2DGtur908MTSF13LP6+/brAXfeeZHrVwIuPifQpnn/G1eDGkOtnFmx7wFpjDEabSCRzfuFgNvXAy5f8hECfh2qwv9nVmwMkEboFLSGRKrG/a5jz0hpSKQ9kxfvLPnd+27DhjZNMBoSBbGEnX0nB6QiwEwKRjMzVGl1XsXguiBc0EaTKJBSozXkATQFzfRZyuxXG6t8bQl29s8ZagCp7EoUrK8UbbZGZCVkjLZ40BOPFawuh1Uez9ddZr0Q1mupspzdvBYwjjQnEXy/PebRN39VllbLt6vdhpVBKdTlupsPXcHjHKLjxK46lPueVdwJPAYLBVRXF3s+dK5jc6yUJpEZoqMEothGIE6K5/Ukfr7vWsUhDHpzHt+8FhAlEEtNFNeHbprfWBa9F2Kav6jGY0GnDd1OTR1LCaOxYRSVQ+e6zBCdJFnehYB+F9ZWivi49N6ezbEHQQvCADoBvLCWAk7qAkgN40gziuBkbMN68fmwRCDGMKNKX9hLfR/6HY9B3+P2ZloCqe9BEEDYtoo/vNvPPG770G4J2i0LhIUurC55bL6aNlKo74Fw7KXLA1i5EM5FSeC6gpbnIuYK14XU6b85pBNA0LaXLfY9VpfhpY1wxkLz8smDQ1xX4PsuvY5goeuxuuRx9ZWy11obtAE1Wbkcp87i1hBfTC4K4cKCN/PadSh1o27ozRitG9owClHGRS0bVlHjQk/Q70K7VczxDKEB9MLszHwDKGJDW742U85uoMwZzWmIFSzdGKKNBVLQgl7Ho9vxEGLStRpaY500NolbmwG3Nm1D/+HnrEY/+PQQgHvv907ldz3tUjnOznnspEc/bqCUnuVyFMFbr9VPEdH2RqG8RhHsHih+eew0DoC5UDtptL1haziCoxPD7oFm54mi7cOdrS5XLvv0OoK9QzVX1xops/2Pvo1KSo2e5NdkSmcejyI4HmmeHhn+OdbsHijuf36M74FUekKNlmDy9HkSwZ9PradffH1UiZXCs8neeZA6SzeGaVMPjmLDOIbROPN4cWtYMynP1bDJ8lsBruq5OE5sB5IKxhEcj6fjTn5//bydR3xWTuo0VKfO4tbwlC+H5nl7/d0hj79arxyFn+nzYz4y8qeX+ePJMb/vG37bjbn32d85A6s/e/4Hxc1jU538C3PnCNjRVsYEAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAAD7UlEQVR42q2Xz2scZRjHPzPvzO7M/ki2STRJiUWhepBSUJoiGmtbBKEgPXntxasHQbz5B/RS6F/gzUtvehAU8SJ4COjBY0EQsyYpiWhNsjsz74/x8O7uzOz8SFJ94GWZ2fd9n1/f5/s843AucdLyu9ThGcQ5j9IvH66U3t79+LBGeZWRmaHef1H60f2DGtur908MTSF13LP6+/brAXfeeZHrVwIuPifQpnn/G1eDGkOtnFmx7wFpjDEabSCRzfuFgNvXAy5f8hECfh2qwv9nVmwMkEboFLSGRKrG/a5jz0hpSKQ9kxfvLPnd+27DhjZNMBoSBbGEnX0nB6QiwEwKRjMzVGl1XsXguiBc0EaTKJBSozXkATQFzfRZyuxXG6t8bQl29s8ZagCp7EoUrK8UbbZGZCVkjLZ40BOPFawuh1Uez9ddZr0Q1mupspzdvBYwjjQnEXy/PebRN39VllbLt6vdhpVBKdTlupsPXcHjHKLjxK46lPueVdwJPAYLBVRXF3s+dK5jc6yUJpEZoqMEothGIE6K5/Ukfr7vWsUhDHpzHt+8FhAlEEtNFNeHbprfWBa9F2Kav6jGY0GnDd1OTR1LCaOxYRSVQ+e6zBCdJFnehYB+F9ZWivi49N6ezbEHQQvCADoBvLCWAk7qAkgN40gziuBkbMN68fmwRCDGMKNKX9hLfR/6HY9B3+P2ZloCqe9BEEDYtoo/vNvPPG770G4J2i0LhIUurC55bL6aNlKo74Fw7KXLA1i5EM5FSeC6gpbnIuYK14XU6b85pBNA0LaXLfY9VpfhpY1wxkLz8smDQ1xX4PsuvY5goeuxuuRx9ZWy11obtAE1Wbkcp87i1hBfTC4K4cKCN/PadSh1o27ozRitG9owClHGRS0bVlHjQk/Q70K7VczxDKEB9MLszHwDKGJDW742U85uoMwZzWmIFSzdGKKNBVLQgl7Ho9vxEGLStRpaY500NolbmwG3Nm1D/+HnrEY/+PQQgHvv907ldz3tUjnOznnspEc/bqCUnuVyFMFbr9VPEdH2RqG8RhHsHih+eew0DoC5UDtptL1haziCoxPD7oFm54mi7cOdrS5XLvv0OoK9QzVX1xops/2Pvo1KSo2e5NdkSmcejyI4HmmeHhn+OdbsHijuf36M74FUekKNlmDy9HkSwZ9PradffH1UiZXCs8neeZA6SzeGaVMPjmLDOIbROPN4cWtYMynP1bDJ8lsBruq5OE5sB5IKxhEcj6fjTn5//bydR3xWTuo0VKfO4tbwlC+H5nl7/d0hj79arxyFn+nzYz4y8qeX+ePJMb/vG37bjbn32d85A6s/e/4Hxc1jU538C3PnCNjRVsYEAAAAAElFTkSuQmCC" x="120" y="118" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAdCAYAAAC5UQwxAAAC2UlEQVR42r2Wz2vUQBTHv5PMZKPdlUYoRmihFq2/KoKCFdGLIogoePPgSfBf8uD/IOKhf0Av1j9ApOClB6EutCXbNptOkvnhIZtp0k2yaV18MGw2E96H933z3htg6kZ0tqrNmjbsxvI1LC7Mow5qTTOqq0tXQCkFDwfwvW4llJze8bgt+rPgsUA/CE/saHIK4Lhz3+vC7VAAgMMoHGYjSSUOQj6CadLsSxNS5/ze8mUkQiFJJZJUGEj2a8Ohltk/CDkAFCIsgol+tnoHP39toR+EoADRL1avI5UKQihIoZCqFKmQx86ZnT3TLOWM2mYfANwOBY/FKG9APwh1Ecq6c5D4XZSU6DdPbkNIBSEVUqkQc1ECM5pBmcXM+6ICPBYlhcoSEz3nzWInGKAU+rvn9yGkgFQKQcgR87ITm1olBZqAZYmPDxGpSu77lw+wMzjEYZQAAOhIylxyAGPQPI91lkdMx48x0Y5jw3UohFRmJ5XKgHNontckla0Lq6LwNfn09TsuXbwAaltmMbv8KbMYACAZwfNyOQMwg3788g2uQ0ELIGZboNSCTS2kKjWw01hDa9Pk8/oP868IlkJhyNMswoZDc6ZemkuaW8wFoqT5gLgdWitx6+YtpMJRLMakLEZ3ElR87p1zARA9AZjJmjcDnsQnpJQTI8ptxqVtIiT67dO7OEpE1nlGXaepDPJ+WycvbStplHBT5EU560DFRh9GcXvgkCeIuRiD1YEAoHu+A4daYNQ2KWgBJPrD64fY+rOHQRQhjOLS4cjmIa2cJK7TMV2pOFUmRtjf20dwEGI3GJbe81jUTPjMXj26iRnXwf6QmynTCri9O8D2zmHDBKie8GsbmzoHM4vBYdSoY9XJuXprvgTrB2FhxuWrvpwATdY2NtFxj2VHPWxB+15P+15PT7pntrl4PV5ZKviq+MD3enrR9/4R1OpynMFWlvwpwjBZzv8Ea77sTsv+AsbousuacphcAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAdCAYAAAC5UQwxAAAC2UlEQVR42r2Wz2vUQBTHv5PMZKPdlUYoRmihFq2/KoKCFdGLIogoePPgSfBf8uD/IOKhf0Av1j9ApOClB6EutCXbNptOkvnhIZtp0k2yaV18MGw2E96H933z3htg6kZ0tqrNmjbsxvI1LC7Mow5qTTOqq0tXQCkFDwfwvW4llJze8bgt+rPgsUA/CE/saHIK4Lhz3+vC7VAAgMMoHGYjSSUOQj6CadLsSxNS5/ze8mUkQiFJJZJUGEj2a8Ohltk/CDkAFCIsgol+tnoHP39toR+EoADRL1avI5UKQihIoZCqFKmQx86ZnT3TLOWM2mYfANwOBY/FKG9APwh1Ecq6c5D4XZSU6DdPbkNIBSEVUqkQc1ECM5pBmcXM+6ICPBYlhcoSEz3nzWInGKAU+rvn9yGkgFQKQcgR87ITm1olBZqAZYmPDxGpSu77lw+wMzjEYZQAAOhIylxyAGPQPI91lkdMx48x0Y5jw3UohFRmJ5XKgHNontckla0Lq6LwNfn09TsuXbwAaltmMbv8KbMYACAZwfNyOQMwg3788g2uQ0ELIGZboNSCTS2kKjWw01hDa9Pk8/oP868IlkJhyNMswoZDc6ZemkuaW8wFoqT5gLgdWitx6+YtpMJRLMakLEZ3ElR87p1zARA9AZjJmjcDnsQnpJQTI8ptxqVtIiT67dO7OEpE1nlGXaepDPJ+WycvbStplHBT5EU560DFRh9GcXvgkCeIuRiD1YEAoHu+A4daYNQ2KWgBJPrD64fY+rOHQRQhjOLS4cjmIa2cJK7TMV2pOFUmRtjf20dwEGI3GJbe81jUTPjMXj26iRnXwf6QmynTCri9O8D2zmHDBKie8GsbmzoHM4vBYdSoY9XJuXprvgTrB2FhxuWrvpwATdY2NtFxj2VHPWxB+15P+15PT7pntrl4PV5ZKviq+MD3enrR9/4R1OpynMFWlvwpwjBZzv8Ea77sTsv+AsbousuacphcAAAAAElFTkSuQmCC" x="165" y="88" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAdCAYAAABSZrcyAAADYElEQVR42r2XTWhcVRTHf/fmacaNnSSOC0mdJIxFQpGi1dZ2QmQgUksXLVIXLVI/al3EKq0fjZpC2kKikJCEGG1CIxStq+LCBkFDEUFxVSq4CflyEYxJ57POm3lv5r1510UkhHZm8vI649u8xeWc//+cc//nnAsV+YTyYiUrARwI+D0TuCfgV185oqoU+cZODdP0TF2WA379tSMbErDzVjXAYdu2EIcOvlCWgGnmqgGuxJmu87S2Pk44/ExJAlnTcKkG4eVuCPVW53HV1LS1iLFQ4fCuDZwKtX17qwqFWu7y4UJqSnw2OsHevbuLnmZ1oyzxZ3c9xf2ahqZpZDK6N53v2b2Tffsi69K/+v9H10umORIJU3NfDQDT07NEoylACU+a7us9q57c8YQCoV46fFBFIm0qEKi7I+1CRSJt6sD+51VHx3Nlay02S+DDrnfw+7cQi8VZXokyNzPP3ML8f1HBgf0d+Hy1mGaOye+nykYqvPTmiUvDJBJJYrE4MzNz/PLrbwC0t4WpfcDHlStX1+5LOT8aCDVxaZhcLodhmJg5k2zGwDRz6HqGrGGgp9PomSyPhVoIBrdSX+dHSolt2wSbgtT6fFy//hNb/A8y8eU3ruu6qci//uoLCoUCzc0h4rEV/l5eYXHxL65N/oiup8nnLSwrt1aC9Yq5x5qvErz4eT8PPdyAnbdIJFPcuPE7iUSSlpZmGhsfIZW6TTKZIp5IcutWlMXFJaanZ4tKWLgF/vijU0gpaWioJ/hoI4lkilTqNktLy8zOzvPdtR8AGB35hLxlY5om+byFaZrYto3jKCzLwrZtCgWHsfHLaG6Az/WcoUZKRI3AMAwOvXiMkeE+pJQUHAen4BAI+IlGU3Se7HKZSSW0jdLc19uNlBIpJe9/0LN2Wlfv5+bNPxgaugjAmyeOMTZ+eVNNRCsFPNB/Hsdx0DSNU6e777g4QunpDAsLf65Z7Hx6B/FYnKvfTiqPXWzV8dBgrxoa7C3TnYQa6L9wV2cb6L+g2tv3eN1shBod+dTF+BPqXE9X0Sl3tvu9EhOwYpuoUO+e7iyZlbdPnlBVXCiFeuP4y2UAhDp69HA1CAg1PjbowrFYN9UquLdnMllXOp6a+rms9LyB6xnXjaTiL5Z00e3lf3ypVMLLv+VjmvIZjAYHAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAdCAYAAABSZrcyAAADYElEQVR42r2XTWhcVRTHf/fmacaNnSSOC0mdJIxFQpGi1dZ2QmQgUksXLVIXLVI/al3EKq0fjZpC2kKikJCEGG1CIxStq+LCBkFDEUFxVSq4CflyEYxJ57POm3lv5r1510UkhHZm8vI649u8xeWc//+cc//nnAsV+YTyYiUrARwI+D0TuCfgV185oqoU+cZODdP0TF2WA379tSMbErDzVjXAYdu2EIcOvlCWgGnmqgGuxJmu87S2Pk44/ExJAlnTcKkG4eVuCPVW53HV1LS1iLFQ4fCuDZwKtX17qwqFWu7y4UJqSnw2OsHevbuLnmZ1oyzxZ3c9xf2ahqZpZDK6N53v2b2Tffsi69K/+v9H10umORIJU3NfDQDT07NEoylACU+a7us9q57c8YQCoV46fFBFIm0qEKi7I+1CRSJt6sD+51VHx3Nlay02S+DDrnfw+7cQi8VZXokyNzPP3ML8f1HBgf0d+Hy1mGaOye+nykYqvPTmiUvDJBJJYrE4MzNz/PLrbwC0t4WpfcDHlStX1+5LOT8aCDVxaZhcLodhmJg5k2zGwDRz6HqGrGGgp9PomSyPhVoIBrdSX+dHSolt2wSbgtT6fFy//hNb/A8y8eU3ruu6qci//uoLCoUCzc0h4rEV/l5eYXHxL65N/oiup8nnLSwrt1aC9Yq5x5qvErz4eT8PPdyAnbdIJFPcuPE7iUSSlpZmGhsfIZW6TTKZIp5IcutWlMXFJaanZ4tKWLgF/vijU0gpaWioJ/hoI4lkilTqNktLy8zOzvPdtR8AGB35hLxlY5om+byFaZrYto3jKCzLwrZtCgWHsfHLaG6Az/WcoUZKRI3AMAwOvXiMkeE+pJQUHAen4BAI+IlGU3Se7HKZSSW0jdLc19uNlBIpJe9/0LN2Wlfv5+bNPxgaugjAmyeOMTZ+eVNNRCsFPNB/Hsdx0DSNU6e777g4QunpDAsLf65Z7Hx6B/FYnKvfTiqPXWzV8dBgrxoa7C3TnYQa6L9wV2cb6L+g2tv3eN1shBod+dTF+BPqXE9X0Sl3tvu9EhOwYpuoUO+e7iyZlbdPnlBVXCiFeuP4y2UAhDp69HA1CAg1PjbowrFYN9UquLdnMllXOp6a+rms9LyB6xnXjaTiL5Z00e3lf3ypVMLLv+VjmvIZjAYHAAAAAElFTkSuQmCC" x="205" y="124" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAdCAYAAABIWle8AAACzUlEQVR42qWWv4tcVRTHP/fc+yYzWSaYIiaohYJitf9A2EoQIaRwC1OEdCIRcRFRWAvBxialpBXLWC6WVkFEU4igBiJIigSTJUtcw86b9+v+tBjm7b6dnUlmfdXl3vc+73vO+d57ruJYj0r746Ta2eNA1oYfMvY7jKt/uMvNFmqWAb0x3MRS0PgcAI/lHKsUPCHnQZJlA9RoMgaUjNq5nAdAUkvBIp5AoGQXW41n1peCJTzReyxlOxeojwcLBGpG2KrE0Pt/yqaqGnJk0CPQUFMdD+aosFQ4Gk5yCs2JQ8VZwl/b/nfOD6/yXPYSMQYaP+IRf7TGNc8COj94n4Dj+f7rFH6X2u9RsEtD/qw5U+kgKOL5u/4FQ5+eWWFcPaZmr/OFmQe68O4G3jbYpsBbi7MWaSyP7I+c/m2VXe63Zl2gTKW3P/gUEUG0QWcnUGLQ2qAzaS2ywumnWUOldz7+HKU1SjSiNVoEbQTR+69uv3KLPqcWwVS6/NmXKJmATC9r1YkYlHQzUrxwfx5MpUuffIF3DhFNf3CSwcqQrN+frOp9B/kQiN4CMDxztnO2Cai0vrHJzW++wlYFdTGiKnKqIieF0Iaaoie4SHQeMZOtlD/emS2At27yV+f46duvqfKcKs+py5K6GGObihgi3k62jjHZkR4QAK27dRCt+fW7G8Tguf39FraqcW5yOkhmEK2pnVtcTSX6EHSSdJ31EDGY3gCjNZKZ+coOJhhARFqFnVMj+Hb84suvLlY2DfewwhQ9MfrO3MN7d4+CJbV1/RprV67OLsoU3g0rOn9kmGbaprauX0sA6xubpBBmFAYXW5/Ne+RwM1WisU3D6lvrPNl5yGtrb1KXI2LwxOCIzjPa+3eRsgN5m4amNUoMwZYdVXUxYvuvP2e6+ZyOrtLF9z7C1hW2qbBVTZmPsLbmzs8/HAl5yvXg4F2iU9eF14n/AAgES9Zk9uvaAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAdCAYAAABIWle8AAACzUlEQVR42qWWv4tcVRTHP/fc+yYzWSaYIiaohYJitf9A2EoQIaRwC1OEdCIRcRFRWAvBxialpBXLWC6WVkFEU4igBiJIigSTJUtcw86b9+v+tBjm7b6dnUlmfdXl3vc+73vO+d57ruJYj0r746Ta2eNA1oYfMvY7jKt/uMvNFmqWAb0x3MRS0PgcAI/lHKsUPCHnQZJlA9RoMgaUjNq5nAdAUkvBIp5AoGQXW41n1peCJTzReyxlOxeojwcLBGpG2KrE0Pt/yqaqGnJk0CPQUFMdD+aosFQ4Gk5yCs2JQ8VZwl/b/nfOD6/yXPYSMQYaP+IRf7TGNc8COj94n4Dj+f7rFH6X2u9RsEtD/qw5U+kgKOL5u/4FQ5+eWWFcPaZmr/OFmQe68O4G3jbYpsBbi7MWaSyP7I+c/m2VXe63Zl2gTKW3P/gUEUG0QWcnUGLQ2qAzaS2ywumnWUOldz7+HKU1SjSiNVoEbQTR+69uv3KLPqcWwVS6/NmXKJmATC9r1YkYlHQzUrxwfx5MpUuffIF3DhFNf3CSwcqQrN+frOp9B/kQiN4CMDxztnO2Cai0vrHJzW++wlYFdTGiKnKqIieF0Iaaoie4SHQeMZOtlD/emS2At27yV+f46duvqfKcKs+py5K6GGObihgi3k62jjHZkR4QAK27dRCt+fW7G8Tguf39FraqcW5yOkhmEK2pnVtcTSX6EHSSdJ31EDGY3gCjNZKZ+coOJhhARFqFnVMj+Hb84suvLlY2DfewwhQ9MfrO3MN7d4+CJbV1/RprV67OLsoU3g0rOn9kmGbaprauX0sA6xubpBBmFAYXW5/Ne+RwM1WisU3D6lvrPNl5yGtrb1KXI2LwxOCIzjPa+3eRsgN5m4amNUoMwZYdVXUxYvuvP2e6+ZyOrtLF9z7C1hW2qbBVTZmPsLbmzs8/HAl5yvXg4F2iU9eF14n/AAgES9Zk9uvaAAAAAElFTkSuQmCC" x="95" y="140" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAdCAYAAACe/43ZAAACEklEQVR42o2UO28TQRSFv5mdXT9imzywk4iAoCD0iCKiR6KAEoSoEAVIdFDzc6goafgPoIgooogUKUIYUQQFjGzvY3Zmh2Jtx5tdk5xmNDP33jn3nqMRFCAclXBiFjEfvE0eH50J7yNmSWr+YuvJc3QckmpNEobE4xE6iWF/dxYjp9XvP3uF8n1UEOB5Cr8eENRrKOXT7q7P6MqzbD2/hucHSKlQQQNVr7F59cbsXoFwD1++wZp0cmQIGg1cZib7FsbzzlKCzFrSVKOTCB1F1JbaNFot/FoAwPbtHUA4BdD//gOTJGTWYHREZgz19gpGx+hwRByG/Dz4Ajghq6aeWTtZc5qZ0WVK80h1yiKUEkySzA2gnCyLVAypTgsUAOwiSiaJSOMx/4Oar55ZW6i2oAcn9j6+p7e+SqfTwg8URudJ65ubrF1eYalZLyr96PVbotEQKRXNdofByTFb166g44hmu4P0FFIFHO3vOgng1+o0Wm06q2ss9zboHx6w3N3gUrfHcm8Dz5cc7e8CToipW+88eEo4/Es8HDD8fcytnXvEowGjwQnjwR/6Xz9NlRbu7uMXZbVn5qsQzmUWISUXQSlKTqzsMls4716/CYi86anZpJfL8uvbYalyfrbArfNFKill9rRBqU7/BWNNtdKfP7zLxfFUwYgXaroKUw0WTMmfTCk7/wWpvHNfE9X/qhPlfY5/E3PiTgSPfcsAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAdCAYAAACe/43ZAAACEklEQVR42o2UO28TQRSFv5mdXT9imzywk4iAoCD0iCKiR6KAEoSoEAVIdFDzc6goafgPoIgooogUKUIYUQQFjGzvY3Zmh2Jtx5tdk5xmNDP33jn3nqMRFCAclXBiFjEfvE0eH50J7yNmSWr+YuvJc3QckmpNEobE4xE6iWF/dxYjp9XvP3uF8n1UEOB5Cr8eENRrKOXT7q7P6MqzbD2/hucHSKlQQQNVr7F59cbsXoFwD1++wZp0cmQIGg1cZib7FsbzzlKCzFrSVKOTCB1F1JbaNFot/FoAwPbtHUA4BdD//gOTJGTWYHREZgz19gpGx+hwRByG/Dz4Ajghq6aeWTtZc5qZ0WVK80h1yiKUEkySzA2gnCyLVAypTgsUAOwiSiaJSOMx/4Oar55ZW6i2oAcn9j6+p7e+SqfTwg8URudJ65ubrF1eYalZLyr96PVbotEQKRXNdofByTFb166g44hmu4P0FFIFHO3vOgng1+o0Wm06q2ss9zboHx6w3N3gUrfHcm8Dz5cc7e8CToipW+88eEo4/Es8HDD8fcytnXvEowGjwQnjwR/6Xz9NlRbu7uMXZbVn5qsQzmUWISUXQSlKTqzsMls4716/CYi86anZpJfL8uvbYalyfrbArfNFKill9rRBqU7/BWNNtdKfP7zLxfFUwYgXaroKUw0WTMmfTCk7/wWpvHNfE9X/qhPlfY5/E3PiTgSPfcsAAAAASUVORK5CYII=" x="150" y="150" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAaCAYAAAC3g3x9AAABWUlEQVR42qVVS2rDMBQcfXAXyaJdlJKFkSE9QXr/A5RcoYEYLULJQgmkOzvqIn2urH/IA2NLehrNG40shimYxUNhGQAwAnt9eQ5S3lYrAMAwDLP32Zgg92hOACzjObDvwwEAIKWc3mdjpoViwWOdNIFAGykh/x53LBbMZ9i27V3Kaa39kusn1fTzUpLWGp1SEJxXLVJk2Cl1lwQ8V4rPglim2GUZUqm1elLIWOf7ej0zckqCfd+XGRJYKcbrdda+WY9ZngPzGVCbwFzPVvkwxtZn5h+EmYa+ZsSoUyqqV2yTeK5EH6zGk7zW1DkLLZbLEPBjs5mxdNm6YP4RTDIcxzGZ5ILTt6vdz+WSL3nf90G5LmiOJS9p529UaWMmwKemyZaas06RIf3uXWMTWGzMA7TsaE743G6Dwa/dLskkNcbpTr2dxf9kIUS0dCFEAEbn2LmXH73s7YTzC0LGsyiB7uIFAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAaCAYAAAC3g3x9AAABWUlEQVR42qVVS2rDMBQcfXAXyaJdlJKFkSE9QXr/A5RcoYEYLULJQgmkOzvqIn2urH/IA2NLehrNG40shimYxUNhGQAwAnt9eQ5S3lYrAMAwDLP32Zgg92hOACzjObDvwwEAIKWc3mdjpoViwWOdNIFAGykh/x53LBbMZ9i27V3Kaa39kusn1fTzUpLWGp1SEJxXLVJk2Cl1lwQ8V4rPglim2GUZUqm1elLIWOf7ej0zckqCfd+XGRJYKcbrdda+WY9ZngPzGVCbwFzPVvkwxtZn5h+EmYa+ZsSoUyqqV2yTeK5EH6zGk7zW1DkLLZbLEPBjs5mxdNm6YP4RTDIcxzGZ5ILTt6vdz+WSL3nf90G5LmiOJS9p529UaWMmwKemyZaas06RIf3uXWMTWGzMA7TsaE743G6Dwa/dLskkNcbpTr2dxf9kIUS0dCFEAEbn2LmXH73s7YTzC0LGsyiB7uIFAAAAAElFTkSuQmCC" x="200" y="94" width="34" height="34" preserveAspectRatio="xMidYMid meet"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAaCAYAAACHD21cAAABd0lEQVR42p2UvUoDQRRGz+zeNZO462YT06SzUHwCBbESFJVYBMTG1pcQfAXBxjR2YiEW2vgCNnkAK9FaLawC+fVvLFySjcaw48AwzRzOd2fuDFgPZQAcW2ivpAFlHFufF6+OjW030giCdVQPcF0rozLVSCNC7LMwevG0AJVZD3QMCeJYGCVRX0qjMiuBIScM1ZfKGEqWHOC7gu+kMipTCTQ5IBAhH0MHT03AqLHGnMCUQOgNQzAcu9/AANVIUxQoesIksJ+AfkRVprK2yvZWBYCiQOiOhgBUElxeXCAfhngiZLTm/PIqsXUMOD83y3QU4fs+2UyGjNZktUbE5eT07K+oRt3dP1B2b2k0GnR6PXrdLq12m3an++vg3KRxZ0l/3537wszUM4+tEtl+5OGoMuoaygXh6LoJ3IysL1HjwAZwUe+O3My4lksDxVGVqW5uEBQi8mEe6rVU79MB+DCfvL69c3hcS2XrH06z2WJCPPjfJzvo0zTjC6WqYiCa9FLDAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAaCAYAAACHD21cAAABd0lEQVR42p2UvUoDQRRGz+zeNZO462YT06SzUHwCBbESFJVYBMTG1pcQfAXBxjR2YiEW2vgCNnkAK9FaLawC+fVvLFySjcaw48AwzRzOd2fuDFgPZQAcW2ivpAFlHFufF6+OjW030giCdVQPcF0rozLVSCNC7LMwevG0AJVZD3QMCeJYGCVRX0qjMiuBIScM1ZfKGEqWHOC7gu+kMipTCTQ5IBAhH0MHT03AqLHGnMCUQOgNQzAcu9/AANVIUxQoesIksJ+AfkRVprK2yvZWBYCiQOiOhgBUElxeXCAfhngiZLTm/PIqsXUMOD83y3QU4fs+2UyGjNZktUbE5eT07K+oRt3dP1B2b2k0GnR6PXrdLq12m3an++vg3KRxZ0l/3537wszUM4+tEtl+5OGoMuoaygXh6LoJ3IysL1HjwAZwUe+O3My4lksDxVGVqW5uEBQi8mEe6rVU79MB+DCfvL69c3hcS2XrH06z2WJCPPjfJzvo0zTjC6WqYiCa9FLDAAAAAElFTkSuQmCC" x="235" y="134" width="34" height="34" preserveAspectRatio="xMidYMid meet"/></g>
@@ -544,11 +570,11 @@ p:last-child { margin-bottom: 0; }
     <line x1="262" y1="84" x2="78" y2="182"/>
   </g>
 </svg>
-      <div style="font-size:14.5px;color:var(--white);line-height:1.55;margin-top:10px;text-align:center;">You lose all the loot from your inventory and looting bag. You lose the whole trip.</div>
+      <div style="font-size:18px;color:var(--white);line-height:1.55;margin-top:10px;text-align:center;">You lose all the loot from your inventory and looting bag. You lose the whole trip.</div>
     </div>
 
     <div style="flex:1;min-width:250px;background:rgba(166,207,166,0.06);border:1px solid #3a6a3a;border-radius:6px;padding:14px 16px;">
-      <div style="font-size:15px;letter-spacing:0.05em;color:var(--green);text-transform:uppercase;margin-bottom:10px;text-align:center;">Death WITH an artefact</div>
+      <div style="font-size:19px;letter-spacing:0.05em;color:var(--green);text-transform:uppercase;margin-bottom:10px;text-align:center;">Death WITH an artefact</div>
       <svg viewBox="0 0 380 205" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width:100%;height:auto;display:block;">
   <defs><marker id="ag" markerUnits="userSpaceOnUse" markerWidth="15" markerHeight="15" refX="11" refY="7.5" orient="auto"><path d="M0,0 L15,7.5 L0,15 Z" fill="#a6cfa6"/></marker></defs>
   <!-- smiley face -->
@@ -579,11 +605,11 @@ p:last-child { margin-bottom: 0; }
     <path d="M -6 0 L -1 5 L 7 -5" fill="none" stroke="#a6cfa6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>
-      <div style="font-size:14.5px;color:var(--white);line-height:1.55;margin-top:10px;text-align:center;">Merge your loot at a Forinthry Gate and it becomes a single Forinthry Emblem, which is protected on death no matter what.</div>
+      <div style="font-size:18px;color:var(--white);line-height:1.55;margin-top:10px;text-align:center;">Merge your loot at a Forinthry Gate and it becomes a single Forinthry Emblem, which is protected on death no matter what.</div>
     </div>
   </div>
 
-  <p>Forinthry Artefacts mirror the <span class="hl-gold">Ancient Artefacts</span> from Revenant Caves in structure and price. The difference is the protection above. An Ancient Artefact is always lost on death, while a Forinthry Artefact is the thing you keep. One concrete rule covers skulled play: <span class="hl-red">if you die while skulled, the artefact splits and your killer gets half of it.</span></p>
+  <p>Forinthry Artefacts mirror the <span class="hl-gold">Ancient Artefacts</span> from Revenant Caves in structure and price. The difference is that an Ancient Artefact is always lost on death, while your most expensive Forinthry Artefact is always kept on death.</p>
 
   <div class="tiers" style="grid-template-columns: repeat(6,1fr);">
     <div class="tier-box t1">
@@ -626,82 +652,86 @@ p:last-child { margin-bottom: 0; }
 
   <p>There is also a <span class="hl-gold">Forinthry Idol</span>, worth 40m, obtained by combining two Forinthry Relics without ever leaving the Wilderness. It cannot be made from GE-bought Relics. Successfully creating it rewards you with a bonus 8m on top of its base value, reflecting the sustained risk of camping the Wilderness for the time it takes to accumulate two Relics.</p>
 
-  <div class="sec-head" style="font-size:24px;margin-top:21px;">How to Obtain Forinthry Artefacts</div>
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">Details on Obtaining Forinthry Artefacts</div>
   <hr class="sec-divider">
 
   <ul class="rules-list">
     <li><span class="hl-gold">Method 1 - Ancient Artefact conversion:</span> Convert an Ancient Artefact obtained within the Wilderness (cannot be bought on the GE) into its matching Forinthry Artefact at a Forinthry Gate. The prices match 1:1.</li>
-    <li><span class="hl-gold">Method 2 - Looting Bag conversion:</span> Use the left-click option on a Forinthry Gate to automatically destroy and convert alchables from your Looting Bag into a Forinthry Emblem. The Forinthry Gate pulls from a predetermined whitelist of items, and you may pay slightly more than the exact 550k price if the alchables in your bag don't add up to an exact amount. This method does not accept loot gained from killing players, and does not accept items brought into the Wilderness. The premium over the artefact's face value exists to account for the death protection. It should not function as a substitute for High Alchemy.</li>
+    <li><span class="hl-gold">Method 2 - Looting Bag conversion:</span> Use the left-click option on a Forinthry Gate to automatically destroy and convert alchables from your Looting Bag into a Forinthry Emblem.
+      <ul class="rules-list" style="margin:8px 0 0;">
+        <li>The Forinthry Gate pulls from a predetermined whitelist of items, and you may pay slightly more than the exact 550k price if the alchables in your bag don't add up to an exact amount.</li>
+        <li>This method does not accept loot gained from killing players, and does not accept items brought into the Wilderness.</li>
+        <li>The premium over the artefact's face value exists to account for the death protection.</li>
+        <li>It should not function as a substitute for High Alchemy.</li>
+      </ul>
+    </li>
     <li><span class="hl-gold">Upgrading:</span> Sacrifice two Forinthry Artefacts of the same tier at a Forinthry Gate to merge them into the next tier. Both artefacts must have been obtained within the Wilderness without leaving.</li>
   </ul>
 
-  <div class="note-box green">
-    <span class="hl-green">Three points summarise the whole system:</span> Forinthry Artefacts are a wealth consolidator that reduces your risk of losing GP earned in the Wilderness. They reward long, sustained trips. And they give 3-itemers and skullers a comparable tool to what Blessed Status gives PvMers. A way to reduce the sting of death without removing all risk.
-  </div>
+  <p>Forinthry Artefacts are a wealth consolidator that reduces your risk of losing GP earned in the Wilderness. They reward long, sustained trips, and they give 3-itemers and skullers a comparable tool to what Blessed Status gives PvMers in that they offer a way to reduce the sting of death without removing all risk.</p>
 
-  <div class="sec-head" style="font-size:24px;margin-top:21px;">Risk Comparison</div>
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">The Math</div>
   <hr class="sec-divider">
-
-  <p>How much do you actually lose on death under each system? This table assumes a player carrying <span class="hl-gold">1m in accumulated loot in their Looting Bag</span> and holding a <span class="hl-gold">1m Forinthry Totem</span>.</p>
-
-  <div class="three-compare" style="grid-template-columns: 160px 1fr 1fr 1fr;">
-    <div class="tc-header tc-empty"></div>
-    <div class="tc-header tc-blessed">
-      Blessed Status
-      <span style="font-size:12px;color:var(--dim);">5% fee on gear, 25% on loot</span>
-    </div>
-    <div class="tc-header tc-normal">
-      Forinthry Artefact<br><span style="font-size:13px;color:var(--dim);">Unskulled</span>
-    </div>
-    <div class="tc-header tc-skulled">
-      Forinthry Artefact<br><span style="font-size:13px;color:var(--dim);">Skulled</span>
-    </div>
-
-    <div class="tc-label">Gear loss on death</div>
-    <div class="tc-cell mid">5% of GE value</div>
-    <div class="tc-cell good">3 items protected (free)</div>
-    <div class="tc-cell bad">Nothing protected (lose all)</div>
-
-    <div class="tc-label">Loot / artefact protection</div>
-    <div class="tc-cell mid">75% of loot kept (25% fee)</div>
-    <div class="tc-cell good">1m artefact always protected as 5th item</div>
-    <div class="tc-cell mid">Artefact splits in half - keep 500k, drop 500k to killer</div>
-
-    <div class="tc-label">Risk with 1m artefact + 1m in loot</div>
-    <div class="tc-cell mid">~5% gear fee + 250k from loot</div>
-    <div class="tc-cell good">Loot lost, artefact saved - you keep the 1m artefact, lose the 1m loot pile</div>
-    <div class="tc-cell bad">Loot lost, artefact halved - keep 500k of it, drop the other 500k to your killer</div>
-
-    <div class="tc-label">Risk if you reach a Forinthry Gate first</div>
-    <div class="tc-cell mid">Unchanged - Forinthry Gates don't affect Blessed Status</div>
-    <div class="tc-cell good">Loot consolidated into the artefact - the full value is now protected on death</div>
-    <div class="tc-cell mid">Loot consolidated into the artefact, but it still splits in half if you die skulled</div>
-
-    <div class="tc-label">Additional risk rules</div>
-    <div class="tc-cell mid">100k minimum risk - remainder of deposit always goes to the killer</div>
-    <div class="tc-cell good">Most expensive Forinthry Artefact is always protected on death</div>
-    <div class="tc-cell bad">Most expensive Forinthry Artefact is protected, but splits in half on death</div>
-
-    <div class="tc-label">Reward ceiling</div>
-    <div class="tc-cell bad">Capped at Tier 5 loot bonuses. Cannot get item drops from PKing.</div>
-    <div class="tc-cell mid">Full PvM loot. Full item drops from anti-PKing.</div>
-    <div class="tc-cell good">Full PvM and PvP loot + Amulet of Avarice bonuses + Ring of Greed eligible</div>
-  </div>
-
-  <div class="sec-head" style="font-size:24px;margin-top:21px;">Optional: the math, for optimisers</div>
-  <hr class="sec-divider">
-
-  <p style="color:#d8c89a;">You never need any of this to use Forinthry Artefacts. "Keep your most expensive one on death" is the whole feature. This section is only for players who want to compare expected loss across systems. These are <span class="hl-gold">averages across many deaths</span>, not what happens on any single death.</p>
 
   <ul class="rules-list" style="margin-top:10px;">
-    <li><span class="hl-sara">Blessed Status:</span> you keep roughly <span class="hl-gold">75%</span> of your earnings on death (you pay the 25% loot fee, plus ~5% on gear).</li>
-    <li><span class="hl-white">Unskulled with a Forinthry Artefact:</span> you save roughly <span class="hl-gold">50%-100%</span> of your PvM earnings, depending on whether you die before reaching a gate (artefact saved, loot lost) or after consolidating at one (everything protected).</li>
-    <li><span class="hl-red">Skulled with a Forinthry Artefact:</span> you save roughly <span class="hl-gold">25%-50%</span>, because the artefact splits in half on death and your unprotected gear is also at risk.</li>
+    <li>If you die with <span class="hl-sara">Blessed Status</span> you keep roughly <span class="hl-gold">75%</span> of your earnings on death (you pay the 25% loot fee, plus ~5% on gear).</li>
+    <li>If you die <span class="hl-white">uskulled with a Forinthry Artefact</span> you save roughly <span class="hl-gold">50%-100%</span> of your PvM earnings, depending on whether you die before reaching a gate (artefact saved, loot lost) or after consolidating at one (everything protected).</li>
+    <li>If you die <span class="hl-red">Skulled with a Forinthry Artefact</span> you save roughly <span class="hl-gold">25%-50%</span>, because the artefact splits in half on death and your unprotected gear is also at risk.</li>
   </ul>
 
-  <p style="color:#d8c89a;">The pattern: the same "always protect the biggest artefact" rule produces a different effective saving depending on your skull state and whether you bank the value at a gate. Higher risk, higher reward, but you only ever interact with the concrete rules above, never the percentages.</p>
 
-  <p>The progression across all three systems flows naturally. A new player starts with <span class="hl-sara">Blessed Status</span>. As they grow comfortable, they switch to <span class="hl-white">unskulled play with Forinthry Artefacts</span> to consolidate earnings. When confident enough to go all in, they reach for the <span class="hl-red">Ring of Greed</span>. Every step of the way, the Wilderness has something meaningful to offer them.</p>
+  <!-- PROGRESSION LADDER -->
+  <div class="sec-head" style="font-size:30px;margin-top:48px;">A Wilderness Progression Ladder</div>
+  <hr class="sec-divider">
+
+  <p>What's the progression ladder of risk with the existence of <span class="hl-sara">Blessed Status</span> and <span class="hl-sara">Forinthry Artefacts</span>?</p>
+
+  <div class="ladder">
+    <span class="lad-ic"><img src="../assets/BeginnerBlessing.png" alt=""></span>
+    <span class="lad-tx">Beginner's Blessing</span>
+
+    <span class="lad-ic"><img src="../assets/blessed-tier-0.png" alt=""></span>
+    <span class="lad-tx">Blessed Status (Below Level 10 Wilderness for reduced Death Fee)</span>
+
+    <span class="lad-ic"><img src="../assets/blessed-tier-0.png" alt=""></span>
+    <span class="lad-tx">Blessed Status (No Tier)</span>
+
+    <span class="lad-ic"><img src="../assets/Artefacts/ForinthryStatuette.png" alt=""></span>
+    <span class="lad-tx">Neutral Status + Low Tier Forinthry Artefacts</span>
+
+    <span class="lad-ic"></span>
+    <span class="lad-tx">Neutral Status</span>
+
+    <span class="lad-ic"><img src="../assets/Artefacts/ForinthryTotem.png" alt=""></span>
+    <span class="lad-tx">Neutral Status + High Tier Forinthry Artefacts</span>
+
+    <span class="lad-ic"><img src="../assets/blessed-tier-5.png" alt=""></span>
+    <span class="lad-tx">Blessed Status (Tier 5)</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Artefacts/ForinthryStatuette.png" alt=""></span>
+    <span class="lad-tx">Skulled Status + Low Tier Forinthry Artefacts</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""></span>
+    <span class="lad-tx">Skulled Status</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Artefacts/ForinthryTotem.png" alt=""></span>
+    <span class="lad-tx">Skulled Status + High Tier Forinthry Artefacts</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Amulet_of_avarice.webp" alt=""></span>
+    <span class="lad-tx">Skulled Status + Amulet of Avarice</span>
+
+    <span class="lad-ic"><img src="../assets/wilderness-skull.png" alt=""><img src="../assets/Ring_of_Greed.png" alt=""></span>
+    <span class="lad-tx">Skulled Status + Ring of Greed</span>
+
+    <span class="lad-ic"><img src="../assets/Skull_(High_Risk_PvP_world)_icon.png" alt=""></span>
+    <span class="lad-tx">High Risk Skull in High Risk Worlds</span>
+
+    <span class="lad-ic"><img src="../assets/Skull_(High_Risk_PvP_world)_icon.png" alt=""><img src="../assets/Alchables/Looting_bag_(open).webp" alt=""></span>
+    <span class="lad-tx">High Risk Skull in High Risk Worlds + Looting Bag</span>
+  </div>
+
+  <p>This creates an entire range of different levels of risk vs reward from <span class="hl-green">low risk, low reward</span> to <span class="hl-red">very high risk, very high reward</span>.</p>
+
 </div>
 
 <div class="brick" style="opacity:0.6;"></div>

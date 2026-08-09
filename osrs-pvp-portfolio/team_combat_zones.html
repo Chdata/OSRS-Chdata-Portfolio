@@ -15,9 +15,9 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
     --bg:#0d0800;--stone:#2a2010;--panel:#1e1608;--border:#5a4a2a;
-    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--red:#cc2222;--red-lt:#ff6b6b;
+    --gold:#c89b3c;--gold-lt:#e8c96a;--green:#00c000;--red:#cc2222;--red-lt:#ff9a9a;
     --blue:#80c0ff;--orange:#ff8c00;--purple:#cc88ff;--white:#f0e8d0;--dim:#a89060;
-    --team:#44aacc;--tcz:#cc8800;--singles:#44aa44;--multi:#cc2222;
+    --team:#44aacc;--tcz:#cc8800;--tcz-lt:#ffb84d;--singles:#44aa44;--multi:#cc2222;
   }
   body{background:var(--bg);font-family:'RSUF',monospace;color:var(--white);width:100%;max-width:760px;margin:0 auto;padding:0;zoom:1.5;}
   .brick{height:28px;background:repeating-linear-gradient(90deg,#5a4a2a 0 35px,#3a2e1a 35px 37px);border-top:2px solid #7a6a4a;border-bottom:2px solid #1a1208;}
@@ -33,7 +33,7 @@
   p{font-size:12.5px;line-height:1.65;color:var(--white);text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;margin-bottom:10px;}
   p:last-child{margin-bottom:0;}
   .hl-gold{color:var(--gold);} .hl-green{color:var(--green);} .hl-red{color:var(--red-lt);}
-  .hl-blue{color:var(--blue);} .hl-orange{color:var(--orange);} .hl-team{color:var(--team);} .hl-tcz{color:var(--tcz);}
+  .hl-blue{color:var(--blue);} .hl-orange{color:var(--orange);} .hl-team{color:var(--team);} .hl-tcz{color:var(--tcz-lt);}
   .summary-box{background:rgba(204,136,0,.1);border:1px solid var(--tcz);border-left:4px solid var(--tcz);border-radius:2px;padding:14px 16px;margin:12px 0;font-size:13px;line-height:1.6;text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;color:var(--white);}
   .summary-box .label{font-size:10px;color:var(--tcz);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;text-shadow:1px 1px 0 #000;}
   .rules-list{list-style:none;padding:0;margin:10px 0;}
@@ -93,7 +93,6 @@
 <div class="hero">
   <span style="font-size:36px;display:block;margin-bottom:12px;"><img src="../assets/multicombat.png" alt="Team Combat Zones" style="height:36px;width:auto;image-rendering:pixelated;vertical-align:middle;"></span>
   <h1>Team Combat Zones</h1>
-  <p class="tagline">A new third type of Wilderness combat zone, between singles and full multi, where any one group can be attacked by at most 6 players at a time.</p>
   <div class="hero-divider"></div>
 </div>
 

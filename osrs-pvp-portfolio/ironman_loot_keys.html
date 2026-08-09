@@ -29,6 +29,7 @@
   --border:    #5a4a2a;
   --gold:      #c89b3c;
   --gold-lt:   #e8c96a;
+  --gold-rich: #ffd24a;
   --green:     #a6cfa6;
   --red:       #ffb7b7;
   --blue:      #80c0ff;
@@ -106,7 +107,7 @@ body {
 .section:last-child { border-bottom: none; }
 
 .sec-head {
-  font-size: 27.0px;
+  font-size: 33.75px;
   color: var(--green);
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000;
   text-align: center;
@@ -135,7 +136,15 @@ p {
 }
 p:last-child { margin-bottom: 0; }
 
-.hl-gold   { color: var(--gold); }
+.hl-gold   { color: var(--gold-rich); }
+
+/* quoted source lines */
+.quote-line {
+  border-left: 3px solid var(--border);
+  padding-left: 14px;
+  color: #d8c89a;
+  margin: 10px 0 18px;
+}
 .hl-green  { color: var(--green); }
 .hl-red    { color: var(--red); }
 .hl-blue   { color: var(--blue); }
@@ -441,74 +450,55 @@ p:last-child { margin-bottom: 0; }
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Ironman Loot Keys to Bond Coffers</h1>
-  <p class="tagline">Let ironmen convert Wilderness Loot Keys into a Bond-only Coffer, giving them a real reason to engage with PvP for the first time.</p>
+  <h1>Ironman Loot Keys to Bonds-Only Coffers</h1>
   <div class="hero-divider"></div>
 </div>
 
 <div class="brick" style="opacity:0.6;"></div>
 <div class="brick"></div>
 
-<!-- THE PROBLEM -->
+<!-- BODY -->
 <div class="section">
-  <div class="sec-head">The Problem</div>
-  <div class="sec-sub">Why ironmen have no reason to PK right now</div>
-  <hr class="sec-divider">
 
-  <p>When an ironman kills another player in the Wilderness, they receive a <span class="hl-gold">Loot Key</span>. But ironmen cannot use Loot Keys. Their only option is to destroy them. The loot inside is completely inaccessible. PKing is, mechanically speaking, a total waste of time and resources for an ironman.</p>
+  <p>This has been suggested everywhere now. Even most of the big OSRS YouTubers have acknowledged it at this point.</p>
 
-  <p>This matters more than it might seem. <span class="hl-orange">Ironmen make up roughly 30% of the OSRS playerbase</span>, and that number keeps growing. Right now, every single one of them has essentially zero mechanical incentive to engage with Wilderness PvP. That is 30% of the voting population with no reason to vote yes on any PvP poll. An automatic structural disadvantage that makes every PvP update harder to pass.</p>
+  <p>And this suggestion goes back from YEARS ago.</p>
 
-  <div class="note-box red">
-    <span class="hl-red">PKing costs ironmen the same resources as everyone else</span> (food, potions, runes, ammo), but provides zero reward. It is a negative sum activity with no upside for them whatsoever.
-  </div>
-</div>
+  <p>This update is extremely important because <span class="hl-orange">Ironmen account for 27-30% of the voting population</span> and they are a ever-growing voice in the community.</p>
 
-<!-- THE FIX -->
-<div class="section">
-  <div class="sec-head">The Fix</div>
-  <div class="sec-sub">A Bond-only Coffer for Loot Key redemption</div>
-  <hr class="sec-divider">
+  <p>Jagex has revealed statistics on how much of the voting population is Ironmen.</p>
 
-  <p>The community suggestion is simple: let ironmen convert Wilderness Loot Keys into a <span class="hl-gold">Bond-only Coffer</span>. Instead of the loot itself, the value of the Loot Key is automatically sold on the GE and the resulting GP is deposited into a special coffer that can only be spent on Bonds.</p>
+  <p><span class="hl-gold">30%:</span> <a href="https://secure.runescape.com/m=news/sailing-poll-results-summary?oldschool=1" style="color:var(--gold-rich);text-decoration:none;" target="_blank">Sailing Poll Results Summary</a></p>
+  <p class="quote-line">Ironmen made up 30% of the total votes in this poll.</p>
+
+  <p><span class="hl-gold">27%:</span> <a href="https://secure.runescape.com/m=news/group-ironman-poll-summary-blog?oldschool=1" style="color:var(--gold-rich);text-decoration:none;" target="_blank">Group Ironman Poll Summary Blog</a></p>
+  <p class="quote-line">You can also see that the poll was largely driven by 'main' accounts, but Ironman accounts accounted for a sizeable ~27% of voters.</p>
+
+  <p>With polls requiring a <span class="hl-green">70% supermajority</span> to pass, and a <span class="hl-red">30% opposition</span> to fail, it is unacceptable for 30% of the community being Ironmen to basically be an "automatic no vote" due to being excluded from PvP content.</p>
+
+  <p>Ironmen have two major problems:</p>
 
   <ul class="rules-list">
-    <li>Ironmen <span class="hl-green">redeem their Loot Keys</span> at the standard Loot Key redemption NPC or chest, but instead of receiving tradeable items, the value is converted to a Bond Coffer balance.</li>
-    <li>The Bond Coffer balance can <span class="hl-green">only be spent on Bonds</span>. No raw GP enters the ironman's economy, and no GE access is created.</li>
-    <li>The conversion uses an <span class="hl-gold">automatic GE selling system</span>. Items are sold at real GE prices, not exploitable street prices. Obscure treasure trail items with inflated prices are not a problem because nobody will buy them at those prices on the real GE.</li>
-    <li>Bonds give ironmen access to <span class="hl-green">membership, cosmetics, and name changes</span>. Meaningful rewards that don't affect gameplay balance at all.</li>
+    <li>Risk is disproportionately too much for items they have to manually farm.</li>
+    <li>They are completely locked out of the reward of PKing someone.</li>
   </ul>
 
-  <div class="note-box green">
-    <span class="hl-green">No economy impact.</span> Ironmen cannot trade. This coffer cannot produce tradeable GP. The loot is sold automatically on the GE just like any other GE transaction. It is completely clean from an economy standpoint.
-  </div>
-</div>
+  <p>I think this update would be great, but it's only half of the equation due to how bad risk is for ironmen. The other half would be to pair this update with or after the release of <span class="hl-sara">Blessed Status</span>.</p>
 
-<!-- WHY IT MATTERS -->
-<div class="section">
-  <div class="sec-head">Why This Matters for PvP as a Whole</div>
-  <div class="sec-sub">One patch in a wall with many holes, but a critical one</div>
-  <hr class="sec-divider">
+  <p><span class="hl-sara">Blessed Status</span> covers what they risk. Loot Keys to Bonds-Only Coffer makes PKing not be completely worthless to them.</p>
 
-  <p>On its own, this update has a real risk of being dead on arrival. Ironmen still have <span class="hl-red">disproportionately higher risk</span> in the Wilderness than regular players. They cannot rebuy lost gear on the GE. Dying in the Wilderness costs an ironman hours of farming time that it costs a main a few minutes of GP. Even with Bond Coffer rewards, that risk imbalance is severe enough that most ironmen still will not engage.</p>
+  <p>Now I know the OSRS playerbase well enough to know that multiple people are going to ask:</p>
 
-  <p>This is why this suggestion works best <span class="hl-gold">alongside Blessed Status</span>. Blessed Status solves the risk problem. Ironmen can enter the Wilderness with a 5% death fee instead of losing everything. The Bond Coffer solves the reward problem. Ironmen now have a meaningful reason to PK. Together, they close both sides of the problem at once.</p>
+  <p class="quote-line">"Aren't people going to exploit this being GE price based by using overinflated worthless and obscure treasure trail items, and what about new items in the game that don't have a settled ge price yet?"</p>
 
-  <ul class="rules-list">
-    <li>Blessed Status alone gives ironmen a way to survive the Wilderness without catastrophic loss.</li>
-    <li>Bond Coffers alone give ironmen a reason to try PKing, but the risk is still too high to make it worth it for most.</li>
-    <li><span class="hl-green">Both together</span> make Wilderness PvP a genuinely viable and rewarding activity for ironmen for the first time ever.</li>
-    <li>30% of the OSRS playerbase now has a concrete reason to vote <span class="hl-green">yes</span> on PvP updates. That changes the polling math permanently.</li>
-  </ul>
-
-  <div class="note-box">
-    This idea has been suggested repeatedly over the years and picked up by major OSRS content creators. It has broad community support. The only remaining question is whether Jagex implements it alone as a half-measure, or pairs it with Blessed Status to make it actually land.
-  </div>
+  <p>My counterpoint is that if the Loot Keys use an <span class="hl-gold">"automatic GE selling system"</span> that sells the items on the real GE, then this should not be a problem because nobody will buy those obscure items outside for more than their street price.</p>
 
   <p style="margin-top:18px;">Community posts on this idea:</p>
   <ul class="rules-list">
-    <li><a href="https://www.reddit.com/r/2007scape/comments/1sd2ryk/give_the_troubled_pvp_scene_a_kick_by_allowing/" style="color:var(--gold);text-decoration:none;" target="_blank">Give the troubled PvP scene a kick by allowing ironmen to convert loot keys</a> - +463 upvotes (1 month ago)</li>
-    <li><a href="https://www.reddit.com/r/2007scape/comments/tkae4a/wild_coffer_an_ironman_incentive_to_pvp/" style="color:var(--gold);text-decoration:none;" target="_blank">Wild Coffer - an ironman incentive to PvP</a> - +459 upvotes (4 years ago)</li>
+    <li><a href="https://youtu.be/88kwn4dhk9U&amp;t=1017" style="color:var(--gold-rich);text-decoration:none;" target="_blank">StillFramed - "Jagex, we need to talk about the Wilderness."</a> - timestamp 17:00-17:17 (4 months ago)</li>
+    <li><a href="https://www.reddit.com/r/2007scape/comments/1sd2ryk/give_the_troubled_pvp_scene_a_kick_by_allowing/" style="color:var(--gold-rich);text-decoration:none;" target="_blank">Give the troubled PvP scene a kick by allowing ironmen to convert loot keys</a> - +463 upvotes (1 month ago)</li>
+    <li><a href="https://www.reddit.com/r/2007scape/comments/tkae4a/wild_coffer_an_ironman_incentive_to_pvp/" style="color:var(--gold-rich);text-decoration:none;" target="_blank">Wild Coffer - an ironman incentive to PvP</a> - +459 upvotes (4 years ago)</li>
+    <li><a href="https://www.reddit.com/r/2007scape/comments/1fgeh82/so_i_made_a_bet_that_a_bond_coffer_is_a_good_idea/" style="color:var(--gold-rich);text-decoration:none;" target="_blank">So I made a bet that a bond coffer is a good idea</a> - +178 upvotes (1 year ago)</li>
   </ul>
 </div>
 
