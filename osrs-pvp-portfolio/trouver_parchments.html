@@ -34,6 +34,8 @@
   --blue:      #80c0ff;
   --orange:    #ffcc8e;
   --purple:    #cc88ff;
+  --purple-lt: #ddb0ff;
+  --gold-rich: #ffd24a;
   --white:     #f0e8d0;
   --dim:       #a89060;
   --sara:      #d0e1f1;
@@ -106,7 +108,7 @@ body {
 .section:last-child { border-bottom: none; }
 
 .sec-head {
-  font-size: 27.0px;
+  font-size: 33.75px;
   color: var(--green);
   text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000;
   text-align: center;
@@ -141,6 +143,9 @@ p:last-child { margin-bottom: 0; }
 .hl-blue   { color: var(--blue); }
 .hl-orange { color: var(--orange); }
 .hl-sara   { color: var(--sara); }
+.hl-purple { color: var(--purple-lt); }
+.hl-shard  { color: var(--gold-lt); }
+.hl-sink   { color: var(--gold-rich); }
 
 /* ── ONE-SENTENCE SUMMARY BOX ── */
 .summary-box {
@@ -163,6 +168,42 @@ p:last-child { margin-bottom: 0; }
   display: block;
   margin-bottom: 9.0px;
   text-shadow: 1px 1px 0 #000;
+}
+
+/* ── PULL-QUOTE ── */
+.pull-quote {
+  position: relative;
+  background: rgba(200,155,60,0.08);
+  padding: 20.0px 26.0px 20.0px 62.0px;
+  margin: 18.0px 0;
+  font-size: 20.5px;
+  line-height: 1.62;
+  color: var(--white);
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+.pull-quote::before {
+  content: "\201C";
+  position: absolute;
+  left: 14.0px;
+  top: 2.0px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 68.0px;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.55;
+}
+.pull-quote .label {
+  font-size: 15.0px;
+  color: var(--gold-lt);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 14.0px;
+  text-shadow: 1px 1px 0 #000;
+}
+@media (max-width: 800px) {
+  .pull-quote { padding-left: 46.0px; }
+  .pull-quote::before { font-size: 52.0px; left: 10.0px; }
 }
 
 /* ── COMPARE TABLE ── */
@@ -354,6 +395,12 @@ p:last-child { margin-bottom: 0; }
 }
 .note-box.green { border-left-color: var(--green); background: rgba(0,192,0,0.06); }
 .note-box.red   { border-left-color: var(--red); background: rgba(204,34,34,0.06); }
+/* strips the frame, keeps the text colours - must follow .green/.red to win the cascade */
+.note-box.bare {
+  border: none;
+  background: none;
+  padding: 0;
+}
 
 /* ── TIERED BLESSED ── */
 .tiers {
@@ -442,8 +489,7 @@ p:last-child { margin-bottom: 0; }
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Removal of Trouver Parchments</h1>
-  <p class="tagline">Replace Trouver Parchments with tradeable item shards, eliminating GP generation concerns while making untradeables drop something meaningful.</p>
+  <h1>Full Removal of Trouver Parchments</h1>
   <div class="hero-divider"></div>
 </div>
 
@@ -453,88 +499,75 @@ p:last-child { margin-bottom: 0; }
 <!-- WHAT IS THE PROBLEM -->
 <div class="section">
   <div class="sec-head">The Problem</div>
-  <div class="sec-sub">Why Jagex hasn't removed Trouver Parchments yet</div>
   <hr class="sec-divider">
+
+  <div style="margin:18px 0;text-align:center;">
+    <img src="../quotes/TrouverProblems.png" alt="Problems with Trouver Parchments" style="max-width:100%;height:auto;border:1px solid var(--border);">
+  </div>
 
   <p>After the recent Trouver Parchment rework, Jagex stated this in their news post:</p>
 
-  <div class="summary-box">
-    <span class="label">Jagex - Gathering QoL, Trouver Changes &amp; More</span>
+  <div class="pull-quote">
     "In an ideal world, we'd do away with Trouver Parchments entirely, but it's not safe for us to take this approach without risking more raw GP generation than we're comfortable with."
+    <span class="label"><a href="https://secure.runescape.com/m=news/gathering-qol-trouver-changes--more?oldschool=1" style="color:var(--gold-lt);text-decoration:none;" target="_blank">Jagex - Gathering QoL, Trouver Changes &amp; More</a></span>
   </div>
 
-  <p>The concern is straightforward: if untradeables like Void Knight Equipment or the Fire Cape just drop freely on death in the Wilderness, that is effectively raw GP generation. The item has real value and can now be acquired without its original grind. Jagex does not want that. But this blocker has a clean solution.</p>
+  <p>The removal of Trouver Parchments was suggested many years ago in the Official OSRS PvP Feedback Discord.</p>
+
+  <div class="pull-quote">
+    "This is the approach I want to go for when we do have a chance to rework the system. My sole question is do you not think giving the PKer 5x the money will lead to abuse? E.g. Dragon defender is 240k normally, deep wildy it would be 1.2m... This would mean getting dragon defenders and dying to your friend could generate ~3m per hour? Other items will potentially have similar issues, but the dragon defender is the most obvious one to me."
+    <span class="label"><a href="https://discord.com/channels/968131480826048523/1066361399292461117/1229428288481525841" style="color:var(--gold-lt);text-decoration:none;" target="_blank">Mod Manked - responding to the community suggestion</a></span>
+  </div>
 </div>
 
 <!-- THE SOLUTION -->
 <div class="section">
-  <div class="sec-head">The Solution - Item Shards</div>
-  <div class="sec-sub">Remove GP generation from the equation entirely</div>
+  <div class="sec-head">The Solution</div>
   <hr class="sec-divider">
 
-  <p>Instead of an untradeable item dropping intact on death, it drops as <span class="hl-gold">tradeable broken or mangled shards</span> of that item. The killer gets shards they can sell on the GE. The owner needs those same shards to repair their item. No raw GP enters the game at any point.</p>
+  <p>I have the simple solution to that:</p>
 
-  <ul class="rules-list">
-    <li>On death in the Wilderness, an untradeable item <span class="hl-orange">breaks</span> and drops as tradeable <span class="hl-gold">Broken Equipment Shards</span> (e.g. Broken Void Equipment Shard, Broken Fire Cape Shard). The <a href="https://oldschool.runescape.wiki/w/(broken)" style="color:var(--gold);text-decoration:none;" target="_blank">(broken)</a> item type already exists in the game.</li>
-    <li>If you die above <span class="hl-red">Wilderness level 20</span>, the item is instead <span class="hl-red">mangled</span>, dropping as more expensive <span class="hl-red">Mangled Equipment Shards</span>. The <a href="https://oldschool.runescape.wiki/w/(mangled)" style="color:var(--red);text-decoration:none;" target="_blank">(mangled)</a> item type also already exists in the game.</li>
-    <li>The <span class="hl-green">NPC who originally sells the item</span> also sells the shards at a fixed price, forcing the GE price to stay consistent and giving players a reliable fallback.</li>
-    <li>Players can repair their item by bringing the required shards back to the same NPC. Repairing can be <span class="hl-dim">free, or carry a small gold sink fee</span>. Designer's choice.</li>
-    <li>If a friend killed you, they can simply hand the shards back. If you killed yourself by mistake, same deal.</li>
-    <li><span class="hl-green">Trouver Parchments are not needed in this system at all.</span> The shard economy replaces their function entirely.</li>
-  </ul>
+  <p>It's so easy.</p>
 
-  <div class="note-box green">
-    <span class="hl-green">No raw GP generation.</span> The current system has untradeables either break on death (returning nothing to the killer) or drop raw GP as compensation, which is exactly the GP generation Jagex is uncomfortable with. The shard system removes that raw GP drop entirely and replaces it with <span class="hl-green">built-in gold sinks</span> instead:
-    <ul class="rules-list" style="margin-top:12px;">
-      <li><span class="hl-gold">Buying shards from NPCs is a gold sink.</span> Players who want to repair quickly without hunting the GE pay the NPC directly. That gold leaves the game.</li>
-      <li><span class="hl-gold">Selling shards on the GE incurs the 2% GE tax.</span> The PKer who received the shards and lists them on the GE pays tax on the sale. Every shard transaction is taxed.</li>
-      <li><span class="hl-gold">Repairing an item could cost a combination of shards and a smaller gold fee.</span> Jagex could layer a modest flat repair charge on top of the shard cost, creating a second sink on every repair, exactly like how Barrows equipment costs gold to fix on top of the charges.</li>
-    </ul>
-  </div>
+  <p><span class="hl-purple">Void Knight Armor</span> for example, just make it break on death in the Wilderness, and then it drops a tradeable "<span class="hl-shard">Void Armor Shard</span>" for the PKer.</p>
+
+  <p>Combine the <span class="hl-orange">Broken Armor</span> + <span class="hl-shard">Armor Shard</span> to repair it.</p>
+
+  <p>At level 20+ Wilderness, you get <span class="hl-red">Mangled Armor</span> + <span class="hl-red">Mangled Armor Shard</span>.</p>
+
+  <p>If a friend killed you, they can simply hand the shards back.</p>
+
+  <p>You would be able to buy the shards from NPCs too. For example <span class="hl-green">Void Knights</span> sell <span class="hl-shard">Void Armor Shards</span>, or they could be sold by Perdu/Lost Item Shop too (probably at a markup for convenience).</p>
+
+  <p>The NPC shops also enforce the price they would trade for in the GE and give Ironmen a way to repair their items or a way to get them if no one is selling the shards.</p>
+
+  <p>Finally, existing <span class="hl-blue">Trouver Parchments</span> become coupons to buy free shards.</p>
+
+  <p>Barrows equipment could potentially receive the same shard treatment.</p>
+
+  <p>With this system, no gold is ever generated into the game. In fact, the GE and NPC Shops become <span class="hl-sink">gold sinks</span>, and repairing the item by combining the armor and shard could also be a <span class="hl-sink">gold sink</span>.</p>
+
+  <p>This design gives untradeable items a tradeable value in the Wilderness.</p>
 </div>
 
-<!-- HOW IT WORKS -->
+<!-- WHY LEVEL 20 -->
 <div class="section">
-  <div class="sec-head">How It Works in Practice</div>
-  <div class="sec-sub">A concrete example</div>
+  <div class="sec-head">Why level 20 Wilderness?</div>
   <hr class="sec-divider">
 
-  <p>Say you're PKed in level 15 Wilderness while wearing Void Knight Equipment.</p>
+  <p>Another question came up in the <a href="https://www.reddit.com/r/2007scape/comments/1u85o2b/bank_tags_trouver_system_rework_more/" style="color:var(--gold-lt);text-decoration:none;" target="_blank">Trouver System Rework</a> thread:</p>
 
-  <ul class="rules-list">
-    <li>Your Void Knight Equipment <span class="hl-orange">breaks</span>. The PKer receives a handful of tradeable <span class="hl-gold">Broken Void Equipment Shards</span>.</li>
-    <li>The PKer can sell those shards on the GE. They have real value because other players need them to repair their own gear.</li>
-    <li>You go to the Void Knight NPC and buy Broken Void Equipment Shards at a set price, or buy them cheaper on the GE if supply is healthy.</li>
-    <li>You hand the shards to the NPC to repair your Void Knight Equipment. Done.</li>
-  </ul>
+  <p>Is there a reason the team feels we MUST keep untradeables being more expensive post 20 wild?</p>
 
-  <p>Now the same scenario but above level 20 Wilderness:</p>
+  <p>Why does stepping 1 tile north make your death more expensive?</p>
 
-  <ul class="rules-list">
-    <li>Your Void Knight Equipment is <span class="hl-red">mangled</span>. The PKer receives <span class="hl-red">Mangled Void Equipment Shards</span>, worth more, reflecting the deeper risk of deep Wilderness content.</li>
-    <li>Repairing from Mangled costs more shards or more expensive shards than repairing from Broken, creating a meaningful risk gradient between low and deep Wilderness.</li>
-  </ul>
-
-  <div class="note-box">
-    This method gives untradeable items a real tradeable value in the Wilderness in a simple and straightforward way, without creating any item duplication, GP injection, or power creep. It is two new items per untradeable (Broken shard and Mangled shard), and the rest is just NPC shop entries and a death table change.
-  </div>
+  <p>I want to know why too. Maybe the veteran PKers or Jagex can help me out?</p>
 </div>
 
 <!-- TRANSITION / EXISTING PARCHMENTS -->
 <div class="section">
-  <div class="sec-head">Item Examples - Before &amp; After</div>
-  <div class="sec-sub">What actually changes for each item under the shard system</div>
+  <div class="sec-head">Item Examples</div>
   <hr class="sec-divider">
-
-  <p>The player who died keeps the <span class="hl-orange">broken</span> or <span class="hl-red">mangled</span> version of the item. The killer receives the tradeable shards. The number of shards dropped equals the number required to repair the item, so if a friend killed you, they can simply trade the shards back.</p>
-
-  <div class="note-box" style="margin-bottom:18px;">
-    <span class="hl-orange">Broken</span> = item broke on death, repaired at a cost. <span class="hl-red">Mangled</span> = item broke above level 20 Wilderness (item must be locked first), repaired at a higher cost. Items that <span class="hl-green">do not get mangled</span> above 20 Wildy have no lock option. They go broken at the same cost regardless of where in the Wilderness you die.
-  </div>
-
-  <div class="note-box red" style="margin-bottom:18px;">
-    <span class="hl-red">Under the current system:</span> to protect an item above level 20 Wilderness, you must first apply a <span class="hl-gold">Trouver Parchment</span> (~<span class="hl-gold">650k</span>) once. It now persists on the item rather than being consumed on death. However, the first death still costs roughly <span class="hl-red">1.1m</span> (parchment + 500k Perdu repair), and every subsequent death costs <span class="hl-gold">500k</span> to repair at Perdu each time. The shard system replaces this entirely.
-  </div>
 
   <div class="three-compare" style="grid-template-columns: 48px 1fr 1fr 1fr 1fr;">
     <div class="tc-header tc-empty" style="grid-column:1/3;border-bottom:1.5px solid var(--border);color:var(--gold);display:flex;align-items:center;justify-content:center;text-align:center;">Item</div>
@@ -542,135 +575,135 @@ p:last-child { margin-bottom: 0; }
     <div class="tc-header tc-skulled">Above level 20 Wilderness</div>
     <div class="tc-header tc-normal" style="color:var(--green);">Repair cost (broken / mangled)</div>
 
-    <div class="tc-empty" style="grid-column:1/6;padding:8px 12px;font-size:14px;color:var(--dim);text-shadow:1px 1px 0 #000;border-bottom:1.5px solid rgba(90,74,42,0.3);">Mangled repair costs are set at 2× the broken repair cost. Jagex would determine the actual values, but 2× is a reasonable baseline that reflects the added risk of deep Wilderness.</div>
+    <div class="tc-empty" style="grid-column:1/6;padding:8px 12px;font-size:18px;color:var(--dim);text-shadow:1px 1px 0 #000;border-bottom:1.5px solid rgba(90,74,42,0.3);">Mangled repair costs are set at 2x the broken repair cost.</div>
 
     <!-- Void Knight -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_melee_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20melee%20helm%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void melee helm</div>
     <div class="tc-cell good">1 Broken Void Helm Shard</div>
     <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
     <div class="tc-cell good">160k broken / 320k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_mage_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20mage%20helm%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void mage helm</div>
     <div class="tc-cell good">1 Broken Void Helm Shard</div>
     <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
     <div class="tc-cell good">160k broken / 320k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_ranger_helm_%28broken%29.png?75a26" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20ranger%20helm%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void ranger helm</div>
     <div class="tc-cell good">1 Broken Void Helm Shard</div>
     <div class="tc-cell mid">1 Mangled Void Helm Shard</div>
     <div class="tc-cell good">160k broken / 320k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_top_%28broken%29.png?bc0cd" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20knight%20top%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void knight top</div>
     <div class="tc-cell good">4 Broken Void Armor Shards</div>
     <div class="tc-cell mid">4 Mangled Void Armor Shards</div>
     <div class="tc-cell good">180k broken / 360k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_robe_%28broken%29.png?4afbb" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20knight%20robe%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void knight robe</div>
     <div class="tc-cell good">3 Broken Void Armor Shards</div>
     <div class="tc-cell mid">3 Mangled Void Armor Shards</div>
     <div class="tc-cell good">135k broken / 270k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Void_knight_gloves_%28broken%29.png?4afbb" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Void%20knight%20gloves%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Void knight gloves</div>
     <div class="tc-cell good">2 Broken Void Armor Shards</div>
     <div class="tc-cell mid">2 Mangled Void Armor Shards</div>
     <div class="tc-cell good">90k broken / 180k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Elite_void_top_%28broken%29.png?7a7c0" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Elite%20void%20top%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Elite void top</div>
     <div class="tc-cell good">4 Broken Elite Void Shards</div>
     <div class="tc-cell mid">4 Mangled Elite Void Shards</div>
     <div class="tc-cell good">240k broken / 480k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Elite_void_robe_%28broken%29.png?1bc1e" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Elite%20void%20robe%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Elite void robe</div>
     <div class="tc-cell good">3 Broken Elite Void Shards</div>
     <div class="tc-cell mid">3 Mangled Elite Void Shards</div>
     <div class="tc-cell good">180k broken / 360k mangled</div>
 
     <!-- Dragon defender -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dragon_defender_%28broken%29.png?8fa13" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Dragon%20defender%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Dragon defender</div>
     <div class="tc-cell good">1 Broken Dragon Defender Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">240k broken</div>
 
     <!-- Fire cape -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Fire_cape_%28broken%29.png?5abba" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Fire%20cape%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Fire cape</div>
     <div class="tc-cell good">1 Broken Fire Cape Cloth</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">150k broken</div>
 
     <!-- Infernal cape -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Infernal_cape_%28broken%29.png?80b36" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Infernal%20cape%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Infernal cape</div>
     <div class="tc-cell good">1 Broken Infernal Cape Cloth</div>
     <div class="tc-cell mid">1 Mangled Infernal Cape Cloth</div>
     <div class="tc-cell good">225k broken / 450k mangled</div>
 
     <!-- Imbued capes -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_guthix_cape_%28broken%29.png?13f14" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Imbued%20guthix%20cape%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Imbued Guthix cape</div>
     <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">96k broken</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_saradomin_cape_%28broken%29.png?19317" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Imbued%20saradomin%20cape%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Imbued Saradomin cape</div>
     <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">96k broken</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Imbued_zamorak_cape_%28broken%29.png?f36f9" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Imbued%20zamorak%20cape%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Imbued Zamorak cape</div>
     <div class="tc-cell good">1 Broken Imbued Cape Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">96k broken</div>
 
     <!-- Fighter torso -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Fighter_torso_%28broken%29.png?7ce14" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Fighter%20torso%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Fighter torso</div>
     <div class="tc-cell good">1 Broken Fighter Torso Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">150k broken</div>
 
     <!-- Ava's assembler -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Ava%27s_assembler_%28broken%29.png?2baad" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Ava's%20assembler%20(broken).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Ava's assembler</div>
     <div class="tc-cell good">1 Broken Assembler Shard</div>
     <div class="tc-cell good">Does not get mangled</div>
     <div class="tc-cell good">240k broken</div>
 
     <!-- Dizana's quiver -->
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dizana%27s_quiver_%28l%29_%28mangled%29.png?7fca1" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Dizana's%20quiver%20(l)%20(mangled).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Dizana's quiver</div>
     <div class="tc-cell good">1 Broken Quiver Shard</div>
     <div class="tc-cell mid">1 Mangled Quiver Shard</div>
     <div class="tc-cell good">270k broken / 540k mangled</div>
 
-    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="https://oldschool.runescape.wiki/images/Dizana%27s_quiver_%28l%29_%28mangled%29.png?7fca1" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
+    <div class="tc-label" style="text-align:center;justify-content:center;padding:10px 6px;"><img src="../assets/ManyItems/Dizana's%20quiver%20(l)%20(mangled).png" style="width:30px;height:30px;image-rendering:pixelated;" alt=""></div>
     <div class="tc-cell">Blessed Dizana's quiver</div>
     <div class="tc-cell good">1 Broken Blessed Quiver Shard</div>
     <div class="tc-cell mid">1 Mangled Blessed Quiver Shard</div>
     <div class="tc-cell good">300k broken / 600k mangled</div>
   </div>
 
-  <p style="margin-top:12px;font-size:16px;color:var(--dim);text-shadow:1px 1px 0 #000;">Items that say <span class="hl-green">does not get mangled</span> above 20 Wildy have no lock option. They always go broken at the same cost regardless of depth. Items that go mangled currently require locking with a Trouver Parchment before entering. Under the shard system, Trouver Parchments are removed entirely. Items that currently go mangled would simply have a more expensive shard instead.</p>
 </div>
 
 <!-- NPC SHARD COSTS -->
 <div class="section">
   <div class="sec-head">Buying Shards from NPCs</div>
-  <div class="sec-sub">Where to repair - and what it costs</div>
   <hr class="sec-divider">
 
   <p>The NPC who originally gives out or sells the item is the one who would also sell the replacement shards. If you don't want to make the trip, the GE is always an option. Other players who received shards from PKing will be selling them there.</p>
+
+  <p>All shard types can also be purchased from the <span class="hl-shard">Lost Property Shop</span> at a higher price.</p>
 
   <div class="three-compare" style="grid-template-columns: 1fr 1fr 1fr;">
     <div class="tc-header tc-normal" style="color:var(--gold);">Shard type</div>
@@ -722,66 +755,6 @@ p:last-child { margin-bottom: 0; }
     <div class="tc-cell good">300k broken / 600k mangled</div>
   </div>
 
-  <div class="note-box" style="margin-top:18px;">
-    Because NPCs sell shards at a fixed price, the GE price naturally stays anchored to that value. Players who received shards from a PK will sell at or below the NPC price. Players who need to repair cheaply can buy off the GE. The economy self-regulates without Jagex having to do anything beyond setting the NPC price once.
-  </div>
-  <div class="note-box" style="margin-top:10px;">
-    All shard types can also be purchased from the <span class="hl-gold">Lost Property Shop</span> as a last-resort option, at a higher price than the originating NPC, so players always have a fallback without having to track down the specific NPC or wait on the GE.
-  </div>
-</div>
-
-<!-- MOD MANKED QUOTE -->
-<div class="section">
-  <div class="sec-head">Jagex's Response</div>
-  <div class="sec-sub">A developer directly addressed this concept</div>
-  <hr class="sec-divider">
-
-  <div class="summary-box">
-    <span class="label">Mod Manked - responding to the community suggestion</span>
-    "This is the approach I want to go for when we do have a chance to rework the system. My sole question is do you not think giving the PKer 5x the money will lead to abuse? E.g. Dragon defender is 240k normally, deep wildy it would be 1.2m... This would mean getting dragon defenders and dying to your friend could generate ~3m per hour? Other items will potentially have similar issues, but the dragon defender is the most obvious one to me."
-  </div>
-
-  <p>This is a fair concern, and it has a straightforward answer. The abuse case Mod Manked describes is a player intentionally dying to a friend to farm Mangled Dragon Defender Shards. But this is only a problem if the shards generate <span class="hl-red">new GP</span>, and under the shard system, they don't.</p>
-
-  <ul class="rules-list">
-    <li>Shards sold on the GE are bought by players who need to repair their own gear. No new GP is created. It is a player-to-player transfer, taxed by the GE.</li>
-    <li>The NPC buys shards at a fixed price anchored to the repair cost. If Mangled Dragon Defender Shards cost 500k from Perdu, the NPC would also buy them for 500k, setting the ceiling. There is no 5x multiplication unless Jagex specifically prices mangled shards at 5x the broken price.</li>
-    <li>The shard price is set by Jagex per item, not by the tier multiplier from the existing Trouver system. Mangled shards can simply cost the same as broken shards if Jagex decides the deep Wilderness premium is not worth the abuse risk.</li>
-  </ul>
-
-  <div class="note-box green">
-    <span class="hl-green">Mod Manked already said this is the direction they want to go.</span> The abuse concern is resolvable by design. It is a matter of how shards are priced, not whether the system can exist at all.
-  </div>
-
-  <hr class="sec-divider" style="margin-top:24px;">
-
-  <p>Another question that came up in the Trouver System Rework thread:</p>
-
-  <div class="summary-box" style="border-left-color:var(--dim);background:rgba(168,144,96,0.07);">
-    <span class="label" style="color:var(--dim);">Community - Trouver System Rework discussion</span>
-    "Is there a reason the team feels we MUST keep untradeables being deleted post 20 wild? I'd be curious to hear a PKer's or Jagex's explanation for why that even needs to be a thing. Like why can't items just break and need to be repaired the same way regardless of where you die in the Wilderness? Why if I walk 1 tile north does it need to become way more expensive?"
-  </div>
-
-  <p>This is a question I don't have a personal answer to. I don't know why the level 20 distinction needs to exist, or why the cost needs to jump so sharply at that line. If any veteran PKers or Jagex would like to explain the reasoning, I'd genuinely like to hear it.</p>
-</div>
-
-<!-- TRANSITION / EXISTING PARCHMENTS -->
-<div class="section">
-  <div class="sec-head">Transitioning Away from Trouver Parchments</div>
-  <div class="sec-sub">What happens to existing parchments</div>
-  <hr class="sec-divider">
-
-  <p>Players who currently hold Trouver Parchments would not be left empty-handed:</p>
-
-  <ul class="rules-list">
-    <li>Existing Trouver Parchments would be <span class="hl-red">deleted</span> from the game at the time of this update.</li>
-    <li>Players who held them would receive a <span class="hl-gold">free voucher</span> redeemable for item shards of their choice, covering the value of the parchments they lost.</li>
-    <li>The Barrows equipment degradation system could potentially receive the same shard treatment, replacing the current GP-based repair cost with a more consistent shard economy.</li>
-  </ul>
-
-  <div class="note-box green">
-    <span class="hl-green">This is something Jagex already wants to do.</span> They said so themselves. This proposal simply gives them the mechanical path to do it safely. The blocker was always GP generation. Item shards remove that blocker entirely.
-  </div>
 </div>
 
 <div class="brick" style="opacity:0.6;"></div>
