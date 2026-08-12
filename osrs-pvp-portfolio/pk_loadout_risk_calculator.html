@@ -927,6 +927,49 @@ const PRESETS = {
     ],
     lootingBag: []
   },
+  extilebasic: {
+    label: "Tutorial Basic PKer",
+    source: "https://youtu.be/yanL6dRfqI4?t=136",
+    equipment: {
+      head:"Helm of neitiznot", cape:"Imbued saradomin cape", neck:"Amulet of glory",
+      ammo:"Dragonstone bolts (e)", weapon:"Ancient staff", body:"Mystic robe top",
+      shield:"Unholy book", legs:"Mystic robe bottom", hands:"Barrows gloves",
+      feet:"Dragon boots", ring:"Ring of shadows"
+    },
+    equipmentQty: { ammo:80 },
+    // Square 6 (row 2, column 2) is empty in the video.
+    emptySlots: [6],
+    // Listed in the order the squares actually sit in the video's inventory, reading
+    // left-to-right then down, so the rendered grid matches the screenshot rather than
+    // grouping every duplicate together.
+    inventory: [
+      // row 1
+      {name:"Black d'hide body", qty:1},
+      {name:"Rune crossbow", qty:1},
+      {name:"Saradomin brew(4)", qty:2},
+      // row 2
+      {name:"Black d'hide chaps", qty:1},
+      {name:"Saradomin brew(4)", qty:2},
+      // row 3
+      {name:"Blighted karambwan", qty:1},
+      {name:"Armadyl godsword", qty:1},
+      {name:"Saradomin brew(4)", qty:2},
+      // row 4
+      {name:"Blighted anglerfish", qty:2},
+      {name:"Saradomin brew(4)", qty:2},
+      // row 5
+      {name:"Blighted anglerfish", qty:4},
+      // row 6
+      {name:"Super combat potion(4)", qty:1},
+      {name:"Blighted anglerfish", qty:1},
+      {name:"Blighted super restore(4)", qty:2},
+      // row 7
+      {name:"Blighted ancient ice sack", qty:40},
+      {name:"Ranging potion(4)", qty:1},
+      {name:"Blighted super restore(4)", qty:2}
+    ],
+    lootingBag: []
+  },
   mine: {
     label: "Loadout I would use",
     equipment: {
@@ -1046,6 +1089,11 @@ const UNTRADEABLE = {
   // defender hilt, uncharged Ring of suffering), so these carry no GE price of
   // their own and must not be flagged as a missing price lookup.
   "Imbued zamorak cape": 0,
+  "Imbued saradomin cape": 0,
+  "Unholy book": 0,       // assembled book, untradeable - priced from its pages below
+  // Untradeable Desert Treasure II reward - no GE listing, but it's re-buyable from the
+  // Mysterious Bandit for 75,000 coins, so that re-buy is what losing it actually costs.
+  "Ring of shadows": 75000,
   "Rada's blessing 4": 0,
   "Surge potion(4)": 0,   // Varlamore potion, no GE listing
   // Pest Control gear and the Colosseum quiver - no GE listing, no tradeable form
@@ -1244,6 +1292,15 @@ const COMPONENT_COST = {
   "Crystal legs": [
     { name:"Crystal armour seed",            qty:2 },
     { name:"Enhanced crystal teleport seed", qty:100/150 }
+  ],
+  // The book itself is a free reclaim from Jossik, so what it actually costs is the four
+  // Zamorak pages that fill it - which is exactly how the wiki prices it.
+  // https://oldschool.runescape.wiki/w/Unholy_book ("Filling the unholy book currently costs...")
+  "Unholy book": [
+    { name:"Zamorak page 1", qty:1 },
+    { name:"Zamorak page 2", qty:1 },
+    { name:"Zamorak page 3", qty:1 },
+    { name:"Zamorak page 4", qty:1 }
   ],
   // Nightmare staff + volatile orb; the finished staff has no GE listing of its own.
   "Volatile nightmare staff": [
@@ -1484,16 +1541,25 @@ function renderDoll(preset, items){
   });
 }
 
-function renderItemGrid(items, kind, gridElId, overflowElId, labelNoun){
+// `emptySlots` is a list of 1-based square numbers that are deliberately left blank, so a
+// preset copied out of a screenshot can reproduce the gaps in the real inventory instead
+// of packing everything up against the top-left. Purely cosmetic: a gap is the absence of
+// an item, so nothing is added to the item list and no total or risk figure moves.
+function renderItemGrid(items, kind, gridElId, overflowElId, labelNoun, emptySlots){
   const grid = document.getElementById(gridElId);
   grid.innerHTML = '';
   const gridItems = items.filter(i=>i.kind===kind);
+  const blanks = new Set(emptySlots || []);
   const TOTAL_SLOTS = 28;
+  // Items are laid in reading order, skipping over any blank square rather than
+  // consuming an item for it.
+  let placed = 0;
   for(let i=0; i<TOTAL_SLOTS; i++){
     const div = document.createElement('div');
     div.className = 'slot';
-    const item = gridItems[i];
+    const item = blanks.has(i + 1) ? undefined : gridItems[placed];
     if(item){
+      placed++;
       attachIcon(div, item);
       if(item.stackable && item.qty > 1){
         const qty = document.createElement('span');
@@ -1508,9 +1574,9 @@ function renderItemGrid(items, kind, gridElId, overflowElId, labelNoun){
   }
 
   const overflowEl = document.getElementById(overflowElId);
-  if(gridItems.length > TOTAL_SLOTS){
+  if(gridItems.length > placed){
     overflowEl.style.display = '';
-    overflowEl.textContent = `This preset has ${gridItems.length} individual ${labelNoun} items (unstackable items each take their own slot), which is ${gridItems.length - TOTAL_SLOTS} more than the 28 slots available. Only the first 28 are shown above, but all of them are still included in the totals and risk table below.`;
+    overflowEl.textContent = `This preset has ${gridItems.length} individual ${labelNoun} items (unstackable items each take their own slot), which is ${gridItems.length - placed} more than the ${placed} slots available. Only the first ${placed} are shown above, but all of them are still included in the totals and risk table below.`;
   }else{
     overflowEl.style.display = 'none';
     overflowEl.textContent = '';
@@ -2231,7 +2297,7 @@ function render(){
   const preset = PRESETS[currentPreset];
   const items = buildItemList(preset);
   renderDoll(preset, items);
-  renderItemGrid(items, 'inventory', 'inv', 'inventoryOverflowNote', 'inventory');
+  renderItemGrid(items, 'inventory', 'inv', 'inventoryOverflowNote', 'inventory', preset.emptySlots);
   renderItemGrid(items, 'lootbag', 'lootbag', 'lootbagOverflowNote', 'looting bag');
   // visibility rather than display: the line keeps its space either way, so toggling the
   // looting bag doesn't shift everything below it.
