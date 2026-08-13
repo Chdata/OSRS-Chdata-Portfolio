@@ -970,6 +970,114 @@ const PRESETS = {
     ],
     lootingBag: []
   },
+  chinhunter1: {
+    label: "Chinchompa Hunter #1",
+    source: "https://youtu.be/yanL6dRfqI4?t=245",
+    equipment: {
+      cape:"Max cape", neck:"Phoenix necklace", weapon:"Dinh's bulwark",
+      body:"Masori body (f)", legs:"Masori chaps (f)"
+    },
+    inventory: [
+      {name:"Black chinchompa", qty:500},
+      {name:"Box trap", qty:5},
+      {name:"Royal seed pod", qty:1},
+      {name:"Blighted super restore(4)", qty:5},
+      {name:"Anglerfish", qty:3},
+      {name:"Anti-venom+(4)", qty:1},
+      // "the rest is saradomin brews" - fills the remaining 12 of 28 squares
+      {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
+  chinhunter2: {
+    label: "Chinchompa Hunter #2",
+    source: "https://youtu.be/yanL6dRfqI4?t=272",
+    equipment: {
+      head:"Justiciar faceguard", cape:"Infernal cape", neck:"Phoenix necklace",
+      weapon:"Dinh's bulwark", body:"Justiciar chestguard", legs:"Justiciar legguards",
+      hands:"Barrows gloves", feet:"Guardian boots"
+    },
+    // Same inventory as Chinchompa Hunter #1.
+    inventory: [
+      {name:"Black chinchompa", qty:500},
+      {name:"Box trap", qty:5},
+      {name:"Royal seed pod", qty:1},
+      {name:"Blighted super restore(4)", qty:5},
+      {name:"Anglerfish", qty:3},
+      {name:"Anti-venom+(4)", qty:1},
+      // "the rest is saradomin brews" - fills the remaining 12 of 28 squares
+      {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
+  chinhunter3: {
+    label: "Chinchompa Hunter #3",
+    source: "https://oldschool.runescape.wiki/w/Hunter_training#Staff_of_the_dead_(high-risk)",
+    equipment: {
+      head:"Serpentine helm", cape:"Max cape", neck:"Phoenix necklace", ammo:"Rada's blessing 4",
+      weapon:"Toxic staff of the dead", body:"Masori body (f)", shield:"Elysian spirit shield",
+      legs:"Masori chaps (f)", hands:"Barrows gloves", feet:"Boots of brimstone",
+      ring:"Ring of suffering (i)"
+    },
+    // Same inventory as Chinchompa Hunter #1.
+    inventory: [
+      {name:"Black chinchompa", qty:500},
+      {name:"Box trap", qty:5},
+      {name:"Royal seed pod", qty:1},
+      {name:"Blighted super restore(4)", qty:5},
+      {name:"Anglerfish", qty:3},
+      {name:"Anti-venom+(4)", qty:1},
+      // "the rest is saradomin brews" - fills the remaining 12 of 28 squares
+      {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
+  chinhunter4: {
+    label: "Chinchompa Hunter #4",
+    source: "https://oldschool.runescape.wiki/w/Hunter_training#Staff_of_the_dead_(high-risk)",
+    equipment: {
+      head:"Helm of neitiznot", cape:"Imbued saradomin cape", neck:"Amulet of glory",
+      ammo:"Holy blessing", weapon:"Staff of the dead", body:"Karil's leathertop",
+      shield:"Spectral spirit shield", legs:"Karil's leatherskirt", hands:"Barrows gloves",
+      feet:"Mystic boots", ring:"Seers ring (i)"
+    },
+    // Same inventory as Chinchompa Hunter #1.
+    inventory: [
+      {name:"Black chinchompa", qty:500},
+      {name:"Box trap", qty:5},
+      {name:"Royal seed pod", qty:1},
+      {name:"Blighted super restore(4)", qty:5},
+      {name:"Anglerfish", qty:3},
+      {name:"Anti-venom+(4)", qty:1},
+      // "the rest is saradomin brews" - fills the remaining 12 of 28 squares
+      {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
+  chinhunter5: {
+    label: "Chinchompa Hunter #5",
+    source: "https://oldschool.runescape.wiki/w/Hunter_training#Staff_of_the_dead_(high-risk)",
+    equipment: {
+      head:"Torag's helm", cape:"Imbued saradomin cape", neck:"Amulet of glory",
+      ammo:"Holy blessing", weapon:"Dinh's bulwark", body:"Torag's platebody",
+      legs:"Torag's platelegs", hands:"Barrows gloves", feet:"Bandos boots",
+      ring:"Granite ring (i)"
+    },
+    // Chinchompa Hunter #4's inventory with Karil's top and skirt carried instead of
+    // worn - two anglerfish come out to make room for them, keeping it at 28 squares.
+    inventory: [
+      {name:"Black chinchompa", qty:500},
+      {name:"Box trap", qty:5},
+      {name:"Royal seed pod", qty:1},
+      {name:"Karil's leathertop", qty:1},
+      {name:"Karil's leatherskirt", qty:1},
+      {name:"Blighted super restore(4)", qty:5},
+      {name:"Anglerfish", qty:1},
+      {name:"Anti-venom+(4)", qty:1},
+      {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
   mine: {
     label: "Loadout I would use",
     equipment: {
@@ -1112,7 +1220,23 @@ const UNTRADEABLE = {
   "Ava's assembler": 0,
   "Blade of saeldor": 0,
   "Avernic defender": 0,
-  "Ring of suffering (i)": 0
+  "Ring of suffering (i)": 0,   // priced from the tradeable ring in COMPONENT_COST below
+  "Seers ring (i)": 0,          // same - imbue is untradeable, the ring under it isn't
+  "Granite ring (i)": 0,        // same
+  // Untradeable, but Ava re-sells one if you lose yours - priced from that re-buy in
+  // COMPONENT_COST below. https://oldschool.runescape.wiki/w/Ava%27s_accumulator
+  "Ava's accumulator": 0,
+  // Perdu-repairable capes/hats: they're never really "lost", they come back broken and
+  // cost coins to repair, so the repair cost is described in UNTRADEABLE_BEHAVIOR rather
+  // than being ranked here as an item value (same treatment as the Infernal cape).
+  "Fire cape": 0,
+  "Fighter hat": 0,
+  // Elite Wilderness Diary reward - retrieved from the Lesser Fanatic in Edgeville for
+  // free, as many times as you like, so losing it costs nothing.
+  "Wilderness sword 4": 0,
+  // Untradeable, but Mac sells a replacement (cape + hood) for 2,376,000 coins, so that
+  // re-buy is what losing it actually costs. https://oldschool.runescape.wiki/w/Max_cape
+  "Max cape": 2376000
 };
 
 // Items that genuinely stack into a single inventory slot regardless of quantity
@@ -1134,7 +1258,8 @@ const STACKABLE_ITEMS = new Set([
   "Blighted ancient ice sack", "Zulrah's scales",
   "Dragon javelin", "Rune knife", "Earth rune", "Astral rune",
   "Varrock teleport (tablet)", "Broad bolts",
-  "Dragonstone dragon bolts (e)", "Dragonstone bolts (e)"
+  "Dragonstone dragon bolts (e)", "Dragonstone bolts (e)",
+  "Black chinchompa"
 ]);
 
 function isStackable(name, entry){
@@ -1301,6 +1426,24 @@ const COMPONENT_COST = {
     { name:"Zamorak page 2", qty:1 },
     { name:"Zamorak page 3", qty:1 },
     { name:"Zamorak page 4", qty:1 }
+  ],
+  // Not a creation recipe but the same idea: what Ava charges to replace a lost
+  // accumulator - 999 coins plus 75 steel arrows.
+  // https://oldschool.runescape.wiki/w/Ava%27s_accumulator
+  "Ava's accumulator": [
+    { name:"Coins",       qty:999 },
+    { name:"Steel arrow", qty:75 }
+  ],
+  // The imbue itself is bought with Nightmare Zone points, so what the imbued ring
+  // actually costs you is the tradeable ring underneath it.
+  "Ring of suffering (i)": [
+    { name:"Ring of suffering", qty:1 }
+  ],
+  "Seers ring (i)": [
+    { name:"Seers ring", qty:1 }
+  ],
+  "Granite ring (i)": [
+    { name:"Granite ring", qty:1 }
   ],
   // Nightmare staff + volatile orb; the finished staff has no GE listing of its own.
   "Volatile nightmare staff": [
@@ -1632,7 +1775,24 @@ const EQUIPMENT_LEVEL_REQ = {
   "Adamant longsword": 30,
   "Adamant kiteshield": 30,
   "Adamant platelegs": 30,
-  "Mithril platebody": 20
+  "Mithril platebody": 20,
+  "Masori body (f)": 80,
+  "Masori chaps (f)": 80,
+  "Dinh's bulwark": 75,
+  "Justiciar faceguard": 75,
+  "Justiciar chestguard": 75,
+  "Justiciar legguards": 75,
+  "Guardian boots": 75,
+  "Elysian spirit shield": 75,
+  "Toxic staff of the dead": 75,
+  "Staff of the dead": 75,
+  "Spectral spirit shield": 75,
+  "Karil's leathertop": 70,
+  "Karil's leatherskirt": 70,
+  "Torag's helm": 70,
+  "Torag's platebody": 70,
+  "Torag's platelegs": 70,
+  "Boots of brimstone": 70
 };
 
 // Real per-item death behaviour for the untradeable items used in these presets, since
@@ -1647,11 +1807,22 @@ const EQUIPMENT_LEVEL_REQ = {
 // lost, full stop, in every single scenario.
 const ALWAYS_LOST_ITEMS = new Set(["Looting bag"]);
 
+// Shown on any scenario where one of the protected slots was actually filled by a
+// stack, since the kept value there is a single unit rather than the whole pile.
+const STACK_NOTE = "<br><b>Stacks:</b> a stack fills one of your protected slots, but only a single item out of it is actually kept - the rest of the stack is lost like anything else. That's also why a stack is ranked by what ONE unit is worth rather than by the whole pile's value, so a big cheap stack can't outrank real gear for a protected slot.";
+
 // Charges stored inside a piece of equipment (Revenant ether in an Accursed sceptre,
 // etc). They have a real GE price and are consumed/destroyed outright on any death -
 // there is no gravestone, no reclaim fee, and no death-prevention method recovers them,
 // so their full value is added as a straight loss to every scenario below.
 const CHARGE_NOTE = "<br><b>Charges:</b> the ether loaded into your weapon is destroyed on death with no way to reclaim it, so its full GE value is added to every scenario here as a flat loss on top of any fee.";
+
+// Nightmare Zone-imbued rings: the imbue is the untradeable part, the ring underneath
+// is an ordinary GE item (which is what COMPONENT_COST prices them from above).
+const imbuedRing = (ring) => ({
+  pvm: "Dying to a monster doesn't strip the imbue at all - the ring goes to your gravestone still imbued and reclaims for free.",
+  wildy: `Only the imbued status is lost on an unprotected PvP death, and Jagex refunds the Nightmare Zone points, Zeal Tokens or Scroll of imbuing you spent on it. The tradeable ${ring} underneath is what carries the value here, and it's what a killer walks away with.`
+});
 
 const UNTRADEABLE_BEHAVIOR = {
   "Barrows gloves": {
@@ -1670,6 +1841,29 @@ const UNTRADEABLE_BEHAVIOR = {
     pvm: "Plain untradeable-item rule: gravestoned unbroken, free to reclaim. Even if somehow lost, it's a free re-buy from King Narnode Shareen at the Grand Tree for 2 coins.",
     wildy: "No tradeable form or coin value, so it's permanently lost above level 20 Wilderness if unprotected - though since it's freely replaceable for 2 coins from King Narnode, that's a trivial loss in practice, just an inconvenience mid-trip."
   },
+  "Fire cape": {
+    pvm: "Breakable, but PvM deaths don't break it: goes to your gravestone unbroken, free to reclaim.",
+    wildy: "PvP-breakable and can't be locked with a trouver parchment: you keep it in your inventory in broken form, and your killer receives its 150,000 repair cost in coins. Repairing it costs you that same 150,000 at Perdu."
+  },
+  "Fighter hat": {
+    pvm: "Breakable, but PvM deaths don't break it: goes to your gravestone unbroken, free to reclaim.",
+    wildy: "Same PvP-breakable rule as the fire cape: you keep it broken, your killer receives its 45,000 repair cost in coins, and Perdu charges you that 45,000 to make it usable again."
+  },
+  "Ava's accumulator": {
+    pvm: "Plain untradeable-item rule: gravestoned unbroken, free to reclaim.",
+    wildy: "No tradeable form or coin value, so it's permanently lost above level 20 Wilderness if unprotected - though Ava sells a replacement for 999 coins and 75 steel arrows, which is what it actually costs you."
+  },
+  "Wilderness sword 4": {
+    pvm: "Plain untradeable-item rule: gravestoned unbroken, free to reclaim.",
+    wildy: "Permanently lost above level 20 Wilderness if unprotected, but the Lesser Fanatic in Edgeville hands out replacements for free, as many times as you need - so it's a walk back to Edgeville, not a real loss."
+  },
+  "Max cape": {
+    pvm: "Plain untradeable-item rule: gravestoned unbroken, free to reclaim.",
+    wildy: "One of the wiki's listed exceptions: the max cape (and cosmetic versions with no broken state) is <b>always kept in your inventory on a PvP death</b>, protected or not, so a PKer never gets it and you never pay to replace it. Its 2,376,000 re-buy from Mac is counted in the loadout total as carried value, not as something you can lose out there."
+  },
+  "Ring of suffering (i)": imbuedRing("ring of suffering"),
+  "Seers ring (i)":        imbuedRing("Seers ring"),
+  "Granite ring (i)":      imbuedRing("granite ring"),
   "Looting bag": {
     pvm: "In the wiki's 'items that are never kept' list - disappears completely on any unsafe death, regardless of value or Protect Item. It doesn't even go to the gravestone.",
     wildy: "Same rule everywhere: always disappears completely, at any Wilderness depth and regardless of skull status. Its contents are separately handled as always-unprotected items (see the looting bag section above)."
@@ -1701,11 +1895,44 @@ function calcRisk(items){
   // real items would be wrong. Their value is applied to every scenario at the end.
   const chargeItems = items.filter(i => i.kind === 'charge');
   const chargeLoss = chargeItems.reduce((a,i)=>a+i.value,0);
-  const sortedDesc = items.filter(i => !i.untradeable && i.kind !== 'lootbag' && i.kind !== 'charge').sort((a,b)=>b.value-a.value);
+  // A stack is ONE item for the purposes of the kept-item count, but only a single unit
+  // out of it is ever actually kept - so it competes for a protected slot on the value
+  // of one unit, not the value of the whole pile. A 500-stack of black chinchompas
+  // ranks as one chinchompa, not as a quarter-million-gp "item". Unstackable entries are
+  // already split one-per-slot in buildItemList, so value === unitPrice for those.
+  const rankValue = i => (i.stackable && i.qty > 1) ? i.unitPrice : i.value;
+  const sortedDesc = items.filter(i => !i.untradeable && i.kind !== 'lootbag' && i.kind !== 'charge').sort((a,b)=>rankValue(b)-rankValue(a));
   const lootbagSorted = items.filter(i => !i.untradeable && i.kind === 'lootbag').sort((a,b)=>b.value-a.value);
 
+  // The one unit of a stack that a protected slot actually saves...
+  function keptUnitOf(item){
+    if(!(item.stackable && item.qty > 1)) return item;
+    return {...item, qty:1, value:item.unitPrice, stackOf:item.qty};
+  }
+  // ...and the rest of that stack, which is lost exactly like any unprotected item and
+  // still pays whatever fee the scenario charges.
+  function stackRemainderOf(item){
+    if(!(item.stackable && item.qty > 1)) return null;
+    return {...item, qty:item.qty-1, value:item.unitPrice*(item.qty-1), stackRemainder:true, stackOf:item.qty};
+  }
+  // Splits the ranked pool into what's genuinely kept and what's genuinely lost, with
+  // any protected stack broken into its single kept unit plus the remainder.
+  function splitKept(n){
+    const kept = [], lost = [];
+    sortedDesc.forEach((item, idx) => {
+      if(idx < n){
+        kept.push(keptUnitOf(item));
+        const rest = stackRemainderOf(item);
+        if(rest) lost.push(rest);
+      }else{
+        lost.push(item);
+      }
+    });
+    return { kept, lost };
+  }
+
   function keepTopN(n){
-    const kept = sortedDesc.slice(0, n);
+    const kept = splitKept(n).kept;
     const keptValue = kept.reduce((a,i)=>a+i.value,0);
     const nonLootbagTotal = sortedDesc.reduce((a,i)=>a+i.value,0);
     const lootbagTotal = lootbagSorted.reduce((a,i)=>a+i.value,0);
@@ -1731,6 +1958,20 @@ function calcRisk(items){
   // scenario row. sortedDesc order is preserved (most valuable first), untradeable
   // items are appended at the end with their own documented behaviour instead of a
   // GE-value-based fee, since that's how they actually work.
+  // Stacks carry their quantity in the label, and a stack split by a protected slot
+  // says which half of the split each row is, so the two rows read as one stack.
+  function breakdownLabel(item){
+    let label = item.name;
+    if(item.stackRemainder){
+      label += ` (remaining ${item.qty.toLocaleString('en-US')} of ${item.stackOf.toLocaleString('en-US')})`;
+    }else if(item.stackOf){
+      label += ` (1 kept of ${item.stackOf.toLocaleString('en-US')})`;
+    }else if(item.stackable && item.qty > 1){
+      label += ` (${item.qty.toLocaleString('en-US')})`;
+    }
+    return item.kind==='lootbag' ? label + ' (looting bag)' : label;
+  }
+
   function describeItem(item, kept, mode, opts){
     let status, cost;
     if(kept){
@@ -1761,27 +2002,43 @@ function calcRisk(items){
     } else {
       cost = 0; status = 'Kept';
     }
-    return { name: item.kind==='lootbag' ? item.name + ' (looting bag)' : item.name, value:item.value, status, cost };
+    return { name: breakdownLabel(item), value:item.value, status, cost,
+             stackSplit: !!(item.stackOf && !item.stackRemainder) };
   }
 
   function buildBreakdown(keptCount, mode, opts={}){
-    const rows = sortedDesc.map((item, idx) => describeItem(item, idx < keptCount, mode, opts));
+    const rows = [];
+    sortedDesc.forEach((item, idx) => {
+      if(idx < keptCount){
+        // Protected stack: one row for the single unit you keep, one for the rest of
+        // the pile, which takes the same fate as any unprotected item.
+        rows.push(describeItem(keptUnitOf(item), true, mode, opts));
+        const rest = stackRemainderOf(item);
+        if(rest) rows.push(describeItem(rest, false, mode, opts));
+      }else{
+        rows.push(describeItem(item, false, mode, opts));
+      }
+    });
     // Looting bag contents are never kept - they're always in the unprotected/lost
     // bucket, processed with the same scenario formula as everything else here.
     lootbagSorted.forEach(item => rows.push(describeItem(item, false, mode, opts)));
+    // Untradeables show their real replacement/repair value where they have one (a max
+    // cape's re-buy, Korasi's flat figure), since that value is already part of the
+    // loadout total - only the fee column stays at 0, because they follow their own
+    // documented rules instead of paying a GE-value-based fee.
     untradeableItems.forEach(item => {
       if(ALWAYS_LOST_ITEMS.has(item.name)){
-        rows.push({ name:item.name, value:0, status:'Always lost - not saved by Protect Item or any recovery method, in any scenario', cost:0 });
+        rows.push({ name:item.name, value:item.value, status:'Always lost - not saved by Protect Item or any recovery method, in any scenario', cost:0 });
         return;
       }
       if(mode === 'keep-all'){
-        rows.push({ name:item.name, value:0, status:'Kept (fee applies to total, see above)', cost:0 });
+        rows.push({ name:item.name, value:item.value, status:'Kept (fee applies to total, see above)', cost:0 });
         return;
       }
       const behavior = UNTRADEABLE_BEHAVIOR[item.name];
       const context = (mode==='full-loss-pvp' || mode==='full-loss-pvm') ? 'wildy' : 'pvm';
       const text = behavior ? behavior[context] : (context==='wildy' ? 'Lost (no GE value)' : 'Gravestoned (no GE value)');
-      rows.push({ name:item.name, value:0, status:text, cost:0 });
+      rows.push({ name:item.name, value:item.value, status:text, cost:0 });
     });
     return rows;
   }
@@ -1792,7 +2049,7 @@ function calcRisk(items){
   {
     const n = protectItem ? 4 : 3;
     const k = keepTopN(n);
-    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const lostItems = splitKept(n).lost.concat(lootbagSorted);
     const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
     scenarios.push({
       id:'gravestone', name:'PvM Death: Gravestone', concept:false,
@@ -1813,7 +2070,7 @@ function calcRisk(items){
   {
     const n = protectItem ? 4 : 3;
     const k = keepTopN(n);
-    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const lostItems = splitKept(n).lost.concat(lootbagSorted);
     const fee = Math.round(feeDeathsOffice(lostItems) * (ironman ? 0.5 : 1));
     scenarios.push({
       id:'deaths-office', name:"PvM Death: Death's Office", concept:false,
@@ -1829,7 +2086,7 @@ function calcRisk(items){
   {
     const n = protectItem ? 4 : 3;
     const k = keepTopN(n);
-    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const lostItems = splitKept(n).lost.concat(lootbagSorted);
     const activity = DISCOUNTED_ACTIVITIES.find(a => a.name === discountedActivityChoice) || DISCOUNTED_ACTIVITIES[0];
     const rate = discountThresholdMet ? 0.05 : 0.0125; // 5% standard, or 25% of that while discounted
     const fee = Math.round(lostItems.reduce((a,i)=> a + (i.unitPrice>=100000 ? Math.round(i.value*rate) : 0), 0) * (ironman ? 0.5 : 1));
@@ -1888,7 +2145,7 @@ function calcRisk(items){
   {
     const n = protectItem ? 4 : 3;
     const k = keepTopN(n);
-    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const lostItems = splitKept(n).lost.concat(lootbagSorted);
     const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
     scenarios.push({
       id:'pvm-wildy-neutral', name:'PvM Wilderness Death: Neutral Status', concept:false,
@@ -1907,7 +2164,7 @@ function calcRisk(items){
   {
     const n = protectItem ? 1 : 0;
     const k = keepTopN(n);
-    const lostItems = sortedDesc.slice(n).concat(lootbagSorted);
+    const lostItems = splitKept(n).lost.concat(lootbagSorted);
     const fee = Math.round(feeGravestoneTiered(lostItems) * (ironman ? 0.5 : 1));
     scenarios.push({
       id:'pvm-wildy-skull', name:'PvM Wilderness Death: Skulled', concept:false,
@@ -1953,11 +2210,12 @@ function calcRisk(items){
   // Blessed Key.
   {
     const combined = [...sortedDesc.map(i=>({...i, bucket:'broughtin'})), ...lootbagSorted.map(i=>({...i, bucket:'lootbag'}))]
-      .sort((a,b)=>b.value-a.value);
+      .sort((a,b)=>rankValue(b)-rankValue(a));
     // 'top3' mirrors Neutral Status: the 3 most valuable items (4 with Protect Item) are
-    // shielded outright, whole stacks included, exactly like items you'd keep on a
-    // normal Wilderness death. Only brought-in items qualify - looting bag contents are
-    // never kept in any scenario.
+    // shielded, exactly like items you'd keep on a normal Wilderness death - which means
+    // the same stack rule applies, a shielded stack saves one unit and the rest of the
+    // pile still pays. Only brought-in items qualify - looting bag contents are never
+    // kept in any scenario.
     const topProtected = new Set();
     if(blessedProtect === 'top3'){
       combined.filter(i => i.bucket === 'broughtin')
@@ -1979,7 +2237,9 @@ function calcRisk(items){
     // in one inventory slot). It saves one unit's worth, not the whole stack's value -
     // the remaining units in that stack still pay the normal fee rate.
     function feeableValue(item){
-      if(topProtected.has(item)) return 0;
+      if(topProtected.has(item)){
+        return Math.max(0, item.value - item.unitPrice);
+      }
       if(protectedItem && item === protectedItem){
         return Math.max(0, item.value - item.unitPrice);
       }
@@ -2015,12 +2275,19 @@ function calcRisk(items){
     const fee = MINIMUM_RISK + broughtInDisplay + lootbagDisplay;
 
     const blessedBreakdown = combined.map(item => {
-      const label = item.bucket==='lootbag' ? item.name + ' (looting bag)' : item.name;
+      const label = breakdownLabel(item);
       const rate = item.bucket==='broughtin' ? blessedRate : 0.25;
       const rateLabel = item.bucket==='broughtin' ? `${rate*100}% fee (brought into Wilderness)` : '25% fee (obtained after entering Wilderness)';
       const isProtectedStack = protectedItem && item === protectedItem;
 
       if(topProtected.has(item)){
+        if(item.qty > 1){
+          return {
+            name: label, value: item.value,
+            status: `Among your protected top items, but it's a stack - 1 unit (worth ${fmtGp(item.unitPrice)}) is kept free, the other ${(item.qty-1).toLocaleString('en-US')} still pay ${rateLabel}`,
+            cost: Math.round(feeableValue(item) * rate)
+          };
+        }
         return { name:label, value:item.value, status:'Kept - among your protected top items, no fee', cost:0 };
       }
       if(!isProtectedStack){
@@ -2114,6 +2381,10 @@ function calcRisk(items){
   // its own fee we add their full value on top as a flat, unavoidable loss. This runs
   // last so it lands on every row - including Beginner's Blessing (keeps everything,
   // but the ether still burns) and Blessed Status (no fee, it's simply gone).
+  scenarios.forEach(s => {
+    if(s.breakdown && s.breakdown.some(r => r.stackSplit)) s.note += STACK_NOTE;
+  });
+
   if(chargeLoss > 0){
     scenarios.forEach(s => {
       if(typeof s.fee === 'number'){
