@@ -904,29 +904,6 @@ const PRESETS = {
     ],
     lootingBag: []
   },
-  duelarena: {
-    label: "Duel Arena PvP",
-    source: "https://youtu.be/fgCbLa_SCBU",
-    equipment: {
-      head:"Fighter hat", cape:"Fire cape", neck:"Amulet of fury",
-      ammo:"Ancient blessing", weapon:"Ghrazi rapier",
-      body:"Bandos chestplate", shield:"Dragonfire shield", legs:"Bandos tassets",
-      hands:"Barrows gloves", feet:"Dragon boots", ring:"Lightbearer"
-    },
-    inventory: [
-      {name:"Dragon claws", qty:1},
-      {name:"Voidwaker", qty:1},
-      {name:"Super attack(4)", qty:1},
-      {name:"Super strength(4)", qty:1},
-      {name:"Super defence(4)", qty:1},
-      // 300 Vengeance casts - 10 earth, 4 astral, 2 death each
-      // (https://oldschool.runescape.wiki/w/Vengeance)
-      {name:"Earth rune", qty:3000},
-      {name:"Astral rune", qty:1200},
-      {name:"Death rune", qty:600}
-    ],
-    lootingBag: []
-  },
   extilebasic: {
     label: "Tutorial Basic PKer",
     source: "https://youtu.be/yanL6dRfqI4?t=136",
@@ -994,8 +971,9 @@ const PRESETS = {
     source: "https://youtu.be/yanL6dRfqI4?t=272",
     equipment: {
       head:"Justiciar faceguard", cape:"Infernal cape", neck:"Phoenix necklace",
-      weapon:"Dinh's bulwark", body:"Justiciar chestguard", legs:"Justiciar legguards",
-      hands:"Barrows gloves", feet:"Guardian boots"
+      ammo:"Rada's blessing 4", weapon:"Dinh's bulwark", body:"Justiciar chestguard",
+      legs:"Justiciar legguards", hands:"Barrows gloves", feet:"Guardian boots",
+      ring:"Ring of suffering (i)"
     },
     // Same inventory as Chinchompa Hunter #1.
     inventory: [
@@ -1075,6 +1053,48 @@ const PRESETS = {
       {name:"Anglerfish", qty:1},
       {name:"Anti-venom+(4)", qty:1},
       {name:"Saradomin brew(4)", qty:12}
+    ],
+    lootingBag: []
+  },
+  maxf2p: {
+    label: "F2P PKer",
+    source: "https://youtu.be/J8ZBX3OENIk",
+    equipment: {
+      head:"Coif", cape:"Black cape", neck:"Amulet of strength", ammo:"Adamant arrow",
+      weapon:"Maple shortbow", body:"Iron chainbody", legs:"Green d'hide chaps",
+      hands:"Green d'hide vambraces", feet:"Leather boots"
+    },
+    equipmentQty: { ammo:75 },
+    inventory: [
+      {name:"Rune 2h sword", qty:1},
+      {name:"Rune warhammer", qty:1},
+      {name:"Strength potion(4)", qty:1},
+      {name:"Anchovy pizza", qty:5},
+      // Swordfish take over the rest of the food, filling the remaining 20 of 28 squares
+      {name:"Swordfish", qty:20}
+    ],
+    lootingBag: []
+  },
+  duelarena: {
+    label: "Duel Arena PvP",
+    source: "https://youtu.be/fgCbLa_SCBU",
+    equipment: {
+      head:"Fighter hat", cape:"Fire cape", neck:"Amulet of fury",
+      ammo:"Ancient blessing", weapon:"Ghrazi rapier",
+      body:"Bandos chestplate", shield:"Dragonfire shield", legs:"Bandos tassets",
+      hands:"Barrows gloves", feet:"Dragon boots", ring:"Lightbearer"
+    },
+    inventory: [
+      {name:"Dragon claws", qty:1},
+      {name:"Voidwaker", qty:1},
+      {name:"Super attack(4)", qty:1},
+      {name:"Super strength(4)", qty:1},
+      {name:"Super defence(4)", qty:1},
+      // 300 Vengeance casts - 10 earth, 4 astral, 2 death each
+      // (https://oldschool.runescape.wiki/w/Vengeance)
+      {name:"Earth rune", qty:3000},
+      {name:"Astral rune", qty:1200},
+      {name:"Death rune", qty:600}
     ],
     lootingBag: []
   },
@@ -1259,7 +1279,7 @@ const STACKABLE_ITEMS = new Set([
   "Dragon javelin", "Rune knife", "Earth rune", "Astral rune",
   "Varrock teleport (tablet)", "Broad bolts",
   "Dragonstone dragon bolts (e)", "Dragonstone bolts (e)",
-  "Black chinchompa"
+  "Black chinchompa", "Adamant arrow"
 ]);
 
 function isStackable(name, entry){
@@ -1765,6 +1785,10 @@ const EQUIPMENT_LEVEL_REQ = {
   "Ring of suffering (i)": 75,
   "Black d'hide body": 40,
   "Black d'hide chaps": 40,
+  "Green d'hide chaps": 40,
+  "Green d'hide vambraces": 40,
+  "Maple shortbow": 30,
+  "Coif": 20,
   "Occult necklace": 70,
   "Accursed sceptre": 70,
   "Bloodbark helm": 60,
