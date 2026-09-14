@@ -213,7 +213,7 @@
         var isObj = (item && typeof item === 'object');
         var name = isObj ? item.src : item;
         var img = document.createElement('img');
-        img.src = '../pvpisdying/' + name;
+        img.src = 'pvpisdying/' + name;
         img.loading = (i === 0) ? 'eager' : 'lazy';
         img.alt = (isObj && item.alt) ? item.alt : '';
 
