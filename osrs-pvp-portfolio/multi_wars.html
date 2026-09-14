@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Wars - Team PvP Deathmatch Minigame</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+
+
+.hero-icon { font-size: 2.95rem; display: block; margin-bottom: 0.5rem; }
+
+.hero h1 {
+  font-family: 'RSUF', serif;
+  font-size: 2.3625rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.0625rem 0 #000, -0.125rem 0.0625rem 0 #000, 0.125rem -0.0625rem 0 #000, -0.125rem -0.0625rem 0 #000, 0.0625rem 0.125rem 0 #000, -0.0625rem 0.125rem 0 #000, 0.125rem 0.125rem 0 #000, -0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+.hero-tag {
+  display: inline-block;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  border: 0.0625rem solid #5a4a2a;
+  padding: 0.125rem 0.625rem;
+  text-shadow: none;
+}
+
+.sec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  font-weight: normal;
+  color: var(--green-bright);
+  text-align: center;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.04em;
+}
+.sec-sub {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0.0625rem 0.0625rem 0 #000;
+}
+
+.subsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin: 0.875rem 0 0.375rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+
+em { color: var(--orange-rs); font-style: normal; }
+.hl-green { color: var(--green-rs); }
+.hl-red   { color: var(--red-rs); }
+.hl-purple { color: var(--purple-rs); }
+.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 0.7375rem; background: none; }
+.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 0.7375rem; background: none; }
+
+/* Three-column mode grid */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.mode-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.125rem;
+  padding: 0.875rem 0.75rem;
+  background: rgba(0,0,0,0.25);
+  text-align: center;
+}
+.mode-box.casual { border-color: var(--green-rs); background: rgba(0,192,0,0.06); }
+.mode-box.comp   { border-color: var(--yellow-rs); background: rgba(255,204,0,0.06); }
+.mode-icon { font-size: 1.75rem; display: block; margin-bottom: 0.375rem; }
+.mode-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  font-weight: normal;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.mode-box.casual .mode-name { color: var(--green-rs); }
+.mode-box.comp .mode-name   { color: var(--yellow-rs); }
+.mode-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Bracket grid */
+.bracket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.bracket-box {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.25);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+}
+.bracket-box.nov { border-left-color: var(--green-rs); }
+.bracket-box.int { border-left-color: var(--yellow-rs); }
+.bracket-box.vet { border-left-color: var(--red-rs); }
+.bracket-label {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.bracket-box.nov .bracket-label { color: var(--green-rs); }
+.bracket-box.int .bracket-label { color: var(--yellow-rs); }
+.bracket-box.vet .bracket-label { color: var(--red-rs); }
+.bracket-range { font-size: 0.925rem; color: var(--white-rs); }
+
+/* ELO rank grid */
+.rank-row {
+  display: flex;
+  gap: 0.375rem;
+  margin: 0.625rem 0;
+  flex-wrap: wrap;
+}
+.rank-chip {
+  flex: 1;
+  min-width: 5.625rem;
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.5rem 0.375rem;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+}
+.rank-chip .rank-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.1875rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.rank-chip .rank-pts { font-size: 0.8125rem; color: var(--text-dim); }
+.rank-chip.bronze .rank-name { color: #cd7f32; }
+.rank-chip.silver .rank-name { color: #c0c0c0; }
+.rank-chip.gold   .rank-name { color: #ffd700; }
+.rank-chip.plat   .rank-name { color: #80d8ff; }
+.rank-chip.diamond .rank-name { color: var(--purple-rs); }
+
+/* Reward grid */
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+}
+.reward-box {
+  background: rgba(0,0,0,0.3);
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.0625rem;
+}
+.reward-box.special { border-left-color: var(--yellow-rs); }
+.reward-box.premium { border-left-color: var(--purple-rs); }
+.reward-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.reward-box.premium .reward-name { color: var(--purple-rs); }
+.reward-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; margin: 0; }
+
+/* Format boxes */
+.format-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.format-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+}
+.format-box.main { border-color: var(--yellow-rs); background: rgba(255,204,0,0.05); }
+.format-size {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  color: var(--yellow-rs);
+  display: block;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+}
+.format-box:not(.main) .format-size { font-size: 1.25rem; color: var(--text-dim); }
+.format-label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.format-box.main .format-label { color: var(--orange-rs); }
+.format-box p { font-size: 0.8125rem; color: var(--text-dim); margin-top: 0.375rem; line-height: 1.45; }
+.note-box.red   { border-left-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.note-box.red strong   { color: var(--red-rs); }
+.note-box.blue strong  { color: var(--blue-rs); }
+
+.important-label {
+  display: inline-block;
+  font-family: 'RSUF', serif;
+  font-size: 0.7375rem;
+  color: var(--red-rs);
+  border: 0.0625rem solid var(--red-rs);
+  padding: 0.0625rem 0.375rem;
+  margin-right: 0.375rem;
+  vertical-align: middle;
+  letter-spacing: 0.06em;
+}
+
+/* ============ RESEARCH LAB ADDITIONS ============ */
+
+/* Team split boxes (reuse mode-box, add blu/red) */
+.mode-box.blu { border-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
+.mode-box.red { border-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.mode-box.blu .mode-name { color: var(--blue-rs); }
+.mode-box.red .mode-name { color: var(--red-rs); }
+
+/* Phase timeline */
+.phase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.phase-box {
+  border: 0.0625rem solid #4a3a22;
+  border-top: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.28);
+  padding: 0.875rem 0.75rem 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.phase-box.p1 { border-top-color: var(--green-rs); }
+.phase-box.p2 { border-top-color: var(--yellow-rs); }
+.phase-box.p3 { border-top-color: var(--red-rs); }
+.phase-num {
+  font-family: 'RSUF', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.phase-title {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.phase-box.p1 .phase-title { color: var(--green-rs); }
+.phase-box.p2 .phase-title { color: var(--yellow-rs); }
+.phase-box.p3 .phase-title { color: var(--red-rs); }
+.phase-box p { font-size: 0.825rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Blueprint arsenal cards */
+.bp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.bp-card {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.3);
+  padding: 0.6875rem 0.8125rem;
+  border-radius: 0.0625rem;
+}
+.bp-card.offense { border-left-color: var(--red-rs); }
+.bp-card.defense { border-left-color: var(--blue-rs); }
+.bp-card.utility { border-left-color: var(--green-rs); }
+.bp-card.trap    { border-left-color: var(--purple-rs); }
+.bp-card.sun     { border-left-color: var(--yellow-rs); }
+.bp-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3125rem;
+}
+.bp-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+  line-height: 1.2;
+}
+.bp-tag {
+  font-family: 'RSUF', serif;
+  font-size: 0.65625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.375rem;
+  border: 0.0625rem solid currentColor;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bp-card.offense .bp-tag { color: var(--red-rs); }
+.bp-card.defense .bp-tag { color: var(--blue-rs); }
+.bp-card.utility .bp-tag { color: var(--green-rs); }
+.bp-card.trap    .bp-tag { color: var(--purple-rs); }
+.bp-card.sun     .bp-tag { color: var(--yellow-rs); }
+.bp-card p { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+.bp-meta {
+  margin-top: 0.4375rem;
+  padding-top: 0.375rem;
+  border-top: 0.0625rem solid rgba(90,74,42,0.45);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.bp-meta b { color: var(--white-rs); font-weight: normal; }
+.bp-credit { color: #8a7a52; }
+.bp-star { color: var(--yellow-rs); }
+.bp-card.pick { box-shadow: inset 0 0 0 0.0625rem rgba(255,204,0,0.4); background: rgba(255,204,0,0.05); }
+.credit-link { color: var(--blue-rs); text-decoration: underline; text-underline-offset: 0.125rem; }
+.credit-link:hover { color: var(--yellow-rs); }
+
+/* Objective tracker (orbs -> shield -> anchor) */
+.obj-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0.875rem 0 0.375rem;
+}
+.obj-step {
+  border: 0.0625rem solid #4a3a22;
+  background: rgba(0,0,0,0.3);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+  border-radius: 0.0625rem;
+  min-width: 6rem;
+}
+.obj-step .obj-ic { font-size: 1.5rem; display: block; margin-bottom: 0.1875rem; }
+.obj-step .obj-lb {
+  font-family: 'RSUF', serif;
+  font-size: 0.7625rem;
+  color: var(--white-rs);
+  display: block;
+  line-height: 1.25;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.obj-step .obj-sub { font-size: 0.6875rem; color: var(--text-dim); }
+.obj-arrow { color: var(--orange-rs); font-size: 1.125rem; align-self: center; }
+.obj-step.orbs   { border-color: var(--blue-rs); }
+.obj-step.shield { border-color: var(--yellow-rs); }
+.obj-step.anchor { border-color: var(--red-rs); }
+
+.arena-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 0.25rem; font-size: 0.875rem; }
+.arena-table caption { text-align: left; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 1rem; letter-spacing: 0.04em; padding-bottom: 0.375rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.arena-table th { text-align: left; background: var(--stone-panel); color: var(--text-body); border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; font-weight: normal; letter-spacing: 0.03em; }
+.arena-table td { border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; color: var(--text-dim); line-height: 1.45; vertical-align: top; background: var(--stone-mid); }
+.arena-table td.arena-name { color: var(--text-body); white-space: nowrap; }
+.arena-table td.arena-img { width: 11.25rem; padding: 0.3125rem; }
+.arena-table td.arena-img img { display: block; width: 100%; height: auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.125rem; }
+.steps-list { list-style: none; counter-reset: step; padding: 0; margin: 0.5rem 0 0.5rem 0.875rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.steps-list li { counter-increment: step; position: relative; padding-left: 1.125rem; margin-bottom: 0.375rem; }
+.steps-list li:last-child { margin-bottom: 0; }
+.steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
+</style>
+</head>
+<body>
+<!-- BACK TO PORTFOLIO -->
+<div class="back-bar">
+  <a href="../index.html" class="back-link">&#8249; Back to Portfolio</a>
+</div>
+<div class="outer">
+
+  <div class="brick-strip"></div>
+  <div class="brick-strip offset"></div>
+
+  <div class="hero">
+    <img class="hero-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAMAAACnUt2HAAAAAXNSR0IArs4c6QAAABhQTFRFAAAAHyEg/85KkZKSpqamwMDAmZqZpUoAto3rdAAAAAF0Uk5TAEDm2GYAAABrSURBVHjaXc9RCgUxCEPRXLXz9r/jB1YnMP0oycEKlQD5TOWcVTeO1YXqMFZIVttqFbbVrIJT2WZNKsespM2jT2H0Uo8KaJsF882Iftsrkgg0+tz0mhRvIiImsdrhph9ika73EhfZIfQ58AdhvgGtLESuqgAAAABJRU5ErkJggg==" alt="Multicombat" style="width:3.75rem;height:3.5625rem;image-rendering:pixelated;margin:0 auto 0.5rem;transform:translateX(-0.125rem);">
+    <h1>Multi Wars</h1>
+  </div>
+
+  <div class="brick-strip offset"></div>
+  <div class="brick-strip"></div>
+
+  <div class="content">
+
+    <div class="section">
+      <p>Before you read this idea, I want to make things super clear, I think the main focus of PvP changes right now should go towards improving our existing PvP activities between the Wilderness and existing safe PvP minigames, before we think about new avenues of PvP.</p>
+
+      <p>Plus any new activities will split the current PvP population even more. Now is not the right time for this concept.</p>
+
+      <p>That said, I had a funny thought recently.</p>
+
+      <p>New PvP minigame:</p>
+
+      <p><span style="color:#90ee90;">Wars</span></p>
+
+      <p>Just <span style="color:#90ee90;">Wars</span>.</p>
+
+      <p>Or y'know, we could call it <span style="color:#90ee90;">Multi Wars</span>... or keep the name <span style="color:#ccc;">Clan Wars</span>. It's just an extension of <span style="color:#ccc;">Clan Wars</span>.</p>
+
+      <p>...</p>
+
+      <p>You get a <span style="color:#ccc;">Soul Wars</span> lobby of two randomly assigned teams. <span class="hl-blue">100 players per team for a total of 200 players.</span></p>
+
+      <p>The two teams fight to the death in multi and that's the only goal.</p>
+
+      <p>There is a <span style="color:#ff8a8a;">15 minute timer.</span> At the end it's battle royale style fog that kills everyone.</p>
+
+      <ul style="list-style:none;padding:0;margin:0.5rem 0;display:flex;flex-direction:column;gap:0.4375rem;color:var(--text-body);font-size:0.96875rem;line-height:1.5;">
+        <li><span class="hl-blue">Style 1:</span> Everyone gets 5 lives (arena mode)</li>
+        <li><span class="hl-blue">Style 2:</span> The team with the most kills wins (team death match)</li>
+        <li><span class="hl-blue">Style 3:</span> First team to 100 kills wins (team death match arena)</li>
+        <li><span class="hl-blue">Style 4:</span> Your team gets points equal to the 10% of the combat level of players you kill. Most points wins.</li>
+      </ul>
+
+      <p>Give it a <span class="hl-yellow">reward shop</span> so people play it.</p>
+
+      <p>The premise of <span style="color:#90ee90;">Multi Wars</span> is that if players can enjoy the experience in a <span class="hl-green">safe PvP minigame</span>, that could be their gateway to try it out later in a real Wilderness clan scenario.</p>
+
+      <p>So many PKers tell me how much fun clan multi in the Wilderness is. <span class="hl-purple">This is guaranteed to be great.</span></p>
+
+      <p>Quite literally, Jagex could just take the <span style="color:#ccc;">Clan Wars</span> <span style="color:#ddb0ff;">Purple Portal</span> and set it up with basic minigame infrastructure.</p>
+
+      <ol class="steps-list">
+        <li>Set it up with a lobby on one world.</li>
+        <li>Give it a standard ruleset (<span style="color:#ff8a8a;">15 minute team death match most kills</span>).</li>
+        <li>Choose a random arena every round.</li>
+        <li><span class="hl-yellow">Reward shop.</span></li>
+        <li>Done.</li>
+      </ol>
+
+      <p><span style="color:#90ee90;">This minigame is pretty much already fully created.</span> It just needs a viable reward shop attached to it and players would enjoy it.</p>
+
+      <p><a href="https://oldschool.runescape.wiki/w/Clan_Wars" target="_blank" rel="noopener" style="color:var(--yellow-rs);">You can visit the wiki page for Clan Wars to see just how much is already created.</a></p>
+
+      <p>There's a lot of unused space in the caves below the <span style="color:#ccc;">Ferox Enclave</span>. That's the perfect space for the lobby.</p>
+
+      <hr class="sec-divider">
+
+      <p>Or so that's what I would say, but before Jagex considers converting this into a real PvP minigame, I think Jagex would do better to first improve the Wilderness and our other PvP minigames.</p>
+
+      <p><span style="color:#ff8a8a;">Why make this one if we can't make the other ones good?</span></p>
+    </div>
+
+  </div><!-- end .content -->
+
+  <div class="footer">Player-Made Design Document - Not Official - @Chdata</div>
+
+</div><!-- end .outer -->
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" class="back-to-top">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+</body>
+</html>

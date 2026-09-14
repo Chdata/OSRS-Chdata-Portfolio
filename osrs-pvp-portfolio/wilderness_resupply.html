@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wilderness Resupply</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+
+
+.hero-icon { font-size: 2.95rem; display: block; margin-bottom: 0.5rem; }
+
+.hero h1 {
+  font-family: 'RSUF', serif;
+  font-size: 2.3625rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.0625rem 0 #000, -0.125rem 0.0625rem 0 #000, 0.125rem -0.0625rem 0 #000, -0.125rem -0.0625rem 0 #000, 0.0625rem 0.125rem 0 #000, -0.0625rem 0.125rem 0 #000, 0.125rem 0.125rem 0 #000, -0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+.hero h2 {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: 400;
+  color: var(--yellow-rs);
+  letter-spacing: 0.12em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.hero-tag {
+  display: inline-block;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  border: 0.0625rem solid #5a4a2a;
+  padding: 0.125rem 0.625rem;
+  text-shadow: none;
+}
+
+.sec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  font-weight: normal;
+  color: var(--green-bright);
+  text-align: center;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  margin: 2.5rem 0 1.125rem;
+  letter-spacing: 0.04em;
+}
+.sec-sub {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0.0625rem 0.0625rem 0 #000;
+}
+
+.subsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.21875rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin: 2.125rem 0 0.5rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.subsubsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #80c0ff;
+  margin: 1.5rem 0 0.375rem;
+  letter-spacing: 0.03em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+
+em { color: var(--orange-rs); font-style: normal; }
+.hl-green { color: var(--green-rs); }
+.hl-red   { color: var(--red-rs); }
+.hl-purple { color: var(--purple-rs); }
+.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 0.7375rem; background: none; }
+.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 0.7375rem; background: none; }
+
+/* Three-column mode grid */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.mode-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.125rem;
+  padding: 0.875rem 0.75rem;
+  background: rgba(0,0,0,0.25);
+  text-align: center;
+}
+.mode-box.casual { border-color: var(--green-rs); background: rgba(0,192,0,0.06); }
+.mode-box.comp   { border-color: var(--yellow-rs); background: rgba(255,204,0,0.06); }
+.mode-icon { font-size: 1.75rem; display: block; margin-bottom: 0.375rem; }
+.mode-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  font-weight: normal;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.mode-box.casual .mode-name { color: var(--green-rs); }
+.mode-box.comp .mode-name   { color: var(--yellow-rs); }
+.mode-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Bracket grid */
+.bracket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.bracket-box {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.25);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+}
+.bracket-box.nov { border-left-color: var(--green-rs); }
+.bracket-box.int { border-left-color: var(--yellow-rs); }
+.bracket-box.vet { border-left-color: var(--red-rs); }
+.bracket-label {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.bracket-box.nov .bracket-label { color: var(--green-rs); }
+.bracket-box.int .bracket-label { color: var(--yellow-rs); }
+.bracket-box.vet .bracket-label { color: var(--red-rs); }
+.bracket-range { font-size: 0.925rem; color: var(--white-rs); }
+
+/* ELO rank grid */
+.rank-row {
+  display: flex;
+  gap: 0.375rem;
+  margin: 0.625rem 0;
+  flex-wrap: wrap;
+}
+.rank-chip {
+  flex: 1;
+  min-width: 5.625rem;
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.5rem 0.375rem;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+}
+.rank-chip .rank-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.1875rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.rank-chip .rank-pts { font-size: 0.8125rem; color: var(--text-dim); }
+.rank-chip.bronze .rank-name { color: #cd7f32; }
+.rank-chip.silver .rank-name { color: #c0c0c0; }
+.rank-chip.gold   .rank-name { color: #ffd700; }
+.rank-chip.plat   .rank-name { color: #80d8ff; }
+.rank-chip.diamond .rank-name { color: var(--purple-rs); }
+
+/* Reward grid */
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+}
+.reward-box {
+  background: rgba(0,0,0,0.3);
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.0625rem;
+}
+.reward-box.special { border-left-color: var(--yellow-rs); }
+.reward-box.premium { border-left-color: var(--purple-rs); }
+.reward-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.reward-box.premium .reward-name { color: var(--purple-rs); }
+.reward-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; margin: 0; }
+
+/* Format boxes */
+.format-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.format-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+}
+.format-box.main { border-color: var(--yellow-rs); background: rgba(255,204,0,0.05); }
+.format-size {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  color: var(--yellow-rs);
+  display: block;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+}
+.format-box:not(.main) .format-size { font-size: 1.25rem; color: var(--text-dim); }
+.format-label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.format-box.main .format-label { color: var(--orange-rs); }
+.format-box p { font-size: 0.8125rem; color: var(--text-dim); margin-top: 0.375rem; line-height: 1.45; }
+.note-box.red   { border-left-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.note-box.red strong   { color: var(--red-rs); }
+.note-box.blue strong  { color: var(--blue-rs); }
+
+.important-label {
+  display: inline-block;
+  font-family: 'RSUF', serif;
+  font-size: 0.7375rem;
+  color: var(--red-rs);
+  border: 0.0625rem solid var(--red-rs);
+  padding: 0.0625rem 0.375rem;
+  margin-right: 0.375rem;
+  vertical-align: middle;
+  letter-spacing: 0.06em;
+}
+
+/* ============ RESEARCH LAB ADDITIONS ============ */
+
+/* Team split boxes (reuse mode-box, add blu/red) */
+.mode-box.blu { border-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
+.mode-box.red { border-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.mode-box.blu .mode-name { color: var(--blue-rs); }
+.mode-box.red .mode-name { color: var(--red-rs); }
+
+/* Phase timeline */
+.phase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.phase-box {
+  border: 0.0625rem solid #4a3a22;
+  border-top: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.28);
+  padding: 0.875rem 0.75rem 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.phase-box.p1 { border-top-color: var(--green-rs); }
+.phase-box.p2 { border-top-color: var(--yellow-rs); }
+.phase-box.p3 { border-top-color: var(--red-rs); }
+.phase-num {
+  font-family: 'RSUF', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.phase-title {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.phase-box.p1 .phase-title { color: var(--green-rs); }
+.phase-box.p2 .phase-title { color: var(--yellow-rs); }
+.phase-box.p3 .phase-title { color: var(--red-rs); }
+.phase-box p { font-size: 0.825rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Blueprint arsenal cards */
+.bp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.bp-card {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.3);
+  padding: 0.6875rem 0.8125rem;
+  border-radius: 0.0625rem;
+}
+.bp-card.offense { border-left-color: var(--red-rs); }
+.bp-card.defense { border-left-color: var(--blue-rs); }
+.bp-card.utility { border-left-color: var(--green-rs); }
+.bp-card.trap    { border-left-color: var(--purple-rs); }
+.bp-card.sun     { border-left-color: var(--yellow-rs); }
+.bp-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3125rem;
+}
+.bp-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+  line-height: 1.2;
+}
+.bp-tag {
+  font-family: 'RSUF', serif;
+  font-size: 0.65625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.375rem;
+  border: 0.0625rem solid currentColor;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bp-card.offense .bp-tag { color: var(--red-rs); }
+.bp-card.defense .bp-tag { color: var(--blue-rs); }
+.bp-card.utility .bp-tag { color: var(--green-rs); }
+.bp-card.trap    .bp-tag { color: var(--purple-rs); }
+.bp-card.sun     .bp-tag { color: var(--yellow-rs); }
+.bp-card p { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+.bp-meta {
+  margin-top: 0.4375rem;
+  padding-top: 0.375rem;
+  border-top: 0.0625rem solid rgba(90,74,42,0.45);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.bp-meta b { color: var(--white-rs); font-weight: normal; }
+.bp-credit { color: #8a7a52; }
+.bp-star { color: var(--yellow-rs); }
+.bp-card.pick { box-shadow: inset 0 0 0 0.0625rem rgba(255,204,0,0.4); background: rgba(255,204,0,0.05); }
+.credit-link { color: var(--blue-rs); text-decoration: underline; text-underline-offset: 0.125rem; }
+.credit-link:hover { color: var(--yellow-rs); }
+
+/* Objective tracker (orbs -> shield -> anchor) */
+.obj-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0.875rem 0 0.375rem;
+}
+.obj-step {
+  border: 0.0625rem solid #4a3a22;
+  background: rgba(0,0,0,0.3);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+  border-radius: 0.0625rem;
+  min-width: 6rem;
+}
+.obj-step .obj-ic { font-size: 1.5rem; display: block; margin-bottom: 0.1875rem; }
+.obj-step .obj-lb {
+  font-family: 'RSUF', serif;
+  font-size: 0.7625rem;
+  color: var(--white-rs);
+  display: block;
+  line-height: 1.25;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.obj-step .obj-sub { font-size: 0.6875rem; color: var(--text-dim); }
+.obj-arrow { color: var(--orange-rs); font-size: 1.125rem; align-self: center; }
+.obj-step.orbs   { border-color: var(--blue-rs); }
+.obj-step.shield { border-color: var(--yellow-rs); }
+.obj-step.anchor { border-color: var(--red-rs); }
+
+.arena-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 0.25rem; font-size: 0.875rem; }
+.arena-table caption { text-align: left; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 1rem; letter-spacing: 0.04em; padding-bottom: 0.375rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.arena-table th { text-align: left; background: var(--stone-panel); color: var(--text-body); border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; font-weight: normal; letter-spacing: 0.03em; }
+.arena-table td { border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; color: var(--text-dim); line-height: 1.45; vertical-align: top; background: var(--stone-mid); }
+.arena-table td.arena-name { color: var(--text-body); white-space: nowrap; }
+.arena-table td.arena-img { width: 11.25rem; padding: 0.3125rem; }
+.arena-table td.arena-img img { display: block; width: 100%; height: auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.125rem; }
+.steps-list { list-style: none; counter-reset: step; padding: 0; margin: 0.5rem 0 0.5rem 0.875rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.steps-list li { counter-increment: step; position: relative; padding-left: 1.125rem; margin-bottom: 0.375rem; }
+.steps-list li:last-child { margin-bottom: 0; }
+.steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
+.doc-list { list-style: none; padding: 0; margin: 0.625rem 0; display: flex; flex-direction: column; gap: 0.4375rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.doc-list li { position: relative; padding-left: 1.125rem; }
+.doc-list li::before { content: '\25AA'; position: absolute; left: 0; top: 0; color: var(--yellow-rs); }
+.doc-img { display: block; max-width: 100%; height: auto; margin: 0.875rem auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.1875rem; }
+.qa-q { color: var(--text-body); }
+.qa-q strong { color: var(--yellow-rs); }
+.stat-table-wrap { margin: 1.875rem 0; overflow-x: auto; }
+.stat-table { border-collapse: collapse; font-size: 0.7875rem; width: 100%; }
+.stat-table th, .stat-table td { border: 0.0625rem solid var(--stone-border); padding: 0.25rem 0.3125rem; text-align: right; white-space: nowrap; }
+.stat-table thead th { background: var(--stone-panel); color: var(--text-body); font-weight: normal; text-align: center; padding: 0.1875rem 0.375rem; }
+.stat-table thead tr:first-child th { color: var(--yellow-rs); }
+.stat-table thead th img { width: 1.0625rem; height: auto; display: inline-block; vertical-align: middle; }
+.stat-table tbody td { color: var(--text-dim); background: var(--stone-mid); }
+.stat-table tbody td.set-name { color: var(--text-body); text-align: left; padding-right: 0.875rem; }
+.img-carousel { margin: 0.875rem 0 0.375rem; }
+.ic-label { text-align: center; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 0.9375rem; letter-spacing: 0.03em; margin-bottom: 0.5rem; min-height: 1.125rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.ic-stage { position: relative; width: 100%; height: 18.75rem; display: flex; align-items: center; justify-content: center; background: var(--stone-mid); border: 0.0625rem solid var(--stone-border); border-radius: 0.25rem; overflow: hidden; }
+.ic-slide { display: none; max-width: calc(100% - 5.625rem); max-height: 17.5rem; width: auto; height: auto; }
+.ic-slide.active { display: block; }
+.ic-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; background: var(--stone-panel); border: 0.0625rem solid var(--stone-border); color: var(--yellow-rs); font-size: 0.9375rem; width: 2.125rem; height: 2.875rem; cursor: pointer; border-radius: 0.1875rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.ic-arrow:hover { border-color: var(--yellow-rs); background: var(--stone-dark); }
+.ic-arrow.ic-disabled { opacity: 0.28; cursor: default; }
+.ic-left { left: 0.375rem; }
+.ic-right { right: 0.375rem; }
+.ic-counter { text-align: center; color: var(--text-dim); font-size: 0.75rem; margin-top: 0.5rem; }
+
+.doc-fig { max-width: 40rem; margin: 1.25rem auto; text-align: center; }
+.doc-fig.narrow { max-width: 23.75rem; }
+.doc-fig img { max-width: 100%; height: auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.25rem; background: var(--stone-mid); box-shadow: 0 0.1875rem 0.75rem rgba(0,0,0,0.4); }
+.doc-fig.tall img { max-height: 38.75rem; width: auto; }
+.doc-fig figcaption { color: var(--text-dim); font-size: 0.75rem; margin-top: 0.375rem; font-style: italic; }
+.nest-list { list-style: none; padding: 0; margin: 0.25rem 0 0.25rem 1.375rem; display: flex; flex-direction: column; gap: 0.375rem; color: var(--text-dim); font-size: 0.9125rem; line-height: 1.5; }
+.nest-list li { position: relative; padding-left: 1rem; }
+.nest-list li::before { content: '\2013'; position: absolute; left: 0; top: 0; color: var(--yellow-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
+</style>
+</head>
+<body>
+<!-- BACK TO PORTFOLIO -->
+<div class="back-bar">
+  <a href="../index.html" class="back-link">&#8249; Back to Portfolio</a>
+</div>
+<div class="outer">
+
+  <div class="brick-strip"></div>
+  <div class="brick-strip offset"></div>
+
+  <div class="hero">
+    <img class="hero-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAMAAACnUt2HAAAAAXNSR0IArs4c6QAAABhQTFRFAAAAHyEg/85KkZKSpqamwMDAmZqZpUoAto3rdAAAAAF0Uk5TAEDm2GYAAABrSURBVHjaXc9RCgUxCEPRXLXz9r/jB1YnMP0oycEKlQD5TOWcVTeO1YXqMFZIVttqFbbVrIJT2WZNKsespM2jT2H0Uo8KaJsF882Iftsrkgg0+tz0mhRvIiImsdrhph9ika73EhfZIfQ58AdhvgGtLESuqgAAAABJRU5ErkJggg==" alt="Multicombat" style="width:3.75rem;height:3.5625rem;image-rendering:pixelated;margin:0 auto 0.5rem;transform:translateX(-0.125rem);">
+    <h1>Wilderness Resupply</h1>
+  </div>
+
+  <div class="brick-strip offset"></div>
+  <div class="brick-strip"></div>
+
+  <div class="content">
+    <div class="section">
+
+      <p>Wilderness Resupply is a concept I wrote in my thread from 3 years ago where essentially you'd have ways to replenish your food and potions without leaving the Wilderness.</p>
+
+      <p>Many of my suggestions focus on this idea of being able to actually stay inside the Wilderness for an extended trip without leaving the Wilderness.</p>
+
+      <p>It would also be useful for PvMers and anti-PKers to keep their supplies topped up for when a PKer inevitably comes after them, because it's a common criticism that if you engage in the non-PKing parts of the Wilderness, <span style="color:#ff8a8a;">you will be using up your supplies and be unprepared when PKers come after you</span>.</p>
+
+      <p>Naturally, if longer trips in the Wilderness were to be a thing, you'd need a way to replenish your food and potions without going back to a bank.</p>
+
+      <div class="sec-head">Resupply Ideas</div>
+
+      <p><span style="color:#80c0ff;">So here's some creative ideas I thought of for facilitating Wilderness Resupply:</span></p>
+
+      <ul class="doc-list">
+        <li>Roaming Wilderness Rogues who drop a <span style="color:#ddb0ff;">Rogue's Backpack</span> containing a basic inventory of supplies. This backpack could function similarly to the <span style="color:#80c0ff;">"Supplies"</span> item from Tombs of Amascut, except maybe with the inability to store supplies in it and with it falling apart when you've looted it.</li>
+        <li><span style="color:#80c0ff;">Barehanded Fishing Spots</span> conveniently located next to Volcanic Geysers to cook on.</li>
+        <li>Grab branches from any tree and start a barehanded mini-fire to cook on.</li>
+        <li>Steal some rations from poorly guarded crates at the Dark Warrior's fortress.</li>
+        <li>Maybe loot bandages from those Dark Warrior Fortress crates you can use on your teammates.</li>
+        <li><span style="color:#ddb0ff;">Wildertrees, Wilderbushes, Wilderberries</span> in Callisto's boss room.</li>
+        <li><span style="color:#ddb0ff;">Champion Ghost</span> or <span style="color:#ddb0ff;">Reward Coffins</span> at Vet'tion that give blighted supplies... or a <span style="color:#ddb0ff;">Cursed Gold Chalice</span> that crumbles to dust once you've drunk all its wine. And a <span style="color:#ddb0ff;">Cursed Turkey Platter</span> - a true meal fit for a king.</li>
+        <li>What would you eat from Venenatis's room? I don't wanna think about it.</li>
+        <li>Or I guess you could rip open one of the web cocoons and pull out the backpack of a dead adventurer, which happens to be full of blighted supplies. You know... the <span style="color:#ddb0ff;">Rogue's Backpack</span>.</li>
+        <li><span style="color:#80c0ff;">Limited access supply banks</span> around the Wilderness that you can only access when <span style="color:#80c0ff;">out-of-combat</span>, which only let you access food, potions, runes, and ammo.</li>
+        <li>I can come up with these all day.</li>
+      </ul>
+
+      <p>Generally, you would not be able to access these while in combat.</p>
+
+      <p>Interestingly enough, ideas similar to this were talked about a lot in the official OSRS PvP Feedback Discord, and <span style="color:#90ee90;">now Wilderness Bosses, Revenants, and Wilderness Agility all actually do drop extra blighted supplies</span> for you to be able to resupply.</p>
+
+      <p><span style="color:#90ee90;">So it's definitely an idea that Jagex likes.</span></p>
+
+    </div>
+
+  </div><!-- end .content -->
+
+  <div class="footer">Player-Made Design Document - Not Official - @Chdata</div>
+
+</div><!-- end .outer -->
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" class="back-to-top">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+</body>
+</html>

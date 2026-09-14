@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Fix Castle Wars</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+
+
+.hero-icon { font-size: 2.95rem; display: block; margin-bottom: 0.5rem; }
+
+.hero h1 {
+  font-family: 'RSUF', serif;
+  font-size: 2.3625rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.0625rem 0 #000, -0.125rem 0.0625rem 0 #000, 0.125rem -0.0625rem 0 #000, -0.125rem -0.0625rem 0 #000, 0.0625rem 0.125rem 0 #000, -0.0625rem 0.125rem 0 #000, 0.125rem 0.125rem 0 #000, -0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+.hero h2 {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: 400;
+  color: var(--yellow-rs);
+  letter-spacing: 0.12em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.hero-tag {
+  display: inline-block;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  border: 0.0625rem solid #5a4a2a;
+  padding: 0.125rem 0.625rem;
+  text-shadow: none;
+}
+
+.sec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  font-weight: normal;
+  color: var(--green-bright);
+  text-align: center;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  margin: 2.5rem 0 1.125rem;
+  letter-spacing: 0.04em;
+}
+.sec-sub {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0.0625rem 0.0625rem 0 #000;
+}
+
+.subsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.21875rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin: 2.125rem 0 0.5rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+
+em { color: var(--orange-rs); font-style: normal; }
+.hl-green { color: var(--green-rs); }
+.hl-red   { color: var(--red-rs); }
+.hl-purple { color: var(--purple-rs); }
+.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 0.7375rem; background: none; }
+.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 0.7375rem; background: none; }
+
+/* Three-column mode grid */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.mode-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.125rem;
+  padding: 0.875rem 0.75rem;
+  background: rgba(0,0,0,0.25);
+  text-align: center;
+}
+.mode-box.casual { border-color: var(--green-rs); background: rgba(0,192,0,0.06); }
+.mode-box.comp   { border-color: var(--yellow-rs); background: rgba(255,204,0,0.06); }
+.mode-icon { font-size: 1.75rem; display: block; margin-bottom: 0.375rem; }
+.mode-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  font-weight: normal;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.mode-box.casual .mode-name { color: var(--green-rs); }
+.mode-box.comp .mode-name   { color: var(--yellow-rs); }
+.mode-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Bracket grid */
+.bracket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.bracket-box {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.25);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+}
+.bracket-box.nov { border-left-color: var(--green-rs); }
+.bracket-box.int { border-left-color: var(--yellow-rs); }
+.bracket-box.vet { border-left-color: var(--red-rs); }
+.bracket-label {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.bracket-box.nov .bracket-label { color: var(--green-rs); }
+.bracket-box.int .bracket-label { color: var(--yellow-rs); }
+.bracket-box.vet .bracket-label { color: var(--red-rs); }
+.bracket-range { font-size: 0.925rem; color: var(--white-rs); }
+
+/* ELO rank grid */
+.rank-row {
+  display: flex;
+  gap: 0.375rem;
+  margin: 0.625rem 0;
+  flex-wrap: wrap;
+}
+.rank-chip {
+  flex: 1;
+  min-width: 5.625rem;
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.5rem 0.375rem;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+}
+.rank-chip .rank-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.1875rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.rank-chip .rank-pts { font-size: 0.8125rem; color: var(--text-dim); }
+.rank-chip.bronze .rank-name { color: #cd7f32; }
+.rank-chip.silver .rank-name { color: #c0c0c0; }
+.rank-chip.gold   .rank-name { color: #ffd700; }
+.rank-chip.plat   .rank-name { color: #80d8ff; }
+.rank-chip.diamond .rank-name { color: var(--purple-rs); }
+
+/* Reward grid */
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+}
+.reward-box {
+  background: rgba(0,0,0,0.3);
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.0625rem;
+}
+.reward-box.special { border-left-color: var(--yellow-rs); }
+.reward-box.premium { border-left-color: var(--purple-rs); }
+.reward-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.reward-box.premium .reward-name { color: var(--purple-rs); }
+.reward-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; margin: 0; }
+
+/* Format boxes */
+.format-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.format-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+}
+.format-box.main { border-color: var(--yellow-rs); background: rgba(255,204,0,0.05); }
+.format-size {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  color: var(--yellow-rs);
+  display: block;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+}
+.format-box:not(.main) .format-size { font-size: 1.25rem; color: var(--text-dim); }
+.format-label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.format-box.main .format-label { color: var(--orange-rs); }
+.format-box p { font-size: 0.8125rem; color: var(--text-dim); margin-top: 0.375rem; line-height: 1.45; }
+.note-box.red   { border-left-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.note-box.red strong   { color: var(--red-rs); }
+.note-box.blue strong  { color: var(--blue-rs); }
+
+.important-label {
+  display: inline-block;
+  font-family: 'RSUF', serif;
+  font-size: 0.7375rem;
+  color: var(--red-rs);
+  border: 0.0625rem solid var(--red-rs);
+  padding: 0.0625rem 0.375rem;
+  margin-right: 0.375rem;
+  vertical-align: middle;
+  letter-spacing: 0.06em;
+}
+
+/* ============ RESEARCH LAB ADDITIONS ============ */
+
+/* Team split boxes (reuse mode-box, add blu/red) */
+.mode-box.blu { border-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
+.mode-box.red { border-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.mode-box.blu .mode-name { color: var(--blue-rs); }
+.mode-box.red .mode-name { color: var(--red-rs); }
+
+/* Phase timeline */
+.phase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.phase-box {
+  border: 0.0625rem solid #4a3a22;
+  border-top: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.28);
+  padding: 0.875rem 0.75rem 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.phase-box.p1 { border-top-color: var(--green-rs); }
+.phase-box.p2 { border-top-color: var(--yellow-rs); }
+.phase-box.p3 { border-top-color: var(--red-rs); }
+.phase-num {
+  font-family: 'RSUF', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.phase-title {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.phase-box.p1 .phase-title { color: var(--green-rs); }
+.phase-box.p2 .phase-title { color: var(--yellow-rs); }
+.phase-box.p3 .phase-title { color: var(--red-rs); }
+.phase-box p { font-size: 0.825rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Blueprint arsenal cards */
+.bp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.bp-card {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.3);
+  padding: 0.6875rem 0.8125rem;
+  border-radius: 0.0625rem;
+}
+.bp-card.offense { border-left-color: var(--red-rs); }
+.bp-card.defense { border-left-color: var(--blue-rs); }
+.bp-card.utility { border-left-color: var(--green-rs); }
+.bp-card.trap    { border-left-color: var(--purple-rs); }
+.bp-card.sun     { border-left-color: var(--yellow-rs); }
+.bp-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3125rem;
+}
+.bp-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+  line-height: 1.2;
+}
+.bp-tag {
+  font-family: 'RSUF', serif;
+  font-size: 0.65625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.375rem;
+  border: 0.0625rem solid currentColor;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bp-card.offense .bp-tag { color: var(--red-rs); }
+.bp-card.defense .bp-tag { color: var(--blue-rs); }
+.bp-card.utility .bp-tag { color: var(--green-rs); }
+.bp-card.trap    .bp-tag { color: var(--purple-rs); }
+.bp-card.sun     .bp-tag { color: var(--yellow-rs); }
+.bp-card p { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+.bp-meta {
+  margin-top: 0.4375rem;
+  padding-top: 0.375rem;
+  border-top: 0.0625rem solid rgba(90,74,42,0.45);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.bp-meta b { color: var(--white-rs); font-weight: normal; }
+.bp-credit { color: #8a7a52; }
+.bp-star { color: var(--yellow-rs); }
+.bp-card.pick { box-shadow: inset 0 0 0 0.0625rem rgba(255,204,0,0.4); background: rgba(255,204,0,0.05); }
+.credit-link { color: var(--blue-rs); text-decoration: underline; text-underline-offset: 0.125rem; }
+.credit-link:hover { color: var(--yellow-rs); }
+
+/* Objective tracker (orbs -> shield -> anchor) */
+.obj-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0.875rem 0 0.375rem;
+}
+.obj-step {
+  border: 0.0625rem solid #4a3a22;
+  background: rgba(0,0,0,0.3);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+  border-radius: 0.0625rem;
+  min-width: 6rem;
+}
+.obj-step .obj-ic { font-size: 1.5rem; display: block; margin-bottom: 0.1875rem; }
+.obj-step .obj-lb {
+  font-family: 'RSUF', serif;
+  font-size: 0.7625rem;
+  color: var(--white-rs);
+  display: block;
+  line-height: 1.25;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.obj-step .obj-sub { font-size: 0.6875rem; color: var(--text-dim); }
+.obj-arrow { color: var(--orange-rs); font-size: 1.125rem; align-self: center; }
+.obj-step.orbs   { border-color: var(--blue-rs); }
+.obj-step.shield { border-color: var(--yellow-rs); }
+.obj-step.anchor { border-color: var(--red-rs); }
+
+.arena-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 0.25rem; font-size: 0.875rem; }
+.arena-table caption { text-align: left; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 1rem; letter-spacing: 0.04em; padding-bottom: 0.375rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.arena-table th { text-align: left; background: var(--stone-panel); color: var(--text-body); border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; font-weight: normal; letter-spacing: 0.03em; }
+.arena-table td { border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; color: var(--text-dim); line-height: 1.45; vertical-align: top; background: var(--stone-mid); }
+.arena-table td.arena-name { color: var(--text-body); white-space: nowrap; }
+.arena-table td.arena-img { width: 11.25rem; padding: 0.3125rem; }
+.arena-table td.arena-img img { display: block; width: 100%; height: auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.125rem; }
+.steps-list { list-style: none; counter-reset: step; padding: 0; margin: 0.5rem 0 0.5rem 0.875rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.steps-list li { counter-increment: step; position: relative; padding-left: 1.125rem; margin-bottom: 0.375rem; }
+.steps-list li:last-child { margin-bottom: 0; }
+.steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
+.doc-list { list-style: none; padding: 0; margin: 0.625rem 0; display: flex; flex-direction: column; gap: 0.4375rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.doc-list li { position: relative; padding-left: 1.125rem; }
+.doc-list li::before { content: '\25AA'; position: absolute; left: 0; top: 0; color: var(--yellow-rs); }
+.doc-img { display: block; max-width: 100%; height: auto; margin: 0.875rem auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.1875rem; }
+.qa-q { color: var(--text-body); }
+.qa-q strong { color: var(--yellow-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
+</style>
+</head>
+<body>
+<!-- BACK TO PORTFOLIO -->
+<div class="back-bar">
+  <a href="../index.html" class="back-link">&#8249; Back to Portfolio</a>
+</div>
+<div class="outer">
+
+  <div class="brick-strip"></div>
+  <div class="brick-strip offset"></div>
+
+  <div class="hero">
+    <div style="display:flex;align-items:center;justify-content:center;gap:1.125rem;flex-wrap:wrap;">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAB4UlEQVR42tVWO0sEMRD+Jvs4X1haaSNYChY2imBhK4qnaOGbA7UU/4c2Nir4AhvlUBR7G0EQCwtBUMFCf4IIspvE4jZ3e7vZp1o4cFw2m/2++WYmkxBijSRSmaRIhDiwvp6u0AeO64bm7h5eI4lJgc+MDAAAmGEAAEyDYa98lcr/ubHB6lhwXh0fXVzDrHJ1lAAArhSVfwBAOoKvtunQ3PH2EgBJNQIPWBnnHFPLOzA8RXmN+QHVL0j0E6tL8uTSVmVELLQwTonrOnXPJzsr1coy/S8Ed8IeeGSCOyCmJ5GCJ4dIKy+gZHb4M3OIzLTgqbZboFBCBHlAcyuIMl2ehJcDnQKWVX5pnOdXEKwSKTikFJgfrXktpMRi0cX+qZk/RCoMi0XXew6vUe+SiCL3gQKoNEDyrZF1c2rdbpmyJVnnmQrV4bmlTXLmjaazIHjqZvdX9j8ImFfeuk7Afiv+USSRBELw2OqII0kk8AOnJVGeB0lYHHjm4zEpB1HgWUgjckBybGEjvk3nVFa7tnAOCQ4KHO5nB2uJIBOlTU1HJund7EgO9XejuXOmIokYWj8uUbAMPDy9hcAKBRMtjQ2wbQtNDTZs28LjyzsAoL13FcQMvN2uAwBu7p9B2S65mU9p+gZ6ULYU+EARYgAAAABJRU5ErkJggg==" alt="Saradomin banner" style="width:4.5rem;height:5.625rem;image-rendering:pixelated;flex:0 0 auto;">
+      <h1 style="margin:0;">Let's Fix Castle Wars</h1>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAB30lEQVR42rVWv0vDQBh9d5emtRTEpeDgIjiIiAouVUFQxE10F/8PwaHQwf/CydGpgqMuYh0EHQTBCg4t+GPTipaau3Nokuby+2h8ELi7JO993/u+u4QgFkQiFSSJZIgjq8xPBV74tazA2s39c6Qwcch3t1YAAJQxAIDBKI5OLlLFv7ez6o4F5+74uH4Jw5lM2yMh7AgtpMYk7ylzLiVqp9cAJHEFhJCgVLWytr0MXXAhwMiAx/DeACiGBaMqB3WKUa03wIWwhfTQ41y5vByG8qDlNNKgUHbN423h6nPVesNt3eE98Yh4GshvUXbwiygCaezQhRHoAhaeqrs3u53gGo9ujFCLwjKR3U6A/OblKzED1SLPBnFErprt0KjTIpABI8SNlv52UJkYjSVIykIRsH4+Yf18uvNG6yNAlsaW2CKnidC/dvv+jYVyUU/AH/3ieEmruIkCcd57xfqbS7NNtU9QRv9XIE4k07MoTCQzAYPQUJFMM3BE/vW49otkLhCRAZH7a9PgXMT2dLqPfsRGs2xeg6ob5/D8IZH0YGMm4rdTEgIQub40i7lcD8z2722sjHyO4f6xFXgtnzdQGinANHMoFkyYZg4PT20AwGa5AEaBs9du/7i5a4Lo/eTqQpI/WTC0OLG0vCYAAAAASUVORK5CYII=" alt="Zamorak banner" style="width:4.5rem;height:5.625rem;image-rendering:pixelated;flex:0 0 auto;">
+    </div>
+  </div>
+
+  <div class="brick-strip offset"></div>
+  <div class="brick-strip"></div>
+
+  <div class="content">
+
+    <div class="section">
+      <div class="sec-head">Castle Wars Reward Shop</div>
+
+      <p>Similar to what I suggest for <a href="lets_fix_soul_wars.html" style="color:var(--yellow-rs);">Soul Wars</a>, Jagex could bring back the "better" Castle Wars supply crate rewards and <span style="color:#90ee90;">lock it behind quest points</span>.</p>
+
+      <p>I think it would make a lot of sense because the main 3 gods have a lot of tie-in to quests in Runescape.</p>
+
+      <p>That alone would do wonders for the minigame.</p>
+
+      <p>In Pre-EoC, the Castle Wars reward armor was also the best-in-slot damage armor for the minigame. I think it would be great if OSRS Castle Wars did similar, but it might not be necessary.</p>
+
+      <p>We also had these nice capes, and they did actually encourage me to play Castle Wars more. I really would like to have these capes again.</p>
+
+      <ul class="doc-list">
+        <li>Castle Wars Flag Cape (achieved most flag captures in a match)</li>
+        <li>Castle Wars Kills Cape (achieved most kills in a match)</li>
+        <li>Castle Wars Hobbyist Cape (played 500 games of Castle Wars)</li>
+        <li>Castle Wars Enthusiast Cape (played 1000 games of Castle Wars)</li>
+        <li>Castle Wars Professional Cape (played 5000 games of Castle Wars)</li>
+      </ul>
+
+      <div class="sec-head">Castle Wars Team Stacking &amp; Rigging</div>
+
+      <p>It would be good if, on the official Castle Wars worlds, the teams were randomly assigned at round start to reduce the ability for people to stack teams. It could be a <span class="hl-blue">weighted scramble</span>, so the players with the highest levels and strong equipment are evenly distributed between both teams.</p>
+
+      <p>Similar to what Soul Wars does!</p>
+
+      <p>I guarantee you that won't completely prevent team stacking, but it would help.</p>
+
+      <p>Also, there is the problem of some players intentionally wasting barricades by putting them into bad spots.</p>
+
+      <p>This is like the one thing out of everything that I can't think of a solution for. I think the only thing that would help against that would be if the minigame were so active, that players deal with it themselves.</p>
+
+      <p><span style="color:#80c0ff;">nate_4ev</span> says:</p>
+
+      <div style="border-left:0.1875rem solid var(--stone-border);padding-left:0.875rem;margin:0.375rem 0;">
+        <p>The largest issue now is the bonus ticket for ties. There's literally groups of people trying to force ties in theme worlds now. It is pretty bad that you need to call a clan to play the game properly (which is even harder because of guthix portal).</p>
+
+        <p>Like a tie is 3 tickets for everyone, and a loss is 2 tickets, while a win is 3 tickets (unless you hold them to 0, then it is 4 tickets). This has incentivized people to force draws with points, so they actively sabotage their teams to make it happen.</p>
+      </div>
+
+      <div class="sec-head">Castle Wars Crossbow</div>
+
+      <p>Castle Wars bolts are fake dragon bolts, requiring a dragon crossbow to use. The dragon crossbow is a much more difficult item to obtain than a rune crossbow for ironmen, and rune crossbows cannot fire Castle Wars bolts.</p>
+
+      <p>It would be great for ironmen and lower level players if Castle Wars offered a <span class="hl-yellow">"Castle Wars Crossbow"</span> that acted as basically a "fake dragon crossbow".</p>
+
+      <div class="sec-head">Castle Wars Bolts and Arrows</div>
+
+      <p>I would love to see Castle Wars Bolts and Arrows changed to <span class="hl-yellow">Minigame Bolts and Arrows</span>, allowing them to be used in Clan Wars, Soul Wars, and Pest Control.</p>
+
+      <p>Likewise the aforementioned Castle Wars Crossbow could simply be a <span class="hl-yellow">Minigame Crossbow</span> and allowed in all PvP minigames.</p>
+
+      <p>These Minigamae Bolts and Arrows could then be also added to the reward tables for Spoils of War and other reward shops.</p>
+
+      <p>Overall, both of these add some more reward incentive for minigames in general.</p>
+
+      <div class="sec-head">Gear Disparity Problems in Castle Wars</div>
+
+      <p>I think Castle Wars is one of the safe PvP minigames that is the most susceptible to <span style="color:#ff8a8a;">gear disparity problems</span> where rich players dominate everyone by using the most powerful equipment.</p>
+
+      <p>This turns a supposedly casual-friendly activity into something not so casual-friendly.</p>
+
+      <p>For my solutions to that, see my other page about <a href="lets_fix_minigames.html" style="color:var(--yellow-rs);">"Improvements for Multiple PvP Minigames"</a>.</p>
+
+      <div class="sec-head">AFKing in Castle Wars</div>
+
+      <p>Let's take a look at people being AFK at Castle Wars.</p>
+
+      <p>It's easy to write this off as not being such a big deal. It takes an extreme amount of hours of gameplay to get that decorative armor, and these guys aren't really in the way of anyone actually playing the game.</p>
+
+      <p style="margin-top:1.375rem;"><span style="color:#ff8a8a;">But there are cons to that.</span></p>
+
+      <ol class="steps-list">
+        <li>It makes the minigame look dead and look bad.</li>
+        <li>It demotivates people from actually playing it, especially when they know they can just AFK too.</li>
+        <li>It's less fun if everyone on your team isn't helping.</li>
+      </ol>
+
+      <p><span style="color:#90ee90;">The pros to fixing it are:</span></p>
+
+      <ol class="steps-list">
+        <li>More real activity for Castle Wars.</li>
+        <li>The activity would be more fun for players who are actually playing it.</li>
+        <li>Less people would be rewarded for "gaming the system".</li>
+      </ol>
+
+      <p style="margin-top:1.375rem;"><span style="color:#ddb0ff;">Historically, it has been hard for anyone to imagine how Castle Wars could deal with AFK players.</span></p>
+
+      <ol class="steps-list">
+        <li>You can't have an activity meter because playing defense often means you will naturally AFK as you wait for the enemy to come by.</li>
+        <li>You can't just base activity on kills or damage, again because you might not do that while playing defense.</li>
+        <li>You can't even reward or track a player trying to capture the flag, because it can be considered strategically <span style="color:#ff8a8a;">griefing</span> if anyone other than a maxed player in maxed gear tries to capture the flag, as there is a very real possibly the enemy team can kill a lower leveled player and take their own flag, making it almost uncapturable.</li>
+        <li>You can't track players placing barricades or interacting with objects in the minigame, because that could lead to <span style="color:#ff8a8a;">griefing and boosting</span> and does not measure true participation.</li>
+      </ol>
+
+      <p style="margin-top:1.375rem;"><span style="color:#ff8a8a;">So what can we do without affecting the people actually playing the actual game?</span></p>
+
+      <p>Seriously, you can just minimize the game and do anything else for <span style="color:#80c0ff;">20 minutes</span> and still get all of the rewards.</p>
+
+      <p>Well, I've had to deal with this exact same problem in my own Team Fortress 2 servers, in a game mode where it's perfectly sensible to play in a way where you avoid the enemy and build up a defensive position and you might not see action for minutes at a time.</p>
+
+      <p><span style="color:#90ee90;">All we need is a completely simple movement-based AFK timer.</span></p>
+
+      <ol class="steps-list">
+        <li>Add AFK detection to the main Castle Wars world only.</li>
+        <li>If you are detected as "AFK", a timer will count how long you are marked as "AFK".</li>
+        <li>If you move, rotate your camera, or interact with your screen at all, the AFK timer resets, and you are fine.</li>
+        <li>It only tracks when you are outside of spawn.</li>
+        <li>If you are marked "AFK" for <span style="color:#80c0ff;">2.5 minutes</span>, you are kicked from the game.</li>
+        <li>If you are just following a player, you will be marked "AFK" for as long as you do that.</li>
+        <li>If you are reaching the final <span style="color:#80c0ff;">30 seconds</span> before you get AFK kicked, you'll get warnings in your chatbox every <span style="color:#80c0ff;">10 seconds</span>.</li>
+        <li>If you are reaching the final <span style="color:#80c0ff;">5 seconds</span> before you get AFK kicked, you'll get warnings in your chatbox every <span style="color:#80c0ff;">second</span>.</li>
+      </ol>
+
+      <p style="margin-top:1.375rem;">That's it.</p>
+
+      <p>We don't need to track damage players do or what they do with barricades. They just need to interact with their game once every <span style="color:#80c0ff;">2.5 minutes</span>.</p>
+
+      <p>A player playing defense is already likely to be naturally doing this or be paying attention enough to do that.</p>
+
+      <p>Players on offense are definitely already moving. Yet it will still require just enough attention and maintenance from someone trying to go AFK, that they may as well just actually play at that point.</p>
+
+      <p>The aim is not to completely eliminate AFKing. Naturally, players will do their best to figure out how to still AFK with this in place.</p>
+
+      <p>For example, they might use an <span style="color:#ff8a8a;">auto-clicker or a script or macro</span> that rotates their camera.</p>
+
+      <p>The thing is, my goal is to reduce AFKing as much as possible, not to completely eliminate it, because we probably can't completely eliminate it.</p>
+
+      <p>The truly hardcore AFKers can probably just do it away from the main Castle Wars world.</p>
+
+      <p>Also, macros like that are a <span style="color:#ff8a8a;">bannable offense</span>.</p>
+
+      <p>It's still meaningful if this change were to discourage <span style="color:#90ee90;">97%</span> of players from AFKing because they don't want to risk getting banned over Castle Wars.</p>
+
+      <p>I want to also point out that this 100% should be considered a Game Integrity change for the health of Castle Wars.</p>
+      <div class="sec-head">Won't Cloggers / AFKers complain?</div>
+
+      <ol class="steps-list">
+        <li>It's game integrity.</li>
+        <li>If it's really that big of a concern, I am mainly asking for this change <span style="color:#90ee90;">on the main Castle Wars world only</span> where you can also earn Plaudits. Then people who really want to AFK can do it off-world.</li>
+      </ol>
+
+      <p>I want to point out, that Soul Wars does actually get AFKed.</p>
+
+      <p>Source: <a href="https://youtu.be/HplWK4R5SVM" target="_blank" rel="noopener" style="color:var(--yellow-rs);">The ZealGains Method</a></p>
+
+      <p>But it does not get AFKed at all on the main Soul Wars world, and imo, this kind of setup is <span style="color:#90ee90;">A-OK</span>. People AFKing off-world does not hurt the gameplay of the main minigame world.</p>
+
+      <p>The most important point is that players looking to Castle Wars should have a good, consistent place to actually play Castle Wars.</p>
+    </div>
+
+  </div><!-- end .content -->
+
+  <div class="footer">Player-Made Design Document - Not Official - @Chdata</div>
+
+</div><!-- end .outer -->
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" class="back-to-top">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+</body>
+</html>

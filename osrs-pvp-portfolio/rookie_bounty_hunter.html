@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rookie Bounty Hunter</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+
+
+.hero-icon { font-size: 2.95rem; display: block; margin-bottom: 0.5rem; }
+
+.hero h1 {
+  font-family: 'RSUF', serif;
+  font-size: 2.3625rem;
+  font-weight: normal;
+  color: #e4d3a2;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.0625rem 0 #000, -0.125rem 0.0625rem 0 #000, 0.125rem -0.0625rem 0 #000, -0.125rem -0.0625rem 0 #000, 0.0625rem 0.125rem 0 #000, -0.0625rem 0.125rem 0 #000, 0.125rem 0.125rem 0 #000, -0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+.hero h2 {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: 400;
+  color: var(--yellow-rs);
+  letter-spacing: 0.12em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.hero-tag {
+  display: inline-block;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  border: 0.0625rem solid #5a4a2a;
+  padding: 0.125rem 0.625rem;
+  text-shadow: none;
+}
+
+.sec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  font-weight: normal;
+  color: var(--green-bright);
+  text-align: center;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.04em;
+}
+.sec-sub {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0.0625rem 0.0625rem 0 #000;
+}
+
+.subsec-head {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin: 0.875rem 0 0.375rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+
+em { color: var(--orange-rs); font-style: normal; }
+.hl-green { color: var(--green-rs); }
+.hl-red   { color: var(--red-rs); }
+.hl-purple { color: var(--purple-rs); }
+.rs-list.check li::before  { content: '✔'; color: var(--green-rs); font-size: 0.7375rem; background: none; }
+.rs-list.cross li::before  { content: '✖'; color: var(--red-rs); font-size: 0.7375rem; background: none; }
+
+/* Three-column mode grid */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.mode-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.125rem;
+  padding: 0.875rem 0.75rem;
+  background: rgba(0,0,0,0.25);
+  text-align: center;
+}
+.mode-box.casual { border-color: var(--green-rs); background: rgba(0,192,0,0.06); }
+.mode-box.comp   { border-color: var(--yellow-rs); background: rgba(255,204,0,0.06); }
+.mode-icon { font-size: 1.75rem; display: block; margin-bottom: 0.375rem; }
+.mode-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.95625rem;
+  font-weight: normal;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.mode-box.casual .mode-name { color: var(--green-rs); }
+.mode-box.comp .mode-name   { color: var(--yellow-rs); }
+.mode-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Bracket grid */
+.bracket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.bracket-box {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.25);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+}
+.bracket-box.nov { border-left-color: var(--green-rs); }
+.bracket-box.int { border-left-color: var(--yellow-rs); }
+.bracket-box.vet { border-left-color: var(--red-rs); }
+.bracket-label {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.bracket-box.nov .bracket-label { color: var(--green-rs); }
+.bracket-box.int .bracket-label { color: var(--yellow-rs); }
+.bracket-box.vet .bracket-label { color: var(--red-rs); }
+.bracket-range { font-size: 0.925rem; color: var(--white-rs); }
+
+/* ELO rank grid */
+.rank-row {
+  display: flex;
+  gap: 0.375rem;
+  margin: 0.625rem 0;
+  flex-wrap: wrap;
+}
+.rank-chip {
+  flex: 1;
+  min-width: 5.625rem;
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.5rem 0.375rem;
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+}
+.rank-chip .rank-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.1875rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.rank-chip .rank-pts { font-size: 0.8125rem; color: var(--text-dim); }
+.rank-chip.bronze .rank-name { color: #cd7f32; }
+.rank-chip.silver .rank-name { color: #c0c0c0; }
+.rank-chip.gold   .rank-name { color: #ffd700; }
+.rank-chip.plat   .rank-name { color: #80d8ff; }
+.rank-chip.diamond .rank-name { color: var(--purple-rs); }
+
+/* Reward grid */
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+}
+.reward-box {
+  background: rgba(0,0,0,0.3);
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.0625rem;
+}
+.reward-box.special { border-left-color: var(--yellow-rs); }
+.reward-box.premium { border-left-color: var(--purple-rs); }
+.reward-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.reward-box.premium .reward-name { color: var(--purple-rs); }
+.reward-box p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; margin: 0; }
+
+/* Format boxes */
+.format-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+.format-box {
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+}
+.format-box.main { border-color: var(--yellow-rs); background: rgba(255,204,0,0.05); }
+.format-size {
+  font-family: 'RSUF', serif;
+  font-size: 1.625rem;
+  color: var(--yellow-rs);
+  display: block;
+  margin-bottom: 0.25rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000, 0.1875rem 0.1875rem 0 #000;
+}
+.format-box:not(.main) .format-size { font-size: 1.25rem; color: var(--text-dim); }
+.format-label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.format-box.main .format-label { color: var(--orange-rs); }
+.format-box p { font-size: 0.8125rem; color: var(--text-dim); margin-top: 0.375rem; line-height: 1.45; }
+.note-box.red   { border-left-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.note-box.red strong   { color: var(--red-rs); }
+.note-box.blue strong  { color: var(--blue-rs); }
+
+.important-label {
+  display: inline-block;
+  font-family: 'RSUF', serif;
+  font-size: 0.7375rem;
+  color: var(--red-rs);
+  border: 0.0625rem solid var(--red-rs);
+  padding: 0.0625rem 0.375rem;
+  margin-right: 0.375rem;
+  vertical-align: middle;
+  letter-spacing: 0.06em;
+}
+
+/* ============ RESEARCH LAB ADDITIONS ============ */
+
+/* Team split boxes (reuse mode-box, add blu/red) */
+.mode-box.blu { border-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
+.mode-box.red { border-color: var(--red-rs); background: rgba(204,34,34,0.06); }
+.mode-box.blu .mode-name { color: var(--blue-rs); }
+.mode-box.red .mode-name { color: var(--red-rs); }
+
+/* Phase timeline */
+.phase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0;
+}
+.phase-box {
+  border: 0.0625rem solid #4a3a22;
+  border-top: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.28);
+  padding: 0.875rem 0.75rem 0.75rem;
+  text-align: center;
+  position: relative;
+}
+.phase-box.p1 { border-top-color: var(--green-rs); }
+.phase-box.p2 { border-top-color: var(--yellow-rs); }
+.phase-box.p3 { border-top-color: var(--red-rs); }
+.phase-num {
+  font-family: 'RSUF', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.phase-title {
+  font-family: 'RSUF', serif;
+  font-size: 1.03125rem;
+  font-weight: normal;
+  display: block;
+  margin-bottom: 0.375rem;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+}
+.phase-box.p1 .phase-title { color: var(--green-rs); }
+.phase-box.p2 .phase-title { color: var(--yellow-rs); }
+.phase-box.p3 .phase-title { color: var(--red-rs); }
+.phase-box p { font-size: 0.825rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+/* Blueprint arsenal cards */
+.bp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.bp-card {
+  border: 0.0625rem solid #4a3a22;
+  border-left: 0.1875rem solid var(--orange-rs);
+  background: rgba(0,0,0,0.3);
+  padding: 0.6875rem 0.8125rem;
+  border-radius: 0.0625rem;
+}
+.bp-card.offense { border-left-color: var(--red-rs); }
+.bp-card.defense { border-left-color: var(--blue-rs); }
+.bp-card.utility { border-left-color: var(--green-rs); }
+.bp-card.trap    { border-left-color: var(--purple-rs); }
+.bp-card.sun     { border-left-color: var(--yellow-rs); }
+.bp-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3125rem;
+}
+.bp-name {
+  font-family: 'RSUF', serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--yellow-rs);
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+  line-height: 1.2;
+}
+.bp-tag {
+  font-family: 'RSUF', serif;
+  font-size: 0.65625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.375rem;
+  border: 0.0625rem solid currentColor;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bp-card.offense .bp-tag { color: var(--red-rs); }
+.bp-card.defense .bp-tag { color: var(--blue-rs); }
+.bp-card.utility .bp-tag { color: var(--green-rs); }
+.bp-card.trap    .bp-tag { color: var(--purple-rs); }
+.bp-card.sun     .bp-tag { color: var(--yellow-rs); }
+.bp-card p { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5; margin: 0; }
+.bp-meta {
+  margin-top: 0.4375rem;
+  padding-top: 0.375rem;
+  border-top: 0.0625rem solid rgba(90,74,42,0.45);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.bp-meta b { color: var(--white-rs); font-weight: normal; }
+.bp-credit { color: #8a7a52; }
+.bp-star { color: var(--yellow-rs); }
+.bp-card.pick { box-shadow: inset 0 0 0 0.0625rem rgba(255,204,0,0.4); background: rgba(255,204,0,0.05); }
+.credit-link { color: var(--blue-rs); text-decoration: underline; text-underline-offset: 0.125rem; }
+.credit-link:hover { color: var(--yellow-rs); }
+
+/* Objective tracker (orbs -> shield -> anchor) */
+.obj-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0.875rem 0 0.375rem;
+}
+.obj-step {
+  border: 0.0625rem solid #4a3a22;
+  background: rgba(0,0,0,0.3);
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+  border-radius: 0.0625rem;
+  min-width: 6rem;
+}
+.obj-step .obj-ic { font-size: 1.5rem; display: block; margin-bottom: 0.1875rem; }
+.obj-step .obj-lb {
+  font-family: 'RSUF', serif;
+  font-size: 0.7625rem;
+  color: var(--white-rs);
+  display: block;
+  line-height: 1.25;
+  text-shadow: 0.0625rem 0 0 #000, -0.0625rem 0 0 #000, 0 0.0625rem 0 #000, 0 -0.0625rem 0 #000;
+}
+.obj-step .obj-sub { font-size: 0.6875rem; color: var(--text-dim); }
+.obj-arrow { color: var(--orange-rs); font-size: 1.125rem; align-self: center; }
+.obj-step.orbs   { border-color: var(--blue-rs); }
+.obj-step.shield { border-color: var(--yellow-rs); }
+.obj-step.anchor { border-color: var(--red-rs); }
+
+.arena-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 0.25rem; font-size: 0.875rem; }
+.arena-table caption { text-align: left; color: var(--yellow-rs); font-family: 'RSUF', serif; font-size: 1rem; letter-spacing: 0.04em; padding-bottom: 0.375rem; text-shadow: 0.0625rem 0.0625rem 0 #000; }
+.arena-table th { text-align: left; background: var(--stone-panel); color: var(--text-body); border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; font-weight: normal; letter-spacing: 0.03em; }
+.arena-table td { border: 0.0625rem solid var(--stone-border); padding: 0.4375rem 0.625rem; color: var(--text-dim); line-height: 1.45; vertical-align: top; background: var(--stone-mid); }
+.arena-table td.arena-name { color: var(--text-body); white-space: nowrap; }
+.arena-table td.arena-img { width: 11.25rem; padding: 0.3125rem; }
+.arena-table td.arena-img img { display: block; width: 100%; height: auto; border: 0.0625rem solid var(--stone-border); border-radius: 0.125rem; }
+.steps-list { list-style: none; counter-reset: step; padding: 0; margin: 0.5rem 0 0.5rem 0.875rem; color: var(--text-body); font-size: 0.96875rem; line-height: 1.5; }
+.steps-list li { counter-increment: step; position: relative; padding-left: 1.125rem; margin-bottom: 0.375rem; }
+.steps-list li:last-child { margin-bottom: 0; }
+.steps-list li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; color: var(--blue-rs); }
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  
+  .mode-grid,
+  .bracket-grid,
+  .reward-grid,
+  .format-grid,
+  .phase-grid,
+  .bp-grid { grid-template-columns: 1fr; }
+  img, table { max-width: 100%; height: auto; }
+}
+</style>
+</head>
+<body>
+<!-- BACK TO PORTFOLIO -->
+<div class="back-bar">
+  <a href="../index.html" class="back-link">&#8249; Back to Portfolio</a>
+</div>
+<div class="outer">
+
+  <div class="brick-strip"></div>
+  <div class="brick-strip offset"></div>
+
+  <div class="hero">
+    <img class="hero-icon" src="data:image/png;base64,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" alt="Mysterious emblem" style="width:6.375rem;height:6.375rem;margin:0 auto 0.5rem;">
+    <h1>Rookie Bounty Hunter</h1>
+  </div>
+
+  <div class="brick-strip offset"></div>
+  <div class="brick-strip"></div>
+
+  <div class="content">
+
+    <div class="section">
+      <p>Bounty Hunter itself may need some work before ever considering this.</p>
+
+      <p>And to make things super clear, I think the main focus of PvP changes right now should go towards improving our existing PvP activities between the Wilderness and existing safe PvP minigames, before we think about new avenues of PvP.</p>
+
+      <p>However, and I talk about this in my video, what if there were a <span style="color:#90ee90;">risk-free version of Bounty Hunter</span>?</p>
+
+      <p>And maybe you <span class="hl-blue">reduce the rewards and EP by 50% or even 90%</span> or you can't buy the monetary value rewards to compensate.</p>
+
+      <p>And in this version of BH you can only get a "Rookie Bounty Hunter Hat" instead of the real one.</p>
+
+      <p>This is not my highest priority suggestion, but I was thinking about it and I realized that it would take out a lot of the BS for a player like me who <span style="color:#ff8a8a;">dislikes risk PKing</span>.</p>
+
+      <p>It also would address problems I mentioned of skill gap, content gap, and how "bronze players don't have a place to fight other bronze players".</p>
+
+      <p>This could be the perfect low-stakes safe PvP minigame for players to try out PvP.</p>
+
+      <p>One of my critiques of the <span style="color:#ccc;">PvP Arena</span> is the downtime - you have to go back to the lobby and requeue to find another fight and it just takes extra time and takes you out of it.</p>
+
+      <p>In the Bounty Hunter island, it's just an area full of people looking for a fight. While the area matches a target for you, you could just go rogue and fight whoever as people are just waiting around.</p>
+
+      <p>That actually sounds great to me, if only it weren't <span style="color:#ff8a8a;">risk PKing</span>.</p>
+
+      <p>If they were to make <span style="color:#ddb0ff;">1</span> world dedicated to a <span style="color:#90ee90;">safe version of Bounty Hunter</span>, then&hellip;</p>
+
+      <ol class="steps-list">
+        <li>You could easily find fights fast and have fun doing PvP.</li>
+        <li>You wouldn't need to spend any time re-gearing every time you die.</li>
+        <li>There would be no problem with rushers, because you aren't killing people for their loot, making less incentive for people to try rushing.</li>
+        <li>Even if they do rush, you don't lose anything, so it doesn't matter if you die that way.</li>
+        <li>Plus, there would be no better way for you to learn how to fight in Bounty Hunter, than by actually doing a safe version of Bounty Hunter.</li>
+      </ol>
+
+      <p>The consequence is that it would be dominated by high level players using max gear, because there would be <span style="color:#ff8a8a;">zero gear risk</span> to doing that.</p>
+
+      <p>&hellip;</p>
+
+      <p>Which would not be a problem if we had <a href="lets_fix_minigames.html" style="color:var(--yellow-rs);">Minigame Hybrid Armor and Minigame Weapons</a> for less rich players to be able to compete.</p>
+
+      <p>Or alternatively there could be a <span class="hl-blue">gear-limit where you can't equip gear that's level 80 or above</span>. Lots of PvPers often suggest ideas like that and it could be a good way to level the playing field for less rich players.</p>
+
+      <p>I don't foresee this taking too many players away from regular risk-based Bounty Hunter, because the players already engaging in that are already okay with risk. They would stay in risk Bounty Hunter because the rewards are also gained twice as fast or ten times as fast.</p>
+
+      <p>A safe version of Bounty Hunter would most likely attract just a <span class="hl-purple">completely different crowd of players</span>.</p>
+
+      <p>Plus, if players find that they can do well in this version of Bounty Hunter, there may be a good chance that they just <span style="color:#90ee90;">graduate</span> to real risk Bounty Hunter.</p>
+    </div>
+
+  </div><!-- end .content -->
+
+  <div class="footer">Player-Made Design Document - Not Official - @Chdata</div>
+
+</div><!-- end .outer -->
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" class="back-to-top">&#9650; Top</button>
+<script>(function(){var b=document.getElementById('back-to-top');function t(){b.style.display=(window.scrollY>400)?'block':'none';}window.addEventListener('scroll',t,{passive:true});t();})();</script>
+</body>
+</html>

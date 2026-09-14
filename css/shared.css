@@ -1,0 +1,199 @@
+/* Shared core for the PvP portfolio pages.
+   Extracted from the 16 pages that were byte-identical here.
+   Sizing is in rem against the root size below, so a single root
+   font-size drives every page's fonts, borders, and spacing at once. */
+
+/* Fixed 1.5x root: reproduces the size of the old `body { zoom: 1.5 }`
+   pages (root pages/osrs-pvp-portfolio) as real rem sizes instead of a
+   CSS zoom hack, so text and borders read the same as the old pages. */
+html { font-size: 1.5rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+strong, b { font-weight: normal; }
+
+:root {
+  --stone-dark:   #1e1a12;
+  --stone-mid:    #2e2618;
+  --stone-panel:  #3d3020;
+  --stone-light:  #4e3e28;
+  --stone-border: #5a4a30;
+  --text-body:    #d8c89a;
+  --text-dim:     #a89870;
+  --green-rs:     #00c000;
+  --green-bright: #80ff00;
+  --yellow-rs:    #ffcc00;
+  --orange-rs:    #ff8c00;
+  --red-rs:       #cc2222;
+  --blue-rs:      #80c0ff;
+  --purple-rs:    #cc88ff;
+  --white-rs:     #f0e8d0;
+}
+
+.brick-strip {
+  width: 100%;
+  height: 2rem;
+  background: repeating-linear-gradient(90deg, #5a4a2a 0rem, #5a4a2a 2.1875rem, #3a2e1a 2.1875rem, #3a2e1a 2.3125rem);
+  border-top: 0.125rem solid #7a6a4a;
+  border-bottom: 0.125rem solid #2a2010;
+  position: relative;
+}
+.brick-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0rem, transparent 1.0625rem, rgba(0,0,0,0.3) 1.0625rem, rgba(0,0,0,0.3) 1.1875rem, transparent 1.1875rem, transparent 2.1875rem, rgba(0,0,0,0.3) 2.1875rem, rgba(0,0,0,0.3) 2.3125rem);
+}
+.brick-strip.offset::after {
+  background: repeating-linear-gradient(90deg, transparent 0rem, transparent 2.1875rem, rgba(0,0,0,0.3) 2.1875rem, rgba(0,0,0,0.3) 2.3125rem);
+}
+
+.hero {
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%), #1a1208;
+  background-color: #1a1208;
+  padding: 2.25rem 1.5rem 1.75rem;
+  text-align: center;
+  border-bottom: 0.1875rem solid #5a4a2a;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  background-color: #2a2010;
+  padding: 0;
+}
+
+.footer {
+  background: #181008;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #6a5a3a;
+  border-top: 0.125rem solid #5a4a2a;
+}
+
+.back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  background: linear-gradient(180deg, #c89b3c, #8a6a1f);
+  border: 0.0625rem solid #5a4a2a;
+  border-radius: 0.125rem;
+  padding: 0.5625rem 0.9375rem;
+  font-family: 'RSUF', 'Cinzel', 'Lato', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: #1a1208;
+  text-shadow: none;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,.5);
+}
+
+body {
+  background: var(--stone-dark);
+  text-shadow: 0.0625rem 0.0625rem 0 #000, -0.0625rem -0.0625rem 0 #000, 0.0625rem -0.0625rem 0 #000, -0.0625rem 0.0625rem 0 #000, 0.125rem 0.125rem 0 #000;
+  font-family: 'RSUF', serif;
+  color: var(--text-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  min-height: 100vh;
+}
+.outer {
+  width: 45rem;
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--stone-dark);
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,100,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.section {
+  padding: 1.5rem 2rem;
+  border-bottom: 0.0625rem dashed #5a4a2a;
+}
+.section:last-child { border-bottom: none; }
+.section-inner {
+  background: rgba(0,0,0,0.25);
+  border: 0.0625rem solid #4a3a22;
+  border-radius: 0.0625rem;
+  padding: 1.125rem 1.25rem;
+}
+.sec-divider {
+  border: none;
+  border-top: 0.0625rem dashed #6a5a3a;
+  margin: 0.625rem 0 1rem;
+}
+p {
+  font-size: 0.99375rem;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin-bottom: 0.625rem;
+}
+p:last-child { margin-bottom: 0; }
+strong { color: var(--white-rs); }
+.hl-blue  { color: var(--blue-rs); }
+.hl-yellow { color: var(--yellow-rs); }
+.rs-list { list-style: none; padding: 0; margin: 0; }
+.rs-list li {
+  font-size: 0.95625rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  padding: 0.1875rem 0 0.1875rem 1.375rem;
+  position: relative;
+  border-bottom: 0.0625rem solid rgba(90,74,42,0.3);
+}
+.rs-list li:last-child { border-bottom: none; }
+.rs-list li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0.25rem;
+  top: 0.1875rem;
+  color: #f0e8d0;
+}
+.rs-list.diamond li::before { content: '◆'; color: var(--yellow-rs); font-size: 0.5875rem; top: 0.375rem; background: none; }
+.note-box {
+  text-shadow: 0.0625rem 0.0625rem 0 #000, -0.0625rem 0.0625rem 0 #000, 0.0625rem -0.0625rem 0 #000, -0.0625rem -0.0625rem 0 #000;
+  border: 0.0625rem solid #6a5a3a;
+  border-left: 0.25rem solid var(--yellow-rs);
+  background: rgba(255,200,0,0.06);
+  padding: 0.625rem 0.875rem;
+  margin: 0.75rem 0;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  border-radius: 0.0625rem;
+}
+.note-box.green { border-left-color: var(--green-rs); background: rgba(0,192,0,0.06); }
+.note-box.blue  { border-left-color: var(--blue-rs); background: rgba(128,192,255,0.06); }
+.note-box strong { color: var(--yellow-rs); }
+.note-box.green strong { color: var(--green-rs); }
+.rs-hr { border: none; border-top: 0.0625rem dashed #5a4a2a; margin: 0.875rem 0; }
+
+.back-bar {
+  width: 100%;
+  background: #0a0804;
+  border-bottom: 0.125rem solid #5a4a2a;
+  padding: 0.375rem 0.75rem;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: linear-gradient(180deg, #3a2e1a, #241c0e);
+  border: 0.0625rem solid #7a6a4a;
+  border-radius: 0.1875rem;
+  padding: 0.3125rem 0.75rem;
+  font-family: 'RSUF', 'Cinzel', 'Lato', monospace;
+  font-size: 0.8125rem;
+  color: #f0d890;
+  text-decoration: none;
+  text-shadow: 0.0625rem 0.0625rem 0 #000, -0.0625rem -0.0625rem 0 #000, 0.0625rem -0.0625rem 0 #000, -0.0625rem 0.0625rem 0 #000;
+  letter-spacing: 0.03em;
+}

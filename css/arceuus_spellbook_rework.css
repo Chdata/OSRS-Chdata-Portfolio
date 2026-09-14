@@ -1,0 +1,41 @@
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-size:150%;background:#111008;font-family:'RSUF','Times New Roman',serif;color:#d4c49a;min-height:100vh;text-shadow:1.5px 1.5px 0 #000,-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000;background-image:repeating-linear-gradient(0deg,transparent,transparent 46.5px,rgba(0,0,0,0.12) 46.5px,rgba(0,0,0,0.12) 48px),repeating-linear-gradient(90deg,transparent,transparent 46.5px,rgba(0,0,0,0.06) 46.5px,rgba(0,0,0,0.06) 48px);}
+.page{max-width:1692px;margin:0 auto;padding:0 0 60px;border-left:4.5px solid #5a4a1e;border-right:4.5px solid #5a4a1e;border-bottom:4.5px solid #5a4a1e;background:#13100a;}
+.title-banner{background:#0a0804;border-bottom:3px solid #6b5a2a;padding:33px 42px 24px;text-align:center;position:relative;}
+.title-skull{display:flex;align-items:center;justify-content:center;gap:27px;margin-bottom:12px;}
+.title-main{font-family:'RSUF',serif;font-size:56.7px;color:#e8d070;letter-spacing:4.5px;text-shadow:1.5px 0 0 #000, -1.5px 0 0 #000, 0 1.5px 0 #000, 0 -1.5px 0 #000, 3px 1.5px 0 #000, -3px 1.5px 0 #000, 3px -1.5px 0 #000, -3px -1.5px 0 #000, 1.5px 3px 0 #000, -1.5px 3px 0 #000, 3px 3px 0 #000, -3px 3px 0 #000, 4.5px 4.5px 0 #000}
+.page-body{padding:0 42px;}
+.divider{height:1.5px;background:linear-gradient(90deg,transparent,#5a4a1a 20%,#b09040 50%,#5a4a1a 80%,transparent);margin:30px 0;}
+.sec{margin:30px 0;}
+
+.intro-note {
+  text-align: center;
+  margin-bottom: 36px;
+  font-size: 23.85px;
+  color: #ffffff;
+  line-height: 1.7;
+  text-shadow:1.5px 1.5px 0 #000,-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000;
+}
+.doc-image-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 21px;
+  margin: 12px -42px 6px;
+}
+.doc-image-wrap img {
+  display: block;
+  width: auto;
+  max-width: 100%; height: auto;
+  border: 3px solid #5a4a2a;
+  border-radius: 4.5px;
+  image-rendering: auto;
+}
+
+.footer{text-align:center;font-family:'RSUF',serif;font-size:19.5px;color:#a89870;margin-top:36px;padding-top:21px;border-top:3px solid #5a4a2a;letter-spacing:1.5px;text-shadow:1.5px 0 0 #000, -1.5px 0 0 #000, 0 1.5px 0 #000, 0 -1.5px 0 #000, 3px 1.5px 0 #000, -3px 1.5px 0 #000, 3px -1.5px 0 #000, -3px -1.5px 0 #000, 1.5px 3px 0 #000, -1.5px 3px 0 #000, 3px 3px 0 #000, -3px 3px 0 #000, 4.5px 4.5px 0 #000}
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+  img, table { max-width: 100%; height: auto; }
+}
